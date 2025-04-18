@@ -1,0 +1,110 @@
+\section{Risikobewertung}
+
+
+Die Risiken des Projektes sind in \acrshort{pren1} gesammelt und bewertet worden. Pro Risiko wurden Massnahmen zur Prävention und zur Mitigation gesammelt. Die Bewertung wurde durchgeführt vor dem Umsetzen der Massnahmen (V.) und nachher (N.). Dies ist in mehr Detail nachzulesen in der im Anhang angehängten Arbeit. Jedes Risiko hat in dieser Arbeit neu eine weitere Kolonne "Ref.". Diese zeigt auf, in welchem Kapitel beschrieben wird, wie das Risko behoben oder noch weiter mitigiert wurde, falls dies möglich war.
+
+TODO: SOME IMG IN SOME WAY? Riskomatrix von PREN1 + neue Risiken
+
+% Aus der Risikomatrix nach den Massnahmen geht hervor, dass die grössten Risiken, die beim Entwickeln des Roboters berücksichtigt werden müssen, die folgenden drei sind:
+
+% \begin{itemize}
+%     \item Risiko 2: Knoten werden nicht erkannt.
+%     \item Risiko 7: Ein Objekt wird fehlerhaft gedeutet und falsche Wege werden intern entfernt.
+%     \item Risiko 12: Der Roboter wählt einen falschen Pfad, weil die Hinderniserkennung fehlerhaft ist.
+% \end{itemize}
+
+Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|c|X|X|X|c|c|c|}
+\hline
+  \textbf{Nr} & \textbf{Beschreibung} & \textbf{Prävention} & \textbf{Mitigation} & \textbf{V.} & \textbf{N.} & \textbf{Ref.}\\
+  \hline
+      1&Hindernisse werden nicht erkannt. &Mit vielen Bildern trainieren.& Distanzsensor erkennt Hindernisse, falls Bilderkennung nicht erkannt hat; Roboter fährt zurück, falls Distanzsensor erkennt.&20&5& \\
+  \hline
+2&Knoten werden nicht erkannt. &Viele Bilder in verschiedenen Situationen machen, um zu trainieren.&Linien werden erkannt und Roboter orientiert sich daran.&20& 12&\\
+  \hline
+      3&4 Minuten reichen nicht. &Testdurchfläufe in realistischen Umgebungen.&&8&4 &\\
+  \hline
+      4& 1 Minute reicht nicht zum Aufbau.& Testdurchfläufe und einfaches Interface.&Zufälliges Ziel wird gewählt von SW, falls bei Start keines ausgewählt.&5&3 &\ref{zieleingabe}\\
+  \hline
+      5&Bodenfugen werden als Linie erkannt. & Testdurchfläufe in realistischen Umgebungen.&Kamera hilft Linien zu erkennen, hilft Roboter gerade zu stellen.&15&4& \\
+  \hline
+      6& Liniensensor fehlerhaft. &Sichere Implementation mit Tests.& Encoder Motoren.&8&3 &\\
+  \hline
+      7& Ein Objekt wird fehlerhaft gedeutet und falsche Wege werden intern entfernt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&6& \\
+  \hline
+      8&Hindernisse werden beim Anheben verschoben. &Robuste Greifmethode wählen und testen.&&12&8& \\
+  \hline
+      9&Überstrom bei blockierten Motoren. &Endschalter, Stromsensoren.&Abschalten bevor Bauteile beschädigt.&10&5& \\
+  \hline
+      10&Ungenaue Abfahrtsituation vom Knoten, Fahrzeug fährt von der Linie weg. &Liniensensor als Unterstützung, Kamera prüft Linie& Falls keine Linie mehr erkannt, rückwärts fahren und korrigieren.&15&5& \\
+  \hline
+      11&Die Kamera liefert unscharfe oder verzerrte unbrauchbare Bilder. &Verwendung von Kameras mit hoher Auflösung.&Falls Bilder unscharf sind, Roboter anhalten und neue Bilder aufnehmen.&12&6&\ref{risks-sprint-1} \\
+  \hline
+      12& Der Roboter wählt einen falschen Pfad, weil die Hinderniserkennung fehlerhaft ist.&Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\\
+  \hline
+
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}\textwidth{|c | X | X | X | c | c|c|}
+\hline
+  \textbf{Nr} & \textbf{Beschreibung} & \textbf{Prävention} & \textbf{Mitigation} & \textbf{V.} & \textbf{N.} & \textbf{Ref.}\\
+  
+  \hline
+        13&Ein Softwarefehler führt zu einem Absturz während der Laufzeit, wodurch der Roboter stoppt oder Fehlfunktionen aufweist. &Exception Handling und umfangreiche Tests unter verschiedenen Bedingungen.&Automatischer SW-Neustart, Wiederaufnahme des letzten bekannten Zustands.&15&4&\ref{risks-sprint-2} \\
+  \hline
+      14&Ein Software-Update führt zu neuen Fehlern oder ist nicht kompatibel mit der aktuellen Hardware. &Gründliche Tests vor dem Rollout eines Updates.& Durch SW-Versionierung hat man die Möglichkeit, schnell zur vorherigen stabilen Version zurückzukehren.&6&2&\ref{navigation-arch} \\
+  \hline
+      15&Akkustand ist zu niedrig bei Start des Laufes. & Anzeige des Akkustandes. Leicht austauschbarer Akku. Akku aufladen.&Ein zweiter Akku, der voll aufgeladen ist.&5& 1&\\
+  \hline
+      16&Personenausfall durch Krankheit oder Unfall. &&Stellvertretungen und virtuelle Kommunikation.&6& 3&\\
+  \hline
+      17&Datenkorruption. &&Regelmässige Backups. Alle Dokumente auf Teams erstellen. Dokumentation in LaTeX auf Overleaf. Durch Cronjob werden jeden Tag die .tex Files auf GitHub gepusht.&4& 1&\\
+  \hline
+  \multicolumn{7}{l}{Neue Risiken aus PREN 2} \\
+  \hline
+  18&Akkuhalterung geht kaputt & Akku vorsichtig austauschen. & Mehrere Akkuhalterungen erstellen. &8 &3&\\
+  \hline
+  19&Elektroteile geht kaputt & Vorsichtig damit umgehen und nicht unnötig anfassen. & Mehrere Exemplare bereithalten. &8 &3&\ref{pcb}\\
+  \hline
+
+
+
+\end{tabularx}
+\caption{Risiken}
+\label{table:risks}
+\end{table}
+
+TODO add those:
+
+  - sprint 4 : gibt fälschlich an sei im Ziel obwohl nicht ist/ erkennt ziel nicht -> getestet mit X bildern und immer erkannt
+
+TMP NOTES:
+
+3: Risiko 1: ultraschall \\
+3: Risiko 2: ok weil wenn ninchts erkannt einach Knoten \\
+4: Risiko 3: schaffte immer in x min \\
+4: Risiko 4: immer moeglich in x sec \\
+Risiko 5:\\
+Risiko 6:\\
+3: Riisko 7: Model kann zu x prozent richtig, sonst wir gehofft dass nicht genug objekte gibt, dass alle wege wege sind, kamera winkel? Muss confidence level erreichen, damit nicht falsch deutet, lieber verpassen als erkennen wegen safety mit ultraschall\\
+Risiko 8:\\
+Risiko 9:\\
+Risiko 10: durch tests: ist ok\\
+1: Risiko 11: done\\
+3: Risiko 12: Ultraschall erkennt \& setzt zurueck, faehrt zurueck\\
+x: Risiko 13: in progress (link all times we mention unittests)\\
+2: Risiko 14: done\\
+Risiko 15:\\
+16: -\\
+17: -\\
+

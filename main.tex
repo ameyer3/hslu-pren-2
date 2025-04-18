@@ -1,0 +1,204 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lastpage}
+\RequirePackage{subfiles}
+\usepackage[a4paper, left=23mm, top=32.5mm, right=25mm, bottom=20mm, headheight=50mm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{float}
+\restylefloat{table}
+\usepackage{tabularx}
+\usepackage{csquotes}
+\usepackage{pdfpages}
+\usepackage{pdflscape}
+\usepackage{xurl}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{nameref}
+
+
+
+
+
+% my cheaty way of making linebreaks in tables
+\usepackage{makecell}
+\renewcommand{\cellalign}{tl}
+\renewcommand{\theadalign}{tl}
+
+\addto\captionsngerman{
+    \renewcommand{\figurename}{Abb.}
+}
+\renewcommand{\familydefault}{cmss}
+
+% Remove indent
+\setlength{\parindent}{0pt}
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{2mm}
+
+% Header and Footer settings
+\pagestyle{fancy}
+\fancyhead[L,L] {\includegraphics[height=10mm]{assets/gesamtkonzept/HSLU_Logo.png}}
+\fancyhead[R,R] {\includegraphics[height=10mm]{assets/gesamtkonzept/project_logo_BanaCone.png}}
+\fancyfoot[L, L] {PREN 2}
+\fancyfoot[C] {\thepage /\pageref{LastPage}}
+\fancyfoot[R, R] {\today}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% References
+\RequirePackage{wrapfig}
+\RequirePackage[backend=biber]{biblatex}
+  \addbibresource{references.bib}
+
+\RequirePackage[linktoc=all]{hyperref}
+\hypersetup{
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black
+}
+
+% Glossary
+\usepackage[section, acronym]{glossaries}
+\makeglossaries
+
+
+    % Override the mark (because the glossary is only a section use the chapter mark)
+% else, the \leftmark whould not be the chapter name
+\makeatletter
+  \renewcommand{\glossarymark}[1]{}
+\makeatother
+
+\RequirePackage{nomencl}
+
+\newglossarystyle{acronymindent}{
+  \setglossarystyle{long}
+
+  % glossary group skipp
+  % This one made it ugly
+  % \renewcommand*{\glsgroupskip}{\vspace{3mm}}
+  \renewenvironment{theglossary}
+  {
+    % bold name
+    % \renewcommand{\glsnamefont}[1]{\textbf{#1}}
+    % No new line when 1.8cm- but then the vspace isnt right anumore for last ones
+    \begin{longtable}[l]{@{}p{\dimexpr 1.6cm-\tabcolsep}p{0.6\hsize}}
+  }
+  {
+    \end{longtable}
+  }
+}
+
+% Make the name bold
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+
+\newcommand\addglossary{
+  \printnomenclature[2cm]
+  % Akronyme
+  \addcontentsline{toc}
+    {section}
+    {Akronyme}
+
+  \printglossary[
+    title=Akronyme,
+    style=acronymindent,
+    type=\acronymtype
+  ]
+  \newpage
+}
+
+% Actual document
+\begin{document}
+
+\title{\textbf{Produktentwicklung 2}
+
+Autonomer Wegfindungsroboter
+
+Hochschule Luzern - Informatik, Technik und Architektur}
+
+% \includegraphics[width=0.5\textwidth]{assets/gesamtkonzept/Skizze-Fahrzeugkonzept.jpg}}
+
+
+\author{
+\begin{tabular}{ l l l}
+  \textbf{Gruppe 4} && \\
+    Schaffner Timo & timo.schaffner@stud.hslu.ch & Digital Engineering\\
+  Kasper Jonah & jonah.kasper@stud.hslu.ch & Elektrotechnik\\
+  Zimmermann Ivan & ivan.zimmermann@stud.hslu.ch & Elektrotechnik \\
+  Schmid Lukas & lukas.schmid@stud.hslu.ch & Informatik\\
+  Meyer Alina & alina.meyer@stud.hslu.ch & Informatik \\
+  von Atzigen Elias & elias.vonatzigen@stud.hslu.ch & Maschinentechnik \\
+  \\
+  \textbf{Betreuender Dozent} && \\
+  Thalmann Markus & markus.thalmann@hslu.ch & Elektrotechnik \\
+  \\
+  \\
+  \\
+  TA.BA\_PREN2.F2501 &&\\
+\end{tabular}
+}
+\date{\today}
+
+
+    \maketitle
+    \newpage
+
+    \include{parts/00-abstract}
+
+    \tableofcontents\thispagestyle{fancy}
+    \newpage
+    \listoffigures\thispagestyle{fancy}
+    \newpage
+    \listoftables
+    \newpage
+    \subfile{glossary.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% Add your file here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % Include files
+    \include{parts/01-einleitung}
+
+    \include{parts/02-projektplanung}
+    \include{parts/03-risikobewertung}
+    \include{parts/04a-hauptteil-sprint1}
+    \include{parts/04b-hauptteil-sprint2}
+    \include{parts/04c-hauptteil-sprint3}
+    \include{parts/04d-hauptteil-sprint4}
+    \include{parts/5-nachhaltigkeit}
+    \include{parts/99-fazit}
+
+
+    % \include{parts/template}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+    % TODO Glossary is ugly
+    \newpage
+    \addglossary
+    \printglossary[]
+
+
+    % Literaturverzeichnis
+  \setcounter{biburllcpenalty}{7000}
+  \setcounter{biburlucpenalty}{8000}
+  \newpage
+  \addcontentsline{toc}
+    {section}
+    {Literatur}
+  \printbibliography[
+    heading=subbibliography
+  ]
+
+  % Anhang
+
+  \include{parts/anhang}
+
+
+\end{document}
