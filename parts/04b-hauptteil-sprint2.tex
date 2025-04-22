@@ -12,9 +12,22 @@ Bevor der Simulator refactored wurde, wurde die neue Architektur designed für d
 
 TODO NAVIGATION ARCH BILD
 
-Dieses Refactoring hilft dabei, dass strukturiert die simulierten Teilen mit den realen Teilen ersetzt werden kann und währenddessen trotzdem sowohl auf einem Raspberry Pi mit allen Verbindungen, als auch auf einem Laptop mit keinen Verbindungen eine lauffähige Version des Simulators verfügbar ist. TODO LUKAS ENVs
+Dieses Refactoring hilft dabei, dass strukturiert die simulierten Teilen mit den realen Teilen ersetzt werden kann und währenddessen trotzdem sowohl auf einem Raspberry Pi, mit allen Verbindungen, als auch auf einem Laptop mit keinen Verbindungen eine lauffähige Version des Simulators verfügbar ist.
+Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/wiki/Umgebungsvariable}} kann die Hardware und den Funktionsumfang dynamisch gewählt werden. Nachfolgend in Tabelle \ref{table:environment-variables}
 
-Bei jedem Update wird getestet, ob die Version noch auf allen Plattformen lauffähig ist. Falls dies nicht der Fall wäre, kann durch die Benutzung von Git einfach auf eine alte Version zurückgewechselt werden. So muss das Risiko 14 von Software Updates, die Fehler mit sich bringen, nicht mehr beachtet werden.
+
+\begin{table}
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \textbf{Environment Variable} & \textbf{} &  & \\
+         &  &  & \\
+         &  &  & \\
+    \end{tabularx}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+
+Bei jedem Update wird getestet, ob die Version noch auf allen Plattformen lauffähig ist. Falls dies nicht der Fall wäre, kann durch die Benutzung von Git einfach auf eine alte Version zurück gewechselt werden. So muss das Risiko 14 von Software Updates, die Fehler mit sich bringen, nicht mehr beachtet werden.
 
 
 Ein grosser Unterschied von dieser Architektur zu der Architektur des Simulators ist es, dass es eine klare Unterteilung in die einzelnen Module gibt, die die Navigation benötigt, so wird paralleles Arbeiten einfacher. Die Architektur modelliert nicht mehr die physischen Roboterteile, sondern nur noch die Navigationsteile.
