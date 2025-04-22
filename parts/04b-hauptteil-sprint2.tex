@@ -13,18 +13,24 @@ Bevor der Simulator refactored wurde, wurde die neue Architektur designed für d
 TODO NAVIGATION ARCH BILD
 
 Dieses Refactoring hilft dabei, dass strukturiert die simulierten Teilen mit den realen Teilen ersetzt werden kann und währenddessen trotzdem sowohl auf einem Raspberry Pi, mit allen Verbindungen, als auch auf einem Laptop mit keinen Verbindungen eine lauffähige Version des Simulators verfügbar ist.
-Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/wiki/Umgebungsvariable}} kann die Hardware und den Funktionsumfang dynamisch gewählt werden. Nachfolgend in Tabelle \ref{table:environment-variables}
+Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/wiki/Umgebungsvariable}} kann die Hardware und den Funktionsumfang dynamisch gewählt werden. Nachfolgend in Tabelle \ref{table:environment-variables} sind diese Variablen ersichtlich
 
 
-\begin{table}
+\begin{table}[H]
     \centering
-    \begin{tabularx}{\textwidth}{|X|X|X|X|}
-        \textbf{Environment Variable} & \textbf{} &  & \\
-         &  &  & \\
-         &  &  & \\
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline
+        \textbf{Environment Variable} & \textbf{Beschreibung} & \textbf{Mögliche Werte}\\
+        \hline
+         \verb|PREN_PLATFORM| & Die Platform, auf welchem der Code ausgeführt wird. & \verb|PC| oder \verb|RPI| \\
+         \hline
+         \verb|PREN_CAMERA| & Die verwendete Kamera & \verb|NONE|, \verb|USB| oder \verb|PICAMERA| \\
+         \hline
+         \verb|PREN_UART| & Die verwendete Serielle Schnittstelle für die Kommunikation zwischen Raspberry Pi und TinyK22 & \verb|NONE| oder \verb|<DEVICE>| \newline (z.B. \verb|/dev/ttyAMA0|) \\
+         \hline
     \end{tabularx}
-    \caption{Caption}
-    \label{tab:my_label}
+    \caption{Environment Variabeln}
+    \label{table:environment-variables}
 \end{table}
 
 Bei jedem Update wird getestet, ob die Version noch auf allen Plattformen lauffähig ist. Falls dies nicht der Fall wäre, kann durch die Benutzung von Git einfach auf eine alte Version zurück gewechselt werden. So muss das Risiko 14 von Software Updates, die Fehler mit sich bringen, nicht mehr beachtet werden.
