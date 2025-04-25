@@ -77,4 +77,4 @@ TODO: schönes Bild vom Schlussgestell mit Abschirmung des Liniensensors
 
 \subsubsection{Liniensensor}
 
-...
+Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxxen der Pins von GPIO-Output (High) auf den Input-Capture-Modus wird die Entladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrtweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt.

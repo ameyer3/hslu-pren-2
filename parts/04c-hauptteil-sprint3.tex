@@ -25,20 +25,26 @@ Diese ObjectDetector Klasse erstellt das Model aufgrund des .pt Files bei der In
     \item Nächstes Objekte vor dem Roboter finden.
 \end{enumerate}
 
-Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheits ist als Konstante definiert auf TODO WERT. Dies wird mit folgender Codezeile umgesetzt:
+Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheits ist als Konstante definiert auf TODO WERT \& WIESO. Dies wird mit folgender Codezeile umgesetzt:
 \begin{verbatim}
 results = self.model.predict(source=rotated_image, conf=self.MIN_CONDFIDENCE)
 \end{verbatim}
 
-Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence mit der sie erkannt wurden und mit ihrem auf dem Bild zurückgegeben werden.
-Inference auswerten mithilfe von Enum -> reuslt zu enum objekt decoden
+Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
-Nimmt das Resultat das am naehsten ist und gleichzeitig auch nur diese, die direkt vor dem Roboter sind anhand von X/Y Koordinaten auf Bild
+Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bilders befinden. Somit kann sichergestellt werden, dass nicht aus Versehen Objekte, die sich nicht auf der Fahrbahn, die betrachtet wird, befinden gespeichert werden. Die Mitellinie wird berechnet aus der Breite des Bildes. Diese Objekte werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser List, ist das nächste Objekt zum Roboter. Die Id des Objektes, die vom Model zurückgegbene wird, korrespondiert mit der ID des erstellten Enums, damit das erkannte Objekt als Enum zurückgegeben wird.
 
--Bild wie X/Y fukntioniert mit Objekt
+In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
 
-Falls nichts erkannt -> dann Knoten -> lieber nicht bemerken als halluzinieren wegen Schutz von Ultraschall und unexpected Object Error.
+\begin{itemize}
+    \item Falls das nächste Objekt eine Barriere und das zweitnächste eine Pylone ist. In diesem Fall wird zurückgegeben, dass eine Pylone das nächste Objekt ist, da dieser Knoten sowieso nicht befahrbar ist und aus dem internen Graph entfernt werden soll.
+    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist wahrscheinlich, dass das Model ein Knoten verpasst und es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst wird. Falls dies doch geschehen ist, kann der Ultraschall trotzdem Objekte noch erkennen, falls ein unterwartetes Objekt doch auftritt. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen.
+\end{itemize}
 
+Risk 1 mit-minimiert + ultraschall
+Risk 2 minimiert
+Risk 7 minimiert
+Risk 12 minimierrt, kann zurueckfahren + model
 
 Wie auf die einzelnen Objekte reagiert wird, ist in folgender Aufzählung beschrieben und ist gleich, wie in \acrshort{pren1} geplant.
 
