@@ -13,29 +13,50 @@ mehrere Epics zusammengefasst
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
 
+Um die Modelresultate auszuwerten wurde das .pt File in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt.
+
+TODO UML
+
+Diese ObjectDetector Klasse erstellt das Model aufgrund des .pt Files bei der Instanzierung eines Objektes. Diese Objekt wird aufgerufen, wenn ein Nachbarsknoten geprüft werden soll und führt einne Prozess von drei Schritten durch:
+
+\begin{enumerate}
+    \item Inference (Objekterkennung)
+    \item Resultat parsen
+    \item Nächstes Objekte vor dem Roboter finden.
+\end{enumerate}
+
+Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheits ist als Konstante definiert auf TODO WERT. Dies wird mit folgender Codezeile umgesetzt:
+\begin{verbatim}
+results = self.model.predict(source=rotated_image, conf=self.MIN_CONDFIDENCE)
+\end{verbatim}
+
+Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence mit der sie erkannt wurden und mit ihrem auf dem Bild zurückgegeben werden.
 Inference auswerten mithilfe von Enum -> reuslt zu enum objekt decoden
 
 Nimmt das Resultat das am naehsten ist und gleichzeitig auch nur diese, die direkt vor dem Roboter sind anhand von X/Y Koordinaten auf Bild
 
--Bild wir X/Y fukntioniert mit Objekt
+-Bild wie X/Y fukntioniert mit Objekt
 
-TO IMPLEMENT: Falls nichts erkannt -> dann most likely Knoten
+Falls nichts erkannt -> dann Knoten -> lieber nicht bemerken als halluzinieren wegen Schutz von Ultraschall und unexpected Object Error.
 
-\textbf{Pylonen erkennen mit Kamera}
 
-...
+Wie auf die einzelnen Objekte reagiert wird, ist in folgender Aufzählung beschrieben und ist gleich, wie in \acrshort{pren1} geplant.
 
-\textbf{Knoten erkennen mit Kamera}
+\textbf{Pylonen erkennen}
 
-...
+Wird eine Pylone erkannt, wird der Knoten, der gerade geprüft wurde, inklusive alle Strecken dahin, aus dem internen Graphen entfernt.
+
+\textbf{Knoten erkennen}
+
+Wenn ein Knoten erkannt wird, dann geschieht nichts. Es wird interpretiert, dass sich kein Objekt auf diesem Weg befindet und die Strecke normal befahrbar ist.
 
 \textbf{Barrieren erkennen}
 
-...
+Wir auf dem Bild eine Barriere erkannt, wird dies im internen Graphen gespeichert, indem die jeweilige Linie höher gewichtet wird, da es länger dauern wird diese zu überqueren.
 
 \textbf{Entfernte Linien erkennen}
 
-....
+TODO LUKAS
 
 \newpage
 %%%%%%%%%%%%%%%%%Epic 11%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
