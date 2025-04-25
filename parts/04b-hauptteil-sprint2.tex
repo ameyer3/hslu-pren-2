@@ -85,19 +85,20 @@ Die einzelnen Bedeutungen zu den Möglichkeiten des Flagbytes sind in Tabelle \r
 \hline
   \textbf{Flagbyte} & \textbf{Bedingung} & \textbf{Beschreibung}\\
   \hline
-      000&nur Winkelbyte gesetzt&Roboter soll sich nach links drehen.\\
+      0000&nur Winkelbyte gesetzt&Roboter soll sich nach links drehen.\\
   \hline
-        000&nur Fahrbyte gesetzt&Roboter soll vorwärts fahren.\\
+        0000&nur Fahrbyte gesetzt&Roboter soll vorwärts fahren.\\
   \hline
-001&nur Winkelbyte gesetzt&Roboter soll sich nach rechts drehen.\\
-  \hline
-
-010&nur Fahrbyte gesetzt&Roboter soll rückwärts fahren.\\
+0001&nur Winkelbyte gesetzt&Roboter soll sich nach rechts drehen.\\
   \hline
 
-100&kein zusätzliches Byte gesetzt&Auf folgender Strecke befindet sich eine Barriere.\\
+0010&nur Fahrbyte gesetzt&Roboter soll rückwärts fahren.\\
   \hline
 
+0100&kein zusätzliches Byte gesetzt&Auf folgender Strecke befindet sich eine Barriere.\\
+  \hline
+1000&kein zusätzliches Byte gesetzt&Roboter fährt bis er sich auf einem Knoten befindet.\\
+  \hline
   \end{tabularx}
 \caption{Flags in Interface zu Steurung}
 \label{table:flag-to-tiny}
