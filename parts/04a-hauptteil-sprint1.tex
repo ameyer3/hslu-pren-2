@@ -33,11 +33,26 @@ Funktionsmuster, Übersichtszeichnungen / Übersichtsmodell mit aufgezeigten Bez
 \label{pcb}
 
 Um eine zuverlässige Kontaktierung der einzelnen Komponenten sicherzustellen, wird im Rah-
-men von Pren 2 ein Verbindungs-PCB entwickelt. Dieses PCB übernimmt das Management der
+men von Pren 2 ein Verbindungs-PCB \ref{fig: Verteiler PCB} entwickelt. Dieses PCB übernimmt das Management der
 Spannungsversorgung für den Raspberry Pi und den TinyK22. Zudem werden sämtliche Signale,
 die vom TinyK22 erfasst und verarbeitet werden sollen, entsprechend verbunden.
 
-Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem TinyK22 mehrere Exemplare vorhanden. Somit ist das Risiko der kaputten Elektroteile nicht mehr relevant. TODO IWAN: ANYTHING TO ADD?
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm, height=6cm]{assets/ET/PCB/VerteilerPCB_unbestueckt.png}
+\caption{Verteiler PCB}
+\label{fig: Verteiler PCB}
+\end{figure}
+
+Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem TinyK22 mehrere Exemplare vorhanden \ref{fig: Verteiler PCBA}. Somit ist das Risiko der kaputten Elektroteile nicht mehr relevant.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm, height=6cm]{assets/ET/PCB/VerteilerPCB_bestueckt.png}
+\caption{Verteiler PCBA}
+\label{fig: Verteiler PCBA}
+\end{figure}
+
 
 
 \subsubsection{Motoren ansteueren und auslesen}
