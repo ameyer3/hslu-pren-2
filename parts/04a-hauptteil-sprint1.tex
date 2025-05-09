@@ -4,10 +4,10 @@ In diesem Teil werden die einzelne Schritte beschrieben, um den Roboter zu bauen
 
 Die folgenden Kapitel sind unterteilt nach den einzelnen Epics und User Stories, die im vorgehenden Kapitel \ref{projektplanung} aufgelistet wurden. Dabei werden die Tätigkeiten beschrieben, inklusive Testprotokolle und -beschriebe.
 
-TODO: Risikoverweise (welches Risiko vermindert/behoben? Double check
-with table from prev chapter 
+TODO: Risikoverweise (welches Risiko vermindert/behoben? Double checkwith table from prev chapter 
 TODO: Testprotokolle
 TODO: Lessons Learned
+TODO: Komponentendiagramme mit Schnittstellen falls sinnvoll
 
 TODO: 
 Was vorkommen muss:
@@ -21,15 +21,12 @@ Was vorkommen muss:
 - Wichtige Berechnungen (Resultate)
 - Beschreibung von Versuchen und Tests mit Ergebnissen (Zusammenfassung)
 
-
-Ebenfalls wird das Gesamtkonzept aufgezeigt mit Verweisen zu den Teilfunktionen und den einzelnen Komponenten: TODO SOME KIND OF GRAFIK
-
 \subsection{Produktbeschreibung}
 
-In diesem Kapitel wird der Roboter als Gesamtsystem beschrieben. Dabei wird das Funktionsmuster mit einem Ablaufdiagramm beschrieben und die Schnittstellen und einzelnen Komponenten werden 
-Funktionsmuster, Übersichtszeichnungen / Übersichtsmodell mit aufgezeigten Beziehungen \& Schnittstellen, Softwaresubsysteme, Ablaufdiagramm aus PREN 1?
+In diesem Kapitel wird der Roboter als Gesamtsystem beschrieben. Dabei wird das Funktionsmuster mit einem Ablaufdiagramm beschrieben und die einzelnen physischen und elektronischen Komponenten werden in Zeichnungen aufgezeigt.
 
-Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dies dient zur Repetition aus \acrshort{pren1}, genauere Informationen koennen aus der angehaengten Dokumentation entnommen werden.
+
+Die folgende Grafik \ref{fig:ablauf} zeigt das geplante Funktionsmuster auf. Dieses Ablaufdiagramm stammt aus \acrshort{pren1} und dient zur Erinnerung, genauere Informationen koennen aus der angehaengten PREN 1 Dokumentation entnommen werden.
 
 \begin{figure}[H]
 \centering
@@ -37,6 +34,26 @@ Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dies dient 
 \caption{Gesamtkonzept Ablaufdiagram}
 \label{fig:ablauf}
 \end{figure}
+
+Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgenden Komponenten auf Grafik \ref{fig:components} gebaut. Die Grafik ist zeigt lediglich das Konzept mit den noetigen Komponenten und nicht das tatsaechliche Aussehen des Roboters.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{assets/gesamtkonzept/Skizze-Fahrzeugkonzept-Beschriftet.jpg}
+\caption{Komponenten des Roboters}
+\label{fig:components}
+\end{figure}
+
+Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlich auf Grafik \ref{fig:electro-components}. Dieses sorgt dafuer, dass sich der Roboter wie geplant autonom fortbewegen kann.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{assets/gesamtkonzept/electronics.png}
+\caption{Elektronische Komponenten des Roboters}
+\label{fig:electro-components}
+\end{figure} 
+
+\newpage
 
 %%%%%%%%%%%%%%%%%Epic 1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Fortbewegung mit geregelter Geschwindigkeit}
@@ -64,7 +81,6 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem TinyK22 mehrere
 \caption{Verteiler PCBA}
 \label{fig: Verteiler PCBA}
 \end{figure}
-
 
 
 \subsubsection{Motoren ansteueren und auslesen}
