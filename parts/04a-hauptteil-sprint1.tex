@@ -1,6 +1,6 @@
 \section{Roboterbau}
 
-In diesem Teil werden die einzelne Schritte beschrieben, um den Roboter zu bauen. Dabei wird sich an dem Konzept auf \acrshort{pren1} orientiert. Falls von dem Konzept abgewichen wird, wird dies erwähnt und begründet. Die Arbeit aus \acrshort{pren1} kann im elektronischen Anhang gefunden werden.
+In diesem Teil werden die einzelne Schritte beschrieben, um den Roboter zu bauen. Dabei wird sich an dem Konzept von \acrshort{pren1} orientiert. Falls von dem Konzept abgewichen wird, wird dies erwähnt und begründet. Die Arbeit aus \acrshort{pren1} kann im elektronischen Anhang gefunden werden.
 
 Die folgenden Kapitel sind unterteilt nach den einzelnen Epics und User Stories, die im vorgehenden Kapitel \ref{projektplanung} aufgelistet wurden. Dabei werden die Tätigkeiten beschrieben, inklusive Testprotokolle und -beschriebe.
 
@@ -26,8 +26,17 @@ Ebenfalls wird das Gesamtkonzept aufgezeigt mit Verweisen zu den Teilfunktionen 
 
 \subsection{Produktbeschreibung}
 
+In diesem Kapitel wird der Roboter als Gesamtsystem beschrieben. Dabei wird das Funktionsmuster mit einem Ablaufdiagramm beschrieben und die Schnittstellen und einzelnen Komponenten werden 
 Funktionsmuster, Übersichtszeichnungen / Übersichtsmodell mit aufgezeigten Beziehungen \& Schnittstellen, Softwaresubsysteme, Ablaufdiagramm aus PREN 1?
 
+Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dies dient zur Repetition aus \acrshort{pren1}, genauere Informationen koennen aus der angehaengten Dokumentation entnommen werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{assets/gesamtkonzept/ablaufdiagramm.png}
+\caption{Gesamtkonzept Ablaufdiagram}
+\label{fig:ablauf}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%Epic 1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Fortbewegung mit geregelter Geschwindigkeit}
@@ -100,6 +109,26 @@ Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder RasberryPi
 \end{figure}
 
 
+Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft und den Lagerstellen. Bei der Implementierung des Greifers musste darauf geachtet werden das die Lagerstellen nicht verschoben werden. In Abb \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man, die für die Funktion wichtigsten Masse am Versuchsaufbau und am Fertigen Roboter. Die für für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[height=5cm]{assets/MT/Greifer Montiert.png}
+    \caption{Greifer im Roboter}
+    \label{fig:Greifer im Roboter}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[height=5cm]{assets/MT/Greifer Prototyp.png}
+    \caption{Greifer Versuchsaufbau}
+    \label{fig:Greifer Versuchsaufbau}
+  \end{minipage}
+\end{figure}
+
+exakte Position der Kamera und den Anstellwinkel 
 
 -Raeder, PCB, Tiny, Akku, Motoren
 
