@@ -6,6 +6,13 @@ mehrere Epics zusammengefasst
 
 \subsubsection{Ultraschall}
 
+Backup-Hinderniserkennung mittels Ultraschallsensor
+
+Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller TinyK22 verbunden.
+
+Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 10 cm erkannt wird, wird automatisch ein Not-Stopp ausgelöst, um Kollisionen zu vermeiden. Gleichzeitig wird ein definierter Fehlercode generiert und über eine serielle Schnittstelle an den Raspberry Pi übertragen, um den Fehlerstatus zu protokollieren und entsprechende Maßnahmen einleiten zu können.
+
+
 \subsubsection{YOLOv11 Model trainieren}
 3 Iterationen
 Learn by doing

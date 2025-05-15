@@ -178,7 +178,27 @@ Damit auch ohne Verbindung zu einem Tiny K22 eine lauffähige Version verfügbar
 %%%%%%%%%%%%%%%%%Epic 5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Hindernis umplatzieren}
 
-...
+Das Umplatzieren eines Hindernisses erfolgt in mehreren Stufen.
+
+\subsubsection{Objekterkennung}
+Das Fahrzeug ist mit einem Ultraschallsensor ausgestattet, der zur Detektion von Objekten im Fahrweg eingesetzt werden kann. Die endgültige Entscheidung über das weitere Vorgehen trifft jedoch der \textit{Raspberry Pi}, der mit einer Kamera zur visuellen Objekterkennung verbunden ist.
+
+...... POSSIBLY VERLINKUNG ZU OBJEKTERKENNUNG
+
+Wird ein bewegliches Hindernis erkannt, analysiert das System die Situation. Falls das Hindernis als ausweichbar eingestuft wird, wird ein Wegstellbefehl ausgeführt, um den Fahrweg freizuräumen.
+
+\subsubsection{Wegstellbefehl}
+Der \textit{Raspberry Pi} übermittelt dem \textit{TinyK22} einen Drehbefehl sowie einen Befehl zum Rückwärtsfahren, um das Hindernis anzufahren und für das Umplatzieren zu positionieren.
+
+\subsubsection{Bedingung zum Anheben}
+Das Fahrzeug fährt rückwärts, bis der Endschalter betätigt wird. Bei Betätigung wird das Fahrzeug gestoppt und der Greifmechanismus
+
+...... POSSIBLY VERLINKUNG ZU Greifmechanismus
+
+aktiviert. Nach dem erfolgreichen Anheben des Objekts dreht sich das Fahrzeug zurück in seine ursprüngliche Ausrichtung. Anschliessend erfolgt eine Nachkorrektur der Position, um das Objekt gezielt wieder abzusetzen.
+
+\subsubsection{Nachkorrektur}
+Damit das Hindernis möglichst präzise an der ursprünglichen Position abgelegt werden kann, muss das Fahrzeug seine eigene Position nachkorrigieren. Die dafür notwendigen Korrekturwerte wurden experimentell ermittelt.
 
 
 \newpage
