@@ -5,6 +5,7 @@
 mehrere Epics zusammengefasst 
 
 \subsubsection{Ultraschall}
+\label{ultraschall}
 
 Backup-Hinderniserkennung mittels Ultraschallsensor
 
@@ -55,7 +56,7 @@ In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
 
 \begin{itemize}
     \item Falls das nächste Objekt eine Barriere und das zweitnächste eine Pylone ist. In diesem Fall wird zurückgegeben, dass eine Pylone das nächste Objekt ist, da dieser Knoten sowieso nicht befahrbar ist und aus dem internen Graph entfernt werden soll.
-    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist wahrscheinlich, dass das Model ein Knoten verpasst und es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst wird. Falls dies doch geschehen ist, kann der Ultraschall trotzdem Objekte noch erkennen, falls ein unterwartetes Objekt doch auftritt. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Dadurch dass immer mindestens ein Knoten zurueckgegeben wird
+    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist wahrscheinlich, dass das Model ein Knoten verpasst und es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst wird. Falls dies doch geschehen ist, kann der Ultraschall trotzdem Objekte noch erkennen, falls ein unterwartetes Objekt doch auftritt. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Dadurch dass immer mindestens ein Knoten zurueckgegeben wird, wird das Risiko, dass Knoten nicht erkannt werden, mitigiert.
 \end{itemize}
 
 Risk 1 mit-minimiert + ultraschall
