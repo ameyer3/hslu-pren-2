@@ -24,7 +24,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       1&Hindernisse werden nicht erkannt. &Mit vielen Bildern trainieren.& Distanzsensor erkennt Hindernisse, falls Bilderkennung nicht erkannt hat; Roboter fährt zurück, falls Distanzsensor erkennt.&20&5& \\
   \hline
-2&Knoten werden nicht erkannt. &Viele Bilder in verschiedenen Situationen machen, um zu trainieren.&Linien werden erkannt und Roboter orientiert sich daran.&20& 12&\\
+2&Knoten werden nicht erkannt. &Viele Bilder in verschiedenen Situationen machen, um zu trainieren.&Linien werden erkannt und Roboter orientiert sich daran.&20& 12&\ref{model-results}\\
   \hline
       3&4 Minuten reichen nicht. &Testdurchfläufe in realistischen Umgebungen.&&8&4 &\ref{risks-sprint-2}\\
   \hline
@@ -34,7 +34,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       6& Liniensensor fehlerhaft. &Sichere Implementation mit Tests.& Encoder Motoren.&8&3 &\\
   \hline
-      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&6& \\
+      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&6& \ref{model-results}\\
   \hline
       8&Hindernisse werden beim Anheben verschoben. &Robuste Greifmethode wählen und testen.&&12&8& \\
   \hline
@@ -44,7 +44,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       11&Die Kamera liefert unscharfe oder verzerrte unbrauchbare Bilder. &Verwendung von Kameras mit hoher Auflösung.&Falls Bilder unscharf sind, Roboter anhalten und neue Bilder aufnehmen.&12&6&\ref{risks-sprint-1} \\
   \hline
-      12& Der Roboter wählt einen falschen Pfad, Objekte nicht erkann werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\\
+      12& Der Roboter wählt einen falschen Pfad, Objekte nicht erkann werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\ref{model-results}\\
   \hline
 
 \end{tabularx}

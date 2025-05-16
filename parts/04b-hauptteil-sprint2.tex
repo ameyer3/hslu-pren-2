@@ -54,7 +54,7 @@ Im Blind Testing Mode nimmt der Roboter jedes Mal die erste Kante von links, bei
 
 \subsubsection{Schnittstelle Navigation und Steuerung}
 
-Die Navigation läuft auf einem Raspberry Pi und die Steuerung läuft auf einem Tiny K22. Die beiden kommunizieren wie geplant über das UART Protokoll miteinander. Für die Kommunikation wurde eine Schnittstelle definiert. Die Navigation sendet 4 Bytes an die Steuerung und die Steuerung antwortet mit dem Statuscode in From von einem Byte.
+Die Navigation läuft auf einem Raspberry Pi und die Steuerung läuft auf einem Tiny K22. Die beiden kommunizieren wie geplant über das UART Protokoll miteinander. Für die Kommunikation wurde eine Schnittstelle definiert. Die Navigation sendet 4 Bytes an die Steuerung und die Steuerung antwortet mit dem Statuscode in Form von einem Byte.
 
 Die Instruktionen von der Navigation an die Steuerung, werden, wie in Grafik \ref{fig:interface-tiny} gezeigt, gesendet.
 
@@ -131,13 +131,15 @@ Die möglichen Statuscodes von der Steuerung an der Navigation sind in folgender
 00000001&UNEXPECTED\_OBJECT\_DETECTED &Ultraschall hat ein Objeckt erkannt, das nicht erwartet wurde. Navigation macht ein Bild und detektiert, um welches Objekt es sich handelt und handelt entsprechend (siehe Kapitel \ref{model-results}).\\
   \hline
 \end{tabularx}
-\caption{Statuscodes von Steurung}
+\caption{Statuscodes von Steuerung}
 \label{table:statuscodes}
 \end{table}
 
 \textbf{TinyK22 Implementation}
 
 TODO: WIE SCHNITTSTELLE IN TINY IMPLEMENTIERT
+
+Für jedes Empfangene Byte wird auf dem TinyK22 ein Interrupt generiert und anschliessend ausgelesen und in einem Buffer Array gespeichert. Nach dem die festgelegten 4 Bytes angekommen sind werden die im Buffer zwischengespeicherten Bytes in ein Array geschrieben. Aus diesem Array können dann die einzelnen Funktionen die nötigen Daten entnehmen und weiter verwenden.
 
 \textbf{Raspberry Pi Implementation}
 

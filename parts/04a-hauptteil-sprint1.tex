@@ -58,7 +58,7 @@ Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlic
 %%%%%%%%%%%%%%%%%Epic 1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Fortbewegung mit geregelter Geschwindigkeit}
 
-\subsubsection{Print Circuit Board design}
+\subsubsection{Print Circuit Board Design}
 \label{pcb}
 
 Um eine zuverlässige Kontaktierung der einzelnen Komponenten sicherzustellen, wird im Rah-
@@ -146,8 +146,7 @@ Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft un
 
 Der Winkel und die Höhe der Kamera wurde in PREN1 an dem Testaufbau in Abb.\ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt das er für die Bildverarbeitung ideal ist. 
 
-Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbaugemessen so ein 
-
+Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23° Beträgt. Ebenfalls wichtig ist, dass die Linsen Höhe 242mm  über dem Boden beträgt. 
 
 
 \begin{figure}[H]
@@ -157,7 +156,12 @@ Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winke
 \label{fig:Testaufbau zum Festlegen des Kamerawinkels}
 \end{figure}
 
-exakte Position der Kamera und den Anstellwinkel 
+ \begin{figure}[H]
+\centering
+\includegraphics[width= \textwidth ]{assets/MT/Sichtfeld_Roboter.png}
+\caption{Skizze der Funktionsmasse für die Kamerabefestigung}
+\label{fig:Skizze der Funktionsmasse für die Kamerabefestigung}
+\end{figure}
 
 -Raeder, PCB, Tiny, Akku, Motoren
 
@@ -173,7 +177,8 @@ In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem 
 
 
 TODO: schönes Bild vom Testgestell mit/für Liniensnesor
-
+\subsubsection{Abschirmung des Liniensensors}
+Timo todo
 \subsubsection{Liniensensor mit Abschirmung anbringen}
 
 Nach dem ersten Test wurde der Liniensensor am Fahrzeug angebracht. Um Störeinflüsse von aussen zu vermeiden, wurde eine Abdeckung konstruiert, die jegliche Einstrahlung abschirmt. Dank diesem Aufbau konnte mit der weiteren Implementierung begonnen werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden ausgemessen – ebenso auf dem Klebeband, da dies essenziell ist, um die Regelung sauber abzustimmen.
