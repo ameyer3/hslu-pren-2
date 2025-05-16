@@ -34,7 +34,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       6& Liniensensor fehlerhaft. &Sichere Implementation mit Tests.& Encoder Motoren.&8&3 &\\
   \hline
-      7& Ein Objekt wird fehlerhaft gedeutet und falsche Wege werden intern entfernt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&6& \\
+      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&6& \\
   \hline
       8&Hindernisse werden beim Anheben verschoben. &Robuste Greifmethode wählen und testen.&&12&8& \\
   \hline
@@ -44,7 +44,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       11&Die Kamera liefert unscharfe oder verzerrte unbrauchbare Bilder. &Verwendung von Kameras mit hoher Auflösung.&Falls Bilder unscharf sind, Roboter anhalten und neue Bilder aufnehmen.&12&6&\ref{risks-sprint-1} \\
   \hline
-      12& Der Roboter wählt einen falschen Pfad, weil die Hinderniserkennung fehlerhaft ist.&Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\\
+      12& Der Roboter wählt einen falschen Pfad, Objekte nicht erkann werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\\
   \hline
 
 \end{tabularx}
@@ -66,15 +66,19 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       15&Akkustand ist zu niedrig bei Start des Laufes. & Anzeige des Akkustandes. Leicht austauschbarer Akku. Akku aufladen.&Ein zweiter Akku, der voll aufgeladen ist.&5& 1&\\
   \hline
-      16&Personenausfall durch Krankheit oder Unfall. &&Stellvertretungen und virtuelle Kommunikation.&6& 3&\\
+      16&Personenausfall durch Krankheit oder Unfall. &&Stellvertretungen und virtuelle Kommunikation.&6& 3&-\\
   \hline
-      17&Datenkorruption. &&Regelmässige Backups. Alle Dokumente auf Teams erstellen. Dokumentation in LaTeX auf Overleaf. Durch Cronjob werden jeden Tag die .tex Files auf GitHub gepusht.&4& 1&\\
+      17&Datenkorruption. &&Regelmässige Backups. Alle Dokumente auf Teams erstellen. Dokumentation in LaTeX auf Overleaf. Durch Cronjob werden jeden Tag die .tex Files auf GitHub gepusht.&4& 1&-\\
   \hline
   \multicolumn{7}{l}{Neue Risiken aus PREN 2} \\
   \hline
-  18&Akkuhalterung geht kaputt & Akku vorsichtig austauschen. & Mehrere Akkuhalterungen erstellen. &8 &3&\\
+  18&Akkuhalterung geht kaputt & Akku vorsichtig austauschen. & Mehrere Akkuhalterungen erstellen. & &&\\
   \hline
-  19&Elektroteile geht kaputt & Vorsichtig damit umgehen und nicht unnötig anfassen. & Mehrere Exemplare bereithalten. &8 &3&\ref{pcb}\\
+  19&Elektroteile geht kaputt & Vorsichtig damit umgehen und nicht unnötig anfassen. & Mehrere Exemplare bereithalten. & &&\ref{pcb}\\
+  \hline
+    20&Robtoter weiss nicht mehr wo er sich befindet.& Robuste Bilderkennung und Wegfindungsmethode. & Trial \& Error Modus implementieren. &&&\ref{navigation-arch}\\
+  \hline
+    21&Ausgehende Linien werden nicht erkannt. & Objekterkennung testen. & Aus anderer Distanz noch einmal versuchen und falls immer noch nicht erkannt, Knoten aus internem Graph entfernen. & &&\ref{outgoing-lines}\\
   \hline
 
 
