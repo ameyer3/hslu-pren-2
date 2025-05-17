@@ -85,7 +85,9 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem TinyK22 mehrere
 
 \subsubsection{Motoren ansteueren und auslesen}
 
-Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem TinyK22 und einem Speisegerät \ref{fig: Motorentest}. Allerdings wurde bereits der ausgewählte Motortreiber verwendet, der später auch im Endprodukt verbaut wird. Nach einigen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem TinyK22 konnten die ersten Meter erfolgreich gefahren werden. Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen und die vorgegebenen Distanzen oder Drehwinkel exakt einzuhalten.
+Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem TinyK22 und einem Speisegerät \ref{fig: Motorentest}. Allerdings wurde bereits der ausgewählte Motortreiber verwendet, der später auch im Endprodukt verbaut wird. Nach einigen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem TinyK22 konnten die ersten Meter erfolgreich gefahren werden. Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen.
+
+TODO Endgültige Situation mit Encodern
 
 
 \begin{figure}[H]
@@ -173,10 +175,23 @@ Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winke
 
 \subsubsection{Liniensensor auslesen}
 
-In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem TinyK22 zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von Vcc auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture sollten sich die Kondensatoren je nach Reflexion des Untergrunds in unterschiedlichen Zeiten entladen. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden, durch die unterschiedlichen Werten im Timer Register des Input Capture Modus.
+In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem TinyK22 zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von Vcc auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture sollten sich die Kondensatoren je nach Reflexion des Untergrunds in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden, durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
 
 
 TODO: schönes Bild vom Testgestell mit/für Liniensnesor
+
+\subsubsection{Linie Folgen mit PD-Regelung}
+
+Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden. Abb. \ref{fig:Ausschnitt der Implementation der PD-Regelung}. Damit man möglichst dynamisch und ohne grosses schwingen fahren kann, wurd ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden PWM Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
+
+ \begin{figure}[H]
+\centering
+\includegraphics[width= \textwidth ]{assets/ET/PD-Regler/PD-Regler_Code_Pren2.png}
+\caption{Ausschnitt der Implementation der PD-Regelung}
+\label{fig:Ausschnitt der Implementation der PD-Regelung}
+\end{figure}
+
+ 
 \subsubsection{Abschirmung des Liniensensors}
 Timo todo
 \subsubsection{Liniensensor mit Abschirmung anbringen}

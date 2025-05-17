@@ -139,7 +139,7 @@ Die möglichen Statuscodes von der Steuerung an der Navigation sind in folgender
 
 TODO: WIE SCHNITTSTELLE IN TINY IMPLEMENTIERT
 
-Für jedes Empfangene Byte wird auf dem TinyK22 ein Interrupt generiert und anschliessend ausgelesen und in einem Buffer Array gespeichert. Nach dem die festgelegten 4 Bytes angekommen sind werden die im Buffer zwischengespeicherten Bytes in ein Array geschrieben. Aus diesem Array können dann die einzelnen Funktionen die nötigen Daten entnehmen und weiter verwenden.
+Für jedes Empfangene Byte wird auf dem TinyK22 ein Interrupt generiert und anschliessend ausgelesen. Das Byte wird dann in einem Buffer Array zwischengespeichert. Nachdem die festgelegten 4 Bytes angekommen sind werden die im Buffer zwischengespeicherten Bytes in ein Array geschrieben. Aus diesem Array können dann die einzelnen Funktionen die nötigen Daten entnehmen und weiter verwenden.
 
 \textbf{Raspberry Pi Implementation}
 
@@ -149,7 +149,7 @@ Für diese Kommunikation wird ein uart\_connector Modul erstellt. Dieses besteht
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{assets/IT/robot-sw-architecture-uart-connector.png}
-\caption{UART Connector und Erorr Handler Klassendiagramm}
+\caption{UART Connector und Error Handler Klassendiagramm}
 \label{fig:uart-connector-nav}
 \end{figure}
 
