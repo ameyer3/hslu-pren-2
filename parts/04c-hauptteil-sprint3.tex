@@ -7,7 +7,7 @@ mehrere Epics zusammengefasst
 \subsubsection{Ultraschall}
 \label{ultraschall}
 
-Backup-Hinderniserkennung mittels Ultraschallsensor
+Backup-Hinderniserkennung mittels Ultraschallsensor, um Risiko 12 (Objekte werden nicht erkannt) zu mitgieren.
 
 Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller TinyK22 verbunden.
 
@@ -30,6 +30,9 @@ fehler haftes labeling
 testtesttest
 
 ...
+\subsubsection{YOLOv11 Model konvertieren}
+
+TODO, WIESO NCNN
 
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
@@ -38,7 +41,7 @@ Um die Modelresultate auszuwerten wurde das .pt File in den Ordner der Navigatio
 
 TODO UML
 
-Diese ObjectDetector Klasse erstellt das Model aufgrund des .pt Files bei der Instanzierung eines Objektes. Diese Objekt wird aufgerufen, wenn ein Nachbarsknoten geprüft werden soll und führt einne Prozess von drei Schritten durch:
+Diese ObjectDetector Klasse erstellt das Model aufgrund des .pt Files bei der Instanzierung eines Objektes. Diese Objekt wird aufgerufen, wenn ein Nachbarsknoten geprüft werden soll und führt einen Prozess von drei Schritten durch:
 
 \begin{enumerate}
     \item Inference (Objekterkennung)
@@ -46,7 +49,7 @@ Diese ObjectDetector Klasse erstellt das Model aufgrund des .pt Files bei der In
     \item Nächstes Objekte vor dem Roboter finden.
 \end{enumerate}
 
-Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf TODO WERT \& WIESO.
+Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf TODO WERT \& WIESO. \& falls Risiko damit vermindert (Falls erhoeht), Risiko 1
 
 Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
@@ -56,13 +59,9 @@ In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
 
 \begin{itemize}
     \item Falls das nächste Objekt eine Barriere und das zweitnächste eine Pylone ist. In diesem Fall wird zurückgegeben, dass eine Pylone das nächste Objekt ist, da dieser Knoten sowieso nicht befahrbar ist und aus dem internen Graph entfernt werden soll.
-    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist wahrscheinlich, dass das Model ein Knoten verpasst und es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst wird. Falls dies doch geschehen ist, kann der Ultraschall trotzdem Objekte noch erkennen, falls ein unterwartetes Objekt doch auftritt. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Dadurch dass immer mindestens ein Knoten zurueckgegeben wird, wird das Risiko, dass Knoten nicht erkannt werden, mitigiert.
+    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein unterwartetes Objekt auftritt. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Durch den Ultraschall wird Risiko 12 und 1 (Objekte werden nicht erkannt) mitigiert.
 \end{itemize}
 
-Risk 1 mit-minimiert + ultraschall
-Risk 2 minimiert
-Risk 7 minimiert
-Risk 12 minimierrt, kann zurueckfahren + model
 
 Wie auf die einzelnen Objekte reagiert wird, ist in folgender Aufzählung beschrieben und ist gleich, wie in \acrshort{pren1} geplant.
 
