@@ -195,14 +195,18 @@ Ebenfalls konnten einige Stories aus nachfolgenden Sprints begonnen oder bereits
 
 In diesem Sprint konnten folgende Risiken beseitigt oder minimiert werden:
 \begin{itemize}
-    \item Risiko 13: Ein Softwarefehler führt zu einem Absturz: Dieses Risiko wird laufend miniemiert durch die Erstellung von Unittests.
-    \item Risiko 14: Ein Software-Update fuehrt zu Fehlern: Jede neue Version wird getestet. Durch die Verwendung von Git kann die Software einfach auf eine alte Version zurückgesetzt werden.
+    \item Risiko 13: Ein Softwarefehler führt zu einem Absturz: Dieses Risiko wird laufend miniemiert durch die Erstellung von Unittests und wird folgend nicht mehr in jedem Sprint erwähnt werden.
+    \item Risiko 14: Ein Software-Update fuehrt zu Fehlern: Jede neue Version wird getestet. Durch die Verwendung von Git kann die Software einfach auf eine alte Version zurückgesetzt werden. 
     \item Risiko 4: 1 Minute reicht nicht zum Aufbau: Die Zieleingabe ist sehr simpel und schnell.
+    \item Risiko 5: Bodenfugen werden  als Linie erkannt: Robuste Methode, um ausgehende Winkel der Linien zu erkennen mit Kamera, mitigiert das Risiko beim Weiterfahren.
+    \item Risiko 10: Ungenaue Abfahrtssituation: Methode, um Winkel der ausgehenden Linien zu erkennen ist sehr robust.
 \end{itemize}
 
 Es kam ein neues Risiko hinzu und wurde ebenfalls direkt minimiert:
 \begin{itemize}
     \item Risiko 19: Elektroteile gehen kaputt: Alle Elektroteile sind in mindestens zweifacher Ausgabe vorhanden. Das PCB ist fünf Mal vorhanden.
+    \item Risiko 20: Roboter weiss nicht mehr, wo er sich befindet: Indizien gesammelt, wann dies der Fall sein könnte und Wechsel in Trial \& Error Modus implementiert.
+    \item Risiko 21: Ausgehende Linien werden nicht erkannt: Sehr robute Methode und Prozess wurde definiert und implementiert, falls keine Linien erkannt werden.
 \end{itemize}
 \newpage
 
@@ -252,8 +256,21 @@ Die beiden Stories 'Greifvorgang implentieren' und 'Software, um sich zu drehen'
 
 \textbf{Risikoupdate}
 
-...
+In diesem Sprint konnten folgende Risiken mitigiert werden:
 
+\begin{enumerate}
+    \item Risiko 1: Hindernisse werden nicht erkannt: Gutes Model trainiert und Sicherheitsvorkehrungen eingebaut.
+    \item Risiko 2: Konten werden nicht erkannt: Gutes Model trainiert, falls trotzdem nichts erkannt, einfach Knoten annehmen.
+    \item Risko 7: Ein Objekt wird fälschlicherweise erkannt: Gutes Model trainiert, nur Objekte direkt vor Roboter werden akzeptiert, Knoten werden ebenfalls erkannt, hat einen Trial \& Error Methode, falls kein Weg zum Ziel mehr existiert, ist genug schnell, um mit einem längeren Weg umzugehen.
+    \item Risiko 12: Falschen Pfad fahren, wegen übersehenen Objekten: Gutes Model, wuerde durch Ultraschall gestoppt, Prozess implementiert um auf unerwartete Objekte zu reagieren.
+    
+\end{enumerate}
+
+Dieses Risiko kam neu dazu und konnte gleich mitigiert werden:
+
+\begin{enumerate}
+    \item Risiko 22: Gibt fälschlicherweise an, sei im Ziel: Sehr robuste Methode Zielknoten zu erkennen, automatisiert getestet.
+\end{enumerate}
 
 \newpage
 
@@ -286,11 +303,17 @@ dargestellt.
 
 Alle Sprintziele von diesem Sprint konnten bereits in Sprint 2 und 3 fertiggestellt und erreicht werden.
 
+- Ultraschall
+
 TODO, what could we finish now?
 
 \textbf{Risikoupdate}
 
-...
+Folgende Risiken konnten in diesem Sprint mitigiert werden.
+
+\begin{enumerate}
+    \item Risko 1: Hindernisse werden nicht erkannt: Ultraschall als zusätzliche Sicherheitsmassnahme.
+\end{enumerate}
 
 \newpage
 

@@ -53,7 +53,7 @@ Wie im Simulator aus \acrshort{pren1}, wird in der Navigation nach wie vor ein T
 Im Blind Testing Mode nimmt der Roboter jedes Mal die erste Kante von links, bei der keine Pylone erkannt wird und sucht so das Ziel. Obwohl es noch immer moeglich ist, dass falsche Kanten entfernt werden und dies nicht auffaellt, wird dies akzeptiert. Falls immer noch ein Weg gefunden kann, wird dieser zwar laenger dauern, dies wird aber in Kauf genommen. Mit diesem Konzept koennen Risiko 20 (Roboter weiss nicht mehr wo er sich befindet) und Risiko 7 (Hindernis wird faelschlicherweise erkannt) so stark mitigiert, dass sie vernachlaessigt werden koennen.
 
 \subsubsection{Schnittstelle Navigation und Steuerung}
-
+\label{interface-nav-control}
 Die Navigation läuft auf einem Raspberry Pi und die Steuerung läuft auf einem Tiny K22. Die beiden kommunizieren wie geplant über das UART Protokoll miteinander. Für die Kommunikation wurde eine Schnittstelle definiert. Die Navigation sendet 4 Bytes an die Steuerung und die Steuerung antwortet mit dem Statuscode in Form von einem Byte.
 
 Die Instruktionen von der Navigation an die Steuerung, werden, wie in Grafik \ref{fig:interface-tiny} gezeigt, gesendet.
@@ -128,7 +128,7 @@ Die möglichen Statuscodes von der Steuerung an der Navigation sind in folgender
   \hline
       00000000&SUCCESSFULLY\_DONE&Befehl wurde erfolgreich ausgeführt. \\
   \hline
-00000001&UNEXPECTED\_OBJECT\_DETECTED &Ultraschall hat ein Objeckt erkannt, das nicht erwartet wurde. Navigation macht ein Bild und detektiert, um welches Objekt es sich handelt und handelt entsprechend (siehe Kapitel \ref{model-results}).\\
+00000001&UNEXPECTED\_OBJECT\_DETECTED &Ultraschall hat ein Objeckt erkannt, das nicht erwartet wurde. Navigation macht ein Bild und detektiert, um welches Objekt es sich handelt und handelt entsprechend (mitigiert Risiko 12 (wählt falschen Pfad wegen übersehenden Objekten)): Kehrt um, falls Pylone, beseitigt, falls Barriere.\\
   \hline
 \end{tabularx}
 \caption{Statuscodes von Steuerung}

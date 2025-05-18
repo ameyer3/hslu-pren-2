@@ -49,11 +49,11 @@ Diese ObjectDetector Klasse erstellt das Model aufgrund des .pt Files bei der In
     \item Nächstes Objekte vor dem Roboter finden.
 \end{enumerate}
 
-Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf TODO WERT \& WIESO. \& falls Risiko damit vermindert (Falls erhoeht), Risiko 1
+Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf TODO WERT \& WIESO. \& falls Risiko damit vermindert (Falls erhoeht), Risiko 7
 
 Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
-Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bildes befinden. Somit kann sichergestellt werden, dass nicht aus Versehen Objekte, die sich nicht auf der Fahrbahn, die betrachtet wird, befinden gespeichert werden. Die Mitellinie wird berechnet aus der Breite des Bildes. Diese Objekte werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser List, ist das nächste Objekt zum Roboter. Die Id des Objektes, die vom Model zurückgegbene wird, korrespondiert mit der ID des erstellten Enums, damit das erkannte Objekt als Enum zurückgegeben wird.
+Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bildes befinden. Somit kann sichergestellt werden, dass nicht aus Versehen Objekte, die sich nicht auf der Fahrbahn, die betrachtet wird, befinden gespeichert werden und auch Risiko 7 (Objekte werden fälschlicherweise erkannt) kann so mitigiert werden. Die Mitellinie wird berechnet aus der Breite des Bildes. Diese Objekte werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser List, ist das nächste Objekt zum Roboter. Die Id des Objektes, die vom Model zurückgegben wird, korrespondiert mit der ID des erstellten Enums, damit das erkannte Objekt als Enum zurückgegeben wird.
 
 In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
 

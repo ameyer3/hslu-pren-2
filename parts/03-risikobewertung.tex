@@ -45,7 +45,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       11&Die Kamera liefert unscharfe oder verzerrte unbrauchbare Bilder. &Verwendung von Kameras mit hoher Auflösung.&Falls Bilder unscharf sind, Roboter anhalten und neue Bilder aufnehmen.&12&6&\ref{risks-sprint-1} \\
   \hline
-      12& Der Roboter wählt einen falschen Pfad, da Objekte nicht erkannt werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\ref{model-results} \ref{ultraschall}\\
+      12& Der Roboter wählt einen falschen Pfad, da Objekte nicht erkannt werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\ref{model-results} \ref{ultraschall} \ref{interface-nav-control}\\
   \hline
 
 \end{tabularx}
@@ -81,31 +81,23 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
     21&Ausgehende Linien werden nicht erkannt. & Objekterkennung testen. & Aus anderer Distanz noch einmal versuchen und falls immer noch nicht erkannt, Knoten aus internem Graph entfernen. & &&\ref{outgoing-lines}\\
   \hline
+      22&gibt fälschlich an sei im Ziel oder erkennt Ziel nicht. & Robuste Methode, um Graph zu traversieren und sich zu merken, wo man ist. & Methode um Buchstaben auf Knoten zu erkennen implementieren. & &&\ref{detect-target}\\
+  \hline
 
 \end{tabularx}
 \caption{Risiken}
 \label{table:risks}
 \end{table}
 
-TODO add those:
 
-  - sprint 4 : gibt fälschlich an sei im Ziel obwohl nicht ist/ erkennt ziel nicht -> getestet mit X bildern und immer erkannt
 
-TMP NOTES:
+RISKS TODO
 
-3: Risiko 1: ultraschall \\
-3: Risiko 2: ok weil wenn ninchts erkannt einach Knoten \\
-4: Risiko 3: schaffte immer in x min \\
-4: Risiko 4: immer moeglich in x sec \\
+Risiko 3: schaffte immer in x min \\
+Risiko 4: immer moeglich in x sec \\
 Risiko 5:\\
 Risiko 6:\\
-3: Riisko 7: Model kann zu x prozent richtig, sonst wir gehofft dass nicht genug objekte gibt, dass alle wege wege sind, kamera winkel? Muss confidence level erreichen, damit nicht falsch deutet, lieber verpassen als erkennen wegen safety mit ultraschall\\
 Risiko 8:\\
 Risiko 9:\\
-Risiko 10: durch tests: ist ok\\
-1: Risiko 11: done\\
-3: Risiko 12: Ultraschall erkennt \& setzt zurueck, faehrt zurueck\\
-x: Risiko 13: in progress (link all times we mention unittests)\\
-2: Risiko 14: done\\
 Risiko 15:\\
 
