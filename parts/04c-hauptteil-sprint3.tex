@@ -31,17 +31,36 @@ testtesttest
 
 ...
 \subsubsection{YOLOv11 Model konvertieren}
+\label{convert-yolo}
 
-TODO, WIESO NCNN
+Das .pt File des YOLO Models kann bereits eingelesen und verwendet werden. Es gibt Methoden, um diese Datei zu transformieren in ein anderes Format, damit auf embedded Systems und somit auch auf Raspberry Pis schneller die Bilderkennung durchgeführt werden kann.
+
+Drei Möglichkeiten wurden betrachtet und verglichen:
+TODO add sources for each \& akronyum
+\begin{enumerate}
+    \item Caffe2: In der Vergangenheit sehr geeignet, heutzutages mit PyTorch zusammengefügt und existiert nicht mehr auf diese Weise.
+    \item NCNN: Sehr gute Performance für ARM Geräte (u.a. Raspberry Pi), sehr wenig Abhängigkeiten, einfache Transformation.
+    \item ONXX: Geeignet für  Cross-Plattform Fälle, gute Austauschbarkeit des Models, flexibel, viele Abhängigkeiten.
+\end{enumerate}
+
+Es wird NCNN gewählt, da dies perfekt für den Use Case mit einem Raspberry Pi passt. Das erstellt .pt File kann mit der ultralytics Bibliothek transformiert werden:
+
+\begin{verbatim}
+yolo export model=best.pt format=ncnn
+\end{verbatim}
+
+Das Resultat ist ein Ordner mit zwei Dateien drin, mit allen nötigen Informationen, aus dem .pt File. Dieser Ordner kann im Python Code geladen werden, um die Bilderkennung durchzuführen. Mit der Transformation wurde das Risiko 3: 4 Minuten reichen nicht für einen Durchgang, weiter gemindert.
+
+TODO: ADD NUMBERS, BEFORE (~1s) vs AFTER
 
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
 
-Um die Modelresultate auszuwerten wurde das .pt File in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt.
+Um die Modelresultate auszuwerten wurde das Model in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt.
 
 TODO UML
 
-Diese ObjectDetector Klasse erstellt das Model aufgrund des .pt Files bei der Instanzierung eines Objektes. Diese Objekt wird aufgerufen, wenn ein Nachbarsknoten geprüft werden soll und führt einen Prozess von drei Schritten durch:
+Diese ObjectDetector Klasse erstellt das Model aufgrund des NCNN Ordners bei der Instanzierung eines Objektes. Diese Objekt wird aufgerufen, wenn ein Nachbarsknoten geprüft werden soll und führt einen Prozess von drei Schritten durch:
 
 \begin{enumerate}
     \item Inference (Objekterkennung)

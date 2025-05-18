@@ -68,9 +68,8 @@ TODO: UGLY
     {Sprintplanung}
 
     
-In den folgenden Kapiteln wurden für jeden Sprint Sprintziele und ein Sprintbacklog definiert. Dieser ergibt sich aus dem Releaseplan. Darin wird der geschätzte Aufwand mit dem tatsächlichen Aufwand verglichen. Ebenfalls wird angegeben, falls eine User Story nicht fertiggestellt wurden konnte in dem geplanten Sprint.
+In den folgenden Kapiteln wurden für jeden Sprint Sprintziele und ein Sprintbacklog definiert. Dieser ergibt sich aus dem Releaseplan. Darin wird der geschätzte Aufwand mit dem tatsächlichen Aufwand verglichen. Ebenfalls wird angegeben, falls eine User Story nicht fertiggestellt wurden konnte in dem geplanten Sprint und in welchem Sprint sie beendet werden konnte. Ist der Status eines Story am Ende des Sprints 'DONEv1' bedeutete das, dass diese Story in der Sprintreview des jeweiligen Sprints als beendet betrachtet wurde, jedoch in einem späteren Sprint bemerkt wurde, dass noch Teile verbessert oder korrigiert werden müssen. Dies wird in dem jeweiligen späteren Sprint, wo auch der Status angepasst wird, beschrieben. 
 
-TODO LEGENDE FUER STATUS ENDE SPRINT
 
 \subsubsection*{Sprint 1}
   \addcontentsline{toc}
@@ -249,7 +248,7 @@ Alle sieben Sprint Ziele von diesem Sprint konnten erreicht werden. Lediglich de
 
 Ebenfalls konnte die Story 'Software, um Zielknoten zu erkennen implementieren' umgesetzt werden aus Sprint 4.
 
-In diesem Sprint wurde gemerkt, dass der Liniensensor zwar funktioniert, um auf einer Linie zu fahren, jedoch die Knotenerkennung nicht stabil ist. Diese Story wird nun wieder geoffnet und weiterhin bearbeitet. Ebenfalls gab es Probleme damit, eine bestimmte Distanz zu fahren mit dem Roboter. Diese Story aus Sprint 1 wird ebenfalls wieder geöffnet. Die Storis werden im Nachhinein in der Tabelle im Sprint 1 mit 'DONEv1' markiert, da von beiden eine erste Version existierte zu diesem Zeitpunkt, die jetzt noch verbessert oder korrigiert wird.
+In diesem Sprint wurde gemerkt, dass der Liniensensor zwar funktioniert, um auf einer Linie zu fahren, jedoch die Knotenerkennung nicht stabil ist. Diese Story wird nun wieder geoffnet und weiterhin bearbeitet. Ebenfalls gab es Probleme damit, eine bestimmte Distanz zu fahren mit dem Roboter. Diese Story aus Sprint 1 wird ebenfalls wieder geöffnet. Die Stories werden im Nachhinein in der Tabelle im Sprint 1 mit 'DONEv1' markiert, da von beiden eine erste Version existierte zu diesem Zeitpunkt, die jetzt noch verbessert oder korrigiert wird.
 
 Die beiden Stories 'Greifvorgang implentieren' und 'Software, um sich zu drehen', die im vorherigen Sprint noch nicht beendet werden konnten, konnten auch in diesem Sprint nicht beendet werden.
 
@@ -258,19 +257,20 @@ Die beiden Stories 'Greifvorgang implentieren' und 'Software, um sich zu drehen'
 
 In diesem Sprint konnten folgende Risiken mitigiert werden:
 
-\begin{enumerate}
+\begin{itemize}
     \item Risiko 1: Hindernisse werden nicht erkannt: Gutes Model trainiert und Sicherheitsvorkehrungen eingebaut.
     \item Risiko 2: Konten werden nicht erkannt: Gutes Model trainiert, falls trotzdem nichts erkannt, einfach Knoten annehmen.
+    \item Risiko 3: 4 Minuten reichen nicht: Model transformiert in schnelleres Format, um Bilderkennung schneller zu machen.
     \item Risko 7: Ein Objekt wird fälschlicherweise erkannt: Gutes Model trainiert, nur Objekte direkt vor Roboter werden akzeptiert, Knoten werden ebenfalls erkannt, hat einen Trial \& Error Methode, falls kein Weg zum Ziel mehr existiert, ist genug schnell, um mit einem längeren Weg umzugehen.
     \item Risiko 12: Falschen Pfad fahren, wegen übersehenen Objekten: Gutes Model, wuerde durch Ultraschall gestoppt, Prozess implementiert um auf unerwartete Objekte zu reagieren.
     
-\end{enumerate}
+\end{itemize}
 
 Dieses Risiko kam neu dazu und konnte gleich mitigiert werden:
 
-\begin{enumerate}
+\begin{itemize}
     \item Risiko 22: Gibt fälschlicherweise an, sei im Ziel: Sehr robuste Methode Zielknoten zu erkennen, automatisiert getestet.
-\end{enumerate}
+\end{itemize}
 
 \newpage
 
