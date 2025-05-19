@@ -2,7 +2,10 @@
 
 \subsection{Objekte erkennen}
 
-mehrere Epics zusammengefasst 
+Dieses Kapitel behandelt die Methoden zur Objekterkennung. Zur Identifikation der drei Klassen (Pylone, Knoten, Hindernisse) wurde das YOLOv11-Modell eingesetzt, das speziell für diese Aufgabe trainiert wurde. Ergänzend dazu dient ein Ultraschallsensor als Backup-System zur Erkennung von Hindernissen, um die Sicherheit des Roboters zu erhöhen. Die erzielten Modellresultate können anschließend vom Raspberry Pi ausgewertet werden damit der Roboter die optimale Route wählen kann.
+
+Das finale Model wurde auf einem Datensatz Bilder trainiert welcher von der Raspberry-PI-Kamera aus der Betriebshöhe aufgenommen wurden. Der Datensatz enthält Bilder des Graphes, der Pylonen und der Hindernisse. 
+
 
 \subsubsection{Ultraschall}
 \label{ultraschall}
@@ -11,119 +14,115 @@ Backup-Hinderniserkennung mittels Ultraschallsensor, um Risiko 12 (Objekte werde
 
 Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller TinyK22 verbunden.
 
-Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 10 cm erkannt wird, wird automatisch ein Not-Stopp ausgelöst, um Kollisionen zu vermeiden. Gleichzeitig wird ein definierter Fehlercode generiert und über eine serielle Schnittstelle an den Raspberry Pi übertragen, um den Fehlerstatus zu protokollieren und entsprechende Maßnahmen einleiten zu können.
-
-
-
+Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 10 cm erkannt wird, wird automatisch ein Not-Stopp ausgelöst, um Kollisionen zu vermeiden. Gleichzeitig wird ein definierter Fehlercode generiert und über eine serielle Schnittstelle an den Raspberry Pi übertragen, um den Fehlerstatus zu protokollieren und entsprechende Massnahmen einleiten zu können.
 
 \subsubsection{Training YOLOv11-Model trainieren}
 
-\paragraph{Einleitung}
 
 
 Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wurde
 
- Das Ziel war, das Modell auf einem Raspberry Pi 5 für den Einsatz in einem Roboter zu optimieren. Der Trainingsprozess umfasste drei Iterationen, wobei ich verschiedene Ansätze ausprobierte, um die Modellleistung zu verbessern. Diese Dokumentation beschreibt meinen Lernprozess, die Methodik, die Herausforderungen und die Ergebnisse der finalen Iteration.
+Das Ziel war, das Modell auf einem Raspberry Pi 5 für den Einsatz in einem Roboter zu optimieren. Der Trainingsprozess umfasste drei Iterationen, wobei ich verschiedene Ansätze ausprobierte, um die Modellleistung zu verbessern. Diese Teil der Dokumentation beschreibt den Lernprozess, die Methodik, die Herausforderungen und die Ergebnisse der finalen Iteration.
+
+Ein erfolgreich trainiertes Model hat die Fähigkeit zur Generalisierung. Das heisst, es ist besser Objekte zu erkennen in Bilder mit verschiedenen Bildkonditionen. Da das Datenset mit 116 Aufnahmen relativ klein ist, wurde künstliche Datenerweiterung angewendet. Durch "augmentation" werden die Bilder leicht in Helligkeit, Kontrast und weiteren Parametern verändert und diese den unveränderten Bildern hinzugefügt. So lernt das Model die selben Objekte in verschiedenen Konditionen zu erkennen.
+
+Trainieren, auch Fine-Tuning genannt, eines YOLOv11-Modells ist „Supervised Learning“. Im Kontext von Computer Vision heisst das, jedes Bild wird mit Labels versehen, was in dem Bild zu sehen ist. Labeling, oder auch "annotation," wird mit dem Webtool Roboflow gemacht wo das annotierte Datenset im Yolov11-Format exportiert werden kann. 
+
+Das eigentliche Training benötigt GPU-Rechenleistung. Mithilfe von Google Colab können kostenlos GPUs benutzt werden. Das Datenset wurde auf Google Colab hochgeladen und mit einem Jupiter Notebook dort trainiert.
 
 \paragraph{Lernprozess und Trainingsiterationen}
 
-\subparagraph{Erste Iteration: Erkundung und Überaugmentation}
+\subparagraph{Erste Iteration}
 
-In der ersten Iteration testete ich das YOLOv11n-Modell mit einem stark augmentierten Datensatz (Rotation ±30°, Helligkeit ±50\%, Rauschen 10\%) in Google Colab. Der Trainingsbefehl lautete:
+In der ersten Iteration testete ich das YOLOv11n-Modell mit einem stark augmentierten Datensatz \text{(Rotation $\pm$30°, Helligkeit $\pm$50\%, Rauschen 10\%)}. Trainiert wurde mit einem Datensatz aus Bildern welche mit dem Mobiltelefon aufgenommen wurden. Zu Testzwecken hat dies ausgereicht. Für das Model welches dann eingesetzt wird, ist das suboptimal, da die Bilder mit denen trainiert wird, den Real-Konditionen entsprechen sollten.
 
-bashKopieren\verb|!yolo train model=yolo11n.pt data=/content/datasets/dataset/data.yaml epochs=50 imgsz=640 batch=16 device=0|Die Ergebnisse waren unbefriedigend (mAP@0.5 ca. 0.5), da die übermäßige Augmentation zu einem Überlernen künstlicher Muster führte, insbesondere bei der Klasse "Knoten."
+Die Ergebnisse waren unbefriedigend, da die übermäßige Augmentation zu einem Überlernen (overfitting) künstlicher Muster führte, insbesondere bei der Klasse "Knoten." Darauf wurde mit Bildern der Raspberry Pi Kamera ein neuer Datensatz erstellt.
+
 
 \subparagraph{Zweite Iteration: Iterative Erweiterung und Überanpassung}
 
-In der zweiten Iteration kombinierte ich einen unveränderten Datensatz mit zwei augmentierten Datensätzen und trainierte iterativ mit je 50 Epochen (insgesamt 150 Epochen). Der Befehl für die erste Phase war:
+In der zweiten Iteration kombinierte ich einen unveränderten Datensatz mit zwei erweiterten Datensätzen und trainierte iterativ mit je 300 Epochen.
+Augmentationen umfassten horizontale Spiegelung, Rotation (±15°) und Helligkeit (
 
-bashKopieren\verb|!yolo train model=yolo11n.pt data=/content/datasets/unverändert/data.yaml epochs=50 imgsz=640 batch=16 device=0 augment=True|Augmentationen umfassten horizontale Spiegelung, Rotation (±15°) und Helligkeit (±20\%). Die hohe Epochenzahl führte zu Überanpassung (Trainings-mAP 0.9, Validierungs-mAP 0.6), und ich erkannte Fehler in den Annotationen, die eine erneute Überarbeitung notwendig machten.
+Diese Anzahl an Epochs war viel zu hoch was zu einem overfitting führte. Ausserdem erkannte ich Fehler in den Annotationen, die eine erneute Überarbeitung notwendig machten.
 
 \subparagraph{Dritte Iteration: Kombination von Datensätzen und Finales Training}
 
-In der dritten Iteration optimierte ich den Ansatz, indem ich einen unveränderten Datensatz mit einem augmentierten Datensatz kombinierte, um Robustheit und Generalisierung zu verbessern.
+In der dritten Iteration wurde der Ansatz optimiert, indem ein unveränderter Datensatz mit einem veränderten Datensatz kombiniert wurde, um Robustheit und Generalisierung zu verbessern.
 
-DatensatzkombinationDer unveränderte Datensatz umfasste 250 Bilder (ca. 80 pro Klasse), annotiert in Roboflow. Der augmentierte Datensatz wurde gemäß Empfehlungen für den Einsatz im Innenraum mit variierenden Licht- und Bodenbedingungen erstellt. Die Augmentationseinstellungen waren:
+Der unveränderte Datensatz umfasste 396 Bilder, annotiert in Roboflow. Der augmentierte Datensatz wurde gemäß Empfehlungen für den Einsatz im Innenraum mit variierenden Licht- und Bodenbedingungen erstellt. Die Augmentationseinstellungen waren:
 
 \begin{itemize} 
-    \item \textbf{Helligkeit}: ±20\%, um Lichtvariationen abzubilden. 
-    \item \textbf{Sättigung}: ±10\%, für Farbänderungen. 
-    \item \textbf{Farbton}: ±5\%, für leichte Farbverschiebungen. 
-    \item \textbf{Rauschen}: 5\% Gaußsches Rauschen, für Sensorrauschen. 
+    \item \textbf{Helligkeit}: $\pm$20\%, um Lichtvariationen abzubilden. 
+    \item \textbf{Sättigung}: $\pm$10\%, für Farbänderungen. 
+    \item \textbf{Farbton}: $\pm$5\%, für leichte Farbverschiebungen. 
+    \item \textbf{Rauschen}: 5\% Gaussches Rauschen, für Sensorrauschen. 
     \item \textbf{Unschärfe}: 3-Pixel-Gaußsche Unschärfe, für Bewegungseffekte. 
 \end{itemize}
-Pro Originalbild wurde ein augmentiertes Bild generiert, was den kombinierten Datensatz auf etwa 500 Bilder brachte. Die Kombination erfolgte in Google Colab wie folgt:
+Die Kombination der Datensätze erforderte ein zusammenfügen der Bilder in korrekter Ordnerstruktur und erfolgte in Google Colab per Kommandozeile.
 
-\begin{enumerate} 
-    \item Herunterladen der Datensätze: pythonKopieren\verb|from roboflow import Roboflow rf = Roboflow(api_key="MEIN_API_KEY") project = rf.workspace("MEIN_WORKSPACE").project("MEIN_PROJEKT") dataset1 = project.version(1).download("yolov11") \textit{# Unverändert} dataset2 = project.version(2).download("yolov11") \textit{# Augmentiert}|  
-    \item Zusammenführen der train-Daten: bashKopieren\verb|!mkdir /content/datasets/combined_dataset !mkdir -p /content/datasets/combined_dataset/train/images !mkdir -p /content/datasets/combined_dataset/train/labels !mkdir -p /content/datasets/combined_dataset/valid/images !mkdir -p /content/datasets/combined_dataset/valid/labels !mkdir -p /content/datasets/combined_dataset/test/images !mkdir -p /content/datasets/combined_dataset/test/labels !cp /content/datasets/MEIN_PROJEKT-1/train/images/* /content/datasets/combined_dataset/train/images/ !cp /content/datasets/MEIN_PROJEKT-1/train/labels/* /content/datasets/combined_dataset/train/labels/ !cp /content/datasets/MEIN_PROJEKT-2/train/images/* /content/datasets/combined_dataset/train/images/ !cp /content/datasets/MEIN_PROJEKT-2/train/labels/* /content/datasets/combined_dataset/train/labels/ !cp /content/datasets/MEIN_PROJEKT-1/valid/images/* /content/datasets/combined_dataset/valid/images/ !cp /content/datasets/MEIN_PROJEKT-1/valid/labels/* /content/datasets/combined_dataset/valid/labels/ !cp /content/datasets/MEIN_PROJEKT-1/test/images/* /content/datasets/combined_dataset/test/images/ !cp /content/datasets/MEIN_PROJEKT-1/test/labels/* /content/datasets/combined_dataset/test/labels/|  
-    \item Erstellung der data.yaml-Datei: pythonKopieren\verb|import yaml data_yaml = {  'train': '/content/datasets/combined_dataset/train/images',  'val': '/content/datasets/combined_dataset/valid/images',  'test': '/content/datasets/combined_dataset/test/images',  'nc': 3,  'names': ['Kegel', 'Knoten', 'Hindernis'] } with open('/content/datasets/combined_dataset/data.yaml', 'w') as f:  yaml.dump(data_yaml, f, default_flow_style=False)|  
-\end{enumerate}
 Die Validierungs- und Testdaten stammten ausschließlich aus dem unveränderten Datensatz, um Datenlecks zu vermeiden. Die Konsistenz wurde durch Vergleich von Bild- und Label-Dateien überprüft.
 
 Training und ErgebnisseDas Modell wurde mit folgendem Befehl trainiert:
 
-bashKopieren\verb|!yolo train model=yolo11n.pt data=/content/datasets/combined_dataset/data.yaml epochs=100 imgsz=640 batch=16 device=0 augment=True|Die Validierungsergebnisse lauten:
 
-\begin{itemize} 
-    \item \textbf{Modellarchitektur}: YOLOv11n (fused): 238 Schichten, 2.582.737 Parameter, 6.3 GFLOPs. 
-    \item \textbf{Gesamtleistung}: 
-    \begin{itemize} 
-        \item Bilder: 22 
-        \item Instanzen: 34 
-        \item Präzision (P): 0.734 
-        \item Rückruf (R): 0.760 
-        \item mAP@0.5: 0.800 
-        \item mAP@0.5:0.95: 0.595 
-    \end{itemize}  
-    \item \textbf{Klassenleistung}: 
-    \begin{itemize} 
-        \item \textbf{Kegel} (9 Bilder, 9 Instanzen): 
-        \begin{itemize} 
-            \item Präzision: 0.796 
-            \item Rückruf: 1.0 
-            \item mAP@0.5: 0.955 
-            \item mAP@0.5:0.95: 0.824 
-        \end{itemize}  
-        \item \textbf{Knoten} (16 Bilder, 17 Instanzen): 
-        \begin{itemize} 
-            \item Präzision: 0.759 
-            \item Rückruf: 0.529 
-            \item mAP@0.5: 0.611 
-            \item mAP@0.5:0.95: 0.299 
-        \end{itemize}  
-        \item \textbf{Hindernis} (8 Bilder, 8 Instanzen): 
-        \begin{itemize} 
-            \item Präzision: 0.648 
-            \item Rückruf: 0.750 
-            \item mAP@0.5: 0.833 
-            \item mAP@0.5:0.95: 0.662 
-        \end{itemize}  
-    \end{itemize}  
-    \item \textbf{Geschwindigkeit} (pro Bild): 
-    \begin{itemize} 
-        \item Vorverarbeitung: 0.1 ms 
-        \item Inferenz: 1.7 ms 
-        \item Nachverarbeitung: 1.0 ms 
-        \item Gesamt: \~2.8 ms (ca. 357 FPS auf GPU) 
-    \end{itemize}  
+\begin{verbatim}
+yolo train model=yolo11n.pt data=/content/datasets/combined_dataset/data.yaml 
+epochs=100 imgsz=640 batch=16 device=0 augment=True
+\end{verbatim}
+
+Die Validierungsergebnisse lauten:
+
+\begin{itemize}
+    \item \textbf{Model Architecture}: YOLOv11n (fused): 238 layers, 2,582,737 parameters, 0 gradients, 6.3 GFLOPs.
+    \item \textbf{Overall Performance}:
+    \begin{itemize}
+        \item Images: 22
+        \item Instances: 34
+        \item Precision (P): 0.734
+        \item Recall (R): 0.760
+        \item mAP@0.5: 0.800
+        \item mAP@0.5:0.95: 0.595
+    \end{itemize}
+    \item \textbf{Class Performance}:
+    \begin{itemize}
+        \item \textbf{Cone} (9 Images, 9 Instances):
+        \begin{itemize}
+            \item Precision: 0.796
+            \item Recall: 1.0
+            \item mAP@0.5: 0.955
+            \item mAP@0.5:0.95: 0.824
+        \end{itemize}
+        \item \textbf{Node} (16 Images, 17 Instances):
+        \begin{itemize}
+            \item Precision: 0.759
+            \item Recall: 0.529
+            \item mAP@0.5: 0.611
+            \item mAP@0.5:0.95: 0.299
+        \end{itemize}
+        \item \textbf{Obstacle} (8 Images, 8 Instances):
+        \begin{itemize}
+            \item Precision: 0.648
+            \item Recall: 0.750
+            \item mAP@0.5: 0.833
+            \item mAP@0.5:0.95: 0.662
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Speed} (per Image):
+    \begin{itemize}
+        \item Preprocess: 0.1 ms
+        \item Inference: 1.7 ms
+        \item Postprocess: 1.0 ms
+        \item Total: ~2.8 ms (approx. 357 FPS on GPU)
+    \end{itemize}
 \end{itemize}
+
+
 Die Ergebnisse zeigen eine starke Leistung bei "Kegel" und "Hindernis," während "Knoten" eine Schwäche darstellt, möglicherweise aufgrund unzureichender Daten oder Annotationen.
 
 \paragraph{Reflexion des Lernprozesses}
 
 Mein Lernprozess war iterativ geprägt. Die erste Iteration zeigte die Risiken von Überaugmentation, die zweite die Folgen von Überanpassung und fehlerhaften Annotationen. In der dritten Iteration integrierte ich diese Erkenntnisse, indem ich einen ausgewogenen Datensatz erstellte und die Epochenzahl optimierte. Google Colab und Roboflow waren entscheidend für den Erfolg.
-
-\paragraph{Fazit und Ausblick}
-
-Das Modell erreicht eine mAP@0.5 von 0.8, ist jedoch für den Raspberry Pi 5 noch zu optimieren (Bildgröße auf 416x416 anpassen). Ich plane, den Datensatz mit weiteren "Knoten"-Bildern zu erweitern. Diese Dokumentation dient als Grundlage für zukünftige Optimierungen.
-
- 
-
-
-
-
-
 
 
 \subsubsection{YOLOv11 Model konvertieren}
