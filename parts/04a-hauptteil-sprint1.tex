@@ -120,6 +120,8 @@ Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In  Abb. \ref
 
 Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder RasberryPi werden nicht direkt auf die Grundplatte montiert, sondern auf Träger welche anschliessend auf die Grundplatte geschraubt werden. Die Träger wurden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. (siehe Abb.\ref{fig: Träger für elektronische Komponenten}) Dieser Aufbau hatte in der frühen Testphase den Vorteil das alle elektronischen Komponenten provisorisch platziert werden konnten ohne einen Kurzschluss zu Riskieren. 
 
+
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=5cm]{assets/MT/Träger El Komponenten.jpg}
@@ -127,9 +129,18 @@ Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder RasberryPi
 \label{fig: Träger für elektronische Komponenten}
 \end{figure}
 
+Das Batteriefach wurde so Konstruiert das sich die Batterie für die Lagerung jederzeit entfernen lässt. Dafür wurde ein Click-Verschluss verwendet. Das Batteriefach wird von unten in die Grundplatte geschoben bis es einrastet. Zum Herausnehmen der Batterie müssen nur die Hacken gedrückt werden und das Batteriefach kann ausgefahren werden. Um die Funktion Problemlos zu gewährleisten dürfen die Windstärken nicht zu gross sein. Das die Festigkeit trotzdem gewährleistet werden kann wurde die Layerrichtung im 3D Drucker, wie in Abb. \ref{Layerrichtung Batteriefach} so gewählt das die Layer horizontal zur Verschiebung der Hacken angeordnet sind. 
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{assets/MT/Layer_Batterie Fach.png}
+\caption{Layerrichtung Batteriefach}
+\label{Layerrichtung Batteriefach}
+\end{figure}
 
 \subsubsection{Greifer konstruieren}
-\label{{Greifer konstruieren}
+\label{Greifer konstruieren}
 
 Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft und den Lagerstellen. Bei der Implementierung des Greifers musste darauf geachtet werden das die Lagerstellen nicht verschoben werden. In Abb \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man, die für die Funktion wichtigsten Masse am Versuchsaufbau und am Fertigen Roboter. Die für für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
 
@@ -152,7 +163,6 @@ Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft un
 
 
 
--Raeder, PCB, Tiny, Akku, Motoren
 
 
 \newpage
