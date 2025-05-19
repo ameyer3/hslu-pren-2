@@ -98,6 +98,7 @@ TODO Endgültige Situation mit Encodern
 \end{figure}
 
 \subsubsection{Fahrwerk konstruieren}
+\label{Fahrwerk konstruieren}
 
  Das Konzept für das Fahrwerk und die Grundplatte wurden analog zum Konzept aus PREN1 umgesetzt. Am Fahrwerk wurden gegenüber des Prototyps aus PREN1 einzig der Motorflansch und der Lenkrollenhalter angepasst. Beim Prototyp in PREN1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus PLA nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt. Abb.\ref{fig: Lenkrollenhalter V2} 
 
@@ -127,6 +128,9 @@ Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder RasberryPi
 \end{figure}
 
 
+\subsubsection{Greifer konstruieren}
+\label{{Greifer konstruieren}
+
 Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft und den Lagerstellen. Bei der Implementierung des Greifers musste darauf geachtet werden das die Lagerstellen nicht verschoben werden. In Abb \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man, die für die Funktion wichtigsten Masse am Versuchsaufbau und am Fertigen Roboter. Die für für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
 
 \begin{figure}[H]
@@ -146,24 +150,7 @@ Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft un
   \end{minipage}
 \end{figure}
 
-Der Winkel und die Höhe der Kamera wurde in PREN1 an dem Testaufbau in Abb.\ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt das er für die Bildverarbeitung ideal ist. 
 
-Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23° Beträgt. Ebenfalls wichtig ist, dass die Linsen Höhe 242mm  über dem Boden beträgt. 
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=5cm]{assets/MT/camer_tower_2.png}
-\caption{Testaufbau zum Festlegen des Kamerawinkels}
-\label{fig:Testaufbau zum Festlegen des Kamerawinkels}
-\end{figure}
-
- \begin{figure}[H]
-\centering
-\includegraphics[width= \textwidth ]{assets/MT/Sichtfeld_Roboter.png}
-\caption{Skizze der Funktionsmasse für die Kamerabefestigung}
-\label{fig:Skizze der Funktionsmasse für die Kamerabefestigung}
-\end{figure}
 
 -Raeder, PCB, Tiny, Akku, Motoren
 
