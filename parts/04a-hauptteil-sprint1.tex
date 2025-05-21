@@ -211,31 +211,43 @@ Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft un
   \end{minipage}
 \end{figure}
 
-\subsubsection{Halterung und Abschirmung des Liniensensors}
+\newpage
+
+\subsubsection{Halterung Liniensensor}
 \label{Halterung Liniensensor}
 
-To Finish
 
-
-\paragraph{Halterung}
 Für den Liniensensor wurde eine Halterung erstellt welche in der Höhe verstellbar ist für eine optimale und flexible Einstellung am Roboter.
 
-Die Konstruktion ist zweiteilig und wurde aus 
+Die Konstruktion ist zweiteilig und  besteht aus einem äusseren und einem inneren Teil. Die Halterung wurde mit dem 3D-Drucker ausgedruckt.
 
-To finish Timo
+Befestigt wurde der äussere Teil mit 4 M3 schrauben an der Grundplatte. Der innere Teil an dem der Liniensensor befestigt wird, hat ein Untermass und ist so in der Höhe verschiebbar. Mittels M3-Madenschrauben wird er in Position festgeklemmt
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{assets//MT/Sensor Halterung.png}
+    \caption{Halterung mit Sensor}
+    \label{fig:Halterung mit Sensor}
+\end{figure}
 
-\paragraph{Abschirmung}
+
+\subsubsection{Abschirmung des Liniensensors}
+\label{Abschirmung des Liniensensors}
+Um Störeinflüsse von aussen zu vermeiden, wurde eine Abdeckung konstruiert, die jegliche Einstrahlung abschirmt. Der Liniensensor funktioniert am besten wenn er in einem abgedunkelten Umfeld eingesetzt wird.
 
 
-
-
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{assets//MT/Sensor Abdeckung.png}
+    \caption{Sensor Abdeckung}
+    \label{fig:Sensor Abdeckung}
+\end{figure}
 \newpage
 %%%%%%%%%%%%%%%%%Epic 2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Auf Linien des Graphes bewegen}
 
 \subsubsection{Liniensensor auslesen}
-
+\label{Liniensensor auslesen}
 In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem TinyK22 zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von Vcc auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture sollten sich die Kondensatoren je nach Reflexion des Untergrunds in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden, durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
 
 
@@ -252,13 +264,6 @@ Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die e
 \label{fig:Ausschnitt der Implementation der PD-Regelung}
 \end{figure}
 
- 
-\subsubsection{Abschirmung des Liniensensors}
-Um Störeinflüsse von aussen zu vermeiden, wurde eine Abdeckung konstruiert, die jegliche Einstrahlung abschirmt. Der Liniensensor funktioniert am besten wenn er in einem abgedunkelten Umfeld eingesetzt wird.
-
-*Bild einfügen 
-
-
 
 \subsubsection{Liniensensor mit Abschirmung anbringen}
 
@@ -266,7 +271,12 @@ Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung ange
 
 
 
-TODO: schönes Bild vom Schlussgestell mit Abschirmung des Liniensensors/ montierter Sensor
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Sensor montiert.png}
+    \caption{Sensor montiert}
+    \label{fig:enter-label}
+\end{figure}
 
 
 \newpage
