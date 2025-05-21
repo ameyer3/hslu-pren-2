@@ -87,7 +87,53 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem TinyK22 mehrere
 
 Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem TinyK22 und einem Speisegerät \ref{fig: Motorentest}. Allerdings wurde bereits der ausgewählte Motortreiber verwendet, der später auch im Endprodukt verbaut wird. Nach einigen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem TinyK22 konnten die ersten Meter erfolgreich gefahren werden. Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen.
 
-TODO Endgültige Situation mit Encodern
+\textbf{Endgültige Situation mit Encodern}\newline
+Die Encoder sowie der zugehörige Code wurden auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
+
+Anschliessend wurde ein Encoder mithilfe eines Frequenzgenerators simuliert, um das Zähleverhalten des implementierten Codes zu überprüfen. Die Taktfrequenz wurde auf 500 Hz eingestellt. Kanal 2 wurde mit einer Phasenverschiebung von 90 Grad nacheilend konfiguriert. Unter diesen Bedingungen sollte der implementierte Zähler eine Inkrementierung vornehmen.
+
+Das Taktsignal wurde für eine Dauer von 2 Sekunden angelegt, was direkt am Frequenzgenerator eingestellt wurde. Der erwartete Endwert des Zählers lag entsprechend bei etwa 1000.
+\begin{table}[ht]
+\centering
+\caption{Ergebnisse der aufgezeichneten Taktimpulse Decoder}
+\label{tab:taktergebnisse_de}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
+\hline
+1 & 723 \\
+2 & 1397 \\
+3 & 1412 \\
+4 & 655 \\
+\hline
+\end{tabular}
+\end{table}
+
+Wie aus Tabelle \ref{tab:taktergebnisse_de} ersichtlich ist, weichen die aufgezeichneten Werte um bis zu 41\% vom erwarteten Sollwert ab. Diese Abweichung ist zu gross, um eine präzise Regelung darauf aufzubauen.
+
+Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
+
+\begin{table}[ht]
+\centering
+\caption{Ergebnisse der aufgezeichneten Taktimpulse Input Capture}
+\label{tab:taktergebnisse_im}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
+\hline
+1 & 902 \\
+2 & 1252 \\
+3 & 842 \\
+4 & 876 \\
+\hline
+\end{tabular}
+\end{table}
+
+Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}).
+
+Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit den Encodern wurde entschieden, die Drehung ausschliesslich mithilfe der Liniensensoren durchzuführen.
+
+
 
 
 \begin{figure}[H]
