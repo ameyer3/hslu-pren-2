@@ -218,9 +218,8 @@ Damit das Hindernis möglichst präzise an der ursprünglichen Position abgelegt
 
 \subsubsection{Roboter drehen}
 
-...NEUE DEFINITION (WIR DREHEN nur noch mit den Liniensensoren, links recht wieder möglich)
+Aufgrund von Problemen mit den beiden Encodern wird das Drehen des Roboters nicht wie ursprünglich geplant umgesetzt. Die gelieferten Encodertickwerte sind instabil bzw. fehlerhaft und daher nicht für eine zuverlässige Berechnung des Drehwinkels geeignet. Da das Drehen jedoch eine essentielle Funktion ist, wurde als Alternative der Liniensensor verwendet. Dieser erkennt, wann eine Linie verlassen oder wieder erreicht wurde, und kann somit zur Steuerung des Drehvorgangs genutzt werden – etwa zum Fortsetzen oder Beenden der Drehung. Der Roboter kann dabei sowohl nach links als auch nach rechts gedreht werden, was für die Effizienz mit dem Algorithmus entscheidend ist.
 
-...
 
 
 \subsubsection{Ausgehende Linien erkennen}
