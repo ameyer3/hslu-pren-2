@@ -1,9 +1,9 @@
 \section{Risikobewertung}
 
 
-Die Risiken des Projektes sind in \acrshort{pren1} gesammelt und bewertet worden. Pro Risiko wurden Massnahmen zur Prävention und zur Mitigation gesammelt. Die Bewertung wurde durchgeführt vor dem Umsetzen der Massnahmen (V.) und nachher (N.). Dies ist in mehr Detail nachzulesen in der im Anhang angehängten Arbeit. Jedes Risiko hat in dieser Arbeit neu eine weitere Kolonne "Ref.". Diese zeigt auf, in welchem Kapitel beschrieben wird, wie das Risko behoben oder noch weiter mitigiert wurde, falls dies möglich war.
+Die Risiken des Projektes sind in \acrshort{pren1} gesammelt und bewertet worden. Pro Risiko wurden Massnahmen zur Prävention und zur Mitigation gesammelt. Die Bewertung wurde durchgeführt vor dem Umsetzen der Massnahmen (V.) und nachher (N.). Jedes Risiko hat in dieser Arbeit neu eine weitere Kolonne "Ref.". Diese zeigt auf, in welchem Kapitel beschrieben wird, wie das Risiko behoben oder noch weiter mitigiert wurde, falls dies möglich war.
 
-TODO: SOME IMG IN SOME WAY? Riskomatrix von PREN1 + neue Risiken
+TODO: Riskomatrix von PREN1 + neue Risiken
 
 % Aus der Risikomatrix nach den Massnahmen geht hervor, dass die grössten Risiken, die beim Entwickeln des Roboters berücksichtigt werden müssen, die folgenden drei sind:
 
@@ -17,11 +17,11 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
 \hline
   \textbf{Nr} & \textbf{Beschreibung} & \textbf{Prävention} & \textbf{Mitigation} & \textbf{V.} & \textbf{N.} & \textbf{Ref.}\\
   \hline
-      1&Hindernisse werden nicht erkannt. &Mit vielen Bildern trainieren.& Distanzsensor erkennt Hindernisse, falls Bilderkennung nicht erkannt hat; Roboter fährt zurück, falls Distanzsensor erkennt.&20&5&\ref{model-results} \ref{ultraschall} \\
+      1&Hindernisse werden nicht erkannt. &Mit vielen Bildern trainieren.& Distanzsensor erkennt Hindernisse, falls Bilderkennung nicht erkannt hat; Roboter fährt zurück, falls Distanzsensor erkennt.&20&5& \makecell{\ref{model-results}\\ \ref{ultraschall}} \\
   \hline
 2&Knoten werden nicht erkannt. &Viele Bilder in verschiedenen Situationen machen, um zu trainieren.&Linien werden erkannt und Roboter orientiert sich daran.&20& 12&\ref{model-results}\\
   \hline
-      3&4 Minuten reichen nicht. &Testdurchfläufe in realistischen Umgebungen.&&8&4 &\ref{risks-sprint-2} \ref{convert-yolo}\\
+      3&4 Minuten reichen nicht. &Testdurchfläufe in realistischen Umgebungen.&&8&4 &\makecell{\ref{risks-sprint-2}\\ \ref{convert-yolo}}\\
   \hline
       4& 1 Minute reicht nicht zum Aufbau.& Testdurchfläufe und einfaches Interface.&Zufälliges Ziel wird gewählt von SW, falls bei Start keines ausgewählt.&5&3 &\ref{zieleingabe}\\
   \hline
@@ -29,7 +29,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       6& Liniensensor fehlerhaft. &Sichere Implementation mit Tests.& Encoder Motoren.&8&3 &\\
   \hline
-      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&6& \ref{model-results} \ref{navigation-arch}
+      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&6& \makecell{\ref{model-results}\\ \ref{navigation-arch}}
 \\
   \hline
       8&Hindernisse werden beim Anheben verschoben. &Robuste Greifmethode wählen und testen.&&12&8& \\
@@ -40,7 +40,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       11&Die Kamera liefert unscharfe oder verzerrte unbrauchbare Bilder. &Verwendung von Kameras mit hoher Auflösung.&Falls Bilder unscharf sind, Roboter anhalten und neue Bilder aufnehmen.&12&6&\ref{risks-sprint-1} \\
   \hline
-      12& Der Roboter wählt einen falschen Pfad, da Objekte nicht erkannt werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\ref{model-results} \ref{ultraschall} \ref{interface-nav-control}\\
+        12& Der Roboter wählt einen falschen Pfad, da Objekte nicht erkannt werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\makecell{\ref{model-results} \\ \ref{ultraschall}\\ \ref{interface-nav-control}}\\
   \hline
 
 \end{tabularx}
@@ -56,6 +56,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \textbf{Nr} & \textbf{Beschreibung} & \textbf{Prävention} & \textbf{Mitigation} & \textbf{V.} & \textbf{N.} & \textbf{Ref.}\\
   
   \hline
+
         13&Ein Softwarefehler führt zu einem Absturz während der Laufzeit, wodurch der Roboter stoppt oder Fehlfunktionen aufweist. &Exception Handling und umfangreiche Tests unter verschiedenen Bedingungen.&Automatischer SW-Neustart, Wiederaufnahme des letzten bekannten Zustands.&15&4&\ref{risks-sprint-2} \\
   \hline
       14&Ein Software-Update führt zu neuen Fehlern oder ist nicht kompatibel mit der aktuellen Hardware. &Gründliche Tests vor dem Rollout eines Updates.& Durch SW-Versionierung hat man die Möglichkeit, schnell zur vorherigen stabilen Version zurückzukehren.&6&2&\ref{navigation-arch} \\
@@ -83,16 +84,3 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
 \caption{Risiken}
 \label{table:risks}
 \end{table}
-
-
-
-RISKS TODO
-
-Risiko 3: schaffte immer in x min \\
-Risiko 4: immer moeglich in x sec \\
-Risiko 5:\\
-Risiko 6:\\
-Risiko 8:\\
-Risiko 9:\\
-Risiko 15:\\
-
