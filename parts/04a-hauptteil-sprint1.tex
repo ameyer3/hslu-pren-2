@@ -139,7 +139,7 @@ Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit 
 \subsubsection{Fahrwerk konstruieren}
 \label{Fahrwerk konstruieren}
 
- Das Konzept für das Fahrwerk und die Grundplatte wurden analog zum Konzept aus PREN1 umgesetzt. Am Fahrwerk wurden gegenüber des Prototyps aus PREN1 einzig der Motorflansch und der Lenkrollenhalter angepasst. Beim Prototyp in PREN1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus PLA nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt. Abb.\ref{fig: Lenkrollenhalter V2} 
+ Das Konzept für das Fahrwerk und die Grundplatte wurden analog zum Konzept aus \acrshort{pren1} umgesetzt. Am Fahrwerk wurden gegenüber des Prototyps aus \acrshort{pren1} einzig der Motorflansch und der Lenkrollenhalter angepasst. Beim Prototyp in PREN 1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus PLA nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt, wie gezeigt auf Abb.\ref{fig: Lenkrollenhalter V2} 
 
 \begin{figure}[H]
 \centering
@@ -148,7 +148,7 @@ Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit 
 \label{fig: Lenkrollenhalter V2}
 \end{figure}
 
-Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In  Abb. \ref{fig: Motorflansch V1/V2} sieht man in gelb die erste Version des Motorflansches wie er in PREN1 verbaut wurde. Blau eingefärbt die finale Version des Flansche mit einer Verstrebung. 
+Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In  Abb. \ref{fig: Motorflansch V1/V2} sieht man in gelb die erste Version des Motorflansches wie er in PREN 1 verbaut wurde. Blau eingefärbt ist die finale Version des Flansches mit einer Verstrebung. 
 
 \begin{figure}[H]
 \centering
@@ -157,9 +157,7 @@ Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In  Abb. \ref
 \label{fig: Motorflansch V1/V2}
 \end{figure}
 
-Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder RasberryPi werden nicht direkt auf die Grundplatte montiert, sondern auf Träger welche anschliessend auf die Grundplatte geschraubt werden. Die Träger wurden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. (siehe Abb.\ref{fig: Träger für elektronische Komponenten}) Dieser Aufbau hatte in der frühen Testphase den Vorteil das alle elektronischen Komponenten provisorisch platziert werden konnten ohne einen Kurzschluss zu Riskieren. 
-
-
+Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder RasberryPi werden nicht direkt auf die Grundplatte montiert, sondern auf Träger, welche anschliessend auf die Grundplatte geschraubt werden. Die Träger wurden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. (siehe Abb.\ref{fig: Träger für elektronische Komponenten}) Dieser Aufbau hatte in der frühen Testphase den Vorteil, dass alle elektronischen Komponenten provisorisch platziert werden konnten, ohne einen Kurzschluss zu riskieren. 
 
 \begin{figure}[H]
 \centering
@@ -168,7 +166,7 @@ Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder RasberryPi
 \label{fig: Träger für elektronische Komponenten}
 \end{figure}
 
-Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung jederzeit entfernen lässt. Dafür wurde ein Click-Verschluss verwendet. Das Batteriefach wird von unten in die Grundplatte geschoben bis es einrastet. Zum Herausnehmen der Batterie müssen nur die Haken gedrückt werden und das Batteriefach kann ausgefahren werden. Um die Funktion Problemlos zu gewährleisten dürfen die Wandstärken nicht zu gross sein. Das die Festigkeit trotzdem gewährleistet werden kann wurde die Layerrichtung im 3D Drucker, wie in Abb. \ref{Layerrichtung Batteriefach} so gewählt das die Layer horizontal zur Verschiebung der Hacken angeordnet sind. 
+Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung jederzeit entfernen lässt. Dafür wurde ein Click-Verschluss verwendet. Das Batteriefach wird von unten in die Grundplatte geschoben bis es einrastet. Zum Herausnehmen der Batterie müssen nur die Haken gedrückt werden und das Batteriefach kann ausgefahren werden. Um die Funktion problemlos zu gewährleisten dürfen die Wandstärken nicht zu gross sein. Das die Festigkeit trotzdem gewährleistet werden kann wurde die Layerrichtung im 3D Drucker, wie in Abb. \ref{Layerrichtung Batteriefach} so gewählt das die Layer horizontal zur Verschiebung der Hacken angeordnet sind. 
 
 
 \begin{figure}[H]
@@ -181,7 +179,7 @@ Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung je
 \subsubsection{Greifer konstruieren}
 \label{Greifer konstruieren}
 
-Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft und den Lagerstellen. Bei der Implementierung des Greifers musste darauf geachtet werden das die Lagerstellen nicht verschoben werden. In Abb \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man, die für die Funktion wichtigsten Masse am Versuchsaufbau und am fertigen Roboter. Die für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
+Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft und den Lagerstellen. Bei der Implementierung des Greifers musste darauf geachtet werden, dass die Lagerstellen nicht verschoben werden. In Abb \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man die für die Funktion wichtigsten Masse am Versuchsaufbau und am fertigen Roboter. Die für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
 
 \begin{figure}[H]
   \centering
@@ -205,12 +203,12 @@ Der Klemm- und Hebemechanismus des Greifers sind Abhängig von der Federkraft un
 \subsubsection{Halterung Liniensensor}
 \label{Halterung Liniensensor}
 
-
-Für den Liniensensor wurde eine Halterung erstellt welche in der Höhe verstellbar ist für eine optimale und flexible Einstellung am Roboter.
+Für den Liniensensor wurde eine Halterung erstellt, welche in der Höhe verstellbar ist für eine optimale und flexible Einstellung am Roboter.
 
 Die Konstruktion ist zweiteilig und  besteht aus einem äusseren und einem inneren Teil. Die Halterung wurde mit dem 3D-Drucker ausgedruckt.
 
-Befestigt wurde der äussere Teil mit 4 M3 schrauben an der Grundplatte. Der innere Teil an dem der Liniensensor befestigt wird, hat ein Untermass und ist so in der Höhe verschiebbar. Mittels M3-Gewindestiften wird er in Position festgeklemmt
+Befestigt wurde der äussere Teil mit 4 M3 schrauben an der Grundplatte. Der innere Teil, an dem der Liniensensor befestigt wird, hat ein Untermass und ist so in der Höhe verschiebbar. Mittels M3-Gewindestiften wird er in Position festgeklemmt.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{assets//MT/Sensor Halterung.png}
@@ -223,9 +221,7 @@ Befestigt wurde der äussere Teil mit 4 M3 schrauben an der Grundplatte. Der inn
 \label{Abschirmung des Liniensensors}
 Um Störeinflüsse von aussen zu vermeiden, wurde eine Abdeckung konstruiert, die jegliche Einstrahlung abschirmt. Der Liniensensor funktioniert am besten wenn er in einem abgedunkelten Umfeld eingesetzt wird.
 
-Als Abdeckung werden Bürstendichtungen für Türen verwendet welche in eine ausgedruckte Aufnahme gesteckt werden und mit Gewindestifte festgeklemmt werden. Die Vorrichtung wird um die Sensorhalterung angebracht und dunkelt so den Sensor ab.
-
-
+Als Abdeckung werden Bürstendichtungen für Türen verwendet, welche in eine ausgedruckte Aufnahme gesteckt werden und mit Gewindestifte festgeklemmt werden. Die Vorrichtung wird um die Sensorhalterung angebracht und dunkelt so den Sensor ab.
 
 \begin{figure}
     \centering
@@ -240,10 +236,9 @@ Als Abdeckung werden Bürstendichtungen für Türen verwendet welche in eine aus
 
 \subsubsection{Liniensensor auslesen}
 \label{Liniensensor auslesen}
-In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem TinyK22 zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von Vcc auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture sollten sich die Kondensatoren je nach Reflexion des Untergrunds in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden, durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
 
+In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem Tiny K22 zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von Vcc auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture sollten sich die Kondensatoren je nach Reflexion des Untergrunds in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden, durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
 
-TODO: schönes Bild vom Testgestell mit/für Liniensnesor
 
 \subsubsection{Linie Folgen mit PD-Regelung}
 
