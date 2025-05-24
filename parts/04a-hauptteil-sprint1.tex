@@ -237,12 +237,12 @@ Als Abdeckung werden Bürstendichtungen für Türen verwendet, welche in eine au
 \subsubsection{Liniensensor auslesen}
 \label{Liniensensor auslesen}
 
-In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem Tiny K22 zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von Vcc auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture sollten sich die Kondensatoren je nach Reflexion des Untergrunds in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden, durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
+In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem Tiny K22 zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von \acrfull{vcc} auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture, sollten sich die Kondensatoren je nach Reflektion des Untergrundes in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
 
 
-\subsubsection{Linie Folgen mit PD-Regelung}
+\subsubsection{Linie folgen mit PD-Regelung}
 
-Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden. Abb. \ref{fig:Ausschnitt der Implementation der PD-Regelung}. Damit man möglichst dynamisch und ohne grosses schwingen fahren kann, wurd ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden PWM Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
+Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abb. \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit moeglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
 
  \begin{figure}[H]
 \centering
@@ -254,8 +254,7 @@ Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die e
 
 \subsubsection{Liniensensor mit Abschirmung anbringen}
 
-Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht. Dank diesem Aufbau konnte mit der weiteren Implementierung begonnen werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden ausgemessen – ebenso auf dem Klebeband, da dies essenziell ist, um die Regelung sauber abzustimmen.
-
+Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht (siehe Abb. \ref{fig:enter-label}. Dank diesem Aufbau konnte mit der weiteren Implementierung fortgefahren werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
 
 
 \begin{figure}[H]
@@ -271,18 +270,8 @@ Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung ange
 
 \subsection{Bis zum nächsten Knoten fahren}
 
-\subsubsection{Kameranbindung}
-
-...
-
-\subsubsection{Distanz berechnen}
-
-... POSSIBLY REMOVE TODO
-
-
-
-... POSSIBLY REMOVE TODO
-
 \subsubsection{Liniensensor}
 
-Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxxen der Pins von GPIO-Output (High) auf den Input-Capture-Modus wird die Entladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrtweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt.
+Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Entladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt.
+
+TODO JONAH LINIENSENSOR ERREICHT UND ERKENNT KNOTEN

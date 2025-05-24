@@ -2,16 +2,12 @@
 
 \subsection{Objekte erkennen}
 
-Dieses Kapitel behandelt die Methoden zur Objekterkennung. Zur Identifikation der drei Klassen (Pylone, Knoten, Hindernisse) wurde das YOLOv11-Modell eingesetzt, das speziell für diese Aufgabe trainiert wurde. Ergänzend dazu dient ein Ultraschallsensor als Backup-System zur Erkennung von Hindernissen, um die Sicherheit des Roboters zu erhöhen. Die erzielten Modellresultate können anschließend vom Raspberry Pi ausgewertet werden damit der Roboter die optimale Route wählen kann.
+Dieses Kapitel behandelt die Methoden zur Objekterkennung. Zur Identifikation von Objekten auf dem Graphen, wurde ein YOLOv11-Modell eingesetzt, das speziell für diese Aufgabe trainiert wurde. Die erzielten Modellresultate werden vom Raspberry Pi ausgewertet, damit der Roboter die optimale Route wählen kann. Ergänzend dazu dient ein Ultraschallsensor als Backup-System zur Erkennung von Hindernissen, um die Sicherheit des Roboters zu erhöhen. 
 
-Das finale Model wurde auf einem Datensatz Bilder trainiert welcher von der Raspberry-PI-Kamera aus der Betriebshöhe aufgenommen wurden. Der Datensatz enthält Bilder des Graphes, der Pylonen und der Hindernisse. 
-
-\subsubsection{Kamera Halter}
+\subsubsection{Kamera Halterung}
 \label{Kamera Halter}
-Der Winkel und die Höhe der Kamera wurde in PREN1 an dem Testaufbau in Abb.\ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt das er für die Bildverarbeitung ideal ist. 
 
-Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23° Beträgt. Ebenfalls wichtig ist, dass die Linsen Höhe 242mm  über dem Boden beträgt. 
-
+Der Winkel und die Höhe der Kamera wurden in \acrshort{pren1} an dem Testaufbau in Abb.\ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt, dass er für die Bildverarbeitung ideal ist. 
 
 \begin{figure}[H]
 \centering
@@ -19,6 +15,9 @@ Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winke
 \caption{Testaufbau zum Festlegen des Kamerawinkels}
 \label{fig:Testaufbau zum Festlegen des Kamerawinkels}
 \end{figure}
+
+
+Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23° beträgt. Ebenfalls wichtig ist, dass die Linsenhöhe 242mm über dem Boden beträgt. 
 
  \begin{figure}[H]
 \centering
@@ -31,15 +30,19 @@ Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winke
 \subsubsection{Ultraschall}
 \label{ultraschall}
 
-Backup-Hinderniserkennung mittels Ultraschallsensor, um Risiko 12 (Objekte werden nicht erkannt) zu Minimieren.
+Es gibt eine Backup-Hinderniserkennung mittels Ultraschallsensor, um Risiko 12 (Objekte werden nicht erkannt) zu Minimieren.
 
-Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller TinyK22 verbunden.
+Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller Tiny K22 verbunden.
 
-Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 10 cm erkannt wird, wird automatisch ein Not-Stopp ausgelöst, um Kollisionen zu vermeiden. Gleichzeitig wird ein definierter Fehlercode generiert und über eine serielle Schnittstelle an den Raspberry Pi übertragen, um den Fehlerstatus zu protokollieren und entsprechende Massnahmen einleiten zu können.
-
-\subsubsection{Training YOLOv11-Model trainieren}
+Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 10 cm erkannt wird, wird automatisch ein Not-Stopp ausgelöst, um Kollisionen zu vermeiden. Gleichzeitig wird ein definierter Fehlercode generiert und über eine serielle Schnittstelle an den Raspberry Pi übertragen, um den Fehlerstatus zu protokollieren und entsprechende Massnahmen einleiten zu können. Dies ist beschrieben in Tabelle \ref{table:statuscodes}.
 
 
+
+
+
+
+
+\subsubsection{YOLOv11-Model trainieren}
 
 Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wurde
 
@@ -146,6 +149,11 @@ Die Ergebnisse zeigen eine starke Leistung bei "Kegel" und "Hindernis," während
 Mein Lernprozess war iterativ geprägt. Die erste Iteration zeigte die Risiken von Überaugmentation, die zweite die Folgen von Überanpassung und fehlerhaften Annotationen. In der dritten Iteration integrierte ich diese Erkenntnisse, indem ich einen ausgewogenen Datensatz erstellte und die Epochenzahl optimierte. Google Colab und Roboflow waren entscheidend für den Erfolg.
 
 
+
+
+
+
+
 \subsubsection{YOLOv11 Model konvertieren}
 \label{convert-yolo}
 
@@ -159,15 +167,13 @@ TODO add sources for each \& akronyum
     \item ONXX: Geeignet für  Cross-Plattform Fälle, gute Austauschbarkeit des Models, flexibel, viele Abhängigkeiten.
 \end{enumerate}
 
-Es wird NCNN gewählt, da dies perfekt für den Use Case mit einem Raspberry Pi passt. Das erstellt .pt File kann mit der ultralytics Bibliothek transformiert werden:
+Es wird NCNN gewählt, da dies perfekt für den Use Case mit einem Raspberry Pi passt. Das erstellte .pt File kann mit der ultralytics Bibliothek transformiert werden:
 
 \begin{verbatim}
 yolo export model=best.pt format=ncnn
 \end{verbatim}
 
-Das Resultat ist ein Ordner mit zwei Dateien drin, mit allen nötigen Informationen, aus dem .pt File. Dieser Ordner kann im Python Code geladen werden, um die Bilderkennung durchzuführen. Mit der Transformation wurde das Risiko 3: 4 Minuten reichen nicht für einen Durchgang, weiter gemindert.
-
-TODO: ADD NUMBERS, BEFORE (~1s) vs AFTER
+Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File. Mit der Transformation wurde das Risiko 3: 4 Minuten reichen nicht für einen Durchgang, weiter gemindert. Auf dem Raspberry Pi, kann die Bilderkennung pro Bild konstant unter einer Sekunde gehalten werden.
 
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
@@ -176,11 +182,11 @@ Um die Modelresultate auszuwerten wurde das Model in den Ordner der Navigation k
 
 TODO UML
 
-Diese ObjectDetector Klasse erstellt das Model aufgrund des NCNN Ordners bei der Instanzierung eines Objektes. Diese Objekt wird aufgerufen, wenn ein Nachbarsknoten geprüft werden soll und führt einen Prozess von drei Schritten durch:
+Diese ObjectDetector Klasse ladet das Model bei der Instanzierung und wird aufgerufen, wenn ein Nachbarsknoten geprüft werden soll und führt einen Prozess von drei Schritten durch:
 
 \begin{enumerate}
-    \item Inference (Objekterkennung)
-    \item Resultat parsen
+    \item Inference (Objekterkennung).
+    \item Resultat parsen.
     \item Nächstes Objekte vor dem Roboter finden.
 \end{enumerate}
 
@@ -188,13 +194,13 @@ Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die e
 
 Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
-Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bildes befinden. Somit kann sichergestellt werden, dass nicht aus Versehen Objekte, die sich nicht auf der Fahrbahn, die betrachtet wird, befinden gespeichert werden und auch Risiko 7 (Objekte werden fälschlicherweise erkannt) kann so mitigiert werden. Die Mitellinie wird berechnet aus der Breite des Bildes. Diese Objekte werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser List, ist das nächste Objekt zum Roboter. Die Id des Objektes, die vom Model zurückgegben wird, korrespondiert mit der ID des erstellten Enums, damit das erkannte Objekt als Enum zurückgegeben wird.
+Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bildes befinden. Somit kann sichergestellt werden, dass nicht aus Versehen Objekte, die sich nicht auf der Fahrbahn befinden, gespeichert werden und auch Risiko 7 (Objekte werden fälschlicherweise erkannt) kann so mitigiert werden. Die Mitellinie wird berechnet aus der Breite des Bildes. Die Objekte auf der Mitellinie werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser List,e ist das nächste Objekt zum Roboter. Die ID des Objektes, die vom Model zurückgegben wird, korrespondiert mit der ID des erstellten Enums, damit das erkannte Objekt als Enum zurückgegeben wird.
 
 In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
 
 \begin{itemize}
     \item Falls das nächste Objekt eine Barriere und das zweitnächste eine Pylone ist. In diesem Fall wird zurückgegeben, dass eine Pylone das nächste Objekt ist, da dieser Knoten sowieso nicht befahrbar ist und aus dem internen Graph entfernt werden soll.
-    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein unterwartetes Objekt auftritt. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Durch den Ultraschall wird Risiko 12 und 1 (Objekte werden nicht erkannt) mitigiert.
+    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein Objekt verpasst wurde. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Durch den Ultraschall werden Risiko 12 und 1 (Objekte werden nicht erkannt) mitigiert.
 \end{itemize}
 
 
@@ -214,13 +220,20 @@ Wir auf dem Bild eine Barriere erkannt, wird dies im internen Graphen gespeicher
 
 \textbf{Entfernte Linien erkennen}
 
-TODO LUKAS
+Die entfernten Linien werden erkannt, wenn die Winkel der ausgehenden Linien berechnet wird, Details dazu, gibt es in Kapitel \ref{outgoing-lines}. Die fehlende Linie wird aus dem internen Graphen entfernt.
 
 \newpage
 %%%%%%%%%%%%%%%%%Epic 11%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Zieleingabe}
 
-\subsubsection{Peripherie}
+\subsubsection{Peripherie - Zieleingabe}
 \label{zieleingabe}
+
+TOOD LUKAS
+
+
+\textbf{Ziel- und Startknopf}
+
+\textbf{Display}
 
 Geht sehr schnell: 1 Minute aufstellen gemindert Risiko

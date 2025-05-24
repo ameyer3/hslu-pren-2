@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%Epic 4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Wegfindung}
 
-In diesem Kapitel wird die Umsetzung des 4. Epics beschrieben. Ziel dieses Epics ist es, dass aufgrund von einem konfigurierten Graphen der schnellste Weg gefunden werden kann und die Kommunikation zwischen Navigation und Steuerung durchgeführt werden kann.
+In diesem Kapitel wird die Umsetzung der Wegfindung beschrieben. Ziel davon ist es, dass aufgrund von einem konfigurierten Graphen der schnellste Weg gefunden werden kann und die Kommunikation zwischen Navigation und Steuerung durchgeführt werden kann.
 
-Das Finden des schnellsten Weg in einem Graphen wurde bereits in PREN 1 im Simulator umgesetzt mit einem Dijkstra Algorithmus. Der Simulator wird innerhalb dieses Epics refactored, damit möglichst viele Teile wiederverwendet werden können.
+Das Finden des schnellsten Weg in einem Graphen wurde bereits in PREN 1 im Simulator umgesetzt mit einem Dijkstra Algorithmus. Der Simulator wird refactored, damit möglichst viele Teile wiederverwendet werden können.
 
 \subsubsection{Wegfindungssoftware aus Simulator anpassen}
 \label{navigation-arch}
@@ -12,8 +12,8 @@ Bevor der Simulator refactored wurde, wurde die neue Architektur designed für d
 
 TODO NAVIGATION ARCH BILD
 
-Dieses Refactoring hilft dabei, dass strukturiert die simulierten Teilen mit den realen Teilen ersetzt werden kann und währenddessen trotzdem sowohl auf einem Raspberry Pi, mit allen Verbindungen, als auch auf einem Laptop mit keinen Verbindungen eine lauffähige Version des Simulators verfügbar ist.
-Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/wiki/Umgebungsvariable}} kann die Hardware und den Funktionsumfang dynamisch gewählt werden. Nachfolgend in Tabelle \ref{table:environment-variables} sind diese Variablen ersichtlich
+Dieses Refactoring hilft dabei, dass strukturiert die simulierten Teile mit den realen Teilen ersetzt werden koennen und währenddessen sowohl auf einem Raspberry Pi, mit allen Verbindungen, als auch auf einem Laptop mit keinen Verbindungen eine lauffähige Version des Simulators verfügbar ist.
+Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/wiki/Umgebungsvariable}} koennen die Hardware und der Funktionsumfang dynamisch gewählt werden. Nachfolgend in Tabelle \ref{table:environment-variables} sind diese Variablen ersichtlich
 
 
 \begin{table}[H]
@@ -37,12 +37,11 @@ Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/
 
 Bei jedem Update wird getestet, ob die Version noch auf allen Plattformen lauffähig ist. Falls dies nicht der Fall wäre, kann durch die Benutzung von Git einfach auf eine alte Version zurück gewechselt werden. So muss das Risiko 14 von Software Updates, die Fehler mit sich bringen, nicht mehr beachtet werden.
 
-
-Ein grosser Unterschied von dieser Architektur zu der Architektur des Simulators ist es, dass es eine klare Unterteilung in die einzelnen Module gibt, die die Navigation benötigt, so wird paralleles Arbeiten einfacher. Die Architektur modelliert nicht mehr die physischen Roboterteile, sondern nur noch die Navigationsteile.
+Ein grosser Unterschied von der neuen Architektur zu der Architektur des Simulators ist es, dass es eine klare Unterteilung in die einzelnen Module gibt, die die Navigation benötigt. So wird paralleles Arbeiten einfacher. Die Architektur modelliert nicht mehr die physischen Roboterteile, sondern nur noch die Navigationsteile.
 
 Der gesamte Sourcecode zu der Navigation kann in folgendem Repository oder im elektronischen Anhang gefunden werden: \url{https://github.com/ameyer3/hslu-pren-navigation}.
 
-Wie im Simulator aus \acrshort{pren1}, wird in der Navigation nach wie vor ein Trial \& Error Modus implementiert. Dieser Modus wird Blind Testing Mode genannt und wird eingeschaltet, falls es wirkt, als ob der Roboter nicht mehr weiss wo er sich befindet, beziehungsweise, falls er denkt er befindet sich auf einem anderen Knoten als er es tatsaechlich tut. Die folgenden Situationen sind Zeichen, dass dies der Fall ist:
+Wie im Simulator aus \acrshort{pren1}, wird in der Navigation ein Trial \& Error Modus implementiert. Dieser Modus wird Blind Testing Mode genannt und wird eingeschaltet, falls es wirkt, als ob der Roboter nicht mehr weiss wo er sich befindet, beziehungsweise, falls er denkt er befindet sich auf einem anderen Knoten als er es tatsaechlich tut. Die folgenden Situationen sind Zeichen, dass dies der Fall ist:
 
 \begin{itemize}
     \item Roboter detektiert mehr ausgehenden Kanten von einem Knoten als erwartet.
@@ -50,10 +49,11 @@ Wie im Simulator aus \acrshort{pren1}, wird in der Navigation nach wie vor ein T
     \item Falls der Dijkstra Algorithmus keine Route zum Ziel mehr findet.
 \end{itemize}
 
-Im Blind Testing Mode nimmt der Roboter jedes Mal die erste Kante von links, bei der keine Pylone erkannt wird und sucht so das Ziel. Obwohl es noch immer moeglich ist, dass falsche Kanten entfernt werden und dies nicht auffaellt, wird dies akzeptiert. Falls immer noch ein Weg gefunden kann, wird dieser zwar laenger dauern, dies wird aber in Kauf genommen. Mit diesem Konzept koennen Risiko 20 (Roboter weiss nicht mehr wo er sich befindet) und Risiko 7 (Hindernis wird faelschlicherweise erkannt) so stark mitigiert, dass sie vernachlaessigt werden koennen.
+Im Blind Testing Mode nimmt der Roboter jedes Mal die erste Kante von links, bei der keine Pylone erkannt wird und sucht so das Ziel. Obwohl es moeglich ist, dass falsche Kanten entfernt werden und dies nicht auffaellt, wird dies akzeptiert. Falls immer noch ein Weg gefunden kann, wird dieser zwar laenger dauern, dies wird aber in Kauf genommen. Mit diesem Konzept koennen Risiko 20 (Roboter weiss nicht mehr wo er sich befindet) und Risiko 7 (Hindernis wird faelschlicherweise erkannt) so stark mitigiert werden, dass sie vernachlaessigt werden koennen.
 
 \subsubsection{Schnittstelle Navigation und Steuerung}
 \label{interface-nav-control}
+
 Die Navigation läuft auf einem Raspberry Pi und die Steuerung läuft auf einem Tiny K22. Die beiden kommunizieren wie geplant über das UART Protokoll miteinander. Für die Kommunikation wurde eine Schnittstelle definiert. Die Navigation sendet 4 Bytes an die Steuerung und die Steuerung antwortet mit dem Statuscode in Form von einem Byte.
 
 Die Instruktionen von der Navigation an die Steuerung, werden, wie in Grafik \ref{fig:interface-tiny} gezeigt, gesendet.
@@ -74,7 +74,7 @@ Die einzelnen Bytes sind in der folgenden Tabelle \ref{table:interface-to-tiny} 
 \hline
   \textbf{Byte} &\textbf{Bezeichnung} & \textbf{Beschreibung}\\
   \hline
-      1. Byte&1. Winkelbyte &Zeigt zusammen mit dem 2. Winkelbyte den Drehwinkel an. Die Steuerung addiert die beiden Werte und gibt den Befehl, dass der Robote sich so weit drehen soll. In zwei Bytes aufgeteilt, da Drehwinkel 255 übersteigen kann.\\
+      1. Byte&1. Winkelbyte &Zeigt zusammen mit dem 2. Winkelbyte den Drehwinkel an. Die Steuerung addiert die beiden Werte und gibt den Befehl, dass der Robote sich so weit drehen soll. In zwei Bytes aufgeteilt, da der Drehwinkel 255 übersteigen kann.\\
   \hline
 2. Byte&2. Winkelbyte&Siehe 1. Winkelbyte.\\
   \hline
@@ -128,7 +128,7 @@ Die möglichen Statuscodes von der Steuerung an der Navigation sind in folgender
   \hline
       00000000&SUCCESSFULLY\_DONE&Befehl wurde erfolgreich ausgeführt. \\
   \hline
-00000001&UNEXPECTED\_OBJECT\_DETECTED &Ultraschall hat ein Objeckt erkannt, das nicht erwartet wurde. Navigation macht ein Bild und detektiert, um welches Objekt es sich handelt und handelt entsprechend (mitigiert Risiko 12 (wählt falschen Pfad wegen übersehenden Objekten)): Kehrt um, falls Pylone, beseitigt, falls Barriere.\\
+00000001&UNEXPECTED\_OBJECT\_DETECTED &Ultraschall hat ein Objeckt erkannt, das nicht erwartet wurde. Navigation macht ein Bild und detektiert, um welches Objekt es sich handelt und handelt entsprechend (mitigiert Risiko 12 (übersehene Objekte)): Kehrt um, falls Pylone oder beseitigt, falls Barriere.\\
   \hline
 \end{tabularx}
 \caption{Statuscodes von Steuerung}
@@ -137,13 +137,12 @@ Die möglichen Statuscodes von der Steuerung an der Navigation sind in folgender
 
 \textbf{TinyK22 Implementation}
 
-
-Für jedes Empfangene Byte wird auf dem TinyK22 ein Interrupt generiert und anschliessend ausgelesen. Das Byte wird dann in einem Buffer Array zwischengespeichert. Nachdem die festgelegten 4 Bytes angekommen sind werden die im Buffer zwischengespeicherten Bytes in ein Array geschrieben. Aus diesem Array können dann die einzelnen Funktionen die nötigen Daten entnehmen und weiter verwenden.
+Für jedes empfangene Byte wird auf dem TinyK22 ein Interrupt generiert und anschliessend ausgelesen. Das Byte wird in einem Buffer Array zwischengespeichert. Nachdem die festgelegten 4 Bytes angekommen sind werden, die im Buffer zwischengespeicherten Bytes, in ein Array geschrieben. Aus diesem Array können dann die einzelnen Funktionen die nötigen Daten entnehmen und weiter verwenden.
 
 \textbf{Raspberry Pi Implementation}
 
 Auf dem Raspberry Pi wurde UART aktiviert, damit dieser mit dem Tiny K22 kommunizieren kann.
-Für diese Kommunikation wird ein uart\_connector Modul erstellt. Dieses besteht aus des UARTConnector Klasse und der ErrorHandler Klasse, die die statische Methode 'handle\_errors' enthält. Auf folgender Grafik \ref{fig:uart-connector-nav} sind die beiden Klassen im Detail dargestellt in ihrere Beziehung zu den anderen Klassen.
+Für die Kommunikation wird ein uart\_connector Modul erstellt. Dieses besteht aus der UARTConnector Klasse und der ErrorHandler Klasse, die die statische Methode 'handle\_errors' enthält. Auf folgender Grafik \ref{fig:uart-connector-nav} sind die beiden Klassen im Detail dargestellt mit ihrer Beziehung zu den anderen Klassen.
 
 \begin{figure}[H]
 \centering
@@ -152,8 +151,9 @@ Für diese Kommunikation wird ein uart\_connector Modul erstellt. Dieses besteht
 \label{fig:uart-connector-nav}
 \end{figure}
 
-Die UART-Connector Klasse  wird mithilfe der PySerial\footnote{https://pypi.org/project/pyserial/} Klasse implementiert. Diese kümmert sich selber um die Start- und Stop-Bits.
+Die UART-Connector Klasse  wird mithilfe der PySerial\footnote{https://pypi.org/project/pyserial/} Library implementiert. Diese kümmert sich selber um die Start- und Stop-Bits.
 Die Verbindung wird mit diesen Zeilen aufgebaut:
+
 \begin{verbatim}
 beaudrate = 57600
 port = "/dev/ttyAMA0"
@@ -171,13 +171,13 @@ Das Encoden der Nachrichten wurde mit mehreren Unittests getestet. Diese Unittes
 
 Im Arrange Teil wird hier festgelegt, was der Roboter machen soll und wie er antworten soll. Die Antwort wird gemocked\footnote{https://microsoft.github.io/code-with-engineering-playbook/automated-testing/unit-testing/mocking/} mithilfe von der Unittest Library.\footnote{https://docs.python.org/3/library/unittest.mock.html} Beispielsweise soll der Roboter -200cm fahren und die Antwort soll 0 sein, sprich, die Sequenz wurde richtig ausgeführt.
 
-Im Act Teil wird die Funktion aufgerufen, die getest wird. In diesem Beispiel ist das die 'drive' Funktion.
+Im Act Teil wird die Funktion aufgerufen, die getestet wird. In diesem Beispiel ist das die 'drive' Funktion.
 
 Im Assert Teil wird getestet, ob die zurückgegebene Response korrekt decodiert wurde (von 0 zu SUCESSFULLY\_DONE) und ob die Funktion, die auf den Tiny K22 schreibt, die richtigen Daten gesendet hat, was in diesem Fall ein Array mit folgendem Inhalt wäre:
 
 \begin{verbatim}
 # decimal values in Array get converted to Bytes when sent:
-# 00000000, 00000000, 11001000 (200 to drive), 00000010 (drive forward)
+# 00000000, 00000000, 11001000 (200 to drive), 00000010 (drive backward)
 [0, 0, abs(-200), 2]'
 \end{verbatim}
 
@@ -190,25 +190,24 @@ Damit auch ohne Verbindung zu einem Tiny K22 eine lauffähige Version verfügbar
 
 Das Umplatzieren eines Hindernisses erfolgt in mehreren Stufen.
 
+
+
 \subsubsection{Objekterkennung}
-Das Fahrzeug ist mit einem Ultraschallsensor ausgestattet, der zur Detektion von Objekten im Fahrweg eingesetzt werden kann. Die endgültige Entscheidung über das weitere Vorgehen trifft jedoch der \textit{Raspberry Pi}, der mit einer Kamera zur visuellen Objekterkennung verbunden ist.
 
-...... POSSIBLY VERLINKUNG ZU OBJEKTERKENNUNG
+Die Barriere soll mit der Kamera erkannt werden, bevor der Roboter beginnt auf die Linie zu fahren. Der Raspberry Pi wird der Steuerung mitteilen, dass auf der naechsten Strecke eine Barriere zu erwarten ist.
 
-Wird ein bewegliches Hindernis erkannt, analysiert das System die Situation. Falls das Hindernis als ausweichbar eingestuft wird, wird ein Wegstellbefehl ausgeführt, um den Fahrweg freizuräumen.
+Falls die Kamera die Barriere nicht erkannt wird der Ultraschallsensor ein Objekt erkennen und der Navigaiton mitteilen, dass etwas im Weg steht. Die Navigation wird mit der Kamera auslesen, was sich vor dem Roboter befindet und falls es eine Barriere ist, wird der Wegstell-Prozess, um das Hindernis umzuplatzieren, initialisiert.
 
 \subsubsection{Wegstellbefehl}
-Der \textit{Raspberry Pi} übermittelt dem \textit{TinyK22} einen Drehbefehl sowie einen Befehl zum Rückwärtsfahren, um das Hindernis anzufahren und für das Umplatzieren zu positionieren.
 
-\subsubsection{Bedingung zum Anheben}
-Das Fahrzeug fährt rückwärts, bis der Endschalter betätigt wird. Bei Betätigung wird das Fahrzeug gestoppt und der Greifmechanismus
+Falls der Roboter sich noch auf dem vorherigen Knoten befindet und die Kamera die Barriere erkannt hat, faehrt er soweit, bis der Ultraschall die Barriere bemerkt. Falls der Roboter das Hindernis erst durch den Ultraschall bemerkt hat, bleibt er dort wo er steht.
 
-...... POSSIBLY VERLINKUNG ZU Greifmechanismus
+Dann dreht das Fahrzeug sich um und fährt rückwärts, bis der Endschalter am Greifer betätigt wird. Bei Betätigung wird das Fahrzeug gestoppt und der Greifer hebt das Hindernis an.
+Nach dem erfolgreichen Anheben des Objekts, dreht sich das Fahrzeug zurück in seine ursprüngliche Ausrichtung. Anschliessend erfolgt eine Nachkorrektur der Position, um das Objekt gezielt wieder abzusetzen.
 
-aktiviert. Nach dem erfolgreichen Anheben des Objekts dreht sich das Fahrzeug zurück in seine ursprüngliche Ausrichtung. Anschliessend erfolgt eine Nachkorrektur der Position, um das Objekt gezielt wieder abzusetzen.
+Damit das Hindernis möglichst präzise an der ursprünglichen Position abgelegt werden kann, muss das Fahrzeug seine eigene Position nachkorrigieren. Die dafür notwendigen Korrekturwerte wurden experimentell ermittelt. TODO IVAN, please add KORREKTURWERTE
 
-\subsubsection{Nachkorrektur}
-Damit das Hindernis möglichst präzise an der ursprünglichen Position abgelegt werden kann, muss das Fahrzeug seine eigene Position nach korrigieren. Die dafür notwendigen Korrekturwerte wurden experimentell ermittelt.
+Nach der Nachkorrektur stellt der Roboter das Hindernis wieder ab und faehrt, bis der naechste Knoten erkannt wird.
 
 
 \newpage
@@ -217,13 +216,17 @@ Damit das Hindernis möglichst präzise an der ursprünglichen Position abgelegt
 
 \subsubsection{Roboter drehen}
 
-Aufgrund von Problemen mit den beiden Encodern wird das Drehen des Roboters nicht wie ursprünglich geplant umgesetzt. Die gelieferten Encodertickwerte sind instabil bzw. fehlerhaft und daher nicht für eine zuverlässige Berechnung des Drehwinkels geeignet. Da das Drehen jedoch eine essentielle Funktion ist, wurde als Alternative der Liniensensor verwendet. Dieser erkennt, wann eine Linie verlassen oder wieder erreicht wurde, und kann somit zur Steuerung des Drehvorgangs genutzt werden – etwa zum Fortsetzen oder Beenden der Drehung. Der Roboter kann dabei sowohl nach links als auch nach rechts gedreht werden, was für die Effizienz mit dem Algorithmus entscheidend ist.
+Aufgrund von Problemen mit den beiden Encodern wird das Drehen des Roboters nicht wie ursprünglich geplant umgesetzt. Die gelieferten Encodertickwerte sind instabil bzw. fehlerhaft und daher nicht für eine zuverlässige Berechnung des Drehwinkels geeignet. 
+
+TODO WHICHEVER OPTION WE PICK
+
+% Da das Drehen jedoch eine essentielle Funktion ist, wurde als Alternative der Liniensensor verwendet. Dieser erkennt, wann eine Linie verlassen oder wieder erreicht wurde, und kann somit zur Steuerung des Drehvorgangs genutzt werden – etwa zum Fortsetzen oder Beenden der Drehung. Der Roboter kann dabei sowohl nach links als auch nach rechts gedreht werden, was für die Effizienz mit dem Algorithmus entscheidend ist.
 
 
 
 \subsubsection{Ausgehende Linien erkennen}
 \label{outgoing-lines}
 
-...
+TODO LUKAS... WIE, UND DASS AUCH FEHLENDE LINIEN ERKANNT WERDEN (WAS MIT FEHLENDEN LINIEN PASSIERT SCHON IN KAPITEL IN SPRINT 3 beschrieben (vo mir :) )
 
-Falls die ausgehenden Linien nicht erkannt werden können, wird der Roboter 20cm zurueckfahren und in kleinen Abständen vorfahren und Bilder machen und weiterhin versuchen die ausgehenden Kanten zu erkennen. Falls die Linien immer noch nicht erkannt werden koennen, faehrt der Roboter zum letzten Knoten zurueck. entfernt den anderen Knoten aus dem intern gespeicherten Graph und sucht sich einen anderen Weg.
+Falls die ausgehenden Linien nicht erkannt werden können, wird der Roboter 20cm zurueckfahren und in kleinen Abständen vorfahren und Bilder machen und weiterhin versuchen die ausgehenden Kanten zu erkennen. Falls die Linien immer noch nicht erkannt werden koennen, faehrt der Roboter zum vorherigen Knoten zurueck, entfernt den anderen Knoten aus dem intern gespeicherten Graphen und sucht sich einen anderen Weg.

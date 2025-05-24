@@ -1,12 +1,12 @@
 %%%%%%%%%%%%%%%%%Epic 12%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ziel erreicht Ausgabe}
 
-In diesem Epic ist es das Ziel, dass der Roboter sicher weiss, dass er sich im Ziel befindet und dies erkenntlich gibt mit einem Buzzer Geräusch.
+Es ist das Ziel, dass der Roboter sicher weiss, dass er sich im Ziel befindet und dies erkenntlich gibt mit einem Buzzer Geräusch.
 
 \subsubsection{Zielknoten erkennen}
 \label{detect-target}
 
-Es wurde bereits in PREN 1 die Methode gewählt, mit welcher die Buchstaben auf den Zielknoten erkannt werden sollen. Dieser Code muss nun lediglich migriert werden, um in die Architektur der Navigation zu passen.
+Es wurde bereits in \acrshort{pren1} die Methode gewählt, mit welcher die Buchstaben auf den Zielknoten erkannt werden sollen. Dieser Code muss nun lediglich migriert werden, um in die Architektur der Navigation zu passen.
 
 Wie geplant wird der \gls{orb-gloss} Algorithmus verwendet, der in der OpenCV Library vorhanden ist. Es wird die TargetNodeReader Klasse im NodeReader Modul erstellt (siehe Grafik TODO REF WHOLE ARCH). Sobald eine Instanz dieser Klasse erstellt wird, lernt sie die Konturen von den Buchstaben A, B und C und speichert diese in Attributen.
 Dies lernt sie von Beispielbildern von den schwarzen Buchstaben auf weissem Hintergrund.
@@ -41,9 +41,10 @@ TODO neues RIsiko mitigiert: gibt fälschlich an sei im Ziel obwohl nicht ist ->
 
 Damit die Navigation nach wie vor auf allen Umgebungen laufen kann, werden hier zwei Methoden erstellt, eine Dummy Methode, die aus dem Simulator übernommen wurde und die richtige Methode, die Buchstaben von Bildern detektiert. so kann einfach hin und her gewechselt werden je nach Umgebung.
 
-\subsubsection{Peripherie}
+\subsubsection{Peripherie - Buzzer}
 
-...
+TODO LUKAS... BUZZER
+
 
 
 \newpage
@@ -55,12 +56,13 @@ Damit die Navigation nach wie vor auf allen Umgebungen laufen kann, werden hier 
 Der Hauptschalter ist benutzerfreundlich ausgeführt und trennt alle für den Fahrbetrieb relevanten Funktionen zuverlässig vom Stromkreis. Befindet sich der Schalter in der unteren Stellung, ist das Fahrzeug vollständig deaktiviert.
 
 Eine Ausnahme bildet der \textit{Raspberry Pi}, der auch bei deaktiviertem Hauptschalter weiterhin mit Strom versorgt wird. Dies ist bewusst so vorgesehen, um Datenverlust oder Dateisystemfehler durch unerwartetes Abschalten zu vermeiden.
+
 ...... POSSIBLY Bild von Verkablung
 ...... POSSIBLY Bild von Verkablungsschema
 
 \subsubsection{Schaltergehäuse}
 
-Am Schaltergehäuse werden Hauptschalter und die zwei Knöpfe montiert. Dieses wird zu forderst auf der Grundplatte angebracht wo es einfach zu erreichen ist. Aus dem Gehäuse führen die benötigten Kabel zu den jeweiligen Komponenten.
+Am Schaltergehäuse werden Hauptschalter und die zwei Knöpfe TODO IVAN TODO ELIAS (weiss ned wer), WELCHE KNOEPFE montiert. Diese werden zuvorderst auf der Grundplatte angebracht, wo sie einfach zu erreichen sind. Aus dem Gehäuse führen die benötigten Kabel zu den jeweiligen Komponenten.
 
 
 
