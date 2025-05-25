@@ -224,40 +224,55 @@ Die entfernten Linien werden erkannt, wenn die Winkel der ausgehenden Linien ber
 
 \newpage
 %%%%%%%%%%%%%%%%%Epic 11%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Zieleingabe}
+\subsection{Zieleingabe: Peripherie Ein- und Ausgabe}
 
 In diesem Kapitel wird die Ein- und Ausgabe des Roboters thematisiert.
-Dafür wurde auf dem Raspberry Pi ein Prototypen-HAT montiert, welcher die benötigten GPIO-Pins entsprechend dem Schema \ref{fig:raspiheader} auf Taster, Display und Buzzer verbindet.
+Dafür wurde auf dem Raspberry Pi ein Prototypen-HAT montiert, welcher die benötigten GPIO-Pins entsprechend der Abbildung \ref{fig:raspiheader-schema} auf Taster, Display und Buzzer verbindet.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth, trim=7cm 7cm 7cm 7cm, clip]{assets/ET/PCB/raspiheader.pdf}
+    \includegraphics[width=\linewidth, trim=7.5cm 6cm 10cm 6cm, clip]{assets/ET/PCB/raspiheader.pdf}
     \caption{Raspberry Pi HAT Schema}
-    \label{fig:raspiheader}
+    \label{fig:raspiheader-schema}
 \end{figure}
 
+TODO insert image of raspberry pi hat assembled
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{assets/ET/PCB/raspiheader.pdf}
-    \caption{Raspberry Pi HAT Schema}
-    \label{fig:raspiheader}
+    \includegraphics[width=0.5\linewidth]{assets/placeholder.png}
+    \caption{Raspberry Pi HAT}
+    \label{fig:raspiheader-assembly}
 \end{figure}
 
-\subsubsection{Peripherie - Zieleingabe}
+\subsubsection{Peripherie Eingabe}
 \label{zieleingabe}
 
 \textbf{Zielknopf}
 
-Die Zieleingabe wird dazu verwendet, um vor dem Start den geforderten Zielknoten auszuwählen. Dazu wurde ein GPIO Pin definiert, welcher bei einer Steigenden Flanke, Also bei einem Knopfdruck zwischen den Zielknoten A --> B --> C hin und herschaltet. So wird nur ein Taster benötigt, um zwischen den drei Zielen zu wechseln.
-
+Die Zieleingabe wird dazu verwendet, um vor dem Start den geforderten Zielknoten auszuwählen. Bei Knopfdruck wird der gewählte Zielknoten durchgeschaltet, dies in der Reihenfolge A --> B --> C und dann wieder von vorne. So wird nur ein Taster benötigt, um zwischen den drei Zielen zu wechseln. Das Gewählte Ziel ist stets im Display (\ref{peripherie-display}) ersichtlich.
 
 \textbf{Startknopf}
 
-Der Zweite Taster ist der Startknopf. Dieser wird nach eingabe des Zielknoten gedrückt, nach einer kurzen Wartezeit wird dann der Start initialisiert und der Roboter fängt an den Graphen richtung Zielknoten zu traversieren.
+Der Zweite Taster ist der Startknopf. Dieser wird nach der Eingabe des Zielknoten gedrückt, nach einer kurzen Wartezeit wird dann der Start initialisiert und der Roboter fängt an den Graphen Richtung Zielknoten zu traversieren.
 
-\textbf{Display}
+Durch die einfache Zweitaster-Bedienung, und das ablesbare Display ist das Aufstellen sowie wählen des Zielknoten sehr gut unter 1 Minute möglich. 
+
+\subsubsection{Peripherie Ausgabe}
+
+\textbf{Display}\label{peripherie-display}
 
 Das Display zeigt stets den aktuellen gewählten Zielknoten an, so kann einfach überprüft werden, welcher Zielknoten gewählt wird, bevor der Roboter gestartet wird. 
-Zusätzlich wird der Status des Roboters dargestellt und die Laufzeit. Dadurch muss nicht separat eine Stoppuhr verwendet werden. Die Laufzeit wird automatisch beim erreichen des Zielknoten gestoppt.
+Zusätzlich wird der Status sowie die Laufzeit des Roboters dargestellt. Dadurch muss nicht separat eine Stoppuhr verwendet werden. Die Laufzeit wird automatisch beim erreichen des Zielknoten gestoppt und bleibt ablesbar.
 
-Geht sehr schnell: 1 Minute aufstellen gemindert Risiko
+TODO insert image of Display
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/placeholder.png}
+    \caption{Raspberry Pi HAT}
+    \label{fig:raspiheader-assembly}
+\end{figure}
+
+
+\textbf{Buzzer}\label{peripherie-buzzer}
+
+Der Buzzer ertönt sobald der Zielknoten erreicht wurde. Somit wird dem Bediener und Publikum vermittelt, dass der Roboter seine Traversierung beendet hat, und sich am Zielknoten befindet.
