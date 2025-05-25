@@ -223,13 +223,47 @@ TODO WHICHEVER OPTION WE PICK
 % Da das Drehen jedoch eine essentielle Funktion ist, wurde als Alternative der Liniensensor verwendet. Dieser erkennt, wann eine Linie verlassen oder wieder erreicht wurde, und kann somit zur Steuerung des Drehvorgangs genutzt werden – etwa zum Fortsetzen oder Beenden der Drehung. Der Roboter kann dabei sowohl nach links als auch nach rechts gedreht werden, was für die Effizienz mit dem Algorithmus entscheidend ist.
 
 
-
 \subsubsection{Ausgehende Linien erkennen}
 \label{outgoing-lines}
 
-TODO LUKAS... WIE, UND DASS AUCH FEHLENDE LINIEN ERKANNT WERDEN (WAS MIT FEHLENDEN LINIEN PASSIERT SCHON IN KAPITEL IN SPRINT 3 beschrieben (vo mir :) )
+Die eigenständige Software zum Erkennen ausgehender Linien wurde bereits in \acrshort{pren1} umgesetzt und getestet. In \acrshort{pren2} wurde diese Funktionalität in die zentrale Roboter-Software integriert. Abbildung \ref{fig:angle-reader-classdiagramm} zeigt das Klassendiagramm der dafür verantwortlichen Klasse \verb|AngleReader|.
 
-Die eigenständige Software um ausgehende Linien zu erkennen wurde schon in \acrshort{pren1} umgesetzt und intensiv getestet. In \acrshort{pren2} musste die Umsetzung nur noch in die Funktion des Roboters integriert werden.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{assets/placeholder.png}
+    \caption{Angle-Reader Klassendiagramm}
+    \label{fig:angle-reader-classdiagramm}
+\end{figure}
 
+Die Klasse \verb|AngleReader| ist verantwortlich für das Erkennen und Zuordnen der ausgehenden Kanten eines Knotens anhand eines Bildes. Dabei kommen verschiedene Bildverarbeitungsschritte zum Einsatz: 
+\begin{itemize}
+    \item Perspektivtransformation zur Normalisierung der Bildansicht
+    \item Erkennung des zentralen Knotens (Kreisform) mittels \verb|HoughCircles|
+    \item Farbsegmentierung zur Isolation der Linien (Kanten)
+    \item Analyse der Konturen zur Berechnung der Winkel der Linien relativ zur Knotenmitte
+\end{itemize}
 
-Falls die ausgehenden Linien nicht erkannt werden können, wird der Roboter 20cm zurueckfahren und in kleinen Abständen vorfahren und Bilder machen und weiterhin versuchen die ausgehenden Kanten zu erkennen. Falls die Linien immer noch nicht erkannt werden koennen, faehrt der Roboter zum vorherigen Knoten zurueck, entfernt den anderen Knoten aus dem intern gespeicherten Graphen und sucht sich einen anderen Weg.
+Die detektierten Winkel werden anschliessend mit den erwarteten Winkeln aus einer statischen YAML-Konfigurationsdatei (\verb|base_graph_angles.yml|) abgeglichen. Dies geschieht entweder über:
+\begin{itemize}
+    \item \textbf{Positionsbasiertes Matching}: Falls die Anzahl erkannter Linien mit der Anzahl erwarteter Linien übereinstimmt, werden die Winkel einfach nach ihrer Reihenfolge im Uhrzeigersinn zugeordnet.
+    \item \textbf{Toleranz-basiertes Matching}: Falls eine oder mehrere Linie zu wenig erkannt wurden, wird versucht, die Winkel anhand eines bekannten Winkelbereichs (z.B. $60^\circ \pm 30^\circ$) zuzuordnen.
+\end{itemize}
+
+Die Klasse bietet zudem die Möglichkeit, das erkannte Ergebnis mit Winkeln und Konturen auf dem Originalbild zu annotieren und zu speichern, was die Debugging-Möglichkeiten deutlich verbessert. Eine Beispiel Ausgabe vom Knoten E ist in der nachfolgenden Abbildung \ref{fig:angle-reader-debug-output} ersichtlich.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/IT/250525_204610_test_annotated_angles_of_E.jpg}
+    \caption{Debugging Ausgabe der Winkelerkennung vom Knoten E}
+    \label{fig:angle-reader-debug-output}
+\end{figure}
+
+\textbf{Fehlende Linien erkennen und darauf reagieren}
+
+Falls kein Knoten, zu viele Knoten, oder Kanten oder Kanten in falschen Winkelbereichen detektiert werden, wird folgender mehrstufiger Mechanismus aktiviert, um ein fehlerhaftes Einlesen auszuschliessen, und den Prozess der Winkelerkennung zu wiederholen:
+\begin{enumerate}
+    \item Der Roboter fährt 20cm zurück.
+    \item Danach fährt er in kleinen Schritten vorwärts und macht dabei fortlaufend Bilder, um die Kanten erneut zu erkennen.
+    \item Wird auch nach mehreren Versuchen keine vollständige Kantenstruktur erkannt, geht der Roboter davon aus, dass der Knoten nicht vollständig zugänglich oder die Markierungen beschädigt sind, oder er sich verirrt hat, also nicht auf einem Knoten steht, den er erwartet hat. (z.B. Beim traversieren einmal falsch abgebogen.)
+    \item In diesem Fall wird der Knoten aus dem internen Graphen entfernt, der Roboter fährt zum vorherigen Knoten zurück und wählt eine alternative Route.
+\end{enumerate}
