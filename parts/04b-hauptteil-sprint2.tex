@@ -8,9 +8,14 @@ Das Finden des schnellsten Weg in einem Graphen wurde bereits in PREN 1 im Simul
 \subsubsection{Wegfindungssoftware aus Simulator anpassen}
 \label{navigation-arch}
 
-Bevor der Simulator refactored wurde, wurde die neue Architektur designed für die Navigation, die auf Grafik TODO REF sichtbar ist.
+Bevor der Simulator refactored wurde, wurde die neue Architektur designed für die Navigation, die auf Grafik \ref{fig:nav-arch} sichtbar ist.
 
-TODO NAVIGATION ARCH BILD
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{assets/IT/robot-sw-architecture-arch.png}
+\caption{Aufbau Interface zu Steuerung}
+\label{fig:nav-arch}
+\end{figure}
 
 Dieses Refactoring hilft dabei, dass strukturiert die simulierten Teile mit den realen Teilen ersetzt werden koennen und währenddessen sowohl auf einem Raspberry Pi, mit allen Verbindungen, als auch auf einem Laptop mit keinen Verbindungen eine lauffähige Version des Simulators verfügbar ist.
 Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/wiki/Umgebungsvariable}} koennen die Hardware und der Funktionsumfang dynamisch gewählt werden. Nachfolgend in Tabelle \ref{table:environment-variables} sind diese Variablen ersichtlich
@@ -36,6 +41,25 @@ Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/
 \end{table}
 
 Bei jedem Update wird getestet, ob die Version noch auf allen Plattformen lauffähig ist. Falls dies nicht der Fall wäre, kann durch die Benutzung von Git einfach auf eine alte Version zurück gewechselt werden. So muss das Risiko 14 von Software Updates, die Fehler mit sich bringen, nicht mehr beachtet werden.
+
+Sowohl der Ablauf aus der Navigation selber die Berechnung der kuerzesten Pfades und die interne Behandlung des Graphes sind gleicht wie in \acrshort{pren1} und sind auf den folgenden Grafiken \ref{fig:nav-navigator} und \ref{fig:nav-pathfinder} als Wiederholung gezeigt. Der Rest der einzelnen Module wird in den folgenden Kapiteln Schritt fuer Schritt im Detail aufgezeigt.
+
+\begin{figure}[H]
+  \centering
+    \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/robot-sw-architecture-navigator.png}
+    \caption{Navigator Modul}
+    \label{fig:nav-navigator}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/robot-sw-architecture-path_finder.png}
+    \caption{Path Finder Modul}
+    \label{fig:nav-pathfinder}
+  \end{minipage}
+\end{figure}
 
 Ein grosser Unterschied von der neuen Architektur zu der Architektur des Simulators ist es, dass es eine klare Unterteilung in die einzelnen Module gibt, die die Navigation benötigt. So wird paralleles Arbeiten einfacher. Die Architektur modelliert nicht mehr die physischen Roboterteile, sondern nur noch die Navigationsteile.
 

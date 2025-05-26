@@ -46,7 +46,7 @@ Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz
 
 Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wurde
 
-Das Ziel war, das Modell auf einem Raspberry Pi 5 für den Einsatz in einem Roboter zu optimieren. Der Trainingsprozess umfasste drei Iterationen, wobei ich verschiedene Ansätze ausprobierte, um die Modellleistung zu verbessern. Diese Teil der Dokumentation beschreibt den Lernprozess, die Methodik, die Herausforderungen und die Ergebnisse der finalen Iteration.
+Das Ziel war, das Modell auf einem Raspberry Pi 5 für den Einsatz in einem Roboter zu optimieren. Der Trainingsprozess umfasste drei Iterationen, wobei ich verschiedene Ansätze ausprobierte, um die Modellleistung zu verbessern. Dieser Teil der Dokumentation beschreibt den Lernprozess, die Methodik, die Herausforderungen und die Ergebnisse der finalen Iteration.
 
 Ein erfolgreich trainiertes Model hat die Fähigkeit zur Generalisierung. Das heisst, es ist besser Objekte zu erkennen in Bilder mit verschiedenen Bildkonditionen. Da das Datenset mit 116 Aufnahmen relativ klein ist, wurde künstliche Datenerweiterung angewendet. Durch "augmentation" werden die Bilder leicht in Helligkeit, Kontrast und weiteren Parametern verändert und diese den unveränderten Bildern hinzugefügt. So lernt das Model die selben Objekte in verschiedenen Konditionen zu erkennen.
 
@@ -157,7 +157,7 @@ Mein Lernprozess war iterativ geprägt. Die erste Iteration zeigte die Risiken v
 \subsubsection{YOLOv11 Model konvertieren}
 \label{convert-yolo}
 
-Das .pt File des YOLO Models kann bereits eingelesen und verwendet werden. Es gibt Methoden, um diese Datei zu transformieren in ein anderes Format, damit auf embedded Systems und somit auch auf Raspberry Pis schneller die Bilderkennung durchgeführt werden kann.
+Es gibt Methoden, um die .pt Datei, die beim Trainieren von YOLO erstellt wird, zu transformieren in ein anderes Format, damit auf embedded Systems und somit auch auf Raspberry Pis schneller die Bilderkennung durchgeführt werden kann.
 
 Drei Möglichkeiten wurden betrachtet und verglichen:
 TODO add sources for each \& akronyum
@@ -178,9 +178,14 @@ Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File.
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
 
-Um die Modelresultate auszuwerten wurde das Model in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt.
+Um die Modelresultate auszuwerten wurde das Model in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt, gezigt im Klassendiagramm \ref{fig:nav-object-detector}.
 
-TODO UML
+ \begin{figure}[H]
+\centering
+\includegraphics[width= \textwidth ]{assets/IT/robot-sw-architecture-object-detector.png}
+\caption{Object Detector Modul}
+\label{fig:nav-object-detector}
+\end{figure}
 
 Diese ObjectDetector Klasse ladet das Model bei der Instanzierung und wird aufgerufen, wenn ein Nachbarsknoten geprüft werden soll und führt einen Prozess von drei Schritten durch:
 
