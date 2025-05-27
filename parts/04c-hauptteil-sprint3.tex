@@ -37,7 +37,9 @@ Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hind
 Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 10 cm erkannt wird, wird automatisch ein Not-Stopp ausgelöst, um Kollisionen zu vermeiden. Gleichzeitig wird ein definierter Fehlercode generiert und über eine serielle Schnittstelle an den Raspberry Pi übertragen, um den Fehlerstatus zu protokollieren und entsprechende Massnahmen einleiten zu können. Dies ist beschrieben in Tabelle \ref{table:statuscodes}.
 
 
+QUESTION: TODO IVAN MORE INFO ABOUT HOW TO READ 
 
+TODO ELIAS MORE INFO ABOUT WHERE/HOW ADDED 
 
 
 
@@ -65,10 +67,10 @@ Die Ergebnisse waren unbefriedigend, da die übermässige Augmentation zu einem 
 
 \subparagraph{Zweite Iteration: Iterative Erweiterung und Überanpassung}
 
-In der zweiten Iteration wurde einen unveränderten Datensatz mit zwei erweiterten Datensätzen und trainierte iterativ mit je 300 Epochen.
+In der zweiten Iteration wurde einen unveränderten Datensatz mit zwei erweiterten Datensätzen kombiniert und mit je 300 Epochen trainiert.
 Augmentationen umfassten horizontale Spiegelung, Rotation (±15°) und Helligkeit (
 
-Diese Anzahl an Epochs war viel zu hoch was zu einem overfitting führte. Ausserdem erkannte ich Fehler in den Annotationen, die eine erneute Überarbeitung notwendig machten.
+Diese Anzahl an Epochen war viel zu hoch was zu einem overfitting führte. Ausserdem erkannte ich Fehler in den Annotationen, die eine erneute Überarbeitung notwendig machten.
 
 \subparagraph{Dritte Iteration: Kombination von Datensätzen und Finales Training}
 
@@ -87,7 +89,7 @@ Die Kombination der Datensätze erforderte ein zusammenfügen der Bilder in korr
 
 Die Validierungs- und Testdaten stammten ausschließlich aus dem unveränderten Datensatz, um Datenlecks zu vermeiden. Die Konsistenz wurde durch Vergleich von Bild- und Label-Dateien überprüft.
 
-Training und ErgebnisseDas Modell wurde mit folgendem Befehl trainiert:
+Das Modell wurde mit folgendem Befehl trainiert:
 
 
 \begin{verbatim}
@@ -157,7 +159,7 @@ Mein Lernprozess war iterativ geprägt. Die erste Iteration zeigte die Risiken v
 \subsubsection{YOLOv11 Model konvertieren}
 \label{convert-yolo}
 
-Es gibt Methoden, um die .pt Datei, die beim Trainieren von YOLO erstellt wird, zu transformieren in ein anderes Format, damit auf embedded Systems und somit auch auf Raspberry Pis schneller die Bilderkennung durchgeführt werden kann.
+Es gibt Methoden, um die .pt Datei, die beim Trainieren von YOLO erstellt wird, zu transformieren in ein anderes Format, damit auf Embedded Systems und somit auch auf Raspberry Pi's schneller die Bilderkennung durchgeführt werden kann.
 
 Drei Möglichkeiten wurden betrachtet und verglichen:
 TODO add sources for each \& akronyum
@@ -199,7 +201,7 @@ Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die e
 
 Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
-Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bildes befinden. Somit kann sichergestellt werden, dass nicht aus Versehen Objekte, die sich nicht auf der Fahrbahn befinden, gespeichert werden und auch Risiko 7 (Objekte werden fälschlicherweise erkannt) kann so mitigiert werden. Die Mitellinie wird berechnet aus der Breite des Bildes. Die Objekte auf der Mitellinie werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser List,e ist das nächste Objekt zum Roboter. Die ID des Objektes, die vom Model zurückgegben wird, korrespondiert mit der ID des erstellten Enums, damit das erkannte Objekt als Enum zurückgegeben wird.
+Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bildes befinden. Somit kann sichergestellt werden, dass nicht versehentlich Objekte, die sich nicht auf der Fahrbahn befinden, gespeichert werden und auch Risiko 7 (Objekte werden fälschlicherweise erkannt) kann so mitigiert werden. Die Mittellinie wird berechnet aus der Breite des Bildes. Die Objekte auf der Mittellinie werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser Liste ist das nächste Objekt zum Roboter. Die ID des Objektes, die vom Model zurückgegben wird, korrespondiert mit der ID des erstellten Enums, damit das erkannte Objekt als Enum zurückgegeben wird.
 
 In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
 
@@ -221,7 +223,7 @@ Wenn ein Knoten erkannt wird, dann geschieht nichts. Es wird interpretiert, dass
 
 \textbf{Barrieren erkennen}
 
-Wir auf dem Bild eine Barriere erkannt, wird dies im internen Graphen gespeichert, indem die jeweilige Linie höher gewichtet wird, da es länger dauern wird diese zu überqueren.
+Wird auf dem Bild eine Barriere erkannt, wird dies im internen Graphen gespeichert, indem die jeweilige Linie höher gewichtet wird, da es länger dauern wird diese zu überqueren.
 
 \textbf{Entfernte Linien erkennen}
 

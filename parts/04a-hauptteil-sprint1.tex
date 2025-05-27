@@ -83,9 +83,11 @@ Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encod
 \end{figure}
 
 
-Allerdings wurde bereits der ausgewählte Motortreiber verwendet, der später auch im Endprodukt verbaut wird. Nach einigen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem \gls{tinyk22} konnten die ersten Meter erfolgreich gefahren werden. Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen.
+Allerdings wurde bereits der ausgewählte Motortreiber verwendet, der später auch im Endprodukt verbaut wird. Nach einigen Schwierigkeiten (TODO IVAN, welli? ev als ahhang testprotokoll?) bei der Initialisierung des Quadratur-Encoder-Modus auf dem \gls{tinyk22} konnten die ersten Meter erfolgreich gefahren werden. Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen.
 
 \textbf{Endgültige Situation mit Encodern}
+
+TODO IVAN: WIESO? hets problem geh? wieso hesch sie uf fehlere ahfah pruefe?
 
 Die Encoder sowie der zugehörige Code wurden auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
 
@@ -132,6 +134,8 @@ Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf
 Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}).
 
 Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit den Encodern wurde entschieden, die Drehung ausschliesslich mithilfe der Liniensensoren oder mit einem Gyroskop durchzuführen.
+
+TODO IVAN, erklaere, dass mir aber gliich choennt 10cm fuehre und zrug fahre demit bitte (falls es scho irgendwo isch hani ned gseh sorry) :)
 
 \subsection{Komponenten}
 \label{Komponenten}
@@ -254,7 +258,7 @@ Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die e
 
 \subsubsection{Liniensensor mit Abschirmung anbringen}
 
-Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht (siehe Abb. \ref{fig:enter-label}. Dank diesem Aufbau konnte mit der weiteren Implementierung fortgefahren werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
+Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht (siehe Abb. \ref{fig:enter-label}). Dank diesem Aufbau konnte mit der weiteren Implementierung fortgefahren werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
 
 
 \begin{figure}[H]
@@ -273,4 +277,6 @@ Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung ange
 \subsubsection{Liniensensor}
 
 Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. Das Erkennen ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorenwerte geprüft. Sollten die Werte auf einen Wegpunkt zutreffen, hält der Roboter sofort an.
+
+TODO JONAH 'Sollten die Werte auf einen Wegpunkt zutreffen' chasch das maybe nachli usfuehre? ALso was sinds fuer wert, wie zeiget die dass es en knote isch?
 
