@@ -32,7 +32,7 @@ Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winke
 
 Es gibt eine Backup-Hinderniserkennung mittels Ultraschallsensor, um Risiko 12 (Objekte werden nicht erkannt) zu Minimieren.
 
-Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller Tiny K22 verbunden.
+Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller \gls{tinyk22} verbunden.
 
 Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 10 cm erkannt wird, wird automatisch ein Not-Stopp ausgelöst, um Kollisionen zu vermeiden. Gleichzeitig wird ein definierter Fehlercode generiert und über eine serielle Schnittstelle an den Raspberry Pi übertragen, um den Fehlerstatus zu protokollieren und entsprechende Massnahmen einleiten zu können. Dies ist beschrieben in Tabelle \ref{table:statuscodes}.
 
@@ -46,7 +46,7 @@ Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz
 
 Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wurde
 
-Das Ziel war, das Modell auf einem Raspberry Pi 5 für den Einsatz in einem Roboter zu optimieren. Der Trainingsprozess umfasste drei Iterationen, wobei ich verschiedene Ansätze ausprobierte, um die Modellleistung zu verbessern. Dieser Teil der Dokumentation beschreibt den Lernprozess, die Methodik, die Herausforderungen und die Ergebnisse der finalen Iteration.
+Das Ziel war, das Modell auf einem Raspberry Pi 5 für den Einsatz in einem Roboter zu optimieren. Der Trainingsprozess umfasste drei Iterationen, wobei man verschiedene Ansätze ausprobierte, um die Modellleistung zu verbessern. Dieser Teil der Dokumentation beschreibt den Lernprozess, die Methodik, die Herausforderungen und die Ergebnisse der finalen Iteration.
 
 Ein erfolgreich trainiertes Model hat die Fähigkeit zur Generalisierung. Das heisst, es ist besser Objekte zu erkennen in Bilder mit verschiedenen Bildkonditionen. Da das Datenset mit 116 Aufnahmen relativ klein ist, wurde künstliche Datenerweiterung angewendet. Durch "augmentation" werden die Bilder leicht in Helligkeit, Kontrast und weiteren Parametern verändert und diese den unveränderten Bildern hinzugefügt. So lernt das Model die selben Objekte in verschiedenen Konditionen zu erkennen.
 
@@ -58,14 +58,14 @@ Das eigentliche Training benötigt GPU-Rechenleistung. Mithilfe von Google Colab
 
 \subparagraph{Erste Iteration}
 
-In der ersten Iteration testete ich das YOLOv11n-Modell mit einem stark augmentierten Datensatz \text{(Rotation $\pm$30°, Helligkeit $\pm$50\%, Rauschen 10\%)}. Trainiert wurde mit einem Datensatz aus Bildern welche mit dem Mobiltelefon aufgenommen wurden. Zu Testzwecken hat dies ausgereicht. Für das Model welches dann eingesetzt wird, ist das suboptimal, da die Bilder mit denen trainiert wird, den Real-Konditionen entsprechen sollten.
+In der ersten Iteration testete man das YOLOv11n-Modell mit einem stark augmentierten Datensatz \text{(Rotation $\pm$30°, Helligkeit $\pm$50\%, Rauschen 10\%)}. Trainiert wurde mit einem Datensatz aus Bildern welche mit dem Mobiltelefon aufgenommen wurden. Zu Testzwecken hat dies ausgereicht. Für das Model welches dann eingesetzt wird, ist das suboptimal, da die Bilder mit denen trainiert wird, den Real-Konditionen entsprechen sollten.
 
-Die Ergebnisse waren unbefriedigend, da die übermäßige Augmentation zu einem Überlernen (overfitting) künstlicher Muster führte, insbesondere bei der Klasse "Knoten." Darauf wurde mit Bildern der Raspberry Pi Kamera ein neuer Datensatz erstellt.
+Die Ergebnisse waren unbefriedigend, da die übermässige Augmentation zu einem Überlernen (overfitting) künstlicher Muster führte, insbesondere bei der Klasse "Knoten." Darauf wurde mit Bildern der Raspberry Pi Kamera ein neuer Datensatz erstellt.
 
 
 \subparagraph{Zweite Iteration: Iterative Erweiterung und Überanpassung}
 
-In der zweiten Iteration kombinierte ich einen unveränderten Datensatz mit zwei erweiterten Datensätzen und trainierte iterativ mit je 300 Epochen.
+In der zweiten Iteration wurde einen unveränderten Datensatz mit zwei erweiterten Datensätzen und trainierte iterativ mit je 300 Epochen.
 Augmentationen umfassten horizontale Spiegelung, Rotation (±15°) und Helligkeit (
 
 Diese Anzahl an Epochs war viel zu hoch was zu einem overfitting führte. Ausserdem erkannte ich Fehler in den Annotationen, die eine erneute Überarbeitung notwendig machten.

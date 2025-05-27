@@ -23,7 +23,7 @@ Die folgende Grafik \ref{fig:ablauf} zeigt das geplante Funktionsmuster auf. Die
 \label{fig:ablauf}
 \end{figure}
 
-Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgenden Komponenten auf Grafik \ref{fig:components} gebaut. Die Grafik ist zeigt lediglich das Konzept mit den noetigen Komponenten und nicht das tatsaechliche Aussehen des Roboters.
+Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgenden Komponenten auf Grafik \ref{fig:components} gebaut. Die Grafik ist zeigt lediglich das Konzept mit den nötigen Komponenten und nicht das tatsächliche Aussehen des Roboters.
 
 \begin{figure}[H]
 \centering
@@ -32,7 +32,7 @@ Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgend
 \label{fig:components}
 \end{figure}
 
-Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlich auf Grafik \ref{fig:electro-components}. Dieses sorgt dafuer, dass sich der Roboter wie geplant autonom fortbewegen kann.
+Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlich auf Grafik \ref{fig:electro-components}. Dieses sorgt dafür, dass sich der Roboter wie geplant autonom fortbewegen kann.
 
 \begin{figure}[H]
 \centering
@@ -50,9 +50,9 @@ Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlic
 \label{pcb}
 
 Um eine zuverlässige Kontaktierung der einzelnen Komponenten sicherzustellen, wird im Rah-
-men von \acrshort{pren2} ein Verbindungs-PCB, ersichtlich auf Grafik\ref{fig: Verteiler PCB}, entwickelt. Dieses \acrshort{pcb} übernimmt das Management der
-Spannungsversorgung für den Raspberry Pi und den TinyK22. Zudem werden sämtliche Signale,
-die vom TinyK22 erfasst und verarbeitet werden sollen, entsprechend verbunden.
+men von \acrshort{pren2} ein Verbindungs-PCB, ersichtlich auf Grafik \ref{fig: Verteiler PCB}, entwickelt. Dieses \acrshort{pcb} übernimmt das Management der
+Spannungsversorgung für den Raspberry Pi und den \gls{tinyk22}. Zudem werden sämtliche Signale,
+die vom \gls{tinyk22} erfasst und verarbeitet werden sollen, entsprechend verbunden.
 
 \begin{figure}[H]
 \centering
@@ -61,7 +61,7 @@ die vom TinyK22 erfasst und verarbeitet werden sollen, entsprechend verbunden.
 \label{fig: Verteiler PCB}
 \end{figure}
 
-Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem TinyK22 mehrere Exemplare vorhanden. Das PCB zusammen mit dem Tiny K22 ist auf Grafik \ref{fig: Verteiler PCBA} gezeigt. Somit ist das Risiko der kaputten Elektroteile nicht mehr relevant.
+Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} mehrere Exemplare vorhanden. Das PCB zusammen mit dem \gls{tinyk22} ist auf Grafik \ref{fig: Verteiler PCBA} gezeigt. Somit ist das Risiko der kaputten Elektroteile nicht mehr relevant.
 
 \begin{figure}[H]
 \centering
@@ -73,7 +73,7 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem TinyK22 mehrere
 
 \subsubsection{Motoren ansteueren und auslesen}
 
-Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem TinyK22 und einem Speisegerät. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
+Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem \gls{tinyk22} und einem Speisegerät. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
 
 \begin{figure}[H]
 \centering
@@ -83,7 +83,7 @@ Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encod
 \end{figure}
 
 
-Allerdings wurde bereits der ausgewählte Motortreiber verwendet, der später auch im Endprodukt verbaut wird. Nach einigen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem TinyK22 konnten die ersten Meter erfolgreich gefahren werden. Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmaneuver auszuführen.
+Allerdings wurde bereits der ausgewählte Motortreiber verwendet, der später auch im Endprodukt verbaut wird. Nach einigen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem \gls{tinyk22} konnten die ersten Meter erfolgreich gefahren werden. Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen.
 
 \textbf{Endgültige Situation mit Encodern}
 
@@ -237,12 +237,12 @@ Als Abdeckung werden Bürstendichtungen für Türen verwendet, welche in eine au
 \subsubsection{Liniensensor auslesen}
 \label{Liniensensor auslesen}
 
-In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem Tiny K22 zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von \acrfull{vcc} auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture, sollten sich die Kondensatoren je nach Reflektion des Untergrundes in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
+In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem \gls{tinyk22} zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von \acrfull{vcc} auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture, sollten sich die Kondensatoren je nach Reflektion des Untergrundes in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
 
 
 \subsubsection{Linie folgen mit PD-Regelung}
 
-Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abb. \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit moeglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
+Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abb. \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit möglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
 
  \begin{figure}[H]
 \centering
@@ -272,6 +272,5 @@ Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung ange
 
 \subsubsection{Liniensensor}
 
-Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Entladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt.
+Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. Das Erkennen ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorenwerte geprüft. Sollten die Werte auf einen Wegpunkt zutreffen, hält der Roboter sofort an.
 
-TODO JONAH LINIENSENSOR ERREICHT UND ERKENNT KNOTEN
