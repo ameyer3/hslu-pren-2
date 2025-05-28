@@ -61,13 +61,23 @@ Die  Anforderungsliste ist ersichtlich in Tabellen \ref{table:anforderungsliste_
     {subsection}
     {YOLOv11 Model Evaluation}
 
+Damit Pylonen, Barrieren und Knoten erkannt werden koennen, wird ein Model trainiert. Insgesamt wurden ueber 30 verschiedene YOLO Models trainiert. Viele davon wurden bereits in einem vorherigen Schritt aussortiert, da einige sehr offensichtlich schlechte Performance aufwiesen aufgrund davon, wie es die Objekte erkannt, beziehungsweise nicht erkannt hat. Auf der folgenden Seite ist eine Tabelle angehaent, in der die relevanten Models miteinander verglichen werden und das beste Model gewaehlt wurde.
 
-TODO EXPLAIN WHAT MEANS WHAT, ADD SOURCES
-TMP NOTES No sign of overfitting in 3 cols on the left (where upper row is strongly decreasing while lower row is increasing)
-Training is decreasing very nicely and the lower one has some noise but overall good pattern
-2 cols on the right show rapid learning and then plateauing as time goes on
+Die Model Performance wird an folgenden Parametern gemessen:\cite{model-performance}
+
+\begin{itemize}
+    \item Confusion Matrix: Zeigt was das Model vorhergesagt hat und was tatsaechlich zu sehen war. Je 'diagonaler' die Matrix, desto besser.
+    \item F1-Confidence: Zeigt die Balance zwischen Confidence (Wahrscheinlichkeit, dass Vorrausgesagtes stimmt) und F1 Score (Harmonischer Durchschnitt von Recall und Precision). Je hoeher der F1 Wert, desto besser.
+    \item Precision-Confidence: Zeigt die Balance zwischen Precision (Anteil von 'True Positives'; wenn Model sagt, es gibt einen Knoten, wie akkurat ist diese Deutung?) und Confidence. Je tiefer die Confidence, desto besser, da dadurch der hoechste Praezisionswert bereits bei einer tieferen Confidence erreicht wird.
+    \item Precision-Recall: Zeigt die Balance zwischen Precision und Recall (Faehigkeit, alle Instanzen zu erkennen). Je hoeher die Precision, desto besser.
+    \item Recall-Confidence: Zeigt die Balance zwischen Recall und Confidence. Je hoeher der Recall, desto besser.
+    \item Lernverlauf: Zeigt inwiefern der Verlust (Unterschied zwischen Vorhergsagtem und Realitaet) sinkt bei den Trainingsdaten und den Validationsdaten. Beginnt der Verlust bei der Validation zu steigen, deutet dies auf Overfitting hin\footnote{https://developers.google.com/machine-learning/crash-course/overfitting/overfitting}. Sollte exponentiell sinken. Zeigt, wie das Model and Wissen gewinnt. Sollte expontentiell steigen.
+\end{itemize}
+
 
 Der Vergleich zwischen mehreren potentiellen Modellen ist in folgendem Dokument ersichtlich. Zwei Modelle wurden jeweils verglichen aufgrund von mehreren Werten. Ist der jeweilige Wert des einen Models besser, wird diese Zelle gruen eingefaerbt.
+
+Es wurde untersucht, ob das Modell bessere Ergebnisse bringt, wenn die beiden Barrieren pro Farbe in einzelnen Klassen aufgeteilt werden oder nicht und verschiedene Augmentationen wurden verglichen. Augmentationen werden auf die Trainingsbilder angewandt, damit diese diverser sind und zum einen mehr der Realitaet entsprechen und auch um mehr Trainingsmaterial zu haben. Ebenfalls wurde experimentiert mit unterschuedlichen Groessen der Bilder. 
 
 \includepdf[pages=-]{assets/IT/testing/yolo/ModelComparison.pdf}
 
