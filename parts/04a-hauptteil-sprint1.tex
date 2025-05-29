@@ -142,7 +142,7 @@ TODO IVAN, erklaere, dass mir aber gliich choennt 10cm fuehre und zrug fahre dem
 
 \subsubsection{Gyroskop statt Encoder}
 
-Da man mit den geplanten Encodern nicht wie gewollt weiter gekommen ist, musste kurz vor Schluss nach einer Alternative gesucht werden. Man entschied sich ein Gyroskop zu verwenden. Ein Gyroskop reagiert auf Drehbewegungen, durch die Corioliskraft wird eine Masse ins Schwingen gebracht und somit die Drehbewegung detektiert \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert um die Messdaten zu erlangen. Um die Implementation zu testen, wurde mithilfe eines Logic Analyzers das erste Byte vom Master zum Slave aufgezeichnet. Somit konnte man die Korrektheit der Adresse feststellen \ref{fig:Gyroskop}. 
+Da man mit den geplanten Encodern nicht wie gewollt weiter gekommen ist, musste kurz vor Schluss nach einer Alternative gesucht werden. Man entschied sich ein Gyroskop zu verwenden. Ein Gyroskop reagiert auf Drehbewegungen, die durch die Corioliskraft verursacht wird. Die Corioliskraft bringt eine Masse ins Schwingen, so kann die Drehbewegung detektiert werden \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert um die Messdaten zu erlangen. Um die Implementation zu testen, wurde mithilfe eines Logic Analyzers das erste Byte vom Master zum Slave aufgezeichnet. Somit konnte man die Korrektheit der Adresse feststellen \ref{fig:Gyroskop}. 
 
 \begin{figure}[h]
 \centering
@@ -152,7 +152,16 @@ Da man mit den geplanten Encodern nicht wie gewollt weiter gekommen ist, musste 
 \end{figure}
 
 
-TODO JONAH WEITER MACHEN GYROSKOP
+Nach dem man sichergestellt hat das der Master (\acrshort{tinyk22}) die richtige Adresse anspricht, konnte der Gyrosensor ausgelesen werden. Für den Test wurde er bereits fest auf den Roboter angeschlossen und montiert, wie in Abb. \ref{fig:Gyroskop auf dem Roboter} unten links zu sehen ist. Es sind jeweils 2 Bytes pro Achse, die die Drehgeschwindigkeit angeben. Jedoch musste man feststellen dass sich diese Werte zu sehr unterscheiden und man so nicht einen exakten Winkel berechnen kann. Die Werte liessen sich schon durch leichte Vibration stark verändern.  Infolge dieser Ungenauigkeit konnte auch mit diesem Bauteil nicht weiter gearbeitet werden.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=5cm, height=7cm]{assets/ET/Gyroskop/Gyro_Montiert.jpeg}
+\caption{Festmontierter Gyrosensor auf dem Roboter}
+\label{fig:Gyroskop auf dem Roboter}
+\end{figure}
+
 
 \subsection{Komponenten}
 \label{Komponenten}
