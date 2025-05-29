@@ -115,6 +115,9 @@ Wie aus Tabelle \ref{tab:taktergebnisse_de} ersichtlich ist, weichen die aufgeze
 
 Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
 
+
+Diese genaueren Tests erfolgten erst nach dem entschieden wurde das man mit diesen Motoren/Encodern weiter arbeitet. In den ersten Tests zweifelte man immer den eigenen Leistungen und nicht einer schlechten Hardware, darum wurde in die Encoder möglicherweise zu viel Zeit reingesteckt die sich nicht ausbezahlt hat.
+
 \begin{table}[ht]
 \centering
 \caption{Ergebnisse der aufgezeichneten Taktimpulse Input Capture}
@@ -136,6 +139,20 @@ Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern
 Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit den Encodern wurde entschieden, die Drehung ausschliesslich mithilfe der Liniensensoren oder mit einem Gyroskop durchzuführen.
 
 TODO IVAN, erklaere, dass mir aber gliich choennt 10cm fuehre und zrug fahre demit bitte (falls es scho irgendwo isch hani ned gseh sorry) :)
+
+\subsubsection{Gyroskop statt Encoder}
+
+Da man mit den geplanten Encodern nicht wie gewollt weiter gekommen ist, musste kurz vor Schluss nach einer Alternative gesucht werden. Man entschied sich ein Gyroskop zu verwenden. Ein Gyroskop reagiert auf Drehbewegungen, durch die Corioliskraft wird eine Masse ins Schwingen gebracht und somit die Drehbewegung detektiert \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert um die Messdaten zu erlangen. Um die Implementation zu testen, wurde mithilfe eines Logic Analyzers das erste Byte vom Master zum Slave aufgezeichnet. Somit konnte man die Korrektheit der Adresse feststellen \ref{fig:Gyroskop}. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{assets/ET/Gyroskop/Gyroskop.png}
+\caption{Aufgezeichnetes Byte}
+\label{fig:Gyroskop}
+\end{figure}
+
+
+TODO JONAH WEITER MACHEN GYROSKOP
 
 \subsection{Komponenten}
 \label{Komponenten}
@@ -276,7 +293,7 @@ Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung ange
 
 \subsubsection{Liniensensor}
 
-Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. Das Erkennen ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorenwerte geprüft. Sollten die Werte auf einen Wegpunkt zutreffen, hält der Roboter sofort an.
+Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. Das Erkennen ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorenwerte geprüft. Da beim erreichen des Wegpunktes im Optimalfall alle Sensoren auf der weissen Oberfläche stehen, weichen die Werte der aktuellen Ticks stark der Sollwerte ab. Somit kann ein Wegpunkt klar identifiziert werden und der Roboter kann anhalten.
 
-TODO JONAH 'Sollten die Werte auf einen Wegpunkt zutreffen' chasch das maybe nachli usfuehre? ALso was sinds fuer wert, wie zeiget die dass es en knote isch?
+
 
