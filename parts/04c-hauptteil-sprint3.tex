@@ -4,28 +4,6 @@
 
 Dieses Kapitel behandelt die Methoden zur Objekterkennung. Zur Identifikation von Objekten auf dem Graphen, wurde ein YOLOv11-Modell eingesetzt, das speziell für diese Aufgabe trainiert wurde. Die erzielten Modellresultate werden vom Raspberry Pi ausgewertet, damit der Roboter die optimale Route wählen kann. Ergänzend dazu dient ein Ultraschallsensor als Backup-System zur Erkennung von Hindernissen, um die Sicherheit des Roboters zu erhöhen. 
 
-\subsubsection{Kamera Halterung}
-\label{Kamera Halter}
-
-Der Winkel und die Höhe der Kamera wurden in \acrshort{pren1} an dem Testaufbau in Abb.\ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt, dass er für die Bildverarbeitung ideal ist. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=5cm]{assets/MT/camer_tower_2.png}
-\caption{Testaufbau zum Festlegen des Kamerawinkels}
-\label{fig:Testaufbau zum Festlegen des Kamerawinkels}
-\end{figure}
-
-
-Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23\textdegree\ beträgt. Ebenfalls wichtig ist, dass die Linsenhöhe 242mm über dem Boden beträgt. 
-
- \begin{figure}[H]
-\centering
-\includegraphics[width= \textwidth ]{assets/MT/Sichtfeld_Roboter.png}
-\caption{Skizze der Funktionsmasse für die Kamerabefestigung}
-\label{fig:Skizze der Funktionsmasse für die Kamerabefestigung}
-\end{figure}
-
 
 \subsubsection{Ultraschall}
 \label{ultraschall}
@@ -60,7 +38,7 @@ Das eigentliche Training benötigt GPU-Rechenleistung. Mithilfe von Google Colab
 
 \subparagraph{Erste Iteration}
 
-In der ersten Iteration testete man das YOLOv11n-Modell mit einem stark augmentierten Datensatz \text{(Rotation $\pm$30°, Helligkeit $\pm$50\%, Rauschen 10\%)}. Trainiert wurde mit einem Datensatz aus Bildern welche mit dem Mobiltelefon aufgenommen wurden. Zu Testzwecken hat dies ausgereicht. Für das Model welches dann eingesetzt wird, ist das suboptimal, da die Bilder mit denen trainiert wird, den Real-Konditionen entsprechen sollten.
+In der ersten Iteration testete man das YOLOv11n-Modell mit einem stark augmentierten Datensatz \text{(Rotation $\pm$30\textdegree, Helligkeit $\pm$50\%, Rauschen 10\%)}. Trainiert wurde mit einem Datensatz aus Bildern welche mit dem Mobiltelefon aufgenommen wurden. Zu Testzwecken hat dies ausgereicht. Für das Model welches dann eingesetzt wird, ist das suboptimal, da die Bilder mit denen trainiert wird, den Real-Konditionen entsprechen sollten.
 
 Die Ergebnisse waren unbefriedigend, da die übermässige Augmentation zu einem Überlernen (overfitting) künstlicher Muster führte, insbesondere bei der Klasse "Knoten." Darauf wurde mit Bildern der Raspberry Pi Kamera ein neuer Datensatz erstellt.
 
@@ -68,7 +46,7 @@ Die Ergebnisse waren unbefriedigend, da die übermässige Augmentation zu einem 
 \subparagraph{Zweite Iteration: Iterative Erweiterung und Überanpassung}
 
 In der zweiten Iteration wurde einen unveränderten Datensatz mit zwei erweiterten Datensätzen kombiniert und mit je 300 Epochen trainiert.
-Augmentationen umfassten horizontale Spiegelung, Rotation (±15°) und Helligkeit (
+Augmentationen umfassten horizontale Spiegelung, Rotation (\pm15\textdegree ) und Helligkeit (
 
 Diese Anzahl an Epochen war viel zu hoch was zu einem overfitting führte. Ausserdem erkannte ich Fehler in den Annotationen, die eine erneute Überarbeitung notwendig machten.
 
@@ -76,7 +54,7 @@ Diese Anzahl an Epochen war viel zu hoch was zu einem overfitting führte. Ausse
 
 In der dritten Iteration wurde der Ansatz optimiert, indem ein unveränderter Datensatz mit einem veränderten Datensatz kombiniert wurde, um Robustheit und Generalisierung zu verbessern.
 
-Der unveränderte Datensatz umfasste 396 Bilder, annotiert in Roboflow. Der augmentierte Datensatz wurde gemäß Empfehlungen für den Einsatz im Innenraum mit variierenden Licht- und Bodenbedingungen erstellt. Die Augmentationseinstellungen waren:
+Der unveränderte Datensatz umfasste 396 Bilder, annotiert in Roboflow. Der augmentierte Datensatz wurde gemäss Empfehlungen für den Einsatz im Innenraum mit variierenden Licht- und Bodenbedingungen erstellt. Die Augmentationseinstellungen waren:
 
 \begin{itemize} 
     \item \textbf{Helligkeit}: $\pm$20\%, um Lichtvariationen abzubilden. 

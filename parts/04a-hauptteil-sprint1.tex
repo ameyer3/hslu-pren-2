@@ -43,140 +43,8 @@ Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlic
 
 \newpage
 
-%%%%%%%%%%%%%%%%%Epic 1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Fortbewegung mit geregelter Geschwindigkeit}
-
-\subsubsection{Print Circuit Board Design}
-\label{pcb}
-
-Um eine zuverlässige Kontaktierung der einzelnen Komponenten sicherzustellen, wird im Rah-
-men von \acrshort{pren2} ein Verbindungs-PCB, ersichtlich auf Grafik \ref{fig: Verteiler PCB}, entwickelt. Dieses \acrshort{pcb} übernimmt das Management der
-Spannungsversorgung für den Raspberry Pi und den \gls{tinyk22}. Zudem werden sämtliche Signale,
-die vom \gls{tinyk22} erfasst und verarbeitet werden sollen, entsprechend verbunden.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=5cm, height=6cm]{assets/ET/PCB/VerteilerPCB_unbestueckt.png}
-\caption{Verteiler PCB}
-\label{fig: Verteiler PCB}
-\end{figure}
-
-Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} mehrere Exemplare vorhanden. Das PCB zusammen mit dem \gls{tinyk22} ist auf Grafik \ref{fig: Verteiler PCBA} gezeigt. Somit ist das Risiko der kaputten Elektroteile nicht mehr relevant.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=5cm, height=6cm]{assets/ET/PCB/VerteilerPCB_bestueckt.png}
-\caption{Verteiler PCBA}
-\label{fig: Verteiler PCBA}
-\end{figure}
-
-
-\subsubsection{Software Grundlage}
-
-Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamentals. Dieses Projekt beinhaltet ein gutes Grundgerüst. Aus die
-
-\subsubsection{Motoren ansteueren und auslesen}
-
-Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem \gls{tinyk22} und einem Speisegerät. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=10cm, height=8cm]{assets/ET/Motoren/Motorentest.jpeg}
-\caption{Motorentest}
-\label{fig: Motorentest}
-\end{figure}
-
-
-Allerdings kam bereits der Motortreiber zum Einsatz, der auch im späteren Endprodukt verbaut werden soll. Nach anfänglichen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem \gls{tinyk22} konnten die ersten Meter erfolgreich zurückgelegt werden. Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder zu mitteln, um die gefahrene Strecke zu ermitteln (siehe Gleichung~\ref{eq:gefahren}).
-
-\begin{equation}
-    gefahrenMEAN_{cm} = \frac{gefahrenR_{cm} + gefahrenL_{cm}} {2} 
-    \label{eq:gefahren}
-\end{equation}
-
-Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen. 
-
-Bei den Drehversuchen konnte kein Winkel kleiner als 90\° realisiert werden. Die Ursache wurde zunächst in der Softwareimplementierung vermutet, woraufhin gezielt nach möglichen Fehlerquellen gesucht wurde. Es wurde erheblicher Aufwand in die Entwicklung und den Vergleich verschiedener Auslesealgorithmen sowie in die Fehlersuche im bestehenden Code investiert. Trotz dieser Maßnahmen konnte jedoch keine signifikante Verbesserung erzielt werden.
-
-TODO: Folgender Text mit Tabellen ist eigentlich der Testbericht. (Anpassen?)
-
-Die Encoder sowie der zugehörige Code wurden auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
-
-Anschliessend wurde ein Encoder mithilfe eines Frequenzgenerators simuliert, um das Zähleverhalten des implementierten Codes zu überprüfen. Die Taktfrequenz wurde auf 500 Hz eingestellt. Kanal 2 wurde mit einer Phasenverschiebung von 90 Grad nacheilend konfiguriert. Unter diesen Bedingungen sollte der implementierte Zähler eine Inkrementierung vornehmen.
-
-Das Taktsignal wurde für eine Dauer von 2 Sekunden angelegt, was direkt am Frequenzgenerator eingestellt wurde. Der erwartete Endwert des Zählers lag entsprechend bei etwa 1000.
-
-\begin{table}[ht]
-\centering
-\caption{Ergebnisse der aufgezeichneten Taktimpulse Decoder}
-\label{tab:taktergebnisse_de}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
-\hline
-1 & 723 \\
-2 & 1397 \\
-3 & 1412 \\
-4 & 655 \\
-\hline
-\end{tabular}
-\end{table}
-
-Wie aus Tabelle \ref{tab:taktergebnisse_de} ersichtlich ist, weichen die aufgezeichneten Werte um bis zu 41\% vom erwarteten Sollwert ab. Diese Abweichung ist zu gross, um eine präzise Regelung darauf aufzubauen.
-
-Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
-
-Diese genaueren Tests erfolgten erst, nachdem entschieden wurde das man mit diesen Motoren/Encodern weiter arbeitet. In den ersten Tests zweifelte man immer den eigenen Leistungen und nicht einer schlechten Hardware, darum wurde in die Encoder zu viel Zeit reingesteckt die sich nicht ausbezahlt hat.
-
-\begin{table}[ht]
-\centering
-\caption{Ergebnisse der aufgezeichneten Taktimpulse Input Capture}
-\label{tab:taktergebnisse_im}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
-\hline
-1 & 902 \\
-2 & 1252 \\
-3 & 842 \\
-4 & 876 \\
-\hline
-\end{tabular}
-\end{table}
-
-Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}).
-
-\textbf{Endgültige Situation mit Encodern}
-
-Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit den Encodern wurde entschieden, die Drehung ausschliesslich mithilfe der Liniensensoren oder mit einem Gyroskop durchzuführen.
-
-TODO IVAN, erklaere, dass mir aber gliich choennt 10cm fuehre und zrug fahre demit bitte (falls es scho irgendwo isch hani ned gseh sorry) :)
-
-\subsubsection{Gyroskop statt Encoder}
-
-Da man mit den geplanten Encodern nicht wie gewollt weiter gekommen ist, musste kurz vor Schluss nach einer Alternative gesucht werden. Man entschied sich ein Gyroskop zu verwenden. Ein Gyroskop reagiert auf Drehbewegungen, die durch die Corioliskraft verursacht wird. Die Corioliskraft bringt eine Masse ins Schwingen, so kann die Drehbewegung detektiert werden \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert um die Messdaten zu erlangen. Um die Implementation zu testen, wurde mithilfe eines Logic Analyzers das erste Byte vom Master zum Slave aufgezeichnet. Somit konnte man die Korrektheit der Adresse feststellen \ref{fig:Gyroskop}. 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{assets/ET/Gyroskop/Gyroskop.png}
-\caption{Aufgezeichnetes Byte}
-\label{fig:Gyroskop}
-\end{figure}
-
-
-Nach dem man sichergestellt hat das der Master (\acrshort{tinyk22}) die richtige Adresse anspricht, konnte der Gyrosensor ausgelesen werden. Für den Test wurde er bereits fest auf den Roboter angeschlossen und montiert, wie in Abb. \ref{fig:Gyroskop auf dem Roboter} unten links zu sehen ist. Es sind jeweils 2 Bytes pro Achse, die die Drehgeschwindigkeit angeben. Jedoch musste man feststellen dass sich diese Werte zu sehr unterscheiden und man so nicht einen exakten Winkel berechnen kann. Die Werte liessen sich schon durch leichte Vibration stark verändern.  Infolge dieser Ungenauigkeit konnte auch mit diesem Bauteil nicht weiter gearbeitet werden.
-
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=5cm, height=7cm]{assets/ET/Gyroskop/Gyro_Montiert.jpeg}
-\caption{Festmontierter Gyrosensor auf dem Roboter}
-\label{fig:Gyroskop auf dem Roboter}
-\end{figure}
-
-
-\subsection{Komponenten}
-\label{Komponenten}
+\subsection{Mechanische Komponenten}
+\label{Mechanische Komponenten}
 
 \subsubsection{Fahrwerk konstruieren}
 \label{Fahrwerk konstruieren}
@@ -272,6 +140,193 @@ Als Abdeckung werden Bürstendichtungen für Türen verwendet, welche in eine au
     \label{fig:Sensor Abdeckung}
 \end{figure}
 \newpage
+
+\subsubsection{Kamera Halterung}
+\label{Kamera Halter}
+
+Der Winkel und die Höhe der Kamera wurden in \acrshort{pren1} an dem Testaufbau in Abb.\ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt, dass er für die Bildverarbeitung ideal ist. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{assets/MT/camer_tower_2.png}
+\caption{Testaufbau zum Festlegen des Kamerawinkels}
+\label{fig:Testaufbau zum Festlegen des Kamerawinkels}
+\end{figure}
+
+
+Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23\textdegree\ beträgt. Ebenfalls wichtig ist, dass die Linsenhöhe 242mm über dem Boden beträgt. 
+
+ \begin{figure}[H]
+\centering
+\includegraphics[width= \textwidth ]{assets/MT/Sichtfeld_Roboter.png}
+\caption{Skizze der Funktionsmasse für die Kamerabefestigung}
+\label{fig:Skizze der Funktionsmasse für die Kamerabefestigung}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%Epic 1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Fortbewegung mit geregelter Geschwindigkeit}
+
+\subsubsection{Print Circuit Board Design}
+\label{pcb}
+
+Um eine zuverlässige Kontaktierung der einzelnen Komponenten sicherzustellen, wird im Rah-
+men von \acrshort{pren2} ein Verbindungs-PCB, ersichtlich auf Grafik \ref{fig: Verteiler PCB}, entwickelt. Dieses \acrshort{pcb} übernimmt das Management der
+Spannungsversorgung für den Raspberry Pi und den \gls{tinyk22}. Zudem werden sämtliche Signale,
+die vom \gls{tinyk22} erfasst und verarbeitet werden sollen, entsprechend verbunden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm, height=6cm]{assets/ET/PCB/VerteilerPCB_unbestueckt.png}
+\caption{Verteiler PCB}
+\label{fig: Verteiler PCB}
+\end{figure}
+
+Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} mehrere Exemplare vorhanden. Das PCB zusammen mit dem \gls{tinyk22} ist auf Grafik \ref{fig: Verteiler PCBA} gezeigt. Somit ist das Risiko der kaputten Elektroteile nicht mehr relevant.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm, height=6cm]{assets/ET/PCB/VerteilerPCB_bestueckt.png}
+\caption{Verteiler PCBA}
+\label{fig: Verteiler PCBA}
+\end{figure}
+
+
+\subsubsection{Software Grundlage}
+
+Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamentals. Dieses Projekt beinhaltet ein gutes Grundgerüst. Man hat diverse Codeabschnitte abgeändert, entfernt oder neu hinzugefügt. Als Entwicklungsumgebung wurde MCUXpresso verwendet. Anhand der Pinout Belegungen Abb. \ref{fig:Pinout TinyK22} und Abb. \ref{fig:Pinout Raspy Hat} konnte man diese in der Software initialisieren.
+
+\subsubsection{Servomotor für Greifer} Der Servomotor wurde bereits in Pren 1 getestet und dokumentiert. Durch die Ergebnisse von diesem Test konnte die Software erfolgreich implemenetiert werden.
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{assets/ET/Software/Tiny_Pinout.png}
+  \caption{Pinout Tiny K22}
+  \label{fig:Pinout TinyK22}
+\end{minipage}
+\hspace{0.05\textwidth} % Abstand zwischen den Bildern
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{assets/ET/Software/RaspyHat_Pinout.png}
+  \caption{Pinout Raspy Hat}
+  \label{fig:Pinout Raspy Hat}
+\end{minipage}
+\end{figure}
+
+
+TODO ULTRASCHALL IVAN
+
+TODO Leistunsberechnung/AKKU
+
+
+\subsubsection{Motoren ansteueren und auslesen}
+
+TODO PIN belegung wechseln in pren2
+
+
+
+Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem \gls{tinyk22} und einem Speisegerät. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm, height=8cm]{assets/ET/Motoren/Motorentest.jpeg}
+\caption{Motorentest}
+\label{fig: Motorentest}
+\end{figure}
+
+
+Allerdings kam bereits der Motortreiber zum Einsatz, der auch im späteren Endprodukt verbaut werden soll. Nach anfänglichen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem \gls{tinyk22} konnten die ersten Meter erfolgreich zurückgelegt werden. Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder zu mitteln, um die gefahrene Strecke zu ermitteln (siehe Gleichung~\ref{eq:gefahren}).
+
+\begin{equation}
+    gefahrenMEAN_{cm} = \frac{gefahrenR_{cm} + gefahrenL_{cm}} {2} 
+    \label{eq:gefahren}
+\end{equation}
+
+Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen. 
+
+Bei den Drehversuchen konnte kein Winkel kleiner als 90\textdegree \ realisiert werden. Die Ursache wurde zunächst in der Softwareimplementierung vermutet, woraufhin gezielt nach möglichen Fehlerquellen gesucht wurde. Es wurde erheblicher Aufwand in die Entwicklung und den Vergleich verschiedener Auslesealgorithmen sowie in die Fehlersuche im bestehenden Code investiert. Trotz dieser Maßnahmen konnte jedoch keine signifikante Verbesserung erzielt werden.
+
+TODO: Folgender Text mit Tabellen ist eigentlich der Testbericht. (Anpassen?)
+
+Die Hardware sowie der zugehörige Code wurde auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
+
+Anschliessend wurde ein Encoder mithilfe eines Frequenzgenerators simuliert, um das Zähleverhalten des implementierten Codes zu überprüfen. Die Taktfrequenz wurde auf 500 Hz eingestellt. Kanal 2 wurde mit einer Phasenverschiebung von 90\textdegree \ nacheilend konfiguriert. Unter diesen Bedingungen sollte der implementierte Zähler eine Inkrementierung vornehmen.
+
+Das Taktsignal wurde für eine Dauer von 2 Sekunden angelegt, was direkt am Frequenzgenerator eingestellt wurde. Der erwartete Endwert des Zählers lag entsprechend bei etwa 1000.
+
+\begin{table}[ht]
+\centering
+\caption{Ergebnisse der aufgezeichneten Taktimpulse Decoder}
+\label{tab:taktergebnisse_de}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
+\hline
+1 & 723 \\
+2 & 1397 \\
+3 & 1412 \\
+4 & 655 \\
+\hline
+\end{tabular}
+\end{table}
+
+Wie aus Tabelle \ref{tab:taktergebnisse_de} ersichtlich ist, weichen die aufgezeichneten Werte um bis zu 41\% vom erwarteten Sollwert ab. Diese Abweichung ist zu gross, um eine präzise Regelung darauf aufzubauen.
+
+Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
+
+Diese genaueren Tests erfolgten erst, nachdem entschieden wurde das man mit diesen Motoren/Encodern weiter arbeitet. In den ersten Tests zweifelte man immer den eigenen Leistungen und nicht einer schlechten Hardware, darum wurde in die Encoder zu viel Zeit reingesteckt die sich nicht ausbezahlt hat.
+
+\begin{table}[ht]
+\centering
+\caption{Ergebnisse der aufgezeichneten Taktimpulse Input Capture}
+\label{tab:taktergebnisse_im}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
+\hline
+1 & 902 \\
+2 & 1252 \\
+3 & 842 \\
+4 & 876 \\
+\hline
+\end{tabular}
+\end{table}
+
+Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}).
+
+\textbf{Endgültige Situation mit Encodern}
+
+Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit den Encodern wurde entschieden, die Drehung ausschliesslich mithilfe der Liniensensoren oder mit einer anderen Lösung durchzuführen.
+
+
+
+\subsubsection{Gyroskop statt Encoder}
+
+Da mit den geplanten Encodern nicht wie gewollt weiter gekommen ist, musste kurz vor Schluss nach einer Alternative gesucht werden. Man entschied sich ein Gyroskop zu verwenden. Ein Gyroskop reagiert auf Drehbewegungen, die durch die Corioliskraft verursacht wird. Die Corioliskraft bringt eine Masse ins Schwingen, so kann die Drehbewegung detektiert werden \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert um die Messdaten zu erlangen. Um die Implementation zu testen, wurde mithilfe eines Logic Analyzers das erste Byte vom Master zum Slave aufgezeichnet. Somit konnte man die Korrektheit der Adresse feststellen \ref{fig:Gyroskop}. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{assets/ET/Gyroskop/Gyroskop.png}
+\caption{Aufgezeichnetes Byte}
+\label{fig:Gyroskop}
+\end{figure}
+
+
+Nach dem man sichergestellt hat das der Master (\gls{tinyk22}) die richtige Adresse anspricht, konnte der Gyrosensor ausgelesen werden. Für den Test wurde er bereits fest auf den Roboter angeschlossen und montiert, wie in Abb. \ref{fig:Gyroskop auf dem Roboter} unten links zu sehen ist. Es sind jeweils 2 Bytes pro Achse, die die Drehgeschwindigkeit angeben. Jedoch musste feststellt werden, dass sich diese Werte zu sehr unterscheiden und nicht zu einen exakten Winkel berechnen lassen. Die Werte liessen sich schon durch leichte Vibration stark verändern.  Infolge dieser Ungenauigkeit konnte auch mit diesem Bauteil nicht weiter gearbeitet werden.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=5cm, height=7cm]{assets/ET/Gyroskop/Gyro_Montiert.jpeg}
+\caption{Festmontierter Gyrosensor auf dem Roboter}
+\label{fig:Gyroskop auf dem Roboter}
+\end{figure}
+
+
+
 %%%%%%%%%%%%%%%%%Epic 2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Auf Linien des Graphes bewegen}
