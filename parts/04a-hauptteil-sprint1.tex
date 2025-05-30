@@ -71,6 +71,10 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} m
 \end{figure}
 
 
+\subsubsection{Software Grundlage}
+
+Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamentals. Dieses Projekt beinhaltet ein gutes Grundgerüst. Aus die
+
 \subsubsection{Motoren ansteueren und auslesen}
 
 Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem \gls{tinyk22} und einem Speisegerät. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
@@ -83,11 +87,18 @@ Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encod
 \end{figure}
 
 
-Allerdings wurde bereits der ausgewählte Motortreiber verwendet, der später auch im Endprodukt verbaut wird. Nach einigen Schwierigkeiten (TODO IVAN, welli? ev als ahhang testprotokoll?) bei der Initialisierung des Quadratur-Encoder-Modus auf dem \gls{tinyk22} konnten die ersten Meter erfolgreich gefahren werden. Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen.
+Allerdings kam bereits der Motortreiber zum Einsatz, der auch im späteren Endprodukt verbaut werden soll. Nach anfänglichen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem \gls{tinyk22} konnten die ersten Meter erfolgreich zurückgelegt werden. Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder zu mitteln, um die gefahrene Strecke zu ermitteln (siehe Gleichung~\ref{eq:gefahren}).
 
-\textbf{Endgültige Situation mit Encodern}
+\begin{equation}
+    gefahrenMEAN_{cm} = \frac{gefahrenR_{cm} + gefahrenL_{cm}} {2} 
+    \label{eq:gefahren}
+\end{equation}
 
-TODO IVAN: WIESO? hets problem geh? wieso hesch sie uf fehlere ahfah pruefe?
+Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen. 
+
+Bei den Drehversuchen konnte kein Winkel kleiner als 90\° realisiert werden. Die Ursache wurde zunächst in der Softwareimplementierung vermutet, woraufhin gezielt nach möglichen Fehlerquellen gesucht wurde. Es wurde erheblicher Aufwand in die Entwicklung und den Vergleich verschiedener Auslesealgorithmen sowie in die Fehlersuche im bestehenden Code investiert. Trotz dieser Maßnahmen konnte jedoch keine signifikante Verbesserung erzielt werden.
+
+TODO: Folgender Text mit Tabellen ist eigentlich der Testbericht. (Anpassen?)
 
 Die Encoder sowie der zugehörige Code wurden auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
 
@@ -115,7 +126,6 @@ Wie aus Tabelle \ref{tab:taktergebnisse_de} ersichtlich ist, weichen die aufgeze
 
 Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
 
-
 Diese genaueren Tests erfolgten erst, nachdem entschieden wurde das man mit diesen Motoren/Encodern weiter arbeitet. In den ersten Tests zweifelte man immer den eigenen Leistungen und nicht einer schlechten Hardware, darum wurde in die Encoder zu viel Zeit reingesteckt die sich nicht ausbezahlt hat.
 
 \begin{table}[ht]
@@ -135,6 +145,8 @@ Diese genaueren Tests erfolgten erst, nachdem entschieden wurde das man mit dies
 \end{table}
 
 Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}).
+
+\textbf{Endgültige Situation mit Encodern}
 
 Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit den Encodern wurde entschieden, die Drehung ausschliesslich mithilfe der Liniensensoren oder mit einem Gyroskop durchzuführen.
 
