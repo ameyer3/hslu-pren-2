@@ -98,13 +98,13 @@ Die Tests der Zielknotenerkennung haben zwei Ziele:
 
 \textbf{Parameter tunen}
 
-Die Zielknotenerkennung hat zwei Parameter, deren Werte durch Tests getuned werden muessen:
+Die Zielknotenerkennung hat zwei Parameter, deren Werte durch Tests getuned werden muessen. Ein Match bezeichnet einen gefundenen Erkennungspunkt des Buchstabens.
 
 \begin{enumerate}
     \item MIN\_MATCHES\_REQUIRED = 10: Wie viele Matches muss es geben?
     \item MAX\_DISTANCE\_ALLOWED = 50: Wie ungenau duerfen die Matches maximal sein?
-    \item Distanz Messpunkte = 4:
-    \item Distanz der Distanz = 6:
+    \item Distanz Messpunkte = 4: Differenz der Anzahl Matches fuer jeden Buchstaben, um die Buchstaben mit den zwei meisten Matches vergleichen zu muessen, anstatt direkt den Buchstaben mit den meisten Matches zu nehmen.
+    \item Distanz der Distanz = 6: Differenz in der durchschnittlichen Distanz der Matches der zwei Buchstaben mit den meisten Matches. Hat der Buchstaben mit weniger Matches eine Distanz, die mindestens 6 kleiner ist, passt dieser besser.
 \end{enumerate}
 
 Die finalen Werte wurden mithilfe von diesen Testresultaten ermittelt:
@@ -113,7 +113,8 @@ TODO TABLE
 
 \textbf{Funktionalitaet testen}
 
-Die Logik, um den richtigen Buchstaben zu erkennen beschraenkt sich nicht nur auf den \acrshort{orb} Algorithmus. Es wurde selber noch ein Algorighmus implementiert. Grundsaetzlich wird der Buchstabe, fuer den die meisten Matches gefunden wurden zurueckgeben, falls er die Parameter erfuellt. Jedoch ist es vor allem bei dem Buchstaben C so, dass es relativ wenige Messpunkte gibt, da der Buchstaben sehr simpel ist. Das heisst, wenn C erkannt werden soll, gibt es oft falsche Matches, mit mehr Messpunkten. Falls die Buchstaben mit den meisten und den zweitmeisten Messpunkten nur 5 Messpunkte auseinander liegen, werden die Distanzen der Messpunkte verglichen. Wenn der Buchstaben, der maximal 5 Messpunkte weniger hat, eine durchschnittliche Distanz von mehr als 5 hat, wird der Buchstaben zurueckgegeben, mit den wenigeren Messpunkten. Diese Logik wird in den Unittests getestet.
+Die Logik, um den richtigen Buchstaben zu erkennen beschraenkt sich nicht nur auf den \acrshort{orb} Algorithmus. Es wurde selber noch ein Algorithmus implementiert. Grundsaetzlich wird der Buchstabe, fuer den die meisten Matches gefunden wurden, zurueckgeben, falls er die Parameter erfuellt. Jedoch ist es vor allem bei dem Buchstaben C so, dass es relativ wenige Messpunkte gibt, da der Buchstaben sehr simpel ist. Das heisst, wenn C erkannt werden soll, gibt es oft falsche Buchstaben, mit mehr Messpunkten. Falls die Buchstaben mit den meisten und den zweitmeisten Messpunkten nur 5 Messpunkte auseinander liegen, werden die Distanzen der Messpunkte verglichen. Wenn der Buchstaben, der maximal 5 Messpunkte weniger hat, eine durchschnittliche Distanz von mehr als 5 hat, wird der Buchstaben zurueckgegeben, mit den wenigeren Messpunkten. Diese Logik wird in den Unittests getestet.
+
 
 TODO TABLE
 
