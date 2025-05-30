@@ -1,6 +1,6 @@
 \section{Roboterbau}
 
-In diesem Teil werden die einzelne Schritte beschrieben, um den Roboter zu bauen. Dabei wird sich an dem Konzept von \acrshort{pren1} orientiert. Falls von dem Konzept abgewichen wird, wird dies erwähnt und begründet. Die Arbeit aus \acrshort{pren1} kann im elektronischen Anhang gefunden werden.
+In diesem Teil werden die einzelnen Schritte beschrieben, um den Roboter zu bauen. Dabei wird sich an dem Konzept von \acrshort{pren1} orientiert. Falls von dem Konzept abgewichen wird, wird dies erwähnt und begründet.
 
 Die folgenden Kapitel sind unterteilt nach den einzelnen Funktionen des Roboters. Dabei werden die Tätigkeiten beschrieben, inklusive Testprotokolle und -beschriebe.
 
@@ -49,7 +49,8 @@ Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlic
 \subsubsection{Fahrwerk konstruieren}
 \label{Fahrwerk konstruieren}
 
- Das Konzept für das Fahrwerk und die Grundplatte wurden analog zum Konzept aus \acrshort{pren1} umgesetzt. Am Fahrwerk wurden gegenüber des Prototyps aus \acrshort{pren1} einzig der Motorflansch und der Lenkrollenhalter angepasst. Beim Prototyp in PREN 1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus PLA nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt, wie gezeigt auf Abb.\ref{fig: Lenkrollenhalter V2} 
+ Das Konzept für das Fahrwerk und die Grundplatte wurden analog zum Konzept aus \acrshort{pren1} umgesetzt. Am Fahrwerk wurden gegenüber des Prototyps aus \acrshort{pren1} einzig der Motorflansch und der Lenkrollenhalter angepasst. 
+ Beim Prototyp in PREN 1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus PLA nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt, wie gezeigt auf Abb.\ref{fig: Lenkrollenhalter V2} 
 
 \begin{figure}[H]
 \centering
@@ -113,23 +114,21 @@ Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft un
 \subsubsection{Halterung Liniensensor}
 \label{Halterung Liniensensor}
 
-Für den Liniensensor wurde eine Halterung erstellt, welche in der Höhe verstellbar ist für eine optimale und flexible Einstellung am Roboter.
+Der Liniensensor wird mit einer zweiteiligen Halterung befestigt. Auf der inneren Schale, in Abb. \ref{fig:Schnitt Halterung Liniensensor} blau, ist der Sensor befestigt. Die innere Schale lässt sich verschieben. So kann die Höhe eingestellt werden. Die Fixierung erfolgt mithilfe von zwei Gewindestiften die in der äusseren Schale befestigt werden und die innere Schale klemmen. 
 
-Die Konstruktion ist zweiteilig und  besteht aus einem äusseren und einem inneren Teil. Die Halterung wurde mit dem 3D-Drucker ausgedruckt.
-
-Befestigt wurde der äussere Teil mit 4 M3 schrauben an der Grundplatte. Der innere Teil, an dem der Liniensensor befestigt wird, hat ein Untermass und ist so in der Höhe verschiebbar. Mittels M3-Gewindestiften wird er in Position festgeklemmt.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{assets//MT/Sensor Halterung.png}
-    \caption{Halterung mit Sensor}
-    \label{fig:Halterung mit Sensor}
+    \caption{Schnitt Halterung Liniensensor}
+    \label{fig:Schnitt Halterung Liniensensor}
 \end{figure}
 
 
 \subsubsection{Abschirmung des Liniensensors}
 \label{Abschirmung des Liniensensors}
-Um Störeinflüsse von aussen zu vermeiden, wurde eine Abdeckung konstruiert, die jegliche Einstrahlung abschirmt. Der Liniensensor funktioniert am besten wenn er in einem abgedunkelten Umfeld eingesetzt wird.
+
+Um Störungen durch Fremdlicht zu verhindern wurde eine Abdeckung konstruiert, die jegliche fremdeinstrahlung abschirmt.
 
 Als Abdeckung werden Bürstendichtungen für Türen verwendet, welche in eine ausgedruckte Aufnahme gesteckt werden und mit Gewindestifte festgeklemmt werden. Die Vorrichtung wird um die Sensorhalterung angebracht und dunkelt so den Sensor ab.
 
@@ -330,6 +329,7 @@ Nach dem man sichergestellt hat das der Master (\gls{tinyk22}) die richtige Adre
 %%%%%%%%%%%%%%%%%Epic 2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Auf Linien des Graphes bewegen}
+\label{Auf Linien des Graphes bewegen}
 
 \subsubsection{Liniensensor auslesen}
 \label{Liniensensor auslesen}
@@ -338,6 +338,7 @@ In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem 
 
 
 \subsubsection{Linie folgen mit PD-Regelung}
+\label{Linie folgen mit PD-Regelung}
 
 Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abb. \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit möglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
 

@@ -1,27 +1,19 @@
 \section{Realisiertes Funktionsmuster}
 
-Das in PREN1 ausgearbeitete Konzept konnte so wie geplant umgesetzt werden. Die Funktionalen Komponenten wurden gemäss Planung integriert und 
+In diesem Kapitel wird die Umsetzung des in \acrshort{pren1} erarbeiteten Konzept anhand der  erstellten Anforderungsliste bewertet. Der Fokus liegt auf den Fest- und Mindestanforderungen. Die Anforderungsliste ist im Anhang in Kapitel \nameref{anforderungliste} angehängt.
 
-Vergleich  Konzeptloesung und realisiseren Funktionsmuster
+\subsection{Anforderungen}
 
+Die physischen Anforderungen an den Roboter konnten vollständig erfüllt werden. Das maximal zulässige Gewicht von 2 kg wurde mit einem Gesamtgewicht von 1.262 kg, insbesondere durch den Einsatz von Leichtbaustrukturen, deutlich unterschritten. Die maximale Baugrösse 300x300x800mm kann in der Startkonfiguration mit Greifer in Ausgangsstellung eingehalten werden. Zusätzlich erforderliche Komponenten wie ein Notausschalter, ein Eingabetaster zur Zieleingabe sowie eine Statusanzeige wurden erfolgreich integriert.
 
+Die Anforderung 1.6 "Das Fahrzeug muss in der Lage sein das Hindernis mit  einer Masse von 300g anzuheben und im Umkreis von 20mm am alten Ort abzusetzen", konnte nur teilweise erreicht bzw. getestet werden. Der der Anhebemechanismus des Greifers konnte mit dem originalen Hindernis erfolgreich getestet werden. (Siehe Bilder Anheben) Da die Systemintegration jedoch nicht vollständig durchgeführt werden konnte, konnte das Aufheben drehen und Absetzen als Prozess nicht getestet werden.
 
-\subsection{Auswertung}
+TO DO BILDer GREIFER EINFÜGEN angehoben und offen
 
-In diesem Kapitel wird die Umsetzung des in \acrshort{pren1} erarbeiteten Konzept anhand der damals erstellten Anforderungsliste bewertet. Die Anforderungsliste ist im Anhang in Kapitel \nameref{anforderungliste} angehängt.
+Das folgen der Linie erfolgt wie in PREN1 geplant mit einem Liniensensor der aus mehreren Phototransistoren besteht. Die Regelung der Motoren erfolgt mit Hilfe eines PD-Reglers. Der PD-Regler konnte auf dem Testpracour geprüft werden und ist in der Lage der Linie zu folgen. 
 
-\subsubsection{Anforderungen}
-Die physischen Anforderungen an den Roboter konnten vollständig erfüllt werden. Das maximal zulässige Gewicht von 2 kg wurde mit einem Gesamtgewicht von 1.262 kg, insbesondere durch den Einsatz von Leichtbaustrukturen, deutlich unterschritten. Die maximale Baugrösse 300x300x800mm kann in der Startkonfiguration mit Greifer in Ausgangsstellung eingehalten werden. Zusätzlich erforderliche Komponenten wie ein Hauptschalter, ein Eingabetaster zur Zieleingabe sowie eine Statusanzeige wurden erfolgreich integriert.
+Die Bilderkennung und der Wegfindungsalgorithmus  konnten mithilfe des Kameratestaufbaus aus PREN1 und einem leicht veränderten Code bereits vor Ort getestet werden. Gesperrte Knoten konnten bei unseren Testläufen mit einer XXXX\% Sicherheit erkennt werden. Der Algorithmus hat bei allen Testdurchläufen einen direkten Weg ans Ziel gefunden. 
 
-Die Anforderung 1.6 Der Greifer ist in der Lage das Hindernis mit einer Masse von ca. 300g anzuheben
-
-
-Die Bilderkennung konnte mithilfe des Kameratestaufbaus aus PREN1 und einem leicht veränderten Code bereits vor Ort getestet und weiter optimiert werden. Gesperrte Knoten konnten mit bei unseren Testläufen mit einer XXXX\% Sicherheit erkennt werden. Das folgen der Linie erfolgt wie in PREN1 geplant mit mehreren Phototransistoren. 
+ TODO HIER AUCH TESTS: AUFBAU, TRAVERSIERUNG ZEIT, Bild
 
 Die Konstruktionswerkstoffe konnten wie in PREN1 vorgesehen unter Berücksichtigung der im Kapitel Nachhaltigkeit aufgeführten Kriterien ausgewählt werden.
-
-Zur Laufzeit für den Parcour kann akutell noch keine Aussage gemacht werden da nicht alle Teilfunktionen implementiert worden sind. 
-
-
-
-TODO HIER AUCH TESTS: AUFBAU, TRAVERSIERUNG ZEIT
