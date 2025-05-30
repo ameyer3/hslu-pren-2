@@ -82,8 +82,45 @@ Es wurde untersucht, ob das Modell bessere Ergebnisse bringt, wenn die beiden Ba
 \includepdf[pages=-]{assets/IT/testing/yolo/ModelComparison.pdf}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Unittests %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%target node%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection*{Zielknotenerkennung}\label{target-node-unittests}
+  \addcontentsline{toc}
+    {subsection}
+    {Zielknotenerkennung}
+
+Die Tests der Zielknotenerkennung haben zwei Ziele:
+
+\begin{enumerate}
+    \item Parameter tunen.
+    \item Funktionalitaet testen.
+\end{enumerate}
+
+\textbf{Parameter tunen}
+
+Die Zielknotenerkennung hat zwei Parameter, deren Werte durch Tests getuned werden muessen:
+
+\begin{enumerate}
+    \item MIN\_MATCHES\_REQUIRED = 10: Wie viele Matches muss es geben?
+    \item MAX\_DISTANCE\_ALLOWED = 50: Wie ungenau duerfen die Matches maximal sein?
+    \item Distanz Messpunkte = 4:
+    \item Distanz der Distanz = 6:
+\end{enumerate}
+
+Die finalen Werte wurden mithilfe von diesen Testresultaten ermittelt:
+
+TODO TABLE
+
+\textbf{Funktionalitaet testen}
+
+Die Logik, um den richtigen Buchstaben zu erkennen beschraenkt sich nicht nur auf den \acrshort{orb} Algorithmus. Es wurde selber noch ein Algorighmus implementiert. Grundsaetzlich wird der Buchstabe, fuer den die meisten Matches gefunden wurden zurueckgeben, falls er die Parameter erfuellt. Jedoch ist es vor allem bei dem Buchstaben C so, dass es relativ wenige Messpunkte gibt, da der Buchstaben sehr simpel ist. Das heisst, wenn C erkannt werden soll, gibt es oft falsche Matches, mit mehr Messpunkten. Falls die Buchstaben mit den meisten und den zweitmeisten Messpunkten nur 5 Messpunkte auseinander liegen, werden die Distanzen der Messpunkte verglichen. Wenn der Buchstaben, der maximal 5 Messpunkte weniger hat, eine durchschnittliche Distanz von mehr als 5 hat, wird der Buchstaben zurueckgegeben, mit den wenigeren Messpunkten. Diese Logik wird in den Unittests getestet.
+
+TODO TABLE
+
+TODO BILD RESULTAT
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Unittests %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection*{Navigation automatisierte Unittests}\label{nav-unittests}
   \addcontentsline{toc}
     {subsection}
@@ -92,6 +129,119 @@ Es wurde untersucht, ob das Modell bessere Ergebnisse bringt, wenn die beiden Ba
 TODO ADD FOR EACH MODULE THAT WE HAVE, SHOW IMAGES WHERE WE USE IMAGES
 
 
+\newpage
+\subsubsection*{Object Detector}\label{object-detector-unittests}
+\addcontentsline{toc}
+{subsubsection}
+{Object Detector}
+
+Der Object Detector erhaelt Bilder und detektiert, welche Objekte sich darauf befinden mit dem YOLO Model. Dann wird ein Algorithmus angewandt, um sicherzustellen, dass nur das Objekt direkt vor dem Roboter beachtet wird, ausser hinter dem Hindernis befindet sich eine Pylone, dann soll die Pylone beachtet werden.
+Die Unittests des Object Detectors sollen nicht primaer das Modell testen, sondern den Algorithmus, der das relevante Objekt findet. Folgende Szenarien wurden getestet:
+
+\begin{enumerate}
+    \item Eine Barriere befindet sich vor dem Roboter, dahinter ein Knoten.
+    \item Nur ein Knoten befindet sich vor dem Roboter.
+    \item Nur eine Pylone befindet sich vor dem Roboter (auf dem naechsten Knoten).
+    \item Eine Barriere befindet sich vor dem Roboter, dahiner eine Pylone.
+    \item Eine Barriere befindet sich vor dem Roboter, dahinter ein Knoten. Ebenfalls ist auf dem Bild eine Barriere, die nicht direkt vor dem Roboter ist.
+    \item Ein Knoten befindet sich vor dem Roboter. Auf der Linie zu der Seite, befindet sich eine Barriere, die nicht vor dem Roboter ist.
+\end{enumerate}
+
+\textit{Die annotierten Bilder in der folgenden Tabelle \ref{table:object-det-test}, wurden von dem Object Detector selber annotiert in dem jeweiligen Testfall.}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}\textwidth{|c | X |X | X | X | c | }
+\hline
+  \textbf{Nr} & \textbf{Bild} & \textbf{Annotiertes Bild} &\textbf{Soll} & \textbf{Ist} & \textbf{Resultat} \\
+  
+  \hline
+
+        1&
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/barrier.jpg}
+\end{minipage}
+        &
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/barrier_annot.png}
+\end{minipage}        
+        &Barrier wird erkannt.&Barrier wird erkannt.& Erfüllt\\
+        \hline
+        2&
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/node.jpg}
+\end{minipage}
+        &
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/node_annot.png}
+\end{minipage}        
+        &Knoten wird erkannt.&Knoten wird erkannt.& Erfüllt\\
+        \hline
+
+        3&
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/pylon.jpg}
+\end{minipage}
+        &
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/pylon_annot.png}
+\end{minipage}        
+        &Pylone wird erkannt.&Pylone wird erkennt.& Erfüllt\\
+        \hline
+
+
+        4&
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/pylon_behind_obst.png}
+\end{minipage}
+        &
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/pylon_behind_obst_annot.png}
+\end{minipage}        
+        &Pylone wird erkennt.&Pylone wird erkennt.& Erfüllt\\
+        \hline
+
+         \end{tabularx}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}\textwidth{|c | X |X | X | X | c | }
+\hline
+  \textbf{Nr} & \textbf{Bild} & \textbf{Annotiertes Bild} &\textbf{Soll} & \textbf{Ist} & \textbf{Resultat} \\
+  \hline
+        5&
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/2_barriers_1_node.jpg}
+\end{minipage}
+        &
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/2_barriers_1_node_annot.png}
+\end{minipage}        
+        &Barrier erkannt.&Barrier erkannt.&Erfüllt \\
+        \hline
+        6&
+\begin{minipage}{.18\textwidth}
+\includegraphics[width=\linewidth]{assets/IT/testing/yolo/node-obst-on-the-side.jpg}
+\end{minipage}
+        &
+        TODO
+        &Knoten erkannt.&Knoten erkannt.& Erfüllt\\
+  \hline
+
+
+\end{tabularx}
+\caption{Object Detector Testprotokoll}
+\label{table:object-det-test}
+\end{table}
+
+Auf dem folgenden Bild TODO REF sind die Unittests ersichtlich, die alle erfolgreich waren.
+
+TODO IAMGE
 
 %%%%%%%%%%%%%%%%%%%%%%% protocol opencv calibration %%%%%%%%%%%%%%%%%%%%%%%%
 
