@@ -176,6 +176,15 @@ TODO LUKAS: insert image of raspberry pi hat assembled
     \label{fig:raspiheader-assembly}
 \end{figure}
 
+Die Software dieser Komponenten wurde direkt in Python auf dem Raspberry Pi umgesetzt. Nachfolgend in Abbildung \ref{fig:peripherie-classdiagramm} ist das Klassendiagramm ersichtlich. Wir haben eine RealPeripherieConnector, welcher von BaseConnector erbt, und die Hardwarefunktionen wie Buttons und Buzzer übernimmt. Damit der Programmcode auch stets auf dem PC ausführbar bleibt, haben wir den MockPeripherieConnector, welcher zum Einsatz kommt, wenn kein GPIO zur verfügung steht.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/IT/robot-sw-architecture-peripherie.png}
+    \caption{Raspberry Pi HAT}
+    \label{fig:peripherie-classdiagramm}
+\end{figure}
+
 \subsubsection{Peripherie Eingabe}
 \label{zieleingabe}
 
