@@ -23,11 +23,12 @@ Die Risiken sind in dieser Matrix auf Abbildung \ref{table:risk-table} ersichtli
 \label{table:risk-table}
 \end{table}
 
-Aus der Risikomatrix nach den Massnahmen geht hervor, dass die grössten Risiken, die beim Entwickeln des Roboters berücksichtigt werden müssen, die folgenden zwei sind:
+Aus der Risikomatrix nach den Massnahmen geht hervor, dass die grössten Risiken, die beim Entwickeln des Roboters berücksichtigt werden müssen, die folgenden drei sind:
 
 \begin{itemize}
-    \item Risiko 2: Knoten werden nicht erkannt
+    \item Risiko 2: Knoten werden nicht erkannt.
     \item Risiko 8: Hindernisse werden beim Anheben verschoben.
+    \item Risiko 12: Roboter wählt falschen Pfad.
 \end{itemize}
 
 Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.  Jedes Risiko hat in dieser Arbeit neu eine weitere Kolonne "Ref.". Diese zeigt auf, in welchem Kapitel beschrieben wird, wie das Risiko behoben oder noch weiter mitigiert wurde, falls dies möglich war.
@@ -39,7 +40,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.  Jede
 \hline
   \textbf{Nr} & \textbf{Beschreibung} & \textbf{Prävention} & \textbf{Mitigation} & \textbf{V.} & \textbf{N.} & \textbf{Ref.}\\
   \hline
-      1&Hindernisse werden nicht erkannt. &Mit vielen Bildern trainieren.& Distanzsensor erkennt Hindernisse, falls Bilderkennung nicht erkannt hat; Roboter fährt zurück, falls Distanzsensor erkennt.&20&6& \makecell{\ref{model-results}\\ \ref{ultraschall}} \\
+      1&Hindernisse werden nicht erkannt. &Mit vielen Bildern trainieren.& Distanzsensor erkennt Hindernisse, falls Bilderkennung nicht erkannt hat; Roboter fährt zurück, falls Distanzsensor erkennt.&20&4& \makecell{\ref{model-results}\\ \ref{ultraschall}} \\
   \hline
 2&Knoten werden nicht erkannt. &Viele Bilder in verschiedenen Situationen machen, um zu trainieren.&Linien werden erkannt und Roboter orientiert sich daran.&20& 6&\ref{model-results}\\
   \hline
@@ -60,7 +61,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.  Jede
   \hline
       10&Ungenaue Abfahrtssituation vom Knoten, Fahrzeug fährt von der Linie weg. &Liniensensor als Unterstützung, Kamera prüft Linie& Falls keine Linie mehr erkannt, rückwärts fahren und korrigieren.&20&5& \ref{outgoing-lines}\\
   \hline
-      11&Die Kamera liefert unscharfe oder verzerrte unbrauchbare Bilder. &Verwendung von Kameras mit hoher Auflösung.&Falls Bilder unscharf sind, Roboter anhalten und neue Bilder aufnehmen.&12&6&\ref{risks-sprint-1} \\
+      11&Die Kamera liefert unscharfe oder verzerrte unbrauchbare Bilder. &Verwendung von Kameras mit hoher Auflösung.&Falls Bilder unscharf sind, Roboter anhalten und neue Bilder aufnehmen.&12&3&\ref{risks-sprint-1} \\
   \hline
         12& Der Roboter wählt einen falschen Pfad, da Objekte nicht erkannt werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&15& 6&\makecell{\ref{model-results} \\ \ref{ultraschall}\\ \ref{interface-nav-control}}\\
   \hline
