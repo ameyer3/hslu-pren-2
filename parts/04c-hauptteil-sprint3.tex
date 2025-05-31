@@ -27,9 +27,59 @@ TODO ELIAS MORE INFO ABOUT WHERE/HOW ADDED
 Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wurde ein \gls{yolo} Model trainiert.
 Es wurden mehrere Models trainiert, die laufend miteinander verglichen wurden. Der Prozess wie das finale Model gewählt wurde, ist im Anhang in Kapitel \nameref{model-evaluation} zu finden.
 
-Das Model, das verwendet werden wird, deutet die Bilder in ihrere Originalform und hat ueber alle Klassen (Pylonen, Knoten, Hindernisse) gute Ergebnisse.
+Das Model, das verwendet werden wird, deutet die Bilder in ihrer Originalgrsse und hat über alle Klassen (Pylonen, Knoten, Hindernisse) gute Ergebnisse.
 
+Die folgenden Bilder zeigen einige Bilder, die das Model annotiert hat. Darauf ist zu sehen, wie genau es die einzelnen Objekte erkennen kann.
 
+\begin{figure}[H]
+  \centering
+    \begin{minipage}[b]{0.28\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/yolo/val_batch0_pred.jpg}
+    \caption{Bilderkennung I}
+    \label{fig:yolo-i}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.28\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/yolo/val_batch1_pred.jpg}
+    \caption{Bilderkennung II}
+    \label{fig:yolo-ii}
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.28\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/yolo/val_batch2_pred.jpg}
+    \caption{Bilderkennung III}
+    \label{fig:yolo-iii}
+  \end{minipage}
+\end{figure}
+
+Auf den folgenden Bildern sind die Metriken aufgezeigt. Diese sind ebenfalls im Anhang im Kapitel \nameref{model-evaluation} genauer erklaert. Was hier sichtbar ist, ist zum einen der F1 Wert. Dieser ist besser, je höher er ist. Er ist hier fuer alle Klassen sehr hoch, was auf eine hohe Genauigkeit in den Detekierungen deutet. Ebenfalls ist die Consuion Matrix erkenntlich, diese zeigt welche Objekte das Model wie oft falsch oder richtig gedeutet hat. Das Model hat jede Pylone erkannt, hat sich zwei Knoten eingebildet und zwei Knoten verpasst. Mit den Algorithmen, die in dem nachfolgenden Kapitel \ref{model-results} beschrieben sind, die die Modelperformance stuetzen, sind diese Resultate ausgezeichnet. Ebenfalls ist der Lernverlauf des Models ersichtlich. Alle Graphen zeigen das gewünschte Muster. Die 6 Graphen links, die den Verlust in der Leistung (falsche Deutungen) darstellen, sind exponentiell fallend. Das heisst, dass das Modell mit jeder Iteration mehr gelernt hat und nicht irgendwann gestoppt hat oder schlechter wurde. Die 4 Graphen auf der rechten Seite zeigen, wie viel das Model gelernt, diese steigen und flachen dann ab. Dies ist ebenfalls das Muster, das bei einem guten Model erwartet wird.\cite{model-performance}
+
+\begin{figure}[H]
+  \centering
+    \begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/yolo/F1_curve.png}
+    \caption{F1 Kurve}
+    \label{fig:f1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/yolo/confusion_matrix.png}
+    \caption{Confusion Matrix}
+    \label{fig:conf-matrix}
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/yolo/results.png}
+    \caption{Lernverlauf}
+    \label{fig:results-lernverlauf}
+  \end{minipage}
+\end{figure}
 
 \subsubsection{YOLOv11 Model konvertieren}
 \label{convert-yolo}

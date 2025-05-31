@@ -10,10 +10,16 @@ Die Anforderung 1.6 "Das Fahrzeug muss in der Lage sein das Hindernis mit  einer
 
 TO DO BILDer GREIFER EINFÜGEN angehoben und offen
 
-Das folgen der Linie erfolgt wie in PREN1 geplant mit einem Liniensensor der aus mehreren Phototransistoren besteht. Die Regelung der Motoren erfolgt mit Hilfe eines PD-Reglers. Der PD-Regler konnte auf dem Testpracour geprüft werden und ist in der Lage der Linie zu folgen. 
+Das folgen der Linie erfolgt wie in PREN1 geplant mit einem Liniensensor der aus mehreren Phototransistoren besteht. Die Regelung der Motoren erfolgt mit Hilfe eines PD-Reglers. Der PD-Regler konnte auf dem Testpracour geprüft werden und ist in der Lage der Linie zu folgen und auf einem Knoten anzuhalten. 
 
-Die Bilderkennung und der Wegfindungsalgorithmus  konnten mithilfe des Kameratestaufbaus aus PREN1 und einem leicht veränderten Code bereits vor Ort getestet werden. Gesperrte Knoten konnten bei unseren Testläufen mit einer XXXX\% Sicherheit erkennt werden. Der Algorithmus hat bei allen Testdurchläufen einen direkten Weg ans Ziel gefunden. 
+Die Bilderkennung und der Wegfindungsalgorithmus  konnten mithilfe des Kameratestaufbaus aus \acrshort{pren1} und einem leicht veränderten Code bereits vor Ort getestet werden. Gesperrte Knoten konnten bei unseren Testläufen mit einer 100\% Sicherheit erkennt werden, ebenso konnten die Barrieren in 100\% der Fälle erkannt werden. Dies bezieht sich auf die manuellen Testdurchläufe und das Trainingsresultat des Models. Auch die Erkennung der ausgehenden Kanten war immer erfolgreich. Der Algorithmus hat bei allen Testdurchläufen einen direkten Weg ans Ziel gefunden. 
 
- TODO HIER AUCH TESTS: AUFBAU, TRAVERSIERUNG ZEIT, Bild
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{assets/IT/yolo/confusion_matrix.png}
+\caption{Confusion Matrix Bilderkennung}
+\label{fig:conf-matrix-model}
+\end{figure}
+
 
 Die Konstruktionswerkstoffe konnten wie in PREN1 vorgesehen unter Berücksichtigung der im Kapitel Nachhaltigkeit aufgeführten Kriterien ausgewählt werden.
