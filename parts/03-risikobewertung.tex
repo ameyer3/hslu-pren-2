@@ -17,30 +17,30 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
 \hline
   \textbf{Nr} & \textbf{Beschreibung} & \textbf{Prävention} & \textbf{Mitigation} & \textbf{V.} & \textbf{N.} & \textbf{Ref.}\\
   \hline
-      1&Hindernisse werden nicht erkannt. &Mit vielen Bildern trainieren.& Distanzsensor erkennt Hindernisse, falls Bilderkennung nicht erkannt hat; Roboter fährt zurück, falls Distanzsensor erkennt.&20&5& \makecell{\ref{model-results}\\ \ref{ultraschall}} \\
+      1&Hindernisse werden nicht erkannt. &Mit vielen Bildern trainieren.& Distanzsensor erkennt Hindernisse, falls Bilderkennung nicht erkannt hat; Roboter fährt zurück, falls Distanzsensor erkennt.&20&6& \makecell{\ref{model-results}\\ \ref{ultraschall}} \\
   \hline
-2&Knoten werden nicht erkannt. &Viele Bilder in verschiedenen Situationen machen, um zu trainieren.&Linien werden erkannt und Roboter orientiert sich daran.&20& 12&\ref{model-results}\\
+2&Knoten werden nicht erkannt. &Viele Bilder in verschiedenen Situationen machen, um zu trainieren.&Linien werden erkannt und Roboter orientiert sich daran.&20& 6&\ref{model-results}\\
   \hline
-      3&4 Minuten reichen nicht. &Testdurchfläufe in realistischen Umgebungen.&&8&4 &\makecell{\ref{risks-sprint-2}\\ \ref{convert-yolo}}\\
+      3&4 Minuten reichen nicht. &Testdurchfläufe in realistischen Umgebungen.&&12&4 &\makecell{\ref{risks-sprint-2}\\ \ref{convert-yolo}}\\
   \hline
-      4& 1 Minute reicht nicht zum Aufbau.& Testdurchfläufe und einfaches Interface.&Zufälliges Ziel wird gewählt von SW, falls bei Start keines ausgewählt.&5&3 &\ref{zieleingabe}\\
+      4& 1 Minute reicht nicht zum Aufbau.& Testdurchfläufe und einfaches Interface.&Zufälliges Ziel wird gewählt von SW, falls bei Start keines ausgewählt.&15&3 &\ref{zieleingabe}\\
   \hline
-      5&Bodenfugen werden als Linie erkannt. & Testdurchfläufe in realistischen Umgebungen.&Kamera hilft Linien zu erkennen, hilft Roboter gerade zu stellen.&15&4& \ref{outgoing-lines}\\
+      5&Bodenfugen werden als Linie erkannt. & Testdurchfläufe in realistischen Umgebungen.&Kamera hilft Linien zu erkennen, hilft Roboter gerade zu stellen.&15&5& \ref{outgoing-lines}\\
   \hline
       6& Liniensensor fehlerhaft. &Sichere Implementation mit Tests.& Encoder Motoren.&8&3 &\\
   \hline
-      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&6& \makecell{\ref{model-results}\\ \ref{navigation-arch}}
+      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&4& \makecell{\ref{model-results}\\ \ref{navigation-arch}}
 \\
   \hline
       8&Hindernisse werden beim Anheben verschoben. &Robuste Greifmethode wählen und testen.&&12&8& \\
   \hline
       9&Überstrom bei blockierten Motoren. &Endschalter, Stromsensoren.&Abschalten bevor Bauteile beschädigt.&10&5& \\
   \hline
-      10&Ungenaue Abfahrtsituation vom Knoten, Fahrzeug fährt von der Linie weg. &Liniensensor als Unterstützung, Kamera prüft Linie& Falls keine Linie mehr erkannt, rückwärts fahren und korrigieren.&15&5& \ref{outgoing-lines}\\
+      10&Ungenaue Abfahrtssituation vom Knoten, Fahrzeug fährt von der Linie weg. &Liniensensor als Unterstützung, Kamera prüft Linie& Falls keine Linie mehr erkannt, rückwärts fahren und korrigieren.&20&5& \ref{outgoing-lines}\\
   \hline
       11&Die Kamera liefert unscharfe oder verzerrte unbrauchbare Bilder. &Verwendung von Kameras mit hoher Auflösung.&Falls Bilder unscharf sind, Roboter anhalten und neue Bilder aufnehmen.&12&6&\ref{risks-sprint-1} \\
   \hline
-        12& Der Roboter wählt einen falschen Pfad, da Objekte nicht erkannt werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&12& 6&\makecell{\ref{model-results} \\ \ref{ultraschall}\\ \ref{interface-nav-control}}\\
+        12& Der Roboter wählt einen falschen Pfad, da Objekte nicht erkannt werden. &Optimierung der Hinderniserkennung.& Falls Fehlzustand auftritt, kann Roboter zu vorherigen Knoten fahren und das vorher Gelernte zurücksetzen. Roboter ist schnell.&15& 6&\makecell{\ref{model-results} \\ \ref{ultraschall}\\ \ref{interface-nav-control}}\\
   \hline
 
 \end{tabularx}
@@ -57,27 +57,27 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   
   \hline
 
-        13&Ein Softwarefehler führt zu einem Absturz während der Laufzeit, wodurch der Roboter stoppt oder Fehlfunktionen aufweist. &Exception Handling und umfangreiche Tests unter verschiedenen Bedingungen.&Automatischer SW-Neustart, Wiederaufnahme des letzten bekannten Zustands.&15&4&\ref{risks-sprint-2} \\
+        13&Ein Softwarefehler führt zu einem Absturz während der Laufzeit, wodurch der Roboter stoppt oder Fehlfunktionen aufweist. &Exception Handling und umfangreiche Tests unter verschiedenen Bedingungen.&Automatischer SW-Neustart, Wiederaufnahme des letzten bekannten Zustands.&15&5&\ref{risks-sprint-2} \\
   \hline
-      14&Ein Software-Update führt zu neuen Fehlern oder ist nicht kompatibel mit der aktuellen Hardware. &Gründliche Tests vor dem Rollout eines Updates.& Durch SW-Versionierung hat man die Möglichkeit, schnell zur vorherigen stabilen Version zurückzukehren.&6&2&\ref{navigation-arch} \\
+      14&Ein Software-Update führt zu neuen Fehlern oder ist nicht kompatibel mit der aktuellen Hardware. &Gründliche Tests vor dem Rollout eines Updates.& Durch SW-Versionierung hat man die Möglichkeit, schnell zur vorherigen stabilen Version zurückzukehren.&9&1&\ref{navigation-arch} \\
   \hline
-      15&Akkustand ist zu niedrig bei Start des Laufes. & Anzeige des Akkustandes. Leicht austauschbarer Akku. Akku aufladen.&Ein zweiter Akku, der voll aufgeladen ist.&5& 1&\\
+      15&Akkustand ist zu niedrig bei Start des Laufes. & Anzeige des Akkustandes. Leicht austauschbarer Akku. Akku aufladen.&Ein zweiter Akku, der voll aufgeladen ist.&15& 1&\\
   \hline
       16&Personenausfall durch Krankheit oder Unfall. &&Stellvertretungen und virtuelle Kommunikation.&6& 3&-\\
   \hline
-      17&Datenkorruption. &&Regelmässige Backups. Alle Dokumente auf Teams erstellen. Dokumentation in LaTeX auf Overleaf. Durch Cronjob werden jeden Tag die .tex Files auf GitHub gepusht.&4& 1&-\\
+      17&Datenkorruption. &&Regelmässige Backups. Alle Dokumente auf Teams erstellen. Dokumentation in LaTeX auf Overleaf. Durch Cronjob werden jeden Tag die .tex Files auf GitHub gepusht.&10& 1&-\\
   \hline
   \multicolumn{7}{l}{Neue Risiken aus PREN 2} \\
   \hline
-  18&Akkuhalterung geht kaputt & Akku vorsichtig austauschen. & Mehrere Akkuhalterungen erstellen. & &&\ref{Fahrwerk konstruieren}\\
+  18&Akkuhalterung geht kaputt & Akku vorsichtig austauschen. & Mehrere Akkuhalterungen erstellen. &6 &2&\ref{Fahrwerk konstruieren}\\
   \hline
-  19&Elektroteile geht kaputt & Vorsichtig damit umgehen und nicht unnötig anfassen. & Mehrere Exemplare bereithalten. & &&\ref{pcb}\\
+  19&Elektroteile geht kaputt & Vorsichtig damit umgehen und nicht unnötig anfassen. & Mehrere Exemplare bereithalten. &12 &3&\ref{pcb}\\
   \hline
-    20&Robtoter weiss nicht mehr wo er sich befindet.& Robuste Bilderkennung und Wegfindungsmethode. & Trial \& Error Modus implementieren. &&&\ref{navigation-arch}\\
+    20&Robtoter weiss nicht mehr wo er sich befindet.& Robuste Bilderkennung und Wegfindungsmethode. & Trial \& Error Modus implementieren. &20&6&\ref{navigation-arch}\\
   \hline
-    21&Ausgehende Linien werden nicht erkannt. & Objekterkennung testen. & Aus anderer Distanz noch einmal versuchen und falls immer noch nicht erkannt, Knoten aus internem Graph entfernen. & &&\ref{outgoing-lines}\\
+    21&Ausgehende Linien werden nicht erkannt. & Objekterkennung testen. & Aus anderer Distanz noch einmal versuchen und falls immer noch nicht erkannt, Knoten aus internem Graph entfernen. & 10&4&\ref{outgoing-lines}\\
   \hline
-      22&gibt fälschlich an sei im Ziel oder erkennt Ziel nicht. & Robuste Methode, um Graph zu traversieren und sich zu merken, wo man ist. & Methode um Buchstaben auf Knoten zu erkennen implementieren. & &&\ref{detect-target}\\
+      22&Gibt fälschlich an sei im Ziel oder erkennt Ziel nicht. & Robuste Methode, um Graph zu traversieren und sich zu merken, wo man ist. & Methode um Buchstaben auf Knoten zu erkennen implementieren. & 15&3&\ref{detect-target}\\
   \hline
 
 \end{tabularx}
