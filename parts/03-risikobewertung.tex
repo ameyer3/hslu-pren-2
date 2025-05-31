@@ -1,14 +1,36 @@
 \section{Risikobewertung}
 
 
-Die Risiken des Projektes sind in \acrshort{pren1} gesammelt und bewertet worden. Pro Risiko wurden Massnahmen zur Prävention und zur Mitigation gesammelt. Die Bewertung wurde durchgeführt vor dem Umsetzen der Massnahmen (V.) und nachher (N.). Jedes Risiko hat in dieser Arbeit neu eine weitere Kolonne "Ref.". Diese zeigt auf, in welchem Kapitel beschrieben wird, wie das Risiko behoben oder noch weiter mitigiert wurde, falls dies möglich war.
+Die Risiken des Projektes sind in \acrshort{pren1} gesammelt und bewertet worden. Pro Risiko wurden Massnahmen zur Prävention und zur Mitigation gesammelt. Die Bewertung wurde durchgeführt vor dem Umsetzen der Massnahmen (V.) und nachher (N.).
 
-TODO: Riskomatrix von PREN1 + neue Risiken
+Die Risiken sind in dieser Matrix auf Abbildung \ref{table:risk-table} ersichtlich vor und nach den Massnahmen.
 
-% Aus der Risikomatrix nach den Massnahmen geht hervor, dass die grössten Risiken, die beim Entwickeln des Roboters berücksichtigt werden müssen, die folgenden drei sind:
+\begin{table}[H]
+\centering
+\begin{subtable}{0.49\textwidth}
+\centering
+\includegraphics[width=0.99\linewidth]{assets/projektmanagement/Risikoanalyse_vorher-crop.pdf}
+\caption{vor Massnahmen}
+\label{table:risk-before}
+\end{subtable}
+\begin{subtable}{0.49\textwidth}
+\centering
+\includegraphics[width=0.99\linewidth]{assets/projektmanagement/Risikoanalyse_nachher-crop.pdf}
+\caption{nach Massnahmen}
+\label{table:risk-after}
+\end{subtable}
+\caption{Risikoanalyse}
+\label{table:risk-table}
+\end{table}
 
+Aus der Risikomatrix nach den Massnahmen geht hervor, dass die grössten Risiken, die beim Entwickeln des Roboters berücksichtigt werden müssen, die folgenden zwei sind:
 
-Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
+\begin{itemize}
+    \item Risiko 2: Knoten werden nicht erkannt
+    \item Risiko 8: Hindernisse werden beim Anheben verschoben.
+\end{itemize}
+
+Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.  Jedes Risiko hat in dieser Arbeit neu eine weitere Kolonne "Ref.". Diese zeigt auf, in welchem Kapitel beschrieben wird, wie das Risiko behoben oder noch weiter mitigiert wurde, falls dies möglich war.
 
 \begin{table}[H]
 \centering
@@ -27,14 +49,14 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
       5&Bodenfugen werden als Linie erkannt. & Testdurchfläufe in realistischen Umgebungen.&Kamera hilft Linien zu erkennen, hilft Roboter gerade zu stellen.&15&5& \ref{outgoing-lines}\\
   \hline
-      6& Liniensensor fehlerhaft. &Sichere Implementation mit Tests.& Encoder Motoren.&8&3 &\\
+      6& Liniensensor fehlerhaft. &Sichere Implementation mit Tests.& Encoder Motoren.&8&3 &\ref{Liniensensor auslesen}\\
   \hline
       7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&4& \makecell{\ref{model-results}\\ \ref{navigation-arch}}
 \\
   \hline
       8&Hindernisse werden beim Anheben verschoben. &Robuste Greifmethode wählen und testen.&&12&8& \\
   \hline
-      9&Überstrom bei blockierten Motoren. &Endschalter, Stromsensoren.&Abschalten bevor Bauteile beschädigt.&10&5& \\
+      9&Überstrom bei blockierten Motoren. &Endschalter, Stromsensoren.&Abschalten bevor Bauteile beschädigt.&10&5& \ref{motoren-encoder} \\
   \hline
       10&Ungenaue Abfahrtssituation vom Knoten, Fahrzeug fährt von der Linie weg. &Liniensensor als Unterstützung, Kamera prüft Linie& Falls keine Linie mehr erkannt, rückwärts fahren und korrigieren.&20&5& \ref{outgoing-lines}\\
   \hline
@@ -73,7 +95,7 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.
   \hline
   19&Elektroteile geht kaputt & Vorsichtig damit umgehen und nicht unnötig anfassen. & Mehrere Exemplare bereithalten. &12 &3&\ref{pcb}\\
   \hline
-    20&Robtoter weiss nicht mehr wo er sich befindet.& Robuste Bilderkennung und Wegfindungsmethode. & Trial \& Error Modus implementieren. &20&6&\ref{navigation-arch}\\
+    20&Robtoter weiss nicht mehr wo er sich befindet.& Robuste Bilderkennung und Wegfindungsmethode. & Trial \& Error Modus implementieren. &20&4&\ref{navigation-arch}\\
   \hline
     21&Ausgehende Linien werden nicht erkannt. & Objekterkennung testen. & Aus anderer Distanz noch einmal versuchen und falls immer noch nicht erkannt, Knoten aus internem Graph entfernen. & 10&4&\ref{outgoing-lines}\\
   \hline

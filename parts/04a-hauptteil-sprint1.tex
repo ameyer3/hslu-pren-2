@@ -14,14 +14,6 @@ TODO: Komponentendiagramme mit Schnittstellen falls sinnvoll \\
 In diesem Kapitel wird der Roboter als Gesamtsystem beschrieben. Dabei wird das Funktionsmuster mit einem Ablaufdiagramm beschrieben und die einzelnen physischen und elektronischen Komponenten werden in einer Zeichnung, respektive einem Blockdiagramm aufgezeigt.
 
 
-Die folgende Grafik \ref{fig:ablauf} zeigt das geplante Funktionsmuster auf. Dieses Ablaufdiagramm stammt aus \acrshort{pren1} und dient zur Erinnerung, genauere Informationen koennen aus der angehaengten PREN 1 Dokumentation entnommen werden.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{assets/gesamtkonzept/ablaufdiagramm.png}
-\caption{Gesamtkonzept Ablaufdiagram}
-\label{fig:ablauf}
-\end{figure}
 
 Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgenden Komponenten auf Grafik \ref{fig:components} gebaut. Die Grafik ist zeigt lediglich das Konzept mit den nötigen Komponenten und nicht das tatsächliche Aussehen des Roboters.
 
@@ -32,7 +24,24 @@ Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgend
 \label{fig:components}
 \end{figure}
 
-Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlich auf Grafik \ref{fig:electro-components}. Dieses sorgt dafür, dass sich der Roboter wie geplant autonom fortbewegen kann.
+Es wurde folgender Roboter gebaut, der die geplanten Komponeneten enthaelt.
+TODO BILD ROBOTER
+
+Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dieses Ablaufdiagramm stammt aus \acrshort{pren1} und dient zur Erinnerung, genauere Informationen koennen aus der angehaengten PREN 1 Dokumentation entnommen werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{assets/gesamtkonzept/ablaufdiagramm.png}
+\caption{Gesamtkonzept Ablaufdiagram}
+\label{fig:ablauf}
+\end{figure}
+
+
+Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlich auf Grafik \ref{fig:electro-components}. Dieses sorgt dafür, dass sich der Roboter wie geplant autonom fortbewegen kann.  Die Graphik ist aufgeteilt in die Teile, die Teil der Navigation sind und diese, die Teil der Steuerung sind. 
+
+Das PCBA ist die zentrale Verbindung.  Der TinyK22 liest den Ultraschall, Liniensensor, die Encoder  und die Endschalter des Greifers aus und steuert den Servomotor und die Motorentreiben. Der Raspberry Pi und der TinyK22 kommunizieren ueber UART. Der Raspberry Pi steuert die Kamera an und liest den Startknopf und den Zielasuwahlknops an und zeigt auf dem Disaply das geawhlte Ziel und die Zeit an, die seit dem Start vergangen ist.
+
+TODO speerate graphic to have nav/steuerung
 
 \begin{figure}[H]
 \centering
@@ -139,7 +148,7 @@ Um Störungen durch Fremdlicht zu verhindern wurde eine Abdeckung konstruiert, d
 \end{figure}
 \newpage
 
-\subsubsection{Kamera Halterung}
+\subsubsection{Kamerahalterung}
 \label{Kamera Halter}
 
 Der Winkel und die Höhe der Kamera wurden in \acrshort{pren1} an dem Testaufbau in Abb.\ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt, dass er für die Bildverarbeitung ideal ist. 
@@ -221,7 +230,7 @@ TODO Leistunsberechnung/AKKU
 
 
 \subsubsection{Motoren ansteueren und auslesen}
-
+\label{motoren-encoder}
 TODO PIN belegung wechseln in pren2
 
 

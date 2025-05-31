@@ -5,19 +5,47 @@ Ebenfalls werden die gesammelten Erfahrungen bezüglich der Arbeiten und der Zus
 
 \subsection{Erfüllung der Anforderungen}
 
-TODO ->  kritische Wuerdigung der Arbeiten
+Der Roboter kann die Mehrheit der benoetigten Funktionen umsetzen:
+
+\begin{itemize}
+    \item Der Roboter kann eine bestimmte Distanz vorwaerts und rueckwaerts fahren.
+    \item Der Roboter kann einer Linie folgen.
+    \item Der Roboter kann anhalten, sobald er sich auf einem Knoten befindet.
+    \item Der Roboter greift das Hindernis, sobald er es am Endschalter spuert.
+    \item Der Roboter kann mit einem Ultraschall Objekte vor sich bemerken.
+    \item Der Roboter kann ein Bild machen von einem Knoten und die Winkel der ausgehenden Linien erkennen.
+    \item Der Roboter kann ein Bild machen zu einem Nachbarsknoten und erkennen, ob sich eine Pylone, eine Barriere oder nur ein Knoten dort befindet.
+    \item Der Roboter kann den schnellsten Weg zum Ziel finden.
+    \item Es kann ein Ziel ausgewaehlt werden.
+    \item Der Roboter kann mit einem Notstop ausgeschaltet werden.
+    \item Der Roboter kann erkennen, wenn er sich im Ziel befindet.
+    \item Der Roboter kann mit einem Buzzergeraeusch zeigen, dass er sich im Ziel befindet.
+\end{itemize}
+
+Der Roboter kann sich momentan noch nicht Drehen, da dabei sehr viele Probleme aufgetreten sind. Ohne diese Funktion, kann der Roboter keinen Graph traversieren. Jedoch wurde die Navigation getestet ohne ein Fahrwerk, der Kameraturm wurde an die Orte geschoben, die die Navigation sagte. Mit den Instruktionen der Navigation konnte der Graph erfolgreich traversiert werden. Auch die Mechanik konnte erfolgreich umgesetzt werden. Der Roboter faehrt stabil, der Greifmechanismus funktioniert und alle Komponenten unterstuetzen die Funktionen erfolgreich.
+
+Die nicht-funktionalen Anforderungen konnten ebenfalls erreicht werden: Die maximale Groesse wurde eingehalten und das Gewicht wurde klar unterschritten. Der Roboter ist robust gebaut und durch die Verwendung von \acrshort{pla} konnte nachhaltiger gearbeitet werden. Auch das Budget konnte eingehalten werden.
 
 \subsubsection{Ausblick}
 
-TODO: Offene Punkte, Risiken und Ausblick
+Die grosse Mehrheit der Funktionen konnte implementiert werden, jedoch muss zwingen noch daran gearbeitet werden, dass das Drehen funktioniert. Die naechsten Wochen werden dafuer verwendet, diese Funktion noch zu implementieren. Ebenfalls konnten die Funktionen der Steuerungen nie zusammen getestet werden. Falls es noch moeglich ist das Drehen zu implementieren, muss danach ebenfalls noch das ganze System getestet werden.
 
 \textbf{Risiken}
 
-Die folgenden Risiken bestehen noch fuer den Wettbewerb. TODO AUTFEILUNG: TO FIX, TO ACCEPT
+Die folgenden Risiken aus der Risikobewertung bestehen noch fuer den Wettbewerb. 
 
 \begin{itemize}
-    \item Risiko TODO
+    \item Risiko 2: Knoten werden nicht erkannt
+    \item Risiko 8: Hindernisse werden beim Anheben verschoben.
 \end{itemize}
+
+Jedoch sind die relevantesten Risiken, die es in den folgenden Wochen gilt zu beseitigen, dass die Zeit nicht mehr reicht, um das Drehen mit dem Gryoskop erfolgreich zu implementieren. Das Drehen ist eine essentielle Funktion, die momentan noch nicht funktioniert. Die Faehigkeit am Wettbewerb teilzunehmen, basiert komplett darauf, ob diese Funktion noch implementiert werden kann.
+
+Ebenfalls muss die Zeit noch reichen, den Vorgang zur Hindernisbeseitigung zu implementieren.
+
+Falls diese beiden Funktionen implementiert werden koennen, muessen ebenfalls die einzelnen Steuerungsfunktionen zusammengesetzt werden. Dabei werden wahrscheinlich weitere Probleme auftreten, die behoben werden muessen.
+
+Das groesste Risiko ist es, die fehlenden Funktionen zu implementieren und die Steueurng zusammenzusetzen in der begrenzten Zeit bis zum Wettbewerb.
 
 
 
@@ -25,6 +53,8 @@ Die folgenden Risiken bestehen noch fuer den Wettbewerb. TODO AUTFEILUNG: TO FIX
 
 Es konnten verschiedene Learnings aus Hindernissen, die angetroffen wurden, gezogen werden.
 
-Das Konzept aus \acrshort{pren1} dient als Basis fuer den Roboterbau. Es gab Momente, in denen festgestellt wurde, dass Teile des Konzeptes nicht so funktioneren, wie geplant. Dies passierte beispielsweise bei der Messung der Distanz zu dem naechsten Knoten. Die funktioniert technsich zwar, war aber zu riskant, da der Knoten selber nicht immer genau erkannt werden kan. Deshalb wurde das Konzept hier angepasst. Die Herausforderung dabei ist es, dass das neue Konzept in das Gesamtkonzept passen muss. Wir haben gelernt mit unerwarteten Problemen auf angemessene Art umzugehen.
+Das Konzept aus \acrshort{pren1} dient als Basis fuer den Roboterbau. Es gab Momente, in denen festgestellt wurde, dass Teile des Konzeptes nicht so funktioneren, wie geplant. Dies passierte beispielsweise bei der Messung der Distanz zu dem naechsten Knoten. Die funktioniert technsich zwar, war aber zu riskant, da der Knoten selber nicht immer genau erkannt werden kann. Deshalb wurde das Konzept hier angepasst. Die Herausforderung dabei ist es, dass das neue Konzept in das Gesamtkonzept passen muss. Wir haben gelernt mit unerwarteten Problemen auf angemessene Art umzugehen.
 
 Ein weiteres Hinterdnis war das parallele Arbeiten. Zu Beginn hatten wir mehrere Prototypen des Roboters, die einzelne Teilfunktionen ausfuehren konnten. Ab einem gewissen Punkt reichten nur die Teilfunktionene aber nicht mehr und es wurde ebenfalls Zeit, den Roboter zusammenzubauen. Ab diesem Moment wurde vieles schwieriger und es entstanden viele Abhaengigkeiten. Zum einen musste koordiniert werden, wer wann den Roboter haben kann und zum anderen, gab es sequentielle Abhaengigkeiten. Zum Beispiel muss der Roboter zuerst fahren koennen, bevor getestet werden kann, ob er durch das Wegenetzt fahren kann. Dadurch enstanden Wartezeiten.
+
+Ebenfalls haben wird gelernt, wie wichtig die Technologierecherche in \acrshort{pren1} war. In bestimmten Bereichen, haette es uns in \acrshort{pren2} geholfen, wenn dort mehr recherchiert worden waere. Auf diese Weise haetten wir mehr Moeglichkeiten gehabt uns neu zu orientierten, wenn bestimmte Komponenten nicht funktionert haben, wie es bei dem Drehen mit den Encoder Motoren der Fall war.
