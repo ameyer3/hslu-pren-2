@@ -2,10 +2,14 @@
 
 
 %Zielsetzung, Problemstellung
-Diese Dokumentation beschreibt die Umsetzung des in PREN 1 (referenzieren) entwickelten Konzepts eines autonomen Wegfindungsroboters im Rahmen des Moduls Produktentwicklung 2 (PREN 2) an der Hochschule Luzern. Ziel des Projekts war der Bau eines Roboters, der in der Lage ist, ein linienbasiertes Wegenetz zu durchqueren, Hindernisse zu erkennen und zu versetzen sowie einen zuvor definierten Zielknoten anhand von Bildverarbeitung zuverlässig zu identifizieren.
+Die vorliegende Dokumentation beschreibt die Umsetzung des in PREN 1 (referenzieren) entwickelten Konzepts eines autonomen Wegfindungsroboters im Rahmen des Moduls Produktentwicklung 2 (PREN 2) an der Hochschule Luzern. Ziel des Projekts bestand der Konstruktion eines Roboters, der in der Lage ist, ein linienbasiertes Wegenetz zu durchqueren, Hindernisse zu erkennen und zu versetzen sowie einen zuvor definierten Zielknoten anhand von Bildverarbeitung zuverlässig zu identifizieren.
 
 % Methoden
+In der Umsetzung wurden die einzelnen Systemkomponenten wie Fahrwerk, Steuerung, Bildverarbeitung, Objekterkennung und Greifmechanismus erfolgreich gebaut und einzeln getestet. Die Steuerung des Roboters erfolgt durch eine Kombination aus dem Mikrocontroller Tiny K22 für zeitkritische Steueraufgaben und einem Raspberry Pi für die Bildverarbeitung und Navigation. Während der Implementierung und dem Testen wurden erkannte Probleme durch iterative Anpassungen der Komponente minimiert.
 
 % Ergebnissse
 
+Trotz funktionierender Einzelkomponenten konnte das Gesamtsystem die komplette Aufgabe nicht erfolgreich abschliessen. Grund dafür waren technische Probleme mit der Encoder-Auswertung der DC-Motoren, die zu ungenauen Drehbewegungen führten. Trotz intensiver Fehlersuche konnte das Problem nicht behoben werden. Infolge dieser Ungenauigkeit war eine präzise Ausrichtung sowie die vollständige Navigation durch das Wegenetz nicht möglich.
+
 % Ausblick
+Obwohl das Gesamtsystem nicht funktionierte, bildete die Arbeit eine solide Grundlage für das Entwickeln von Prototypen in interdisziplinärer Arbeit. Die gesammelten Erfahrungen sind Wertvoll für zukünftige Projekte im akademischen Umfeld sowie in der Arbeitswelt.

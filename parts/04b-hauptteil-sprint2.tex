@@ -218,32 +218,18 @@ Das Umplatzieren eines Hindernisses erfolgt in mehreren Stufen. Damit das Hinder
 
 Die Barriere soll mit der Kamera erkannt werden, bevor der Roboter beginnt auf die Linie zu fahren. Der Raspberry Pi wird der Steuerung mitteilen, dass auf der nächsten Strecke eine Barriere zu erwarten ist.
 
-Falls die Kamera die Barriere nicht erkannt wird der Ultraschallsensor ein Objekt erkennen und der Navigation mitteilen, dass etwas im Weg steht. Die Navigation nutzt die Kamera, um die Umgebung vor dem Roboter zu erfassen. Wird dabei eine Barriere erkannt, wird der Wegstell-Prozess gestartet, um das Hindernis aus dem Weg zu räumen.
-
-\subsubsection{Wegstellbefehl}
-
-Falls der Roboter sich noch auf dem vorherigen Knoten befindet und die Kamera die Barriere erkannt hat, fährt er soweit, bis der Ultraschall die Barriere bemerkt. Falls die Kamera keinen Knoten erkennt, ist immer noch der Ultraschall, der man auf Hindernisse abfragt. So kann man auch ein Wegstell-Prozess starten.
-
-Dann dreht das Fahrzeug sich um und fährt rückwärts, bis der Endschalter am Greifer betätigt wird. Bei Betätigung wird das Fahrzeug gestoppt und der Greifer hebt das Hindernis an.
-Nach dem erfolgreichen Anheben des Objekts, dreht sich das Fahrzeug zurück in seine ursprüngliche Ausrichtung. Anschliessend erfolgt eine Nachkorrektur der Position, um das Objekt gezielt wieder abzusetzen.
-
-Damit das Hindernis möglichst präzise an der ursprünglichen Position abgelegt werden kann, muss das Fahrzeug seine eigene Position nachkorrigieren. Die dafür notwendigen Korrekturwerte sollten experimentell ermittelt werden. Startannahme ist 20cm, die nach vorne gefahren werden muss.
-
-Nach der Nachkorrektur stellt der Roboter das Hindernis wieder ab und fährt, bis der nächste Knoten erkannt wird.
-
-
-\newpage
-%%%%%%%%%%%%%%%%%Epic 6%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Auf Linie ausrichten}
+Falls die Kamera die Barriere nicht erkannt, aber trotzdem eine auf der Strecke ist, wird der Ultraschallsensor ein Objekt erkennen und der Navigation mitteilen, dass etwas im Weg steht. Die Navigation nutzt die Kamera, um herauszufinden, welches Objekt sich vor dem Roboter befindet. Wird dabei eine Barriere erkannt, wird der Wegstell-Prozess gestartet, um das Hindernis aus dem Weg zu räumen.
 
 \subsubsection{Roboter drehen}
+
+Der Roboter muss sich drehen können, um das Hindernis wegzustellen. Ebenfalls muss er sich drehen können, damit der Roboter sich ausrichten kann, um eine bestimmte Linie zu befahren. Die ist in dem folgenden Kapitel \ref{outgoing-lines} beschrieben.
 
 In \acrshort{pren1} wurde geplant, dass der Roboter sich mit den Encodern dreht. Dabei sind jedoch immer wieder Probleme aufgetreten. Die Untersuchung davon ist im Anhang zu finden im Kapitel \nameref{drehen-encoder}.
 
 Aus diesem Grund wurde entschieden ein Gyroskop zu verwenden.
- Ein Gyroskop reagiert auf Drehbewegungen, die durch die Corioliskraft verursacht wird. Die Corioliskraft bringt eine Masse ins Schwingen, so kann die Drehbewegung detektiert werden \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert, um die Messdaten  auszulesen. 
+ Ein Gyroskop reagiert auf Drehbewegungen, die durch die Corioliskraft verursacht wird. Die Corioliskraft bringt eine Masse ins Schwingen, so kann die Drehbewegung detektiert werden \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert, um die Messdaten auszulesen. 
 
-Die Tests dazu sind im Anhang in Kapitel \nameref{drehen-gyro} zu finden. Nachdem die ersten Tests erfolgreich waren, wurde das Gyroskop fest auf den Roboter angeschlossen und montiert, wie in Abb. \ref{fig:Gyroskop auf dem Roboter} unten links zu sehen ist. Danach wurden Tests durchgefuehrt, ob das Gyroskop noch immer richtig misst, wenn der Roboter mit den Raedern und dem Motor dreht. Dies war erfolgreich.
+Die Tests dazu sind im Anhang in Kapitel \nameref{drehen-gyro} zu finden. Nachdem die ersten Tests erfolgreich waren, wurde das Gyroskop fest auf den Roboter angeschlossen und montiert, wie in Abb. \ref{fig:Gyroskop auf dem Roboter} unten links zu sehen ist. Danach wurden Tests durchgeführt, ob das Gyroskop noch immer richtig misst, wenn der Roboter mit den Rädern und dem Motor dreht. Dies war erfolgreich.
 
 
 \begin{figure}[H]
@@ -253,7 +239,26 @@ Die Tests dazu sind im Anhang in Kapitel \nameref{drehen-gyro} zu finden. Nachde
 \label{fig:Gyroskop auf dem Roboter}
 \end{figure}
 
-Es kann ein Befehl an die Steuerung gegeben werden mit dem gewuenschten Grad, das der Roboter sich drehen soll. Der Roboter dreht sich so lange, bis das Gyroskop angibt, dass der Wert erreicht wurde, dann stoppt er.
+Es kann ein Befehl an die Steuerung gegeben werden mit dem gewünschten Winkel, in dem der Roboter sich drehen soll. Der Roboter dreht sich so lange, bis das Gyroskop misst, dass der Wert erreicht wurde, dann stoppt er.
+
+\subsubsection{Wegstellbefehl}
+
+Falls der Roboter sich noch auf dem vorherigen Knoten befindet und die Kamera die Barriere erkannt hat, fährt er soweit, bis der Ultraschall die Barriere bemerkt auf 10cm Abstand. 
+Falls die Kamera keine Barriere im Voraus erkennt und der Ultraschall ein Objekt, das als Barriere erkannt wird, erkennt, hält der Roboter ebenfalls 10cm zuvor.
+
+Dann dreht das Fahrzeug sich um und fährt rückwärts auf die Barriere zu, bis der Endschalter am Greifer betätigt wird. Bei Betätigung wird das Fahrzeug gestoppt und der Greifer hebt das Hindernis an.
+Nach dem erfolgreichen Anheben des Objekts, dreht sich das Fahrzeug zurück in seine ursprüngliche Ausrichtung. Anschliessend erfolgt eine Nachkorrektur der Position, um das Objekt wieder an derselben Position abzusetzen.
+
+Der Wert der Nachkorrektur wurde experimentell ermittelt
+
+Nach der Nachkorrektur stellt der Roboter das Hindernis wieder ab und fährt, bis der nächste Knoten erkannt wird.
+
+
+\newpage
+%%%%%%%%%%%%%%%%%Epic 6%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Auf Linie ausrichten}
+
+
 
 \subsubsection{Ausgehende Linien erkennen}
 \label{outgoing-lines}
