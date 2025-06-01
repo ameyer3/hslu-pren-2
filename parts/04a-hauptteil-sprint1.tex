@@ -24,24 +24,24 @@ Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgend
 \label{fig:components}
 \end{figure}
 
-Es wurde folgender Roboter gebaut, der die geplanten Komponeneten enthaelt.
+Es wurde folgender Roboter gebaut, der die geplanten Komponenten enthält.
 TODO BILD ROBOTER
 
-Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dieses Ablaufdiagramm stammt aus \acrshort{pren1} und dient zur Erinnerung, genauere Informationen koennen aus der angehaengten PREN 1 Dokumentation entnommen werden.
+Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dieses Ablaufdiagramm stammt aus \acrshort{pren1} und dient zur Erinnerung, genauere Informationen können aus der angehängten PREN 1 Dokumentation entnommen werden.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{assets/gesamtkonzept/ablaufdiagramm.png}
-\caption{Gesamtkonzept Ablaufdiagram}
+\caption{Gesamtkonzept Ablaufdiagramm}
 \label{fig:ablauf}
 \end{figure}
 
 
 Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlich auf Grafik \ref{fig:electro-components}. Dieses sorgt dafür, dass sich der Roboter wie geplant autonom fortbewegen kann.  Die Graphik ist aufgeteilt in die Teile, die Teil der Navigation sind und diese, die Teil der Steuerung sind. 
 
-Das PCBA ist die zentrale Verbindung.  Der TinyK22 liest den Ultraschall, Liniensensor, die Encoder  und die Endschalter des Greifers aus und steuert den Servomotor und die Motorentreiben. Der Raspberry Pi und der TinyK22 kommunizieren ueber UART. Der Raspberry Pi steuert die Kamera an und liest den Startknopf und den Zielasuwahlknops an und zeigt auf dem Disaply das geawhlte Ziel und die Zeit an, die seit dem Start vergangen ist.
+Das PCBA ist die zentrale Verbindung. Der TinyK22 liest den Ultraschall, Liniensensor, die Encoder und die Endschalter des Greifers aus und steuert den Servomotor und die Motorentreiber. Der Raspberry Pi und der TinyK22 kommunizieren über UART. Der Raspberry Pi steuert die Kamera an und liest den Startknopf und den Zielauswahlknopf an und zeigt auf dem Display das gewählte Ziel und die Zeit an, die seit dem Start vergangen ist.
 
-TODO speerate graphic to have nav/steuerung
+TODO separate graphics to have nav/steuerung
 
 \begin{figure}[H]
 \centering
@@ -61,7 +61,7 @@ Im nachfolgenden Kapitel wird auf die Konstruktion der mechanischen Komponenten 
 \label{Fahrwerk konstruieren}
 
  Das Konzept für das Fahrwerk und die Grundplatte wurden analog zum Konzept aus \acrshort{pren1} umgesetzt. Am Fahrwerk wurden gegenüber des Prototyps aus \acrshort{pren1} einzig der Motorflansch und der Lenkrollenhalter angepasst. 
- Beim Prototyp in PREN 1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus PLA nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt, wie gezeigt auf Abb.\ref{fig: Lenkrollenhalter V2} 
+ Beim Prototyp in PREN 1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus PLA nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt, wie gezeigt auf Abbildung \ref{fig: Lenkrollenhalter V2}.
 
 \begin{figure}[H]
 \centering
@@ -70,7 +70,7 @@ Im nachfolgenden Kapitel wird auf die Konstruktion der mechanischen Komponenten 
 \label{fig: Lenkrollenhalter V2}
 \end{figure}
 
-Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In  Abb. \ref{fig: Motorflansch V1/V2} sieht man in gelb die erste Version des Motorflansches wie er in PREN 1 verbaut wurde. Blau eingefärbt ist die finale Version des Flansches mit einer Verstrebung. 
+Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In Abbildung \ref{fig: Motorflansch V1/V2} sieht man in gelb die erste Version des Motorflansches wie er in PREN 1 verbaut wurde. Blau eingefärbt ist die finale Version des Flansches mit einer Verstrebung. 
 
 \begin{figure}[H]
 \centering
@@ -79,7 +79,7 @@ Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In  Abb. \ref
 \label{fig: Motorflansch V1/V2}
 \end{figure}
 
-Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder Rasberry Pi werden nicht direkt auf die Grundplatte montiert, sondern auf Träger, welche anschliessend auf die Grundplatte geschraubt werden. Die Träger wurden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. (siehe Abb.\ref{fig: Träger für elektronische Komponenten}) Dieser Aufbau hatte in der frühen Testphase den Vorteil, dass alle elektronischen Komponenten provisorisch platziert werden konnten, ohne einen Kurzschluss zu riskieren. 
+Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder Raspberry Pi werden nicht direkt auf die Grundplatte montiert, sondern auf Träger, welche anschliessend auf die Grundplatte geschraubt werden. Die Träger wurden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. (siehe Abbildung \ref{fig: Träger für elektronische Komponenten}) Dieser Aufbau hatte in der frühen Testphase den Vorteil, dass alle elektronischen Komponenten provisorisch platziert werden konnten, ohne einen Kurzschluss zu riskieren. 
 
 \begin{figure}[H]
 \centering
@@ -88,7 +88,7 @@ Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder Rasberry P
 \label{fig: Träger für elektronische Komponenten}
 \end{figure}
 
-Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung jederzeit entfernen lässt. Dafür wurde ein Click-Verschluss verwendet. Das Batteriefach wird von unten in die Grundplatte geschoben bis es einrastet. Zum Herausnehmen der Batterie müssen nur die Haken gedrückt werden und das Batteriefach kann ausgefahren werden. Um die Funktion problemlos zu gewährleisten dürfen die Wandstärken nicht zu gross sein. Das die Festigkeit trotzdem gewährleistet werden kann wurde die Layerrichtung im 3D Drucker, wie in Abb. \ref{Layerrichtung Batteriefach} so gewählt das die Layer horizontal zur Verschiebung der Hacken angeordnet sind. 
+Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung jederzeit entfernen lässt. Dafür wurde ein Klick-Verschluss verwendet. Das Batteriefach wird von unten in die Grundplatte geschoben bis es einrastet. Zum Herausnehmen der Batterie müssen nur die Haken gedrückt werden und das Batteriefach kann ausgefahren werden. Um die Funktion problemlos zu gewährleisten dürfen die Wandstärken nicht zu gross sein. Das die Festigkeit trotzdem gewährleistet werden kann wurde die Layerrichtung im 3D Drucker, wie in Abbildung \ref{Layerrichtung Batteriefach} so gewählt das die Layer horizontal zur Verschiebung der Hacken angeordnet sind. 
 
 
 \begin{figure}[H]
@@ -101,7 +101,7 @@ Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung je
 \subsubsection{Greifer konstruieren}
 \label{Greifer konstruieren}
 
-Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft und den Lagerstellen. Bei der Implementierung des Greifers musste darauf geachtet werden, dass die Lagerstellen nicht verschoben werden. In Abb \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man die für die Funktion wichtigsten Masse am Versuchsaufbau und am fertigen Roboter. Die für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
+Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft und den Lagerstellen. Bei der Implementierung des Greifers musste darauf geachtet werden, dass die Lagerstellen nicht verschoben werden. In Abbildung \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man die für die Funktion wichtigsten Masse am Versuchsaufbau und am fertigen Roboter. Die für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
 
 \begin{figure}[H]
   \centering
@@ -125,7 +125,7 @@ Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft un
 \subsubsection{Halterung Liniensensor}
 \label{Halterung Liniensensor}
 
-Der Liniensensor wird mit einer zweiteiligen Halterung befestigt. Auf der inneren Schale, in Abb. \ref{fig:Schnitt Halterung Liniensensor} blau, ist der Sensor befestigt. Die innere Schale lässt sich verschieben. So kann die Höhe eingestellt werden. Die Fixierung erfolgt mithilfe von zwei Gewindestiften die in der äusseren Schale befestigt werden und die innere Schale klemmen. 
+Der Liniensensor wird mit einer zweiteiligen Halterung befestigt. Auf der inneren Schale, in Abbildung \ref{fig:Schnitt Halterung Liniensensor} blau, ist der Sensor befestigt. Die innere Schale lässt sich verschieben. So kann die Höhe eingestellt werden. Die Fixierung erfolgt mithilfe von zwei Gewindestiften die in der äusseren Schale befestigt werden und die innere Schale klemmen. 
 
 
 \begin{figure}[H]
@@ -139,7 +139,7 @@ Der Liniensensor wird mit einer zweiteiligen Halterung befestigt. Auf der innere
 \subsubsection{Abschirmung des Liniensensors}
 \label{Abschirmung des Liniensensors}
 
-Um Störungen durch Fremdlicht zu verhindern wurde eine Abdeckung konstruiert, die jegliche Fremdeinstrahlung abschirmt. Als Dichtung wurde ein Bürstenband verwendet, wie es üblicherweise bei Schiebetüren zum Einsatz kommt. Die Bürsten werden in der Halterung eingesteckt und mit einem Geweindestift geklemmt. 
+Um Störungen durch Fremdlicht zu verhindern wurde eine Abdeckung konstruiert, die jegliche Fremdeinstrahlung abschirmt. Als Dichtung wurde ein Bürstenband verwendet, wie es üblicherweise bei Schiebetüren zum Einsatz kommt. Die Bürsten werden in der Halterung eingesteckt und mit einem Gewindestift geklemmt. 
 
 
 \begin{figure}
@@ -165,7 +165,7 @@ Der Ultraschall wurde getestet, indem die Barriere auf einem Massstab verschoben
 \subsubsection{Kamerahalterung}
 \label{Kamera Halter}
 
-Der Winkel und die Höhe der Kamera wurden in \acrshort{pren1} an dem Testaufbau in Abb.\ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt, dass er für die Bildverarbeitung ideal ist. 
+Der Winkel und die Höhe der Kamera wurden in \acrshort{pren1} an dem Testaufbau in Abbildung \ref{fig:Testaufbau zum Festlegen des Kamerawinkels} getestet. Am Testaufbau konnte der Winkel zwischen der Kamera und der Vertikalen mit Hilfe einer Schraube verstellt werden. Der Winkel wurde so gewählt, dass er für die Bildverarbeitung ideal ist. 
 
 \begin{figure}[H]
 \centering
@@ -190,8 +190,7 @@ Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winke
 \subsubsection{Print Circuit Board Design}
 \label{pcb}
 
-Um eine zuverlässige Kontaktierung der einzelnen Komponenten sicherzustellen, wird im Rah-
-men von \acrshort{pren2} ein Verbindungs-PCB, ersichtlich auf Grafik \ref{fig: Verteiler PCB}, entwickelt. Dieses \acrshort{pcb} übernimmt das Management der
+Um eine zuverlässige Kontaktierung der einzelnen Komponenten sicherzustellen, wird im Rahmen von \acrshort{pren2} ein Verbindungs-PCB, ersichtlich auf Abbildung \ref{fig: Verteiler PCB}, entwickelt. Dieses \acrshort{pcb} übernimmt das Management der
 Spannungsversorgung für den Raspberry Pi und den \gls{tinyk22}. Zudem werden sämtliche Signale,
 die vom \gls{tinyk22} erfasst und verarbeitet werden sollen, entsprechend verbunden.
 
@@ -214,7 +213,7 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} m
 
 \subsubsection{Software Grundlage}
 
-Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamentals. Dieses Projekt beinhaltet ein gutes Grundgerüst. Man hat diverse Codeabschnitte abgeändert, entfernt oder neu hinzugefügt. Als Entwicklungsumgebung wurde MCUXpresso verwendet. Anhand der Pinout Belegungen Abb. \ref{fig:Pinout TinyK22} und Abb. \ref{fig:Pinout Raspy Hat} konnte man diese in der Software initialisieren.
+Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamentals. Dieses Projekt beinhaltet ein gutes Grundgerüst. Man hat diverse Codeabschnitte abgeändert, entfernt oder hinzugefügt. Als Entwicklungsumgebung wurde MCUXpresso verwendet. Anhand der Pinout Belegungen Abbildung \ref{fig:Pinout TinyK22} \& \ref{fig:Pinout Raspy Hat} konnte man diese in der Software initialisieren.
 
 
 
@@ -230,7 +229,7 @@ Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamen
 \begin{minipage}[b]{0.45\textwidth}
   \centering
   \includegraphics[width=\textwidth]{assets/ET/Software/RaspyHat_Pinout.png}
-  \caption{Pinout Raspy Hat}
+  \caption{Pinout Raspberry Pi}
   \label{fig:Pinout Raspy Hat}
 \end{minipage}
 \end{figure}
