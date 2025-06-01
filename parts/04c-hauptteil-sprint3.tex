@@ -17,7 +17,9 @@ Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz
 
 QUESTION: TODO IVAN MORE INFO ABOUT HOW TO READ 
 
-TODO ELIAS MORE INFO ABOUT WHERE/HOW ADDED 
+TODO ELIAS MORE INFO ABOUT WHERE/HOW ADDED
+
+denke eher ref uf erste ultraschall
 
 
 
@@ -83,7 +85,7 @@ Auf den folgenden Bildern sind die Metriken aufgezeigt. Diese sind ebenfalls im 
 \subsubsection{YOLOv11 Model konvertieren}
 \label{convert-yolo}
 
-Es gibt Methoden, um die .pt Datei, die beim Trainieren von YOLO erstellt wird, zu transformieren in ein anderes Format, damit auf Embedded Systems und somit auch auf Raspberry Pi's schneller die Bilderkennung durchgeführt werden kann.
+Es gibt Methoden, um die .pt Datei, die das Model enthaelt und verwendet wird, um Objekte zu erkennen, zu transformieren in ein anderes Format, damit auf Embedded Systems und somit auch auf Raspberry Pi's die Bilderkennung schneller durchgeführt werden kann.
 
 Drei Möglichkeiten wurden betrachtet und verglichen:
 TODO add sources for each \& akronyum
@@ -99,12 +101,12 @@ Es wird NCNN gewählt, da dies perfekt für den Use Case mit einem Raspberry Pi 
 yolo export model=best.pt format=ncnn
 \end{verbatim}
 
-Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File. Mit der Transformation wurde das Risiko 3: 4 Minuten reichen nicht für einen Durchgang, weiter gemindert. Auf dem Raspberry Pi, kann die Bilderkennung pro Bild konstant unter einer Sekunde gehalten werden.
+Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File: Die Ultralytics Library erwartet den Pfad zu der Datei, respektive dem Ordner und baut daraus das YOLO Model, das verwendet werden kann in Python. Mit der Transformation wurde das Risiko 3: 4 Minuten reichen nicht für einen Durchgang, weiter gemindert. Auf dem Raspberry Pi, kann die Bilderkennung pro Bild konstant unter einer Sekunde gehalten werden.
 
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
 
-Um die Modelresultate auszuwerten wurde das Model in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt, gezigt im Klassendiagramm \ref{fig:nav-object-detector}.
+Um die Modelresultate auszuwerten wurde das Model in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt, gezeigt im Klassendiagramm \ref{fig:nav-object-detector}.
 
  \begin{figure}[H]
 \centering
@@ -134,6 +136,38 @@ In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
     \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein Objekt verpasst wurde. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Durch den Ultraschall werden Risiko 12 und 1 (Objekte werden nicht erkannt) mitigiert.
 \end{itemize}
 
+Die folgenden Abbildungen veranschaulichen das Prinzip. Diese Bilder haben die einzelnen Objekte, die das Model erkannt hat mit Boxen annotiert. Die Bildunterschrift zeigt, welche Objekte zurueckgegeben werden basierend auf dem Algorithmus, der zuvor erklaert wurde. Wenn es keine Box annotiert haette, wuerde ebenfalls ein Knoten zurueckgegeben werden.
+
+\begin{figure}[H]
+  \centering
+    \begin{minipage}[b]{0.23\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/testing/yolo/node-obst-on-the-side_annot.png}
+    \caption{Returned Knoten}
+    \label{fig:expl-algo-1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.23\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/testing/yolo/node_annot.png}
+    \caption{Returned Knoten}
+    \label{fig:expl-algo-2}
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.23\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/testing/yolo/barrier_annot.png}
+    \caption{Returned Barriere}
+    \label{fig:expl-algo-3}
+  \end{minipage}
+      \hfill
+  \begin{minipage}[b]{0.23\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/IT/testing/yolo/pylon_behind_obst_annot.png}
+    \caption{Returned Pylone}
+    \label{fig:expl-algo-4}
+  \end{minipage}
+\end{figure}
 
 Wie auf die einzelnen Objekte reagiert wird, ist in folgender Aufzählung beschrieben und ist gleich, wie in \acrshort{pren1} geplant.
 
