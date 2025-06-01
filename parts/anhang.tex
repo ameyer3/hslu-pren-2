@@ -459,6 +459,14 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 \includepdf[pages=-]{assets/IT/testing/testprotocol_static_node_edge_detection.pdf}
 
 
+%%%%%%%%%%%%%%%%%%%%%%% testprocotol static node and edge detection %%%%%%%%%%%%%%%%%%%%%%%%
+
+\addcontentsline{toc}
+{subsection}
+{Testprotokoll Statische Traversierung}
+
+\includepdf[pages=-]{assets/IT/testing/testprotocol_static_traversal.pdf}
+
 %%%%%%%%%%%%%%%%%%%%%%% testprocotol Fahrregelung mit Liniensensoren %%%%%%%%%%%%%%%%%%%%%%%%
 
 \addcontentsline{toc}
@@ -477,7 +485,9 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
     {subsection}
     {Untersuchung Drehen mit Encodern}
 
-Die Hardware sowie der zugehörige Code wurde auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
+Es gab Probleme mit dem Drehen. Der Winkel, der gedreht werden sollte, wurde sehr ungenau umgesetzt und es konnte kein Regelmässigkeit darin erkannt werden.
+
+Die Hardware, sowie der zugehörige Code wurde auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
 
 Anschliessend wurde ein Encoder mithilfe eines Frequenzgenerators simuliert, um das Zähleverhalten des implementierten Codes zu überprüfen. Die Taktfrequenz wurde auf 500 Hz eingestellt. Kanal 2 wurde mit einer Phasenverschiebung von 90\textdegree \ nacheilend konfiguriert. Unter diesen Bedingungen sollte der implementierte Zähler eine Inkrementierung vornehmen.
 
@@ -501,9 +511,7 @@ Das Taktsignal wurde für eine Dauer von 2 Sekunden angelegt, was direkt am Freq
 
 Wie aus Tabelle \ref{tab:taktergebnisse_de} ersichtlich ist, weichen die aufgezeichneten Werte um bis zu 41\% vom erwarteten Sollwert ab. Diese Abweichung ist zu gross, um eine präzise Regelung darauf aufzubauen.
 
-Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
-
-Diese genaueren Tests erfolgten erst, nachdem entschieden wurde das man mit diesen Motoren/Encodern weiter arbeitet. In den ersten Tests zweifelte man immer den eigenen Leistungen und nicht einer schlechten Hardware, darum wurde in die Encoder zu viel Zeit reingesteckt die sich nicht ausbezahlt hat.
+Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder, wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
 
 \begin{table}[H]
 \centering
@@ -521,7 +529,8 @@ Diese genaueren Tests erfolgten erst, nachdem entschieden wurde das man mit dies
 \end{tabular}
 \end{table}
 
-Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}).
+Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}). Dies ist zu viel. Die Encoder können nicht verwendet werden um sich genau zu drehen.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% drehehn gyro %%%%%%%%%%%%%%%5
 
@@ -532,3 +541,31 @@ Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern
     {Tests Drehen mit Gyroskop}
 
 TODO
+
+%%%%%%%%%%%%%%%%%%%%%% nachkorrektur wert hindernis %%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection*{Hindernis umplatzieren - Nachkorrekturwert}\label{hindernis-nachkorrektur}
+  \addcontentsline{toc}
+    {subsection}
+    {Hindernis umplatzieren - Nachkorrekturwert}
+
+Damit der Nachkorrekturwert, der gefahren werden muss, damit das Hindernis am selben Ort abgestellt werden kann, ermittelt werden kann, werden 10 Testdurchläufe durchgeführt. Dabei wird wiederholt der Roboter das Hindernis aufheben, sich 180\textdegree \ drehen und dann dort wo er ist, das Hindernis wieder hinstellten. Dies jeweiligen Abstellorte wurden mit Postit Zetteln markiert. Die Mitte von jedem Postit korrespondeirt mit der Mitte der Barriere. Auch der ursprüngliche Ort der Barriere wird markiert. Die Distanzen zwischen dem Abstellort und dem ursprüngliche Ort der Barriere wird gemessen. 
+
+Ein blaues Postit, das den Abstellort markiert, ist 12mm breit. Die Distanz von dem Rand des blauen Postit, das sich am weitesten weg von der Barriere befindet, zu der Mitte der Barriere beträgt 153 mm.
+
+TODO BILDER
+
+Die Werte aus, die auf dem Bild abgelesen werden können sind hier aufgelistet.
+
+\begin{itemize}
+    \item 153mm - 6mm = 147mm
+    \item 153mm - 13mm = 140mm (2x)
+    \item 153mm - 22mm = 131mm(3x)
+    \item 153mm - 50mm = 103mm (2x)
+    \item 153mm - 56mm = 97mm 
+    \item 153mm - 76mm = 77mm
+\end{itemize}
+
+Der Durchschnitt dieser Werte beträgt 120mm. Der Nachkorrekturwert wird auf 120mm gesetzt.
+
+
