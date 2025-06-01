@@ -218,7 +218,7 @@ Das Umplatzieren eines Hindernisses erfolgt in mehreren Stufen. Damit das Hinder
 
 Die Barriere soll mit der Kamera erkannt werden, bevor der Roboter beginnt auf die Linie zu fahren. Der Raspberry Pi wird der Steuerung mitteilen, dass auf der nächsten Strecke eine Barriere zu erwarten ist.
 
-Falls die Kamera die Barriere nicht erkannt wird der Ultraschallsensor ein Objekt erkennen und der Navigaiton mitteilen, dass etwas im Weg steht. Die Navigation nutzt die Kamera, um die Umgebung vor dem Roboter zu erfassen. Wird dabei eine Barriere erkannt, wird der Wegstell-Prozess gestartet, um das Hindernis aus dem Weg zu räumen.
+Falls die Kamera die Barriere nicht erkannt wird der Ultraschallsensor ein Objekt erkennen und der Navigation mitteilen, dass etwas im Weg steht. Die Navigation nutzt die Kamera, um die Umgebung vor dem Roboter zu erfassen. Wird dabei eine Barriere erkannt, wird der Wegstell-Prozess gestartet, um das Hindernis aus dem Weg zu räumen.
 
 \subsubsection{Wegstellbefehl}
 
@@ -238,75 +238,12 @@ Nach der Nachkorrektur stellt der Roboter das Hindernis wieder ab und fährt, bi
 
 \subsubsection{Roboter drehen}
 
-Bei den Drehversuchen konnte kein Winkel kleiner als 90\textdegree \ realisiert werden. Die Ursache wurde zunächst in der Softwareimplementierung vermutet, woraufhin gezielt nach möglichen Fehlerquellen gesucht wurde. Es wurde erheblicher Aufwand in die Entwicklung und den Vergleich verschiedener Auslesealgorithmen sowie in die Fehlersuche im bestehenden Code investiert. Trotz dieser Maßnahmen konnte jedoch keine signifikante Verbesserung erzielt werden.
+In \acrshort{pren1} wurde geplant, dass der Roboter sich mit den Encodern dreht. Dabei sind jedoch immer wieder Probleme aufgetreten. Die Untersuchung davon ist im Anhang zu finden im Kapitel \nameref{drehen-encoder}.
 
-TODO: Folgender Text mit Tabellen ist eigentlich der Testbericht. (Anpassen?)
+Aus diesem Grund wurde entschieden ein Gyroskop zu verwenden.
+ Ein Gyroskop reagiert auf Drehbewegungen, die durch die Corioliskraft verursacht wird. Die Corioliskraft bringt eine Masse ins Schwingen, so kann die Drehbewegung detektiert werden \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert, um die Messdaten  auszulesen. 
 
-Die Hardware sowie der zugehörige Code wurde auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
-
-Anschliessend wurde ein Encoder mithilfe eines Frequenzgenerators simuliert, um das Zähleverhalten des implementierten Codes zu überprüfen. Die Taktfrequenz wurde auf 500 Hz eingestellt. Kanal 2 wurde mit einer Phasenverschiebung von 90\textdegree \ nacheilend konfiguriert. Unter diesen Bedingungen sollte der implementierte Zähler eine Inkrementierung vornehmen.
-
-Das Taktsignal wurde für eine Dauer von 2 Sekunden angelegt, was direkt am Frequenzgenerator eingestellt wurde. Der erwartete Endwert des Zählers lag entsprechend bei etwa 1000.
-
-\begin{table}[H]
-\centering
-\caption{Ergebnisse der aufgezeichneten Taktimpulse Decoder}
-\label{tab:taktergebnisse_de}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
-\hline
-1 & 723 \\
-2 & 1397 \\
-3 & 1412 \\
-4 & 655 \\
-\hline
-\end{tabular}
-\end{table}
-
-Wie aus Tabelle \ref{tab:taktergebnisse_de} ersichtlich ist, weichen die aufgezeichneten Werte um bis zu 41\% vom erwarteten Sollwert ab. Diese Abweichung ist zu gross, um eine präzise Regelung darauf aufzubauen.
-
-Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
-
-Diese genaueren Tests erfolgten erst, nachdem entschieden wurde das man mit diesen Motoren/Encodern weiter arbeitet. In den ersten Tests zweifelte man immer den eigenen Leistungen und nicht einer schlechten Hardware, darum wurde in die Encoder zu viel Zeit reingesteckt die sich nicht ausbezahlt hat.
-
-\begin{table}[H]
-\centering
-\caption{Ergebnisse der aufgezeichneten Taktimpulse Input Capture}
-\label{tab:taktergebnisse_im}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
-\hline
-1 & 902 \\
-2 & 1252 \\
-3 & 842 \\
-4 & 876 \\
-\hline
-\end{tabular}
-\end{table}
-
-Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}).
-
-\textbf{Endgültige Situation mit Encodern}
-
-Aufgrund der hohen Fehlerrate beim Auslesen sowie der Vielzahl an Problemen mit den Encodern wurde entschieden, die Drehung ausschliesslich mithilfe der Liniensensoren oder mit einer anderen Lösung durchzuführen.
-
-
-
-\subsubsection{Gyroskop statt Encoder}
-
-Da mit den geplanten Encodern nicht wie gewollt weiter gekommen ist, musste kurz vor Schluss nach einer Alternative gesucht werden. Man entschied sich ein Gyroskop zu verwenden. Ein Gyroskop reagiert auf Drehbewegungen, die durch die Corioliskraft verursacht wird. Die Corioliskraft bringt eine Masse ins Schwingen, so kann die Drehbewegung detektiert werden \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert um die Messdaten zu erlangen. Um die Implementation zu testen, wurde mithilfe eines Logic Analyzers das erste Byte vom Master zum Slave aufgezeichnet. Somit konnte man die Korrektheit der Adresse feststellen \ref{fig:Gyroskop}. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{assets/ET/Gyroskop/Gyroskop.png}
-\caption{Aufgezeichnetes Byte}
-\label{fig:Gyroskop}
-\end{figure}
-
-
-Nach dem man sichergestellt hat das der Master (\gls{tinyk22}) die richtige Adresse anspricht, konnte der Gyrosensor ausgelesen werden. Für den Test wurde er bereits fest auf den Roboter angeschlossen und montiert, wie in Abb. \ref{fig:Gyroskop auf dem Roboter} unten links zu sehen ist. Es sind jeweils 2 Bytes pro Achse, die die Drehgeschwindigkeit angeben. Jedoch musste feststellt werden, dass sich diese Werte zu sehr unterscheiden und nicht zu einen exakten Winkel berechnen lassen. Die Werte liessen sich schon durch leichte Vibration stark verändern.  Infolge dieser Ungenauigkeit konnte auch mit diesem Bauteil nicht weiter gearbeitet werden.
+Die Tests dazu sind im Anhang in Kapitel \nameref{drehen-gyro} zu finden. Nachdem die ersten Tests erfolgreich waren, wurde das Gyroskop fest auf den Roboter angeschlossen und montiert, wie in Abb. \ref{fig:Gyroskop auf dem Roboter} unten links zu sehen ist. Danach wurden Tests durchgefuehrt, ob das Gyroskop noch immer richtig misst, wenn der Roboter mit den Raedern und dem Motor dreht. Dies war erfolgreich.
 
 
 \begin{figure}[H]
@@ -316,12 +253,7 @@ Nach dem man sichergestellt hat das der Master (\gls{tinyk22}) die richtige Adre
 \label{fig:Gyroskop auf dem Roboter}
 \end{figure}
 
-
-Aufgrund von Problemen mit den beiden Encodern wird das Drehen des Roboters nicht wie ursprünglich geplant umgesetzt. Die gelieferten Encodertickwerte sind instabil bzw. fehlerhaft und daher nicht für eine zuverlässige Berechnung des Drehwinkels geeignet. 
-
-Momentan wird daran gearbeitet ein Gryoskop zu verwenden fuer die Drehung. Dies konnte leider noch nicht fertig implementiert werden bevor dieses Dokument abgegeben werden musste und befindet sich momentan noch in Arbeit.
-
-TODO HIER REF TO ANHANG
+Es kann ein Befehl an die Steuerung gegeben werden mit dem gewuenschten Grad, das der Roboter sich drehen soll. Der Roboter dreht sich so lange, bis das Gyroskop angibt, dass der Wert erreicht wurde, dann stoppt er.
 
 \subsubsection{Ausgehende Linien erkennen}
 \label{outgoing-lines}

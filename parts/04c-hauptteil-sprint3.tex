@@ -21,7 +21,6 @@ TODO ELIAS MORE INFO ABOUT WHERE/HOW ADDED
 
 
 
-
 \subsubsection{YOLOv11-Model trainieren}
 
 Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wurde ein \gls{yolo} Model trainiert.
@@ -176,12 +175,12 @@ TODO LUKAS: insert image of raspberry pi hat assembled
     \label{fig:raspiheader-assembly}
 \end{figure}
 
-Die Software dieser Komponenten wurde direkt in Python auf dem Raspberry Pi umgesetzt. Nachfolgend in Abbildung \ref{fig:peripherie-classdiagramm} ist das Klassendiagramm ersichtlich. Wir haben eine RealPeripherieConnector, welcher von BaseConnector erbt, und die Hardwarefunktionen wie Buttons und Buzzer übernimmt. Damit der Programmcode auch stets auf dem PC ausführbar bleibt, haben wir den MockPeripherieConnector, welcher zum Einsatz kommt, wenn kein GPIO zur verfügung steht.
+Die Software dieser Komponenten wurde direkt in Python auf dem Raspberry Pi umgesetzt. Nachfolgend in Abbildung \ref{fig:peripherie-classdiagramm} ist das Klassendiagramm ersichtlich. Wir haben eine RealPeripherieConnector, welcher von BaseConnector erbt, und die Hardwarefunktionen wie Buttons und Buzzer übernimmt. Zusätzlich haben wir einen MockPeripherieConnector, welcher zum Einsatz kommt, wenn kein GPIO zur Verfügung steht. Dieser Simuliert die Ein und Ausgabe auf dem Terminal. Somit kann stets der Programmcode auf dem PC ausgeführt werden, wo keine, über GPIO verbundene, Buttons und Buzzers verfügbar sind.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{assets/IT/robot-sw-architecture-peripherie.png}
-    \caption{Raspberry Pi HAT}
+    \includegraphics[width=\linewidth]{assets/IT/robot-sw-architecture-peripherie.png}
+    \caption{Raspberry Pi HAT Klassendiagramm}
     \label{fig:peripherie-classdiagramm}
 \end{figure}
 

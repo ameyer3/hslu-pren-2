@@ -131,7 +131,7 @@ B & {'B': 221, 'C': 51, 'A': 42} & 170 & B: 0.00 &  \\
 \hline
 C & {'C': 173, 'B': 51, 'A': 22} & 122 & C: 0.00 &  \\
 \hline
-None & {'B': 11, 'A': 10, 'C': 10} & 1 & B: 72.45, A: 63.30 & \textit{Differenzen > 50}\\
+None & {'B': 11, 'A': 10, 'C': 10} & 1 & B: 72.45, A: 63.30 & \textit{Distanzen > 50}\\
 \hline
 A & {'A': 21, 'B': 11, 'C': 9} & 10 & A: 18.80 &  \\
 \hline
@@ -443,14 +443,92 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%% protocol opencv calibration %%%%%%%%%%%%%%%%%%%%%%%%
 
+\addcontentsline{toc}
+{subsection}
+{Protokoll OpenCV Kalibration}
+
 \includepdf[pages=-]{assets/IT/testing/protocol_opencv_calibration.pdf}
 
 
 %%%%%%%%%%%%%%%%%%%%%%% testprocotol static node and edge detection %%%%%%%%%%%%%%%%%%%%%%%%
+
+\addcontentsline{toc}
+{subsection}
+{Testprotokoll Ausgehende Kanten erkennen}
 
 \includepdf[pages=-]{assets/IT/testing/testprotocol_static_node_edge_detection.pdf}
 
 
 %%%%%%%%%%%%%%%%%%%%%%% testprocotol Fahrregelung mit Liniensensoren %%%%%%%%%%%%%%%%%%%%%%%%
 
+\addcontentsline{toc}
+{subsection}
+{Testprotokoll Liniensensor}
+
 \includepdf[pages=-]{assets/ET/Testprotokolle/Testprotokoll_Regelung.pdf}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%5 drehen mit encoder %%%%%%%%%%%%%%%%%%%%%%%%5
+
+\newpage
+\subsection*{Untersuchung Drehen mit Encodern}\label{drehen-encoder}
+  \addcontentsline{toc}
+    {subsection}
+    {Untersuchung Drehen mit Encodern}
+
+Die Hardware sowie der zugehörige Code wurde auf Fehler überprüft. Mit dem Oszilloskop wurden die vom Encoder erzeugten Signale analysiert. Dabei zeigte sich ein hochfrequentes Rauschen, dessen Amplituden jedoch zu gering sind, um nennenswerte Fehler zu verursachen. Die Ursache des Rauschens konnte auf die verwendeten DC-Motoren zurückgeführt werden.
+
+Anschliessend wurde ein Encoder mithilfe eines Frequenzgenerators simuliert, um das Zähleverhalten des implementierten Codes zu überprüfen. Die Taktfrequenz wurde auf 500 Hz eingestellt. Kanal 2 wurde mit einer Phasenverschiebung von 90\textdegree \ nacheilend konfiguriert. Unter diesen Bedingungen sollte der implementierte Zähler eine Inkrementierung vornehmen.
+
+Das Taktsignal wurde für eine Dauer von 2 Sekunden angelegt, was direkt am Frequenzgenerator eingestellt wurde. Der erwartete Endwert des Zählers lag entsprechend bei etwa 1000.
+
+\begin{table}[H]
+\centering
+\caption{Ergebnisse der aufgezeichneten Taktimpulse Decoder}
+\label{tab:taktergebnisse_de}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
+\hline
+1 & 723 \\
+2 & 1397 \\
+3 & 1412 \\
+4 & 655 \\
+\hline
+\end{tabular}
+\end{table}
+
+Wie aus Tabelle \ref{tab:taktergebnisse_de} ersichtlich ist, weichen die aufgezeichneten Werte um bis zu 41\% vom erwarteten Sollwert ab. Diese Abweichung ist zu gross, um eine präzise Regelung darauf aufzubauen.
+
+Es wurde ebenfalls der Code des MCCAR untersucht. Der Code liest die Encoder auf eine andere Weise aus. Anstelle der integrierten Decoder wurde ein eigener Decoder implementiert. Dazu wird das Input Capture verwendet. Dies hat den Vorteil, dass die Geschwindigkeit der einzelnen Räder berechnet werden kann.
+
+Diese genaueren Tests erfolgten erst, nachdem entschieden wurde das man mit diesen Motoren/Encodern weiter arbeitet. In den ersten Tests zweifelte man immer den eigenen Leistungen und nicht einer schlechten Hardware, darum wurde in die Encoder zu viel Zeit reingesteckt die sich nicht ausbezahlt hat.
+
+\begin{table}[H]
+\centering
+\caption{Ergebnisse der aufgezeichneten Taktimpulse Input Capture}
+\label{tab:taktergebnisse_im}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Messung} & \textbf{Aufgezeichnete Takte} \\
+\hline
+1 & 902 \\
+2 & 1252 \\
+3 & 842 \\
+4 & 876 \\
+\hline
+\end{tabular}
+\end{table}
+
+Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern, liegt jedoch immer noch bei etwa 25\% (siehe Tabelle \ref{tab:taktergebnisse_im}).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% drehehn gyro %%%%%%%%%%%%%%%5
+
+\newpage
+\subsection*{Tests Drehen mit Gyroskop}\label{drehen-gyro}
+  \addcontentsline{toc}
+    {subsection}
+    {Tests Drehen mit Gyroskop}
+
+TODO
