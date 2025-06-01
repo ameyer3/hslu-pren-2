@@ -23,14 +23,13 @@ Abbildung \ref{fig:camera-connector-classdiagram} zeigt das Klassendiagramm des 
 \subsubsection{Ultraschall}
 \label{ultraschall}
 
-Es gibt eine Backup-Hinderniserkennung mittels Ultraschallsensor, um Risiko 12 (Objekte werden nicht erkannt) zu Minimieren.
+Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung zusätzlich zu der Kamera ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller \gls{tinyk22} verbunden.
 
-Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller \gls{tinyk22} verbunden.
+Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 25 cm erkannt wird, hält der Roboter an, um Kollisionen zu vermeiden. Diese Distanz wurde gewählt, damit die Balance eingehalten wird zwischen 'zu viel' oder 'zu spät' erkennen. Es sollen nicht fälschlicherweise Objekte erkannt werden, jedoch sollen sie auch nicht zu spät erkannt werden. Dies ist auch deswegen so, da die Kamera benutzt wird, um das unerwartete Objekt zu deuten. Die Kamera braucht eine bestimmte Distanz, um eine mögliche Pylone zu erkennen, da diese möglichst ganz auf dem Bild sein sollte.
 
-Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 10 cm erkannt wird, wird automatisch ein Not-Stopp ausgelöst, um Kollisionen zu vermeiden. Gleichzeitig wird ein definierter Fehlercode generiert und über eine serielle Schnittstelle an den Raspberry Pi übertragen, um den Fehlerstatus zu protokollieren und entsprechende Massnahmen einleiten zu können. Dies ist beschrieben in Tabelle \ref{table:statuscodes}.
+Es wird ein definierter Fehlercode generiert und über die serielle Schnittstelle an den Raspberry Pi übertragen. Der Raspberry Pi leitete entsprechende Massnahmen ein. Dies ist beschrieben in Tabelle \ref{table:statuscodes}.
 
-
-denke eher ref uf erste ultraschall
+Dies hilft dabei Risiko 12 (Objekte werden nicht erkannt) zu mitigieren, falls es passiert.
 
 
 
@@ -134,7 +133,8 @@ Diese ObjectDetector Klasse ladet das Model bei der Instanzierung und wird aufge
     \item Nächstes Objekte vor dem Roboter finden.
 \end{enumerate}
 
-Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf TODO WERT \& WIESO. \& falls Risiko damit vermindert (Falls erhoeht), Risiko 7
+Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf 0.4. Aus der F1 Kurve in Abbildung \ref{fig:f1} kann gelesen werden, dass die Pylone bei 0.4 die besten Resultate hat. Knoten und Pylone sind recht konstant und haben dort ebenfalls sehr genaue Resultate. Dadurch, dass dieser Wert erhöht wurde von dem Standardwert, kann das Risiko 7 (Ein Objekt wird fälsch-
+licherweise erkannt) damit vermindert werden: Das Modell muss sich sicherer sein als dies standardmässig der Fall ist, damit die Deutung akzeptiert wird.
 
 Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
