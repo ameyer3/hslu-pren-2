@@ -540,15 +540,57 @@ Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern
     {subsection}
     {Tests mit Gyroskop}
 
-Das Gyroskop wurde fest an den Roboter angebracht. Um zu identifizieren ob die Werte brauchbar sind, hat man das Gyroskop alle paar Milisekunden ausgelesen und die im Speicher vorhandenen Werte wie auf Abb. \ref{fig:Werte Gyroskop} analysiert. Man musste dann feststellen das schon kleine Vibrationen die Werte zu sehr beeinflussen und so ist es nicht möglich eine exakte Drehung zu berechnen. 
+Die ersten Tests mit dem Gryskop wurden mit einem Bread Board durchgefuehrt und wurde mit einem Tiny K22 verbunden. Auf diese Weise kann das Gryoskop isoliert von den anderen Komponenten getestet werden. Damit das Gyrsokop moeglichst gerade sind konnte, wurde es aufgestellt. Durch die bereits angebrachten Widerstaende konnte es nicht hingelegt werden. Das Setup ist ersichtlich auf Abbildung \ref{img:gyro-tests-1}.
 
-
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=3cm,height=4cm]{assets/ET/Gyroskop/Gyroskop_Werte.jpg}
-\caption{Werte der Y-Achse}
-\label{fig:Werte Gyroskop}
+\includegraphics[width=10cm]{assets/ET/Gyroskop/gyro-breadboard.jpg}
+\caption{Erste Gyroskop Tests}
+\label{img:gyro-tests-1}
 \end{figure}
+
+Zuerst wurde ein simples Programm geschrieben, um die Werte über UART1 im Terminal auszulesen. Das Gyroskop gibt 16-Bit-Messwerte für jede Achse (X, Y und Z) im Big-Endian-Format aus, wobei das höchstwertige Byte zuerst übertragen wird. Da der Prozessor des TinyK22 im Little-Endian-Format arbeitet, müssen diese Bytes nach dem Empfang zuerst noch korrekt konvertiert werden.\footnote{https://wraycastle.com/de/blogs/knowledge-base/big-endian-little-endian}
+
+Als naechstes wurde ein Programm geschrieben, das erwartet, dass das Gyroskop sich um einen bestimmten Winkel (in den folgendenen Tests 90\textdegree) dreht und sobald der Winkel erreicht wird, wird eine Nachricht dafuer ausgegeben. Dafuer wurde das Breadboard in verschiedenen Geschwindigkeiten um 90\textdegree \ gedreht, bis die Nachricht erschien. Die Messung war in allen Geschwindigkeiten sehr genau. Der Wert war immer zwischen 90.0\textdegree \ und 90.5\textdegree.
+
+Die folgenden Bewegungen wurden durchgefuerht mit dem Gyroskop: 
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.29\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, angle=-90]{assets/ET/Gyroskop/gyro-0-deg.jpg}
+    \caption{0 Grad}
+    \label{fig:gyro-0}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.29\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, angle=-90]{assets/ET/Gyroskop/gyro-90-deg.jpg}
+    \caption{+90 Grad}
+    \label{fig:gyro--90}
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.29\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, angle=-90]{assets/ET/Gyroskop/gyro-90-deg2.jpg}
+    \caption{-90 Grad}
+    \label{fig:gyro-90}
+  \end{minipage}
+\end{figure}
+
+Dazu gab es folgende Ausgabe des Testprogrammes:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{assets/ET/Gyroskop/GyroTest.png}
+\caption{Ausgabe 90 Grad Drehung}
+\label{img:gyro-tests-base}
+\end{figure}
+
+Da das Grysokop vertikal auf dem Roboter angebracht werden muss aus Platgruenden, werden die Werte der Y-Achse ausgelesen, um die Drehung des Roboters zu messen.
+
+Nachdem das Grysokop angebracht wurde, wurden die Tests von zuvor wiederholt, indem der Roboter von Hand gedreht wurde, um sicherzustellen, dass die richtige Achse ausgelesen werden. Erst dann wurde der Motor fuer die Drehung verwendet. Sobald der definierte Winkel erreicht wurden, stoppt der Roboter. Dies funktionierte ebenfalls. Dabei wurde die Drehung jedoch etwas ungenauer. Der Roboter dreht sich ungefaerhr 10\textdegree \ zu weit, da die Motoren zu langsam ausgeschaltet werden. Dies wird jedoch akzeptiert, da es sich nur um eine kleine Ungenauigkeit handelt, die vom Liniensensor beim Losfahren wieder korrigiert wird.
 
 
 %%%%%%%%%%%%%%%%%%%%%% nachkorrektur wert hindernis %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -558,11 +600,26 @@ Das Gyroskop wurde fest an den Roboter angebracht. Um zu identifizieren ob die W
     {subsection}
     {Hindernis umplatzieren - Nachkorrekturwert}
 
-Damit der Nachkorrekturwert, der gefahren werden muss, damit das Hindernis am selben Ort abgestellt werden kann, ermittelt werden kann, werden 10 Testdurchläufe durchgeführt. Dabei wird wiederholt der Roboter das Hindernis aufheben, sich 180\textdegree \ drehen und dann dort wo er ist, das Hindernis wieder hinstellten. Dies jeweiligen Abstellorte wurden mit Postit Zetteln markiert. Die Mitte von jedem Postit korrespondeirt mit der Mitte der Barriere. Auch der ursprüngliche Ort der Barriere wird markiert. Die Distanzen zwischen dem Abstellort und dem ursprüngliche Ort der Barriere wird gemessen. 
+Damit der Nachkorrekturwert, der gefahren werden muss, damit das Hindernis am selben Ort abgestellt werden kann, ermittelt werden kann, werden 10 Testdurchläufe durchgeführt. Dabei wird wiederholt der Roboter das Hindernis aufheben, sich 180\textdegree \ drehen und dann dort wo er ist, das Hindernis wieder hinstellten. Dies jeweiligen Abstellorte wurden mit Postit Zetteln markiert (siehe Abbildung \ref{fig:abstellorte}). Die Mitte von jedem Postit korrespondiert mit der Mitte der Barriere. Auch der ursprüngliche Ort der Barriere wird markiert (siehe Abbildung \ref{fig:roboter-grefit-martkier}). Die Distanzen zwischen dem Abstellort und dem ursprüngliche Ort der Barriere wird gemessen. 
 
 Ein blaues Postit, das den Abstellort markiert, ist 12mm breit. Die Distanz von dem Rand des blauen Postit, das sich am weitesten weg von der Barriere befindet, zu der Mitte der Barriere beträgt 153 mm.
 
-TODO BILDER
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/ET/ultraschall/greifen.jpg}
+    \caption{Roboter greift Barriere von markierten Ort}
+    \label{fig:roboter-grefit-martkier}
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/ET/ultraschall/nachkorrektur.jpg}
+    \caption{Alle Abstellorte bei den Testversuchen in blau}
+    \label{fig:abstellorte}
+  \end{minipage}
+\end{figure}
 
 Die Werte aus, die auf dem Bild abgelesen werden können sind hier aufgelistet.
 

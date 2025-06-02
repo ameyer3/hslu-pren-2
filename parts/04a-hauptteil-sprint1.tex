@@ -148,7 +148,7 @@ Der Liniensensor wird mit einer zweiteiligen Halterung befestigt. Auf der innere
 Um Störungen durch Fremdlicht zu verhindern wurde eine Abdeckung konstruiert, die jegliche Fremdeinstrahlung abschirmt. Als Dichtung wurde ein Bürstenband verwendet, wie es üblicherweise bei Schiebetüren zum Einsatz kommt. Die Bürsten werden in einer Halterung eingesteckt und mit einem Gewindestift geklemmt. 
 
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{assets//MT/Sensor Abdeckung.png}
     \caption{Liniensensor Abdeckung}
@@ -162,11 +162,33 @@ Es wird ein Ultraschallsensor montiert. Dieser wird gebraucht für die Bewältig
 
 Der Ultraschall wird ganz vorne am Roboter angebracht, auf der Höhe, die optimal ist, um die Barriere zu erkennen. Der Ultraschall misst direkt über den Löchern, die es in der Barriere gibt, so können die Wellen sicher an einer geraden Fläche reflektiert werden.
 
-TODO zwei Bilder: robi von vorner, robit mit barriere um hohe zu ziegen
+TODO REPLACE WITH ACTUAL IMAGE ULTRASOUND FROM FRONT
 
-Der Ultraschall wurde getestet, indem die Barriere auf einem Massstab verschoben wurde. So konnten die ausgegebenen Werte mit den Werten, die auf dem Massstab ersichtlich waren, verglichen werden.
+\begin{figure}[H]
+\centering
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth, angle=-90]{assets/ET/ultraschall/ultraschall-side.jpg}
+  \caption{Ultraschall am Roboter}
+  \label{fig:ultraschall-robi}
+\end{minipage}
+\hspace{0.05\textwidth} % Abstand zwischen den Bildern
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth, angle=-90]{assets/ET/ultraschall/ultraschall-side.jpg}
+  \caption{Ultraschall Hoehe}
+  \label{fig:ultraschall-hoehe}
+\end{minipage}
+\end{figure}
 
-- um ultraschall zu testen: bild
+Der Ultraschall wurde getestet, indem die Barriere auf einem Massstab verschoben wurde. So konnten die ausgegebenen Werte mit den Werten, die auf dem Massstab ersichtlich waren, verglichen werden. Objekte koennen auf \pm 1cm exact erkannt werden.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/ET/ultraschall/ultraschall-test.jpg}
+    \caption{Ultraschall Testaufbau}
+    \label{fig:ultraschall-tests}
+\end{figure}
 
 \subsubsection{Kamerahalterung}
 \label{Kamera Halter}
@@ -216,14 +238,22 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} m
 \label{fig: Verteiler PCBA}
 \end{figure}
 
-
-\subsubsection{Software Grundlage}
-
-Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamentals. Dieses Projekt beinhaltet ein gutes Grundgerüst. Man hat diverse Codeabschnitte abgeändert, entfernt oder hinzugefügt. Als Entwicklungsumgebung wurde MCUXpresso verwendet. Anhand der Pinout Belegungen Abbildung \ref{fig:Pinout TinyK22} \& \ref{fig:Pinout Raspy Hat} konnte man diese in der Software initialisieren.
+\gls{Pren 2}
 
 
 
-\begin{figure}[h]
+\subsubsection{Pinout und Softwaregrundlagen}
+
+TODO: Die vier Bilder gehören zusammen (Formatierung)
+
+Als Grundlage für die Software diente das Projekt aus dem Modul \textit{Microcontroller Fundamentals}. Dieses enthielt ein solides Gerüst, das im Verlauf angepasst wurde. Dabei wurden verschiedene Codeabschnitte ergänzt, überarbeitet oder entfernt. Als Entwicklungsumgebung kam \textit{MCUXpresso} zum Einsatz.
+
+Die Initialisierung der Pins erfolgte auf Basis der Belegungen aus Abbildung~\ref{fig:Pinout TinyK22} und Abbildung~\ref{fig:Pinout Raspy Hat}. Im Vergleich zur ursprünglichen Planung in \gls{pren1} (siehe Abbildung~\ref{fig:Pinout PREN 1}) hat sich das finale Pinout bis zum Ende von \gls{pren2} (siehe Abbildung~\ref{fig:Pinout PREN 2}) in mehreren Punkten verändert.
+
+Drei ursprünglich für die Liniensensoren vorgesehene Pins mussten aufgrund der verwendeten Sensorbank entfallen. Der Buzzer sowie der Startknopf wurden auf das Raspberry-HAT verlagert. Zudem wurde die Richtungsauswahl von zwei auf vier Pins erweitert, um eine differenziertere Steuerung zu ermöglichen. Zusätzlich wurde eine $I^2C$-Schnittstelle implementiert, um weitere Sensoren anbinden zu können.
+
+
+\begin{figure}[H]
 \centering
 \begin{minipage}[b]{0.45\textwidth}
   \centering
@@ -241,15 +271,34 @@ Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamen
 \end{figure}
 
 
+\begin{figure}[H]
+\centering
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{assets/ET/PINOUT/Pinout_PREN1.png}
+  \caption{Pinout PREN 1}
+  \label{fig:Pinout PREN 1}
+\end{minipage}
+\hspace{0.05\textwidth} % Abstand zwischen den Bildern
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{assets/ET/PINOUT/Pinout_PREN2.png}
+  \caption{Pinout PREN 2}
+  \label{fig:Pinout PREN 2}
+\end{minipage}
+\end{figure}
+
+
+
+
+
 \subsubsection{Spannungsversorgung und Leistungsberechnung}
 
 
-
-
-In der Tabelle \ref{tab:spannungsversorgung} werden alle Verbraucher aufgezeigt mit ihrer Betriebsspannung wie auch die maximale Stromaufnahme. Anhand dieser Daten konnte die Wahl eines geeigneten Akkus getroffen werden. Die Spannungsversorgung kann mittels eines Not-Aus Schalters von den Verbrauchern getrennt werden, ausser das Raspberry Pi 5 wird dabei als einziger Verbraucher nicht Stromlos gemacht. Damit wird die Möglichkeit von Datenkorruption auf der SD-Karte verringert. Berechnet man von jedem Verbraucher die Leistung kommt man auf eine maximale Gesamtleistung von 101W. Der vorgesehene Akku, hat eine Spannung von 14.8V und eine Kapazität von 3000mAh. Unter maximaler Leistung könnte der Roboter für ca. 26 Minuten Funktionieren \ref{eq:Energieverbrauch}.
+In der Tabelle \ref{tab:spannungsversorgung} werden alle Verbraucher aufgezeigt mit ihrer Betriebsspannung wie auch die maximale Stromaufnahme. Anhand dieser Daten konnte die Wahl eines geeigneten Akkus getroffen werden. Die Spannungsversorgung kann mittels eines Not-Aus Schalters von den Verbrauchern getrennt werden, ausser das Raspberry Pi 5 wird dabei als einziger Verbraucher nicht Stromlos gemacht. Damit wird die Möglichkeit von Datenkorruption auf der SD-Karte verringert. Berechnet man von jedem Verbraucher die Leistung kommt man auf eine maximale Gesamtleistung von 101W. Der vorgesehene Akku, hat eine Spannung von 14.8V und eine Kapazität von 3000mAh. Unter maximaler Leistung könnte der Roboter für ca. 25 Minuten Funktionieren \ref{eq:Energieverbrauch}.
 
 \begin{equation}
-    t = \frac{E}{P} = \frac{U \cdot Q}{P} = \frac{14{,}8\,\text{V} \cdot 10800\,\text{As}}{101\,\text{W}} \approx 1{'}583\,\text{s} \approx 26\,\text{Minuten} 
+    t = \frac{E}{P} = \frac{U \cdot Q}{P} = \frac{14{,}8\,\text{V} \cdot 10800\,\text{As}}{105\,\text{W}} \approx 1{'}520\,\text{s} = 25\,\text{Minuten} 
     \label{eq:Energieverbrauch}
 \end{equation}
 
@@ -266,15 +315,15 @@ In der Tabelle \ref{tab:spannungsversorgung} werden alle Verbraucher aufgezeigt 
 \midrule
 2x DC-Motor                  & 12V              & 6A gesamt               & Ansteuerung über Motortreiber \\
 
-Motortreiber & 5V               &  50mA              & Logikversorgung \\
+Motortreiber & 5V               &  100mA              & Logikversorgung \\
 
-2x Encoder & 3.3V               &  15mA gesamt             &- \\
+2x Encoder & 3.3V               &  150mA gesamt             &- \\
 
 Servomotor                   & 5V               &  500mA                 & PWM-gesteuert, kurzzeitig hohe Last \\
 
 Liniensensor         & 5V               &  150mA                  & IR-LED's und Sensoren \\
 
-Ultraschall & 5V               &  150mA              &- \\
+Ultraschall & 5V               &  200mA              &- \\
 
 Raspberry Pi 5              & 5V               & 3-5A                      & über USB-C \\
 

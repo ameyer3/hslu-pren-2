@@ -2,18 +2,19 @@
 
 
 %Zielsetzung, Problemstellung
-Die vorliegende Dokumentation beschreibt die Umsetzung des in PREN 1 (referenzieren) entwickelten Konzepts eines autonomen Wegfindungsroboters im Rahmen des Moduls Produktentwicklung 2 (PREN 2) an der Hochschule Luzern. Ziel des Projekts bestand der Konstruktion eines Roboters, der in der Lage ist, ein linienbasiertes Wegenetz zu durchqueren, Hindernisse zu erkennen und zu versetzen sowie einen zuvor definierten Zielknoten anhand von Bildverarbeitung zuverlässig zu identifizieren.
+Die vorliegende Dokumentation beschreibt die Umsetzung des in \acrfull{pren1} entwickelten Konzepts. Der autonome Wegfindungsroboter wird im Rahmen des Moduls \acrfull{pren2} an der Hochschule Luzern gebaut und getestet. Der Roboter muss in der Lage sein autonom ein linienbasiertes Wegenetz zu durchqueren, Hindernisse zu erkennen und zu versetzen sowie einen zuvor definierten Zielknoten anhand von Bildverarbeitung zuverlässig zu finden. Die Risikobewertung und die Sprintplanung dienen als zentrale Projektmanagement Tools.  
 
 % Methoden
-In der Umsetzung wurden die einzelnen Systemkomponenten wie Fahrwerk, Steuerung, Bildverarbeitung, Objekterkennung und Greifmechanismus erfolgreich gebaut und einzeln getestet. Die Steuerung des Roboters erfolgt durch eine Kombination aus dem Mikrocontroller Tiny K22 für zeitkritische Steueraufgaben und einem Raspberry Pi für die Bildverarbeitung und Navigation. Während der Implementierung und dem Testen wurden erkannte Probleme durch iterative Anpassungen der Komponente minimiert.
+Ausgehend von der Produktbeschreibung werden die einzelnen Systemkomponenten am fertigen System implementiert. Erkenntnisse aus Testaufbauten aus \acrshort{pren1} wurden berücksichtigt. Wurde vom ursprünglichen Konzept abgewichen wird darauf konkret eingegangen und begründet. 
+
+Eine Herausforderung war das korrekte Auslesen der Encoder-Motoren die für die Drehung des Roboters verantwortlich sind. Für die exakte Drehung zu bestimmen wurde schliesslich ein Gyroskop verwendet. Die Steuerung des Roboters erfolgt durch eine Kombination aus dem Mikrocontroller Tiny K22 für zeitkritische Steueraufgaben und einem Raspberry Pi für die Bildverarbeitung und Navigation. Während der Implementierung und dem Testen wurden erkannte Probleme durch iterative Anpassungen minimiert.
 
 % Ergebnissse
 
-Trotz funktionierender Einzelkomponenten konnte das Gesamtsystem die komplette Aufgabe nicht erfolgreich abschliessen. Grund dafür waren technische Probleme mit der Encoder-Auswertung der DC-Motoren, die zu ungenauen Drehbewegungen führten. Trotz intensiver Fehlersuche konnte das Problem nicht behoben werden. Infolge dieser Ungenauigkeit war eine präzise Ausrichtung sowie die vollständige Navigation durch das Wegenetz nicht möglich.
-
-%robo kann jetzt doch noch sich ausrichten, update?
+Die Implementierung des Gyroskop für die Regelung des Drehwinkels konnte abgeschlossen werden. Trotz aller funktionierender Einzelkomponenten konnte das Gesamtsystem zum Zeitpunkt der Abgabe die komplette Aufgabe nicht erfolgreich abschliessen, da noch an der Systemintegration gearbeitet wird. Es wurden im Vorfeld viele Tests für die Navigation durchgeführt was das die Systemintegration erleichtert.
 
 % Ausblick
-Obwohl das Gesamtsystem nicht funktionierte, bildete die Arbeit eine solide Grundlage für das Entwickeln von Prototypen in interdisziplinärer Arbeit. Die gesammelten Erfahrungen sind Wertvoll für zukünftige Projekte im akademischen Umfeld sowie in der Arbeitswelt.
+Obwohl das Gesamtsystem zum Zeitpunkt der Abgabe nicht funktionierte, kann davon ausgegagen werden das der Roboter die Aufgabenstellung selsbständig bewältigen kann. Die Arbeit eine solide Grundlage für das Entwickeln von Prototypen in interdisziplinärer Arbeit. Die gesammelten Erfahrungen sind Wertvoll für zukünftige Projekte im akademischen Umfeld sowie in der Arbeitswelt.
 
 
+TO DO Bild Einfügen
