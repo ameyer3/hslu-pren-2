@@ -216,9 +216,9 @@ Das Umplatzieren eines Hindernisses erfolgt in mehreren Stufen. Damit das Hinder
 
 \subsubsection{Objekterkennung mit Ultraschall}
 
-Die Barriere soll mit der Kamera erkannt werden, bevor der Roboter beginnt auf die Linie zu fahren. Der Raspberry Pi wird der Steuerung mitteilen, dass auf der nächsten Strecke eine Barriere zu erwarten ist. Der Roboter fährt dann los mit der Erwartung anzuhalten, wenn er 10cm vor sich das Objekt bemerkt. Diese Distanz sorgt dafür, dass sich der Roboter sicher drehen kann, ohne die Barriere umzustossen.
+Die Barriere soll mit der Kamera erkannt werden, bevor der Roboter beginnt auf die Linie zu fahren. Der Raspberry Pi wird der Steuerung mitteilen, dass auf der nächsten Strecke eine Barriere zu erwarten ist. Der Roboter fährt dann langsamer als normalerweise los mit der Erwartung anzuhalten, wenn er 7cm vor sich das Objekt bemerkt. Diese Distanz sorgt dafür, dass sich der Roboter sicher drehen kann, ohne die Barriere umzustossen, jedoch die Distanz, die er langsam zum Hindernis zuruecklegt moeglichst kurz ist.
 
-Falls die Kamera die Barriere nicht erkannt, aber trotzdem eine auf der Strecke ist, wird der Ultraschallsensor ein Objekt erkennen und der Navigation mitteilen, dass etwas im Weg steht. Die Navigation nutzt die Kamera, um herauszufinden, welches Objekt sich vor dem Roboter befindet. Wird dabei eine Barriere erkannt, fährt der Roboter 10cm vor sie hin und der Wegstell-Prozess wird gestartet, um das Hindernis aus dem Weg zu räumen.
+Falls die Kamera die Barriere nicht erkannt, aber trotzdem eine auf der Strecke ist, wird der Ultraschallsensor ein Objekt erkennen und der Navigation mitteilen, dass etwas im Weg steht. Die Navigation nutzt die Kamera, um herauszufinden, welches Objekt sich vor dem Roboter befindet. Wird dabei eine Barriere erkannt, fährt der Roboter noch naeher ran, um 7cm vor ihr zu sein und der Wegstell-Prozess wird gestartet, um das Hindernis aus dem Weg zu räumen. 
 
 \subsubsection{Roboter drehen}
 
