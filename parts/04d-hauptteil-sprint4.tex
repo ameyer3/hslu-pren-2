@@ -30,12 +30,12 @@ MIN_MATCHES_REQUIRED = 10
 MAX_DISTANCE_ALLOWED = 50
 \end{verbatim}
 
-Eine genaue Erklaerung dieser Parameter, sowie ein Protokoll, wie die Werte ermittelt wurden koennen im Anhang im Kapitel \nameref{target-node-unittests} gefunden werden.
+Eine genaue Erklärung dieser Parameter, sowie ein Protokoll, wie die Werte ermittelt wurden koennen im Anhang im Kapitel \nameref{target-node-unittests} gefunden werden.
 
 Diese Funktionalität wurde erneut mit Unittests getestet.
 Dabei wird die Klasse, die die Konturen der Buchstaben lernt instanziert und dann werden realistische Bilder an die Methode übergeben, die die Knoten liest. Alle Buchstaben inklusive Knoten ohne Buchstaben werden richtig erkannt. Diese Tests sind ebenfalls im Anhang im Kapitel \nameref{target-node-unittests} zu finden.
 
-Durch die ausfuehrlichen Tests kann das Risiko 22, dass der Roboter das Ziel verpasst oder es sich eibildet, sehr stark mitigiert werden.
+Durch die ausführlichen Tests kann das Risiko 22, dass der Roboter das Ziel verpasst oder es sich eingebildet, sehr stark mitigiert werden.
 
 Damit die Navigation nach wie vor auf allen Umgebungen laufen kann, werden hier zwei Methoden erstellt, eine Dummy Methode, die aus dem Simulator übernommen wurde und die richtige Methode, die Buchstaben von Bildern detektiert. so kann einfach hin und her gewechselt werden je nach Umgebung.
 

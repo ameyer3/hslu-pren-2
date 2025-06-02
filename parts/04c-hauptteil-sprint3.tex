@@ -38,7 +38,7 @@ Dies hilft dabei Risiko 12 (Objekte werden nicht erkannt) zu mitigieren, falls e
 Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wurde ein \gls{yolo} Model trainiert.
 Es wurden mehrere Models trainiert, die laufend miteinander verglichen wurden. Der Prozess wie das finale Model gewählt wurde, ist im Anhang in Kapitel \nameref{model-evaluation} zu finden.
 
-Das Model, das verwendet werden wird, deutet die Bilder in ihrer Originalgrsse und hat über alle Klassen (Pylonen, Knoten, Hindernisse) gute Ergebnisse.
+Das Model, das verwendet werden wird, deutet die Bilder in ihrer Originalgrösse und hat über alle Klassen (Pylonen, Knoten, Hindernisse) gute Ergebnisse.
 
 Die folgenden Bilder zeigen einige Bilder, die das Model annotiert hat. Darauf ist zu sehen, wie genau es die einzelnen Objekte erkennen kann.
 
@@ -66,7 +66,7 @@ Die folgenden Bilder zeigen einige Bilder, die das Model annotiert hat. Darauf i
   \end{minipage}
 \end{figure}
 
-Auf den folgenden Bildern sind die Metriken aufgezeigt. Diese sind ebenfalls im Anhang im Kapitel \nameref{model-evaluation} genauer erklaert. Was hier sichtbar ist, ist zum einen der F1 Wert. Dieser ist besser, je höher er ist. Er ist hier fuer alle Klassen sehr hoch, was auf eine hohe Genauigkeit in den Detekierungen deutet. Ebenfalls ist die Consuion Matrix erkenntlich, diese zeigt welche Objekte das Model wie oft falsch oder richtig gedeutet hat. Das Model hat jede Pylone erkannt, hat sich zwei Knoten eingebildet und zwei Knoten verpasst. Mit den Algorithmen, die in dem nachfolgenden Kapitel \ref{model-results} beschrieben sind, die die Modelperformance stuetzen, sind diese Resultate ausgezeichnet. Ebenfalls ist der Lernverlauf des Models ersichtlich. Alle Graphen zeigen das gewünschte Muster. Die 6 Graphen links, die den Verlust in der Leistung (falsche Deutungen) darstellen, sind exponentiell fallend. Das heisst, dass das Modell mit jeder Iteration mehr gelernt hat und nicht irgendwann gestoppt hat oder schlechter wurde. Die 4 Graphen auf der rechten Seite zeigen, wie viel das Model gelernt, diese steigen und flachen dann ab. Dies ist ebenfalls das Muster, das bei einem guten Model erwartet wird.\cite{model-performance}
+Auf den folgenden Bildern sind die Metriken aufgezeigt. Diese sind ebenfalls im Anhang im Kapitel \nameref{model-evaluation} genauer erklärt. Was hier sichtbar ist, ist zum einen der F1 Wert. Dieser ist besser, je höher er ist. Er ist hier für alle Klassen sehr hoch, was auf eine hohe Genauigkeit in den Detekierungen deutet. Ebenfalls ist die Confusion Matrix erkenntlich, diese zeigt welche Objekte das Model wie oft falsch oder richtig gedeutet hat. Das Model hat jede Pylone erkannt, hat sich zwei Knoten eingebildet und zwei Knoten verpasst. Mit den Algorithmen, die in dem nachfolgenden Kapitel \ref{model-results} beschrieben sind, die die Modelperformance stützen, sind diese Resultate ausgezeichnet. Ebenfalls ist der Lernverlauf des Models ersichtlich. Alle Graphen zeigen das gewünschte Muster. Die 6 Graphen links, die den Verlust in der Leistung (falsche Deutungen) darstellen, sind exponentiell fallend. Das heisst, dass das Modell mit jeder Iteration mehr gelernt hat und nicht irgendwann gestoppt hat oder schlechter wurde. Die 4 Graphen auf der rechten Seite zeigen, wie viel das Model gelernt, diese steigen und flachen dann ab. Dies ist ebenfalls das Muster, das bei einem guten Model erwartet wird.\cite{model-performance}
 
 \begin{figure}[H]
   \centering
@@ -95,17 +95,17 @@ Auf den folgenden Bildern sind die Metriken aufgezeigt. Diese sind ebenfalls im 
 \subsubsection{YOLOv11 Model konvertieren}
 \label{convert-yolo}
 
-Es gibt Methoden, um die .pt Datei, die das Model enthaelt und verwendet wird, um Objekte zu erkennen, zu transformieren in ein anderes Format, damit auf Embedded Systems und somit auch auf Raspberry Pi's die Bilderkennung schneller durchgeführt werden kann.
+Es gibt Methoden, um die .pt Datei, Das Format in welchem das Model gespeichert wrid, in ein anderes Format zu transformieren. Somit kann auf Embedded Systems und auch auf Raspberry Pi's die Bilderkennung schneller durchgeführt werden kann.
 
 Drei Möglichkeiten wurden betrachtet und verglichen:
 TODO add sources for each \& akronyum
 \begin{enumerate}
-    \item Caffe2: In der Vergangenheit sehr geeignet, heutzutages mit PyTorch zusammengefügt und existiert nicht mehr auf diese Weise.
+    \item Caffe2: In der Vergangenheit sehr geeignet, heutzutage mit PyTorch zusammengefügt und existiert nicht mehr auf diese Weise.
     \item NCNN: Sehr gute Performance für ARM Geräte (u.a. Raspberry Pi), sehr wenig Abhängigkeiten, einfache Transformation.
     \item ONXX: Geeignet für  Cross-Plattform Fälle, gute Austauschbarkeit des Models, flexibel, viele Abhängigkeiten.
 \end{enumerate}
 
-Es wird NCNN gewählt, da dies perfekt für den Use Case mit einem Raspberry Pi passt. Das erstellte .pt File kann mit der ultralytics Bibliothek transformiert werden:
+Es wird NCNN gewählt, da dies perfekt für den Verwendungszweck mit einem Raspberry Pi passt. Das erstellte .pt File kann mit der ultralytics Bibliothek transformiert werden:
 
 \begin{verbatim}
 yolo export model=best.pt format=ncnn
@@ -133,8 +133,7 @@ Diese ObjectDetector Klasse ladet das Model bei der Instanzierung und wird aufge
     \item Nächstes Objekte vor dem Roboter finden.
 \end{enumerate}
 
-Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf 0.4. Aus der F1 Kurve in Abbildung \ref{fig:f1} kann gelesen werden, dass die Pylone bei 0.4 die besten Resultate hat. Knoten und Pylone sind recht konstant und haben dort ebenfalls sehr genaue Resultate. Dadurch, dass dieser Wert erhöht wurde von dem Standardwert, kann das Risiko 7 (Ein Objekt wird fälsch-
-licherweise erkannt) damit vermindert werden: Das Modell muss sich sicherer sein als dies standardmässig der Fall ist, damit die Deutung akzeptiert wird.
+Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf 0.4. Aus der F1 Kurve in Abbildung \ref{fig:f1} kann gelesen werden, dass die Pylone bei 0.4 die besten Resultate hat. Knoten und Pylone sind recht konstant und haben dort ebenfalls sehr genaue Resultate. Dadurch, dass dieser Wert erhöht wurde von dem Standardwert, kann das Risiko 7 (Ein Objekt wird fälschlicherweise erkannt) damit vermindert werden: Das Modell muss sich sicherer sein als dies standardmässig der Fall ist, damit die Deutung akzeptiert wird.
 
 Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
@@ -147,7 +146,7 @@ In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
     \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein Objekt verpasst wurde. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Durch den Ultraschall werden Risiko 12 und 1 (Objekte werden nicht erkannt) mitigiert.
 \end{itemize}
 
-Die folgenden Abbildungen veranschaulichen das Prinzip. Diese Bilder haben die einzelnen Objekte, die das Model erkannt hat mit Boxen annotiert. Die Bildunterschrift zeigt, welche Objekte zurueckgegeben werden basierend auf dem Algorithmus, der zuvor erklaert wurde. Wenn es keine Box annotiert haette, wuerde ebenfalls ein Knoten zurueckgegeben werden.
+Die folgenden Abbildungen veranschaulichen das Prinzip. Diese Bilder haben die einzelnen Objekte, die das Model erkannt hat mit Boxen annotiert. Die Bildunterschrift zeigt, welche Objekte zurückgegeben werden basierend auf dem Algorithmus, der zuvor erklärt wurde. Wenn es keine Box annotiert hätte, würde ebenfalls ein Knoten zurückgegeben werden.
 
 \begin{figure}[H]
   \centering

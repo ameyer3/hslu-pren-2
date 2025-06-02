@@ -240,7 +240,7 @@ Als Grundlage der Software, dient das Projekt vom Modul Microcontroller Fundamen
 
 
 
-In der Tabelle \ref{tab:spannungsversorgung} werden alle Verbraucher aufgezeigt mit ihrer Betriebsspannung wie auch die maximale Stromaufnahme. Anhnad dieser Daten konnte die Wahl eines geeigneten Akkus getroffen werden. Die Spannungsversorgung kann mittels eines Not-Aus Schalters von den Verbrauchern getrennt werden, ausser das Raspberry Pi 5 wird dabei als einziger Verbraucher nicht Stromlos gemacht. Berechnet man von jedem Verbraucher die Leistung kommt man auf eine maximale Gesamtleistung von 101W. Der vorgesehene Akku, hat eine Spannung von 14.8V und eine Kapazität von 3000mAh. Unter maximaler Leistung könnte der Roboter für ca. 26 Minuten Funktionieren.
+In der Tabelle \ref{tab:spannungsversorgung} werden alle Verbraucher aufgezeigt mit ihrer Betriebsspannung wie auch die maximale Stromaufnahme. Anhand dieser Daten konnte die Wahl eines geeigneten Akkus getroffen werden. Die Spannungsversorgung kann mittels eines Not-Aus Schalters von den Verbrauchern getrennt werden, ausser das Raspberry Pi 5 wird dabei als einziger Verbraucher nicht Stromlos gemacht. Berechnet man von jedem Verbraucher die Leistung kommt man auf eine maximale Gesamtleistung von 101W. Der vorgesehene Akku, hat eine Spannung von 14.8V und eine Kapazität von 3000mAh. Unter maximaler Leistung könnte der Roboter für ca. 26 Minuten Funktionieren.
 
 \[
 t = \frac{E}{P} = \frac{U \cdot C}{P} = \frac{14{,}8\,\text{V} \cdot 3\,\text{Ah}}{101\,\text{W}} \approx 0{,}44\,\text{h} = 26\,\text{Minuten}
@@ -280,7 +280,7 @@ Tiny K22             & 5V               & 100mA                      & - \\
 
 
 
-\subsubsection{Motoren ansteueren und auslesen}
+\subsubsection{Motoren ansteuern und auslesen}
 \label{motoren-encoder}
 
 
@@ -320,7 +320,7 @@ In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem 
 \subsubsection{Linie folgen mit PD-Regelung}
 \label{Linie folgen mit PD-Regelung}
 
-Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abb. \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit möglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
+Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abbildung \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit möglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
 
  \begin{figure}[H]
 \centering
@@ -332,7 +332,7 @@ Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die e
 
 \subsubsection{Liniensensor mit Abschirmung anbringen}
 
-Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht (siehe Abb. \ref{fig:enter-label}). Dank diesem Aufbau konnte mit der weiteren Implementierung fortgefahren werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
+Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht (siehe Abbildung \ref{fig:enter-label}). Dank diesem Aufbau konnte mit der weiteren Implementierung fortgefahren werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
 
 
 \begin{figure}[H]
