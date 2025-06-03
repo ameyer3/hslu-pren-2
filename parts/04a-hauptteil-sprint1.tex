@@ -199,7 +199,7 @@ Der Ultraschall wird ganz vorne am Roboter angebracht, auf der Höhe, die optima
 \end{minipage}
 \end{figure}
 
-Der Ultraschall wurde getestet, indem die Barriere auf einem Massstab verschoben wurde. So konnten die ausgegebenen Werte mit den Werten, die auf dem Massstab ersichtlich waren, verglichen werden. Objekte können auf \pm 1cm exact erkannt werden.
+Der Ultraschall wurde getestet, indem die Barriere auf einem Massstab verschoben wurde. So konnten die ausgegebenen Werte mit den Werten, die auf dem Massstab ersichtlich waren, verglichen werden. Objekte können auf \pm 1cm exakt erkannt werden.
 
 \begin{figure}[H]
     \centering
@@ -388,15 +388,17 @@ Allerdings kam bereits der Motortreiber zum Einsatz, der auch im späteren Endpr
 Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen. 
 
 ALINA NOTES:
-t
-Check ticks for each encoder
+
+to check that encoder works, check ticks, eine radumdrehung, schauen bei beiden raedern, daraus average und ticks per revolution in encoder
+Mit Lineal mm zahl checken von lib: encoder geprueft, sagt das richtige
+
+jetzt regler anschauen, da encoder zuveralessig speed liefern muss, jetz kann regler fuer regeln benutzt werden um motoren gleichschnell drehen
+
 Using quad=encoder and dfive (regler) lib from mcfun that already work together out of the box
 drive already asks quad for speed und anhan von speed von beiden motoren wird berechnet, dass greade gahrt: allese gegeben
 damit motoren gleich schnell drehen
 
-configure quad with tickes vom encoder per umdrehung des rades
 
-wir muessen konstanten herausfinden, damit er gerade fahrt: PID
 
 
 %%%%%%%%%%%%%%%%%Epic 2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
