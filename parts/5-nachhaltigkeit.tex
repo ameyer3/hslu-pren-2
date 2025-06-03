@@ -17,6 +17,9 @@ Zur Reduktion des Ressourcenverbrauchs wurde auf papierlose Zusammenarbeit geset
 
 Viele Bauteile wie Sensoren, Steckbrettmaterialien, \acrshort{pla}-Filament oder Endschalter waren bereits im Besitz einzelner Teammitglieder und konnten direkt verwendet werden. Dadurch minimierten sich zusätzliche Bestellungen und Verpackungsmaterialien, Transportwege und Kosten konnten erfolgreich reduziert werden.
 
+\paragraph{Konstruktive Nachhaltigkeitsmassnahmen}
+Ein aktiver Beitrag zur Ressourcenschonung erfolgte durch den Einsatz besonders kleiner Elektromotoren, welche eine deutlich geringere Leistungsaufnahme aufweisen. Im Vergleich zu grösseren Antrieben konnten durch den bewussten Einsatz kleiner Motoren sowohl der Energieverbrauch als auch der Materialeinsatz reduziert werden. Die ausgewählten Motoren liegen in einem Leistungsbereich unter 10 W, was eine sehr energieeffiziente Lösung darstellt. %stimmt das?
+
 \subsubsection{Reuse}
 
 Im Bereich Reuse wurden zahlreiche Elemente des Prototypings erfolgreich direkt in den finalen Roboter übernommen. Dazu zählen etwa die Räder, der Kameraturm und der Greifer. Auch Elektronikkomponenten wie der Raspberry Pi, Sensoren und die Kamera wurden teilweise aus bereits vorhandenen Beständen eingebracht. Die modulare Bauweise erlaubte es, einzelne Bauteile mehrfach zu verwenden und flexibel anzupassen. Beispielsweise konnte die Grundplatte mehrfach verändert werden, ohne ersetzt werden zu müssen. Auch das Konzept, mehrere kleine statt einer grossen Leiterplatte zu verwenden, wurde aus Nachhaltigkeitsgründen beibehalten.
@@ -73,34 +76,50 @@ Die \acrshort{mdf}-Grundplatten sind in dieser Menge als Privatperson schwer zu 
 Das Gesamtgewicht des Fahrzeugs beträgt \textbf{1.262 Kg}. In folgender Tabelle \ref{tab:kritische-mat} werden die drei grössten Material-Positionen in Kilogramm und Prozent des Gesamtgewichtes aufgelistet, gefolgt von einer Beschreibung der Recyclingfähigkeit, Entsorgung und/oder Abfallbehandlung dieser Materialien.
 
 \begin{table}[h]
-
     \centering
-    \caption{Material-Positionen nach Gewichtsanteil}
-    \begin{tabular}{l c c p{10cm}}
+    \begin{tabular}{c c c}
     \toprule
-    Material & Gewicht  & Anteil (\%) & Beschreibung der Recyclingfähigkeit/Entsorgung \\
+    Material & Gewicht  & Anteil (\%)\\
     \midrule
-    \acrshort{mdf} & 0.166 Kg & 13\% & Recycelbar aber ist schwierig und teuer \cite{support-2024}\\
-    \acrshort{pla} & 0.252 Kg & 20\% & Gut Recycelbar \\
-    Batterie & 0.202 Kg & 16\% & Recycelbar aber ist schwierig und teuer\cite{regan-2023} \\
+    \acrshort{mdf} & 0.166 Kg & 13\% \\
+    \acrshort{pla} & 0.252 Kg & 20\% \\
+    Batterie & 0.202 Kg & 16\%   \\
     \bottomrule
     \end{tabular}
+    \caption{Material-Positionen nach Gewichtsanteil}
     \label{tab:kritische-mat}
 \end{table}
 
 
+\paragraph{\acrlong{mdf}}
+\acrshort{mdf} besteht aus feinst zerfaserten Holzresten, die unter hohem Druck und unter Zusatz von Leimharzen verpresst werden. Die Herstellung ist energieintensiv, da Holz zerkleinert und mit Harzen verpresst wird. Der Rohstoff Holz ist jedoch nachwachsend, was die Ökobilanz verbessert insbesondere wenn Holzabfälle verwendet werden. Emissionen durch Bindemittel (z. B. Formaldehyd) sind problematisch.\cite{support-2024}
+Der Herstellungsprozess ist energieintensiv und durch den hohen Anteil an Kunstharzen ökologisch problematisch. Zudem ist MDF nur bedingt recycelbar, da die Verklebung mechanische Trennung erschwert und thermische Verwertung Schadstoffe freisetzen kann\cite{support-2024}
 
-\begin{table}
-    \centering
-    \begin{tabular}{ccccc}
-         &  &  &  & \\
-         &  &  &  & \\
-         &  &  &  & \\
-         &  &  &  & \\
-    \end{tabular}
-    \caption{Caption}
-    \label{tab:my_label}
-\end{table}
+\textit{Recyclingfähigkeit:} MDF nur bedingt recycelbar, da die Verklebung mechanische Trennung erschwert und thermische Verwertung Schadstoffe freisetzen kann
+
+\textit{Entsorgung und Abfahllbehandlung}: Verbrennung in speziellen Anlagen ist üblich, da MDF
+nicht auf Deponien entsorgt werden sollte. Bindemittel erfordern strenge Emissionskontrollen, um Schadstoffe zu minimieren.\cite{mdf-entsorgung}
+
+
+\paragraph{\acrlong{pla}}
+
+Ist ein biobasierter Kunststoff, der aus nachwachsenden Rohstoffen wie Maisstärke hergestellt wird. PLA ist theoretisch biologisch abbaubar, dies jedoch nur unter industriellen Kompostierbedingungen.  (check, ai)
+Gut Recycelbar
+(quelle)
+
+\textit{Recyclingfähigkeit:} In der Praxis ist die Recyclinginfrastruktur für PLA begrenzt, weshalb es häufig verbrannt wird. PLA ist technisch recycelbar, aber die Infrastruktur dafür ist begrenzt.
+Es kann in speziellen Anlagen zu neuen PLA-Produkten verarbeitet werden. \cite{pla-recycling}
+
+\textit{Entsorgung und Abfahllbehandlung:} PLA ist biologisch abbaubar unter industriellen Kompostierungsbedingungen. In der Natur zersetzt es sich nur langsam. Entsorgung erfolgt
+idealerweise in Kompostieranlagen oder durch Recycling; Verbrennung ist möglich, setzt
+aber CO2 frei.\cite{pla-details}
+
+
+\paragraph{Batterie}
+text
+Recycelbar aber ist schwierig und teuer\cite{regan-2023}
+
+
 
 \subsubsection{Nachhaltig-kritischste Materialien}
 % Auflistung und Beschreibung der nachhaltig-kritischsten Materialien
