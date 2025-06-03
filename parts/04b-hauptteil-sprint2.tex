@@ -302,6 +302,8 @@ Die Klasse bietet zudem die Möglichkeit, das erkannte Ergebnis mit Winkeln und 
     \label{fig:angle-reader-debug-output}
 \end{figure}
 
+Die Winkel der ausgehenden Linien koennen sehr genau gemessen werden. Dies hilft dem Liniensensor, sobald der Roboter weiterfahren kann. Der Roboter wird sehr genau ausgerichtet, dies hilft dabei, die Linie zu finden und nicht moeglicherweise eine Bodenfuge als Linie zu erkennen. Damit wird Risiko 5 (Bodenfugen als Linie gedeutet) mitigiert.
+
 \textbf{Fehlende Linien erkennen und darauf reagieren}
 
 Falls kein Knoten, zu viele Knoten, oder Kanten oder Kanten in falschen Winkelbereichen detektiert werden, wird folgender mehrstufiger Mechanismus aktiviert, um ein fehlerhaftes Einlesen auszuschliessen, und den Prozess der Winkelerkennung zu wiederholen:

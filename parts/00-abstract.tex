@@ -2,10 +2,10 @@
 
 
 %Zielsetzung, Problemstellung
-Die vorliegende Dokumentation beschreibt die Umsetzung des in \acrfull{pren1} entwickelten Konzepts. Der autonome Wegfindungsroboter wird im Rahmen des Moduls \acrfull{pren2} an der Hochschule Luzern gebaut und getestet. Der Roboter muss in der Lage sein autonom ein linienbasiertes Wegenetz zu durchqueren, Hindernisse zu erkennen und zu versetzen sowie einen zuvor definierten Zielknoten anhand von Bildverarbeitung zuverlässig zu finden. Die Risikobewertung und die Sprintplanung dienen als zentrale Projektmanagement Tools.  
+Die vorliegende Dokumentation beschreibt die Umsetzung des in Produktentwicklung 1 (PREN 1) entwickelten Konzepts. Der autonome Wegfindungsroboter wird im Rahmen des Moduls Produktentwicklung 2 (PREN 2) an der Hochschule Luzern gebaut und getestet. Der Roboter muss in der Lage sein autonom ein linienbasiertes Wegenetz zu durchqueren, Hindernisse zu erkennen und zu versetzen sowie einen zuvor definierten Zielknoten anhand von Bildverarbeitung zuverlässig zu finden. Die Risikobewertung und die Sprintplanung dienen als zentrale Projektmanagement Tools.  
 
 % Methoden
-Ausgehend von der Produktbeschreibung werden die einzelnen Systemkomponenten am fertigen System implementiert. Erkenntnisse aus Testaufbauten aus \acrshort{pren1} wurden berücksichtigt. Wurde vom ursprünglichen Konzept abgewichen wird darauf konkret eingegangen und begründet. 
+Ausgehend von der Produktbeschreibung werden die einzelnen Systemkomponenten am fertigen System implementiert. Erkenntnisse aus Testaufbauten aus PREN 1 wurden berücksichtigt. Wurde vom ursprünglichen Konzept abgewichen wird darauf konkret eingegangen und begründet. 
 
 Eine Herausforderung war das korrekte Auslesen der Encoder-Motoren die für die Drehung des Roboters verantwortlich sind. Für die exakte Drehung zu bestimmen wurde schliesslich ein Gyroskop verwendet. Die Steuerung des Roboters erfolgt durch eine Kombination aus dem Mikrocontroller Tiny K22 für zeitkritische Steueraufgaben und einem Raspberry Pi für die Bildverarbeitung und Navigation. Während der Implementierung und dem Testen wurden erkannte Probleme durch iterative Anpassungen minimiert.
 

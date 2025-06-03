@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%Epic 12%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ziel erreicht Ausgabe}
+\subsection{Ziel erreichen}
 
 Es ist das gefordert, dass der Roboter sicher weiss, dass er sich im Ziel befindet und dies erkenntlich gibt mit einem Buzzer Geräusch, welches schon im vorangegangenen Kapitel \ref{peripherie-buzzer} beschriebene ist.
 
@@ -10,7 +10,7 @@ Es wurde bereits in \acrshort{pren1} die Methode gewählt, mit welcher die Buchs
 
 Wie geplant wird der \gls{orb-gloss} Algorithmus verwendet, der in der OpenCV Library vorhanden ist. Es wird die TargetNodeReader Klasse im NodeReader Modul erstellt (siehe Grafik \ref{fig:nav-arch}). Sobald eine Instanz dieser Klasse erstellt wird, lernt sie die Konturen von den Buchstaben A, B und C und speichert diese in Attributen.
 Dies lernt sie von Beispielbildern von den schwarzen Buchstaben auf weissem Hintergrund.
-Jedes Mal, wenn der Roboter einen Knoten fotografiert, wird dieses Bild verzerrt, um den Knoten in Vogelperspektive anzuzeigen (siehe Kapitel \ref{outgoing-lines}) und dann wird detektiert, ob sich darauf der Buchstabe des Zielknotens befindet.
+Jedes Mal, wenn der Roboter einen Knoten fotografiert, wird dieses Bild verzerrt, um den Knoten in Vogelperspektive anzuzeigen (siehe Kapitel \ref{outgoing-lines}) und dann wird detektiert, ob sich darauf der Buchstabe des Zielknotens befindet. Falls der Zielknoten sich darauf befindet, macht der Roboter ein Buzzergeraeusch (siehe Kapitel \ref{peripherie-buzzer}).
 
 Auf folgender Grafik ist die Klasse in Verhältnis zu dem Navigator dargestellt.
 

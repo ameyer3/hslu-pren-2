@@ -48,11 +48,11 @@ Die folgende Tabelle \ref{table:risks} zeigt alle Risiken detailliert auf.  Jede
   \hline
       4& 1 Minute reicht nicht zum Aufbau.& Testdurchfläufe und einfaches Interface.&Zufälliges Ziel wird gewählt von SW, falls bei Start keines ausgewählt.&15&3 &\ref{zieleingabe}\\
   \hline
-      5&Bodenfugen werden als Linie erkannt. & Testdurchfläufe in realistischen Umgebungen.&Kamera hilft Linien zu erkennen, hilft Roboter gerade zu stellen.&15&5& \ref{outgoing-lines}\\
+      5&Bodenfugen werden als Linie erkannt. & Testdurchfläufe in realistischen Umgebungen.&Kamera hilft Linien zu erkennen, hilft Roboter gerade zu stellen.&15&5& \makecell{\ref{Liniensensor auslesen} \\ \ref{outgoing-lines}}\\
   \hline
       6& Liniensensor fehlerhaft. &Sichere Implementation mit Tests.& Encoder Motoren.&8&3 &\ref{Liniensensor auslesen}\\
   \hline
-      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&4& \makecell{\ref{model-results}\\ \ref{navigation-arch}}
+      7& Ein Objekt wird fälschlicherweise erkannt. &Knoten erkennen und nicht nur Hindernisse.&Roboter ist schnell genug, um Wege auszuprobieren und hat einen Trial \& Error Modus, der dies erlaubt.&16&4& \makecell{\ref{model-results} \\ \ref{navigation-arch}}
 \\
   \hline
       8&Hindernisse werden beim Anheben verschoben. &Robuste Greifmethode wählen und testen.&&12&8& \\
