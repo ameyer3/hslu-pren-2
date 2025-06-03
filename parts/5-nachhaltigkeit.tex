@@ -1,7 +1,8 @@
 \section{Nachhaltigkeit}
-TODO TIMO (noch nicht fertig Timo)
 
-Trotz der Herausforderungen in der Umsetzung konnte ein grosser Teil der in PREN1  definierten Nachhaltigkeitsziele (referenzieren) erfüllt werden. Das Projekt hat gezeigt, dass auch in technisch anspruchsvollen Studierendenprojekten nachhaltiges Handeln möglich und praktikabel ist.
+Trotz der Herausforderungen in der Umsetzung die in \acrshort{pren1}  definierten Nachhaltigkeitsziele \textbf{(referenzieren)} erfüllt werden. Das Projekt hat gezeigt, dass auch in technisch anspruchsvollen Studierendenprojekten nachhaltiges Handeln möglich und praktikabel ist.
+
+Die ökologischen Auswirkungen eines Prototypes geringer als die einer Serienfertigung. Aufgrund von kleineren Bestellungen aus Einzelteilen und Wiederverwendung
 
 \subsection{3R-Prinzip: Reduce, Reuse, Recycle}
 Die in PREN1 definierten Nachhaltigkeitsprinzipien,insbesondere die 3 R (Reduce, Reuse, Recycle), wurden auch in der praktischen Umsetzung in PREN2 angewendet.  
@@ -12,16 +13,15 @@ Die in PREN1 definierten Nachhaltigkeitsprinzipien,insbesondere die 3 R (Reduce,
 
 % Wie im pren1
 
-Zur weiteren Reduktion des Ressourcenverbrauchs wurde auf papierlose Zusammenarbeit gesetzt. Die gesamte Kommunikation und Dokumentation erfolgte digital. Eine eigene Overleaf-Instanz für die LaTeX-Dokumentation wurde auf einem bereits laufenden Server betrieben, wodurch zusätzlicher Stromverbrauch vermieden werden konnte. Auch das tägliche PDF-Building der Dokumentation wurde bewusst auf ein Minimum reduziert.
+Zur Reduktion des Ressourcenverbrauchs wurde auf papierlose Zusammenarbeit gesetzt. Die gesamte Kommunikation und Dokumentation erfolgte digital. Die Overleaf-Instanz für die LaTex-Dokumentation, welche bereits im \acrshort{pren1} verwendet wurde, wurde weiterhin auf dem bereits laufenden Server betrieben.
 
-Viele Bauteile wie Sensoren, Steckbrettmaterialien, PLA-Filament oder Endschalter waren bereits im Besitz einzelner Teammitglieder und konnten direkt verwendet werden. Dadurch konnten nicht nur unnötige Bestellungen, sondern auch Verpackungsmaterial, Transportwege und Kosten reduziert werden.
-
+Viele Bauteile wie Sensoren, Steckbrettmaterialien, \acrshort{pla}-Filament oder Endschalter waren bereits im Besitz einzelner Teammitglieder und konnten direkt verwendet werden. Dadurch minimierten sich zusätzliche Bestellungen und Verpackungsmaterialien, Transportwege und Kosten konnten erfolgreich reduziert werden.
 
 \subsubsection{Reuse}
 
-Im Bereich Reuse wurden zahlreiche Elemente des Prototypings direkt in den finalen Roboter übernommen. Dazu zählen etwa die Räder, der Kameraturm und der Greifer. Auch Elektronikkomponenten wie der Raspberry Pi, Sensoren und die Kamera wurden teilweise aus bereits vorhandenen Beständen eingebracht. Die modulare Bauweise erlaubte es, einzelne Bauteile mehrfach zu verwenden und flexibel anzupassen. Beispielsweise konnte die Grundplatte mehrfach verändert werden, ohne ersetzt werden zu müssen. Auch das Konzept, mehrere kleine statt einer grossen Leiterplatte zu verwenden, wurde aus Nachhaltigkeitsgründen beibehalten.
+Im Bereich Reuse wurden zahlreiche Elemente des Prototypings erfolgreich direkt in den finalen Roboter übernommen. Dazu zählen etwa die Räder, der Kameraturm und der Greifer. Auch Elektronikkomponenten wie der Raspberry Pi, Sensoren und die Kamera wurden teilweise aus bereits vorhandenen Beständen eingebracht. Die modulare Bauweise erlaubte es, einzelne Bauteile mehrfach zu verwenden und flexibel anzupassen. Beispielsweise konnte die Grundplatte mehrfach verändert werden, ohne ersetzt werden zu müssen. Auch das Konzept, mehrere kleine statt einer grossen Leiterplatte zu verwenden, wurde aus Nachhaltigkeitsgründen beibehalten.
 
-
+Die Elektronik-Komponenten können nach der Zerlegung des Roboters mehrheitlich für weitere Projekte verwendet werden.
 
 Die Grundplatte des Prototyps aus PREN1 wurde so konstruiert, dass sie modular erweiterbar ist. Zusätzliche Bohrungen und Nuten konnten während der Entwicklung fortlaufend eingebracht werden, ohne dass eine neue Platte gefertigt werden musste. Die Nachbearbeitung mittels Laserschneidmaschine verlief dabei ohne technische Probleme. Dadurch konnte der Materialeinsatz auf eine einzige Grundplatte beschränkt und die Entstehung von Abfall minimiert werden. Eine Übersicht der verschiedenen Bearbeitungszustände ist in Abbildung \ref{fig: Weiterentwicklung der Grundplatte} dargestellt.
 
@@ -59,27 +59,47 @@ Die Grundplatte des Prototyps aus PREN1 wurde so konstruiert, dass sie modular e
 
 \subsubsection{Recycle}
 
-Durch die modulare Bauweise ist der Roboter nach Gebrauch auch wieder komplett zerleg
-bar. Materialien und Komponenten, welche nicht wiederverwendet werden können, können einzeln recycelt werden.
+Materialien, die nicht wiederverwendet werden können, sollten
+recycelt werden, damit sie in den Rohstoffkreislauf zurückgeführt werden
+
+Durch die modulare Bauweise ist der Roboter nach Gebrauch auch wieder komplett zerlegbar. Materialien und Komponenten, welche nicht wiederverwendet werden können, können einzeln recycelt werden.
+
+Die \acrshort{mdf}-Grundplatten sind in dieser Menge als Privatperson schwer zu recyclen, weshalb sie nicht recyclet wird. Die Komponenten aus \acrshort{pla} werden demontiert und in eine Recycling-Sammlung gegeben werden wo das Material rezykliert wird.
 
 \subsection{Ökobilanz und Materialanalyse}
 
 \subsubsection{Betrachtung hinsichtlich Ökobilanz}
 % Beschreibung des Gesamtgewichtes und der drei größten Material-Positionen
-Das Gesamtgewicht des Fahrzeugs beträgt \textbf{1.262 Kg}. In folgender Tabelle werden die drei grössten Material-Positionen in Kilogramm und Prozent des Gesamtgewichtes aufgelistet, gefolgt von einer Beschreibung der Recyclingfähigkeit, Entsorgung und/oder Abfallbehandlung dieser Materialien.
+Das Gesamtgewicht des Fahrzeugs beträgt \textbf{1.262 Kg}. In folgender Tabelle \ref{tab:kritische-mat} werden die drei grössten Material-Positionen in Kilogramm und Prozent des Gesamtgewichtes aufgelistet, gefolgt von einer Beschreibung der Recyclingfähigkeit, Entsorgung und/oder Abfallbehandlung dieser Materialien.
 
 \begin{table}[h]
-\centering
-\caption{Material-Positionen nach Gewichtsanteil}
-\begin{tabular}{l c c p{5cm}}
-\toprule
-Material & Gewicht  & Anteil (\%) & Beschreibung der Recyclingfähigkeit/Entsorgung \\
-\midrule
-\acrshort{mdf} & 0.166 Kg & 13\% & Recycelbar aber schwierig \\
-\acrshort{pla} & 0.252 Kg & 20\% & Gut Recycelbar \\
-Batterie & 0.202 Kg & 16\% & Recyceln möglich aber ist teuer \\
-\bottomrule
-\end{tabular}
+
+    \centering
+    \caption{Material-Positionen nach Gewichtsanteil}
+    \begin{tabular}{l c c p{10cm}}
+    \toprule
+    Material & Gewicht  & Anteil (\%) & Beschreibung der Recyclingfähigkeit/Entsorgung \\
+    \midrule
+    \acrshort{mdf} & 0.166 Kg & 13\% & Recycelbar aber ist schwierig und teuer \cite{support-2024}\\
+    \acrshort{pla} & 0.252 Kg & 20\% & Gut Recycelbar \\
+    Batterie & 0.202 Kg & 16\% & Recycelbar aber ist schwierig und teuer\cite{regan-2023} \\
+    \bottomrule
+    \end{tabular}
+    \label{tab:kritische-mat}
+\end{table}
+
+
+
+\begin{table}
+    \centering
+    \begin{tabular}{ccccc}
+         &  &  &  & \\
+         &  &  &  & \\
+         &  &  &  & \\
+         &  &  &  & \\
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
 \end{table}
 
 \subsubsection{Nachhaltig-kritischste Materialien}
