@@ -6,9 +6,27 @@ In diesem Kapitel wird die Umsetzung des in \acrshort{pren1} erarbeiteten Konzep
 
 Die physischen Anforderungen an den Roboter konnten vollständig erfüllt werden. Das maximal zulässige Gewicht von 2 kg wurde mit einem Gesamtgewicht von 1.262 kg, insbesondere durch den Einsatz von Leichtbaustrukturen, deutlich unterschritten. Die maximale Baugrösse 300x300x800mm kann in der Startkonfiguration mit Greifer in Ausgangsstellung eingehalten werden. Zusätzlich erforderliche Komponenten wie ein Notausschalter, ein Eingabetaster zur Zieleingabe sowie eine Statusanzeige wurden erfolgreich integriert.
 
-Die Anforderung 1.6 "Das Fahrzeug muss in der Lage sein das Hindernis mit  einer Masse von 300g anzuheben und im Umkreis von 20mm am alten Ort abzusetzen", konnte nur teilweise erreicht bzw. getestet werden. Der Anhebemechanismus des Greifers konnte mit dem originalen Hindernis erfolgreich getestet werden. (Siehe Bilder Anheben) Da die Systemintegration jedoch nicht vollständig durchgeführt werden konnte, konnte das Aufheben, Drehen und Absetzen als Prozess nicht getestet werden.
+Die Anforderung 1.6 'Das Fahrzeug muss in der Lage sein das Hindernis mit  einer Masse von 300g anzuheben und im Umkreis von 20mm am alten Ort abzusetzen', konnte nur teilweise erreicht bzw. getestet werden. Der Anhebemechanismus des Greifers konnte mit dem originalen Hindernis erfolgreich getestet werden. (Abb. \ref{fig:greifer-open}/ \ref{fig:griefe-rclose}) Da die Systemintegration jedoch nicht vollständig durchgeführt werden konnte, konnte das Aufheben, Drehen und Absetzen als Prozess nicht getestet werden.
 
-TO DO BILDer GREIFER EINFÜGEN angehoben und offen
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[b]{0.49\textwidth}
+  \centering
+    \includegraphics[width=\textwidth, angle=-90]{assets/MT/greifer-open.jpg}
+    \caption{Greifer offen}
+    \label{fig:greifer-open}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.49\textwidth}
+  \centering
+  \includegraphics[width=\textwidth, angle=-90]{assets/MT/greifer-close.jpg}
+  \caption{Greifer geschlossen}
+  \label{fig:griefe-rclose}
+\end{minipage}
+\end{figure}
+
+
 
 Das folgen der Linie erfolgt wie in PREN1 geplant mit einem Liniensensor der aus mehreren Phototransistoren besteht. Die Regelung der Motoren erfolgt mit Hilfe eines PD-Reglers. Der PD-Regler konnte auf dem Testpracour geprüft werden und ist in der Lage der Linie zu folgen und auf einem Knoten anzuhalten. Der Roboter ist auch in der Lage eine bestimmte Distanz zu fahren.
 
@@ -16,7 +34,7 @@ Die Bilderkennung und der Wegfindungsalgorithmus  konnten mithilfe des Kamerates
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=7cm]{assets/IT/yolo/confusion_matrix.png}
+\includegraphics[width=10cm]{assets/IT/yolo/confusion_matrix.png}
 \caption{Confusion Matrix Bilderkennung}
 \label{fig:conf-matrix-model}
 \end{figure}

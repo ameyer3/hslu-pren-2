@@ -25,7 +25,24 @@ Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgend
 \end{figure}
 
 Es wurde folgender Roboter gebaut, der die geplanten Komponenten enthält.
-TODO BILD ROBOTER
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/PREN2_Roboter_front.jpg}
+    \caption{Roboter von vorne}
+    \label{fig:robi-front}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{assets/PREN2_Roboter_back.jpg}
+    \caption{Roboter von hinten}
+    \label{fig:robi-back}
+  \end{minipage}
+\end{figure}
+
 
 Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dieses Ablaufdiagramm stammt aus \acrshort{pren1} und dient zur Erinnerung, genauere Informationen können aus der angehängten PREN 1 Dokumentation entnommen werden.
 
@@ -70,7 +87,7 @@ Im nachfolgenden Kapitel wird auf die Konstruktion der mechanischen Komponenten 
 \label{fig: Lenkrollenhalter V2}
 \end{figure}
 
-Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In Abbildung \ref{fig: Motorflansch V1/V2} sieht man in gelb die erste Version des Motorflansches wie er in PREN 1 verbaut wurde. Blau eingefärbt ist die finale Version des Flansches mit einer Verstrebung. 
+Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In Abbildung \ref{fig: Motorflansch V1/V2} sieht man in gelb die erste Version des Motorflansches wie er in PREN 1 verbaut wurde. Blau eingefärbt ist die finale Version des Flansches mit einer Verstrebung. Auf Abbildung \ref{fig: Motorentest} wird die Konstruktion am Roboter gezeigt.
 
 \begin{figure}[H]
 \centering
@@ -100,7 +117,7 @@ Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung je
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{assets/MT/Layer_Batterie Fach.png}
-\caption{Layerrichtung Batteriefach}
+\caption{FDM Layerrichtung Batteriefach}
 \label{Layerrichtung Batteriefach}
 \end{figure}
 
@@ -149,12 +166,27 @@ Um Störungen durch Fremdlicht zu verhindern wurde eine Abdeckung konstruiert, d
 
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\linewidth]{assets//MT/Sensor Abdeckung.png}
-    \caption{Liniensensor Abdeckung}
-    \label{fig:Liniensensor Abdeckung}
+ 
 \end{figure}
 \newpage
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+    \includegraphics[width=\textwidth]{assets//MT/Sensor Abdeckung.png}
+    \caption{Liniensensor Abschirmung}
+    \label{fig:Liniensensor Abdeckung}
+\end{minipage}
+\hspace{0.05\textwidth} % Abstand zwischen den Bildern
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth, angle=90]{assets/MT/liniensensor-beseli.jpg}
+  \caption{Abschirmung am Roboter}
+  \label{fig:abschirmung-robi}
+\end{minipage}
+\end{figure}
+
 
 \subsubsection{Ultraschall}
 
@@ -203,11 +235,23 @@ Der Winkel und die Höhe der Kamera wurden in \acrshort{pren1} an dem Testaufbau
 
 Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23\textdegree\ beträgt. Ebenfalls wichtig ist, dass die Linsenhöhe 242mm über dem Boden beträgt. 
 
- \begin{figure}[H]
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[b]{0.58\textwidth}
 \centering
 \includegraphics[width= \textwidth ]{assets/MT/Sichtfeld_Roboter.png}
 \caption{Skizze der Funktionsmasse für die Kamerabefestigung}
 \label{fig:Skizze der Funktionsmasse für die Kamerabefestigung}
+
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.41\textwidth}
+  \centering
+  \includegraphics[width=\textwidth, angle=-90]{assets/MT/kamerahalterung.jpg}
+  \caption{Kamerahalterung am Roboter angebracht}
+  \label{fig:kameraturm-robi}
+\end{minipage}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%Epic 1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -235,10 +279,6 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} m
 \caption{Verteiler PCBA}
 \label{fig: Verteiler PCBA}
 \end{figure}
-
-TODO nachfolgende Linie korrekt? Oder Ausversehen eingefügt wroden?\\
-\gls{pren2}
-
 
 
 \subsubsection{Pinout und Softwaregrundlagen}
@@ -386,16 +426,13 @@ Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die e
 \end{figure}
 
 
-\subsubsection{Liniensensor mit Abschirmung anbringen}
+Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht (siehe Abbildung \ref{fig:linsen-robi}). Dank diesem Aufbau konnte mit der weiteren Implementierung fortgefahren werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
 
-Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht (siehe Abbildung \ref{fig:enter-label}). Dank diesem Aufbau konnte mit der weiteren Implementierung fortgefahren werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\linewidth]{Sensor montiert.png}
-    \caption{Sensor montiert}
-    \label{fig:enter-label}
+ \begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth ]{assets/MT/liniensensor-robi.jpg}
+\caption{Liniensensor am Roboter}
+\label{fig:linsen-robi}
 \end{figure}
 
 
