@@ -264,7 +264,9 @@ Der Servomotor wurde bereits in Pren 1 getestet und dokumentiert. Durch die Erge
 \end{figure}
 \subsubsection{Wegstellbefehl}
 
-Falls der Roboter sich noch auf dem vorherigen Knoten befindet und die Kamera die Barriere erkannt hat, fährt er soweit, bis der Ultraschall die Barriere bemerkt auf 10cm Abstand. 
+Der Ablauf des Beseitigen eines Hindernisses ist in folgendem Text erklaert und auf der folgenden Grafik \ref{fig:wegstellbefehl} bildlich aufgezeigt.
+
+Falls der Roboter sich noch auf dem vorherigen Knoten befindet und die Kamera die Barriere erkannt hat, fährt er soweit, bis der Ultraschall die Barriere bemerkt auf 7cm Abstand. 
 Falls die Kamera keine Barriere im Voraus erkennt und der Ultraschall ein Objekt, das als Barriere erkannt wird, erkennt, hält der Roboter ebenfalls 10cm zuvor.
 
 Dann dreht das Fahrzeug sich um und fährt rückwärts auf die Barriere zu, bis der Endschalter am Greifer betätigt wird. Bei Betätigung wird das Fahrzeug gestoppt und der Greifer hebt das Hindernis an.
@@ -273,6 +275,13 @@ Nach dem erfolgreichen Anheben des Objekts, dreht sich das Fahrzeug zurück in s
 Der Wert der Nachkorrektur ist 12cm und wurde experimentell ermittelt. Diese Experimente sind im Anhang im Kapitel \nameref{hindernis-nachkorrektur} zu finden.
 
 Nach der Nachkorrektur stellt der Roboter das Hindernis wieder ab und fährt, bis der nächste Knoten erkannt wird.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{assets/ET/wegstellbefehl.png}
+    \caption{Prozess Wegstellbefehl}
+    \label{fig:wegstellbefehl}
+\end{figure}
 
 
 \newpage
