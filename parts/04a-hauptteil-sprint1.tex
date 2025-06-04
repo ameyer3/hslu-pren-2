@@ -2,7 +2,7 @@
 
 In diesem Teil werden die einzelnen Schritte beschrieben, um den Roboter zu bauen. Dabei wird sich an dem Konzept von \acrshort{pren1} orientiert. Falls von dem Konzept abgewichen wird, wird dies erwähnt und begründet.
 
-Die folgenden Kapitel sind unterteilt nach den einzelnen Funktionen des Roboters. Dabei werden die Tätigkeiten beschrieben, inklusive Testprotokolle und -beschriebe.
+Die folgenden Kapitel sind unterteilt nach den einzelnen Funktionen des Roboters. Die einzelnen Funktionen und was diese enthalten, ist dem Projektplan in Kapitel \nameref{projektplanung} zu entnehmen. Pro Funktion werden die Tätigkeiten beschrieben, inklusive Testprotokolle und -beschriebe.
 
 TODO: Risikoverweise (welches Risiko vermindert/behoben? \\
 TODO: Testprotokolle \\
@@ -11,11 +11,9 @@ TODO: Komponentendiagramme mit Schnittstellen falls sinnvoll \\
 
 \subsection{Produktbeschreibung}
 
-In diesem Kapitel wird der Roboter als Gesamtsystem beschrieben. Dabei wird das Funktionsmuster mit einem Ablaufdiagramm beschrieben und die einzelnen physischen und elektronischen Komponenten werden in einer Zeichnung, respektive einem Blockdiagramm aufgezeigt.
+In diesem Kapitel wird der Roboter als Gesamtsystem beschrieben.
+Damit alle nötigen Teilfunktionen umgesetzt werden können, wird ein Produkt mit folgenden Komponenten auf Grafik \ref{fig:components} gebaut. Die Grafik ist zeigt lediglich das Konzept mit den nötigen Komponenten und nicht das tatsächliche Aussehen des Roboters.
 
-
-
-Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgenden Komponenten auf Grafik \ref{fig:components} gebaut. Die Grafik ist zeigt lediglich das Konzept mit den nötigen Komponenten und nicht das tatsächliche Aussehen des Roboters.
 
 \begin{figure}[H]
 \centering
@@ -25,6 +23,8 @@ Damit dieses Funktionsmuster umgesetzt werden kann, wird ein Produkt mit folgend
 \end{figure}
 
 Es wurde folgender Roboter gebaut, der die geplanten Komponenten enthält.
+
+Der Servomotor steuert den Greifer an, der die Barriere anheben kann, um sie zu beseitigen. Der Liniensensor sorgt dafür, dass der Roboter nicht von der Linie abkommt und erkennt, wenn er sich auf einem Knoten befindet. Der Ultraschallsensor soll bemerken, wenn der Roboter sich nahe an einer Barriere befindet. Mit der Kamera werden Bilder gemacht, die mit \acrfull{ai} ausgelsen werden, um herauszufinden, ob sich auf einem Weg Objekte befinden.
 
 \begin{figure}[H]
 \centering
@@ -87,7 +87,9 @@ Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In Abbildung 
 \subsubsection{Montage der Elektronischen Komponenten}
 \label{Montage der Elektronischen Komponenten}
 
-Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder Raspberry Pi werden nicht direkt auf die Grundplatte montiert, sondern auf Träger, welche anschliessend auf die Grundplatte geschraubt werden. Die Träger wurden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. (siehe Abbildung \ref{fig: Träger für elektronische Komponenten}) Dieser Aufbau hatte in der frühen Testphase den Vorteil, dass alle elektronischen Komponenten provisorisch platziert werden konnten, ohne einen Kurzschluss zu riskieren. 
+
+Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder Raspberry Pi werden nicht direkt auf die Grundplatte montiert, sondern auf Trägern, welche anschliessend auf die Grundplatte geschraubt werden. Die Träger sind auf der Abbildung \ref{fig: Träger für elektronische Komponenten} in schwarz sichtbar; es ist das schwarze \acrfull{pla} Gerüst unter dem grünen Raspberry Pi. Sie wurden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. 
+Dieser Aufbau hatte in der frühen Testphase den Vorteil, dass alle elektronischen Komponenten provisorisch platziert werden konnten, ohne einen Kurzschluss zu riskieren. 
 
 \begin{figure}[H]
 \centering
@@ -112,7 +114,7 @@ Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung je
 \subsubsection{Greifer konstruieren}
 \label{Greifer konstruieren}
 
-Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft und den Lagerstellen. Bei der Implementierung des Greifers musste darauf geachtet werden, dass die Lagerstellen nicht verschoben werden. In Abbildung \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man die für die Funktion wichtigsten Masse am Versuchsaufbau und am fertigen Roboter. Die für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
+Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft und den Lagerstellen. Dies ist detailliert beschrieben in der Dokumentation von \acrshort{pren1}. Bei der Implementierung des Greifers musste darauf geachtet werden, dass die Lagerstellen nicht verschoben werden. In Abbildung \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man die für die Funktion wichtigsten Masse am Versuchsaufbau und am fertigen Roboter. Die für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
 
 \begin{figure}[H]
   \centering
@@ -259,7 +261,7 @@ die vom \gls{tinyk22} erfasst und verarbeitet werden sollen, entsprechend verbun
 \label{fig: Verteiler PCB}
 \end{figure}
 
-Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} mehrere Exemplare vorhanden. Das PCB zusammen mit dem \gls{tinyk22} ist auf Grafik \ref{fig: Verteiler PCBA} gezeigt. Somit ist das Risiko der kaputten Elektroteile nicht mehr relevant.
+Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} mehrere Exemplare vorhanden. Das PCB zusammen mit dem \gls{tinyk22} ist auf Grafik \ref{fig: Verteiler PCBA} gezeigt. Somit ist das Risiko 19 der kaputten Elektroteile nicht mehr relevant.
 
 \begin{figure}[H]
 \centering
@@ -400,13 +402,24 @@ Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder z
 \subsubsection{Liniensensor auslesen}
 \label{Liniensensor auslesen}
 
-In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem \gls{tinyk22} zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von \acrfull{vcc} auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture, sollten sich die Kondensatoren je nach Reflektion des Untergrundes in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm dann auch erfolgreich festgestellt werden durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
+In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem \gls{tinyk22} zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von \acrfull{vcc} auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture, sollten sich die Kondensatoren, die sich am Liniensensor befinden, je nach Reflektion des Untergrundes in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm erfolgreich festgestellt werden, durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
+
+Auf der Abb. \ref{fig:liniensensor soll} ist die Sollposition des Liniensensors gezeigt, während des Traversieren auf der Linie. Im Konzept von \acrshort{pren1} waren jeweils vor und hinter dem Array ein zusätzlicher Sensor vorgesehen. Jedoch konnten diese nicht realisiert werden, da es nicht genügend Timer Channels zur Verfügung hatte.
+
+ \begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth ]{assets/ET/Liniensensor/linesensor.png}
+\caption{Sollposition Liniensensor während des Fahrens}
+\label{fig:liniensensor soll}
+\end{figure}
 
 
 \subsubsection{Linie folgen mit PD-Regelung}
 \label{Linie folgen mit PD-Regelung}
 
-Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abbildung \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit möglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt. Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
+Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abbildung \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit möglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt.
+
+Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
 
  \begin{figure}[H]
 \centering
@@ -433,13 +446,10 @@ Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung ange
 
 \subsubsection{Liniensensor}
 
-Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. Das Erkennen ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorenwerte geprüft. Da beim erreichen des Wegpunktes im Optimalfall alle Sensoren auf der weissen Oberfläche stehen, weichen die Werte der aktuellen Ticks stark der Sollwerte ab. Somit kann ein Wegpunkt klar identifiziert werden und der Roboter kann anhalten. Auf der Abb. \ref{fig:liniensensor soll} sieht man die Sollposition des Liniensensors während des Traversieren auf der Linie. Im Konzept von \acrshort{pren1} waren jeweils vor und hinter dem Array ein zusätzlicher Sensor vorgesehen. Jedoch konnten diese nicht realisiert werden, da man nicht genügend Timer Channels zur Verfügung hatte.
+Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht.
 
+Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. 
 
- \begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth ]{assets/ET/Liniensensor/linesensor.png}
-\caption{Sollposition Liniensensor während des Fahrens}
-\label{fig:liniensensor soll}
-\end{figure}
+Das Erkennen, ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorwerten geprüft. Da beim Erreichen des Wegpunktes deutlich mehr Sensoren auf der weissen Oberfläche stehen, weichen die Werte der aktuellen Ticks stark der Sollwerte ab. Somit kann ein Wegpunkt klar identifiziert werden und der Roboter kann anhalten. Dies ist auf Abbildung TODO REF gezeigt.
 
+TODO ABBILDUNG VON \textbf{KNOTEN}

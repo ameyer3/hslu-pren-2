@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%Epic 4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Wegfindung}
 
-In diesem Kapitel wird die Umsetzung der Wegfindung beschrieben. Ziel davon ist es, dass aufgrund von einem konfigurierten Graphen der schnellste Weg gefunden werden kann und die Kommunikation zwischen Navigation und Steuerung durchgeführt werden kann.
+In diesem Kapitel wird die Umsetzung der Wegfindung beschrieben. Ziel davon ist es, dass der schnellste Weg im Graphen zum Ziel gefunden werden kann und die Kommunikation zwischen Navigation und Steuerung durchgeführt werden kann. Die einzelnen Tasks sind im Anhang im Kapitel \nameref{projektplanung} nachzulesen.
 
-Das Finden des schnellsten Weg in einem Graphen wurde bereits in PREN 1 im Simulator umgesetzt mit einem Dijkstra Algorithmus. Der Simulator wird refactored, damit möglichst viele Teile wiederverwendet werden können.
+Der Wegfindungsalgorithmus wurde bereits in PREN 1 mit einem Dijkstra Algorithmus im Simulator umgesetzt. Der Simulator wird refactored, damit möglichst viele Teile wiederverwendet werden können.
 
 \subsubsection{Wegfindungssoftware aus Simulator anpassen}
 \label{navigation-arch}
 
-Bevor der Simulator refactored wurde, wurde die neue Architektur designed für die Navigation, die auf Grafik \ref{fig:nav-arch} sichtbar ist.
+Bevor der Simulator umstrukturiert wurde, wurde die neue Architektur für die Navigation, die auf Grafik \ref{fig:nav-arch} sichtbar ist, geplant.
 
 \begin{figure}[H]
 \centering
@@ -42,7 +42,7 @@ Durch verschiedene Environment Variablen\footnote{\url{https://de.wikipedia.org/
 
 Bei jedem Update wird getestet, ob die Version noch auf allen Plattformen lauffähig ist. Falls dies nicht der Fall wäre, kann durch die Benutzung von Git einfach auf eine alte Version zurück gewechselt werden. So muss das Risiko 14 von Software Updates, die Fehler mit sich bringen, nicht mehr beachtet werden.
 
-Sowohl der Ablauf aus der Navigation selber die Berechnung der kürzesten Pfades und die interne Behandlung des Graphen sind gleicht wie in \acrshort{pren1} und sind auf den folgenden Grafiken \ref{fig:nav-navigator} und \ref{fig:nav-pathfinder} als Wiederholung gezeigt. Der Rest der einzelnen Module wird in den folgenden Kapiteln Schritt für Schritt im Detail aufgezeigt.
+Sowohl der Ablauf aus der Navigation selber die Berechnung der kürzesten Pfades und die interne Behandlung des Graphen sind gleich wie in \acrshort{pren1} und sind auf den folgenden Grafiken \ref{fig:nav-navigator} und \ref{fig:nav-pathfinder} als Wiederholung gezeigt. Der Rest der einzelnen Module wird in den folgenden Kapiteln Schritt für Schritt im Detail aufgezeigt.
 
 \begin{figure}[H]
   \centering
@@ -61,11 +61,11 @@ Sowohl der Ablauf aus der Navigation selber die Berechnung der kürzesten Pfades
   \end{minipage}
 \end{figure}
 
-Ein grosser Unterschied von der neuen Architektur zu der Architektur des Simulators ist es, dass es eine klare Unterteilung in die einzelnen Module gibt, die die Navigation benötigt. So wird paralleles Arbeiten einfacher. Die Architektur modelliert nicht mehr die physischen Roboterteile, sondern nur noch die Navigationsteile.
+Ein grosser Unterschied von der neuen Architektur zu der Architektur des Simulators ist es, dass es eine klare Unterteilung in die einzelnen Module gibt, die die Navigation benötigt. So wird paralleles Arbeiten einfacher. Die Architektur modelliert nicht mehr die physischen Roboterteile, sondern nur noch die Navigationsteile. Die Architektur des Simluators kann in der Dokumentation von \acrshort{pren1} nachgelesen werden.
 
-Der gesamte Sourcecode zu der Navigation kann im Github-Repository (\url{https://github.com/ameyer3/hslu-pren-navigation}) oder im elektronischen Anhang gefunden werden.
+Der gesamte Sourcecode zu der Navigation kann im elektronischen Anhang als ZIP Datei gefunden werden.
 
-Wie im Simulator aus \acrshort{pren1}, wird in der Navigation ein Trial \& Error Modus implementiert. Dieser Modus wird Blind Testing Mode genannt und wird eingeschaltet, falls es wirkt, als ob der Roboter nicht mehr weiss wo er sich befindet, beziehungsweise, falls er denkt er befindet sich auf einem anderen Knoten als er es tatsächlich tut. Die folgenden Situationen sind Zeichen, dass dies der Fall ist:
+Wie im Simulator aus \acrshort{pren1}, wird in der Navigation ein Trial \& Error Modus implementiert. Dieser Modus wird Blind Testing Mode genannt. Er wird eingeschaltet, falls es wirkt, als ob der Roboter nicht mehr weiss wo er sich befindet.Die folgenden Situationen sind Zeichen, dass dies der Fall ist:
 
 \begin{itemize}
     \item Roboter detektiert mehr ausgehenden Kanten von einem Knoten als erwartet.
@@ -78,7 +78,7 @@ Im Blind Testing Mode nimmt der Roboter jedes Mal die erste Kante von links, bei
 \subsubsection{Schnittstelle Navigation und Steuerung}
 \label{interface-nav-control}
 
-Die Navigation läuft auf einem Raspberry Pi und die Steuerung läuft auf einem \gls{tinyk22}. Die beiden kommunizieren wie geplant über das UART Protokoll miteinander. Für die Kommunikation wurde eine Schnittstelle definiert. Die Navigation sendet 4 Bytes an die Steuerung und die Steuerung antwortet mit dem Statuscode in Form von einem Byte.
+Die Navigation läuft auf einem Raspberry Pi und die Steuerung läuft auf einem \gls{tinyk22}. Die beiden kommunizieren wie in \acrshort{pren1} geplant über das UART Protokoll miteinander. Für die Kommunikation wurde eine Schnittstelle definiert. Die Navigation sendet 4 Bytes an die Steuerung und die Steuerung antwortet mit dem Statuscode in Form von einem Byte.
 
 Die Instruktionen von der Navigation an die Steuerung, werden, wie in Grafik \ref{fig:interface-tiny} gezeigt, gesendet.
 
@@ -89,7 +89,7 @@ Die Instruktionen von der Navigation an die Steuerung, werden, wie in Grafik \re
 \label{fig:interface-tiny}
 \end{figure}
 
-Die einzelnen Bytes sind in der folgenden Tabelle \ref{table:interface-to-tiny} beschrieben.
+Die einzelnen Bytes sind in der folgenden Tabelle \ref{table:interface-to-tiny} beschrieben. Ein Beispiel für eine solche Nachricht ist in dem nachfolgenden Kapitel \ref{raspi-uart} gezeigt.
 
 \begin{table}[H]
 \centering
@@ -98,7 +98,7 @@ Die einzelnen Bytes sind in der folgenden Tabelle \ref{table:interface-to-tiny} 
 \hline
   \textbf{Byte} &\textbf{Bezeichnung} & \textbf{Beschreibung}\\
   \hline
-      1. Byte&1. Winkelbyte &Zeigt zusammen mit dem 2. Winkelbyte den Drehwinkel an. Die Steuerung addiert die beiden Werte und gibt den Befehl, dass der Roboter sich so weit drehen soll. In zwei Bytes aufgeteilt, da der Drehwinkel 255 übersteigen kann.\\
+      1. Byte&1. Winkelbyte &Zeigt zusammen mit dem 2. Winkelbyte den Drehwinkel an. Die Steuerung \textbf{addiert} die beiden Werte (sind zwei einzelne Bytes, separat zu lesen) und gibt den Befehl, dass der Roboter sich so weit drehen soll. In zwei Bytes aufgeteilt, da der Drehwinkel 255 übersteigen kann.\\
   \hline
 2. Byte&2. Winkelbyte&Siehe 1. Winkelbyte.\\
   \hline
@@ -164,6 +164,7 @@ Die möglichen Statuscodes von der Steuerung an der Navigation sind in folgender
 Für jedes empfangene Byte wird auf dem \gls{tinyk22} ein Interrupt generiert und anschliessend ausgelesen. Das Byte wird in einem Buffer Array zwischengespeichert. Nachdem die festgelegten 4 Bytes angekommen sind werden, die im Buffer zwischengespeicherten Bytes, in ein Array geschrieben. Aus diesem Array können dann die einzelnen Funktionen die nötigen Daten entnehmen und weiter verwenden.
 
 \textbf{Raspberry Pi Implementation}
+\label{raspi-uart}
 
 Auf dem Raspberry Pi wurde UART aktiviert, damit dieser mit dem \gls{tinyk22} kommunizieren kann.
 Für die Kommunikation wird ein uart\_connector Modul erstellt. Dieses besteht aus der UARTConnector Klasse und der ErrorHandler Klasse, die die statische Methode 'handle\_errors' enthält. Auf folgender Grafik \ref{fig:uart-connector-nav} sind die beiden Klassen im Detail dargestellt mit ihrer Beziehung zu den anderen Klassen.
@@ -189,7 +190,7 @@ Diese Daten werden auf die serielle Verbindung geschrieben.
 Danach wird gewartet, bis die Steuerung antwortet. Die Antwort wird wie in Tabelle \ref{table:statuscodes} decoded mit dem Response Enum.
 Falls es einen 0 Statuscode (erfolgreich) gibt, wird normal weitergemacht. Falls ein andere Statuscode zurückgegeben wird, wird dieser dem ErrorHandler übergeben.
 
-Der Errorhandler führt die Sequenz aus, die benötigt wird je nach Error.
+Der Errorhandler führt die Sequenz aus, die für den jeweiligen Error benötigt wird.
 
 Das Encoden der Nachrichten wurde mit mehreren Unittests getestet. Diese Unittests, sowie alle folgenden Unittests in der Navigation sind nach dem Muster `Arrange, Act, Assert'\footnote{\url{https://automationpanda.com/2020/07/07/arrange-act-assert-a-pattern-for-writing-good-tests/}} aufgebaut.
 
