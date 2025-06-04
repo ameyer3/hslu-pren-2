@@ -378,14 +378,14 @@ Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encod
 \end{figure}
 
 
-Allerdings kam bereits der Motortreiber zum Einsatz, der auch im späteren Endprodukt verbaut werden soll. Nach anfänglichen Schwierigkeiten bei der Initialisierung des Quadratur-Encoder-Modus auf dem \gls{tinyk22} konnten die ersten Meter erfolgreich zurückgelegt werden. Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder zu mitteln, um die gefahrene Strecke zu ermitteln (siehe Gleichung~\ref{eq:gefahren}).
+Es kam bereits der Motortreiber zum Einsatz, der auch im späteren Endprodukt verbaut werden soll. Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder zu mitteln, um die gefahrene Strecke zu ermitteln (siehe Gleichung~\ref{eq:gefahren}).
 
 \begin{equation}
     gefahrenMEAN_{cm} = \frac{gefahrenR_{cm} + gefahrenL_{cm}} {2} 
     \label{eq:gefahren}
 \end{equation}
 
-Mit den ersten Erkenntnissen aus dem Test konnte die Software weiter angepasst werden, um immer präzisere Fahrmanöver auszuführen. 
+Nachdem die Ticks der Encoder pro Radumdrehung herausgefunden wurden, konnte dies in der MCCAR Library in der Quad Klasse konfiguriert werden. Danach wurde mithilfe eines Lineals geprueft, ob der Roboter sich wirklich die Distanz vorbewegt, wie der Encoder das sagt. Da dies erfolgreich war, konnte die Drive LIbr
 
 ALINA NOTES:
 
