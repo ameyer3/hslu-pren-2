@@ -28,7 +28,7 @@ Es wurde folgender Roboter gebaut, der die geplanten Komponenten enthält.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{assets/robo-labeled.png}
+\includegraphics[width=\textwidth]{assets/robo-labeled.jpg}
 \caption{Roboter}
 \label{fig:robo-labeled}
 \end{figure}
@@ -271,14 +271,9 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} m
 
 \subsubsection{Pinout und Softwaregrundlagen}
 
-TODO: Die vier Bilder gehören zusammen (Formatierung)
-
 Als Grundlage für die Software diente das Projekt aus dem Modul \textit{Microcontroller Fundamentals}. Dieses enthielt ein solides Gerüst, das im Verlauf angepasst wurde. Dabei wurden verschiedene Codeabschnitte ergänzt, überarbeitet oder entfernt. Als Entwicklungsumgebung kam \textit{MCUXpresso} zum Einsatz.
 
-Die Initialisierung der Pins erfolgte auf Basis der Belegungen aus Abbildung~\ref{fig:Pinout TinyK22} und Abbildung~\ref{fig:Pinout Raspy Hat}. Im Vergleich zur ursprünglichen Planung in \gls{pren1} (siehe Abbildung~\ref{fig:Pinout PREN 1}) hat sich das finale Pinout bis zum Ende von \gls{pren2} (siehe Abbildung~\ref{fig:Pinout PREN 2}) in mehreren Punkten verändert.
-
-Drei ursprünglich für die Liniensensoren vorgesehene Pins mussten aufgrund der verwendeten Sensorbank entfallen. Der Buzzer sowie der Startknopf wurden auf das Raspberry-HAT verlagert. Zudem wurde die Richtungsauswahl von zwei auf vier Pins erweitert, um eine differenziertere Steuerung zu ermöglichen. Zusätzlich wurde eine $I^2C$-Schnittstelle implementiert, um weitere Sensoren anbinden zu können.
-
+Die Initialisierung der Pins erfolgte auf Basis der Belegungen aus Abbildung~\ref{fig:Pinout TinyK22} und Abbildung~\ref{fig:Pinout Raspy Hat}
 
 \begin{figure}[H]
 \centering
@@ -296,6 +291,10 @@ Drei ursprünglich für die Liniensensoren vorgesehene Pins mussten aufgrund der
   \label{fig:Pinout Raspy Hat}
 \end{minipage}
 \end{figure}
+
+Im Vergleich zur ursprünglichen Planung in \gls{pren1} (siehe Abbildung~\ref{fig:Pinout PREN 1}) hat sich das finale Pinout bis zum Ende von \gls{pren2} (siehe Abbildung~\ref{fig:Pinout PREN 2}) in mehreren Punkten verändert.
+
+Drei ursprünglich für die Liniensensoren vorgesehene Pins mussten aufgrund der verwendeten Sensorbank entfallen. Der Buzzer sowie der Startknopf wurden auf das Raspberry-HAT verlagert. Zudem wurde die Richtungsauswahl von zwei auf vier Pins erweitert, um eine differenziertere Steuerung zu ermöglichen. Zusätzlich wurde eine $I^2C$-Schnittstelle implementiert, um weitere Sensoren anbinden zu können. 
 
 
 \begin{figure}[H]
@@ -367,8 +366,9 @@ Tiny K22             & 5V               & 500mA                      & - \\
 \subsubsection{Motoren ansteuern und auslesen}
 \label{motoren-encoder}
 
+Um die Motoren richtig anzusteutern, wurden die Ticks der Encoder pro Radumdrehung in der MCCAR Library in dem Quad Modul definiert. Danach wurde mithilfe eines Lineals geprueft, ob der Roboter sich die Distanz vorbewegt, wie der Encoder das sagt. Da dies erfolgreich war, konnte das Drive Modul der Library verwendet werden, die das Fahren regelt, damit sich die Motoren so schnell drehen, wie in den jeweiligen Ziel-Variablen vorgegeben. Mit der konfigurierten Library soll der Roboter in der Lage sein, eine bestimmte Distanz akkurat zurueckzulegen.
 
-Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht man die Verwendung eines Breadboards mit dem \gls{tinyk22} und einem Speisegerät. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
+Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht sich die Verwendung eines Breadboards mit dem \gls{tinyk22} und einem Speisegerät, anstelle einer richtigen Verbindung mit einem \acrshort{pcb}. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
 
 \begin{figure}[H]
 \centering
@@ -377,26 +377,15 @@ Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encod
 \label{fig: Motorentest}
 \end{figure}
 
-
-Es kam bereits der Motortreiber zum Einsatz, der auch im späteren Endprodukt verbaut werden soll. Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder zu mitteln, um die gefahrene Strecke zu ermitteln (siehe Gleichung~\ref{eq:gefahren}).
+Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder zu mitteln, um die gefahrene Strecke zu ermitteln (siehe Gleichung~\ref{eq:gefahren}).
 
 \begin{equation}
     gefahrenMEAN_{cm} = \frac{gefahrenR_{cm} + gefahrenL_{cm}} {2} 
     \label{eq:gefahren}
 \end{equation}
 
-Nachdem die Ticks der Encoder pro Radumdrehung herausgefunden wurden, konnte dies in der MCCAR Library in der Quad Klasse konfiguriert werden. Danach wurde mithilfe eines Lineals geprueft, ob der Roboter sich wirklich die Distanz vorbewegt, wie der Encoder das sagt. Da dies erfolgreich war, konnte die Drive LIbr
 
-ALINA NOTES:
 
-to check that encoder works, check ticks, eine radumdrehung, schauen bei beiden raedern, daraus average und ticks per revolution in encoder
-Mit Lineal mm zahl checken von lib: encoder geprueft, sagt das richtige
-
-jetzt regler anschauen, da encoder zuveralessig speed liefern muss, jetz kann regler fuer regeln benutzt werden um motoren gleichschnell drehen
-
-Using quad=encoder and dfive (regler) lib from mcfun that already work together out of the box
-drive already asks quad for speed und anhan von speed von beiden motoren wird berechnet, dass greade gahrt: allese gegeben
-damit motoren gleich schnell drehen
 
 
 
@@ -442,7 +431,13 @@ Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung ange
 
 \subsubsection{Liniensensor}
 
-Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. Das Erkennen ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorenwerte geprüft. Da beim erreichen des Wegpunktes im Optimalfall alle Sensoren auf der weissen Oberfläche stehen, weichen die Werte der aktuellen Ticks stark der Sollwerte ab. Somit kann ein Wegpunkt klar identifiziert werden und der Roboter kann anhalten.
+Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht. Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. Das Erkennen ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorenwerte geprüft. Da beim erreichen des Wegpunktes im Optimalfall alle Sensoren auf der weissen Oberfläche stehen, weichen die Werte der aktuellen Ticks stark der Sollwerte ab. Somit kann ein Wegpunkt klar identifiziert werden und der Roboter kann anhalten. Auf der Abb. \ref{fig:liniensensor soll} sieht man die Sollposition des Liniensensors während des Traversieren auf der Linie. Im Konzept von \acrshort{pren1} waren jeweils vor und hinter dem Array ein zusätzlicher Sensor vorgesehen. Jedoch konnten diese nicht realisiert werden, da man nicht genügend Timer Channels zur Verfügung hatte.
 
 
+ \begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth ]{assets/ET/Liniensensor/linesensor.png}
+\caption{Sollposition Liniensensor während des Fahrens}
+\label{fig:liniensensor soll}
+\end{figure}
 
