@@ -45,9 +45,11 @@ Damit die Navigation nach wie vor auf allen Umgebungen laufen kann, werden hier 
 \subsection{Funktion-Stop}
 
 
-Der Hauptschalter ist leicht zugänglich vorn am Roboter angebracht und trennt alle  relevanten Funktionen zuverlässig vom Stromkreis. Befindet sich der Schalter in der unteren Stellung, ist das Fahrzeug vollständig deaktiviert.
+Der Hauptschalter ist leicht zugänglich vorn am Roboter angebracht und trennt alle  relevanten Funktionen zuverlässig vom Stromkreis. Befindet sich der Schalter in der unteren Stellung (siehe Abbildung \ref{fig:Schaltergehäuse}), ist das Fahrzeug vollständig deaktiviert.
 
 Eine Ausnahme bildet der Raspberry Pi, der auch bei deaktiviertem Hauptschalter weiterhin mit Strom versorgt wird. Dies ist bewusst so vorgesehen, um Datenverlust oder Dateisystemfehler durch unerwartetes Abschalten zu vermeiden.
+
+Im Schemaauszug zur Verdrahtung des Hauptschalters ist ebenfalls ersichtlich, dass der Motortreiber Zugriff auf die Akkuspannung hat (siehe Abbildung \ref{fig: Verdrahtung Hauptschalter}). Dadurch können die Motoren mit einer höheren Spannung betrieben werden, was die Leistungsfähigkeit steigert. Zudem wurde darauf geachtet, dass die Masseverbindung zwischen dem Raspberry Pi und dem restlichen Fahrzeug ausschliesslich über die UART-Schnittstelle erfolgt. Auf diese Weise sollen unerwünschte Massepotenzialunterschiede und daraus resultierende Störströme vermieden werden.
 
 \begin{figure}[H]
 \centering
@@ -64,7 +66,7 @@ Am Schaltergehäuse werden der Hauptschalter und die zwei Inputtasten für die Z
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth, angle=-90]{assets/MT/Schaltergehäuse.jpg}
+\includegraphics[width=0.3\textwidth, angle=-90, trim={20cm 0cm 20cm 0cm}, clip]{assets/MT/Schaltergehäuse.jpg}
 \caption{Schaltergehäuse}
 \label{fig:Schaltergehäuse}
 \end{figure}
