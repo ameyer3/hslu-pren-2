@@ -6,7 +6,9 @@ In diesem Kapitel wird die Umsetzung des in \acrshort{pren1} erarbeiteten Konzep
 
 Die physischen Anforderungen an den Roboter konnten vollständig erfüllt werden. Das maximal zulässige Gewicht von 2 kg wurde mit einem Gesamtgewicht von 1.262 kg, insbesondere durch den Einsatz von Leichtbaustrukturen, deutlich unterschritten. Die maximale Baugrösse 300x300x800mm kann in der Startkonfiguration mit Greifer in Ausgangsstellung eingehalten werden. Zusätzlich erforderliche Komponenten wie ein Notausschalter, ein Eingabetaster zur Zieleingabe sowie eine Statusanzeige wurden erfolgreich integriert.
 
-Die Anforderung 1.6 'Das Fahrzeug muss in der Lage sein das Hindernis mit  einer Masse von 300g anzuheben und im Umkreis von 20mm am alten Ort abzusetzen', konnte nur teilweise erreicht bzw. getestet werden. Der Anhebemechanismus des Greifers konnte mit dem originalen Hindernis erfolgreich getestet werden. (Abb. \ref{fig:greifer-open}/ \ref{fig:griefe-rclose}) Da die Systemintegration jedoch nicht vollständig durchgeführt werden konnte, konnte das Aufheben, Drehen und Absetzen als Prozess nicht getestet werden.
+Der Roboter ist in der Lage eine bestimmte Distanz vor und zurück zu fahren und sich einen bestimmten Winkel zu drehen.
+
+Die Anforderung 1.6 'Das Fahrzeug muss in der Lage sein das Hindernis mit  einer Masse von 300g anzuheben und im Umkreis von 20mm am alten Ort abzusetzen', konnte nur teilweise erreicht beziehungsweise. getestet werden. Der Anhebemechanismus des Greifers konnte mit dem originalen Hindernis erfolgreich getestet werden. (Abb. \ref{fig:greifer-open}/ \ref{fig:griefe-rclose}) Da die Systemintegration jedoch nicht vollständig durchgeführt werden konnte, konnte das Aufheben, Drehen und Absetzen als automatisierter Prozess nicht getestet werden.
 
 
 \begin{figure}[H]
@@ -26,11 +28,11 @@ Die Anforderung 1.6 'Das Fahrzeug muss in der Lage sein das Hindernis mit  einer
 \end{minipage}
 \end{figure}
 
+Das Folgen der Linie erfolgt wie in \acrshort{pren1} geplant mit einem Liniensensor, der aus mehreren Phototransistoren besteht. Die Regelung der Motoren erfolgt mit Hilfe eines PD-Reglers. Der PD-Regler konnte auf dem Testpracour geprüft werden und ist in der Lage der Linie zu folgen und auf einem Knoten anzuhalten.
 
+Die Bilderkennung und der Wegfindungsalgorithmus  konnten mithilfe des Kameratestaufbaus aus \acrshort{pren1} und einem leicht veränderten Code bereits vor Ort getestet werden (Siehe Anhang \nameref{statische-traver}). Gesperrte Knoten konnten bei unseren Testläufen mit einer 100\% Sicherheit erkennt werden, ebenso konnten die Barrieren in 100\% der Fälle erkannt werden. Dies bezieht sich auf die manuellen Testdurchläufe und das Trainingsresultat des Models. Trotzdem wird mit dem Ultraschall eine zusätzliche Sicherung eingebaut. Dieser misst sehr zuverlässig, wie nahe sich ein Objekt vor dem Roboter befindet.
 
-Das folgen der Linie erfolgt wie in PREN1 geplant mit einem Liniensensor der aus mehreren Phototransistoren besteht. Die Regelung der Motoren erfolgt mit Hilfe eines PD-Reglers. Der PD-Regler konnte auf dem Testpracour geprüft werden und ist in der Lage der Linie zu folgen und auf einem Knoten anzuhalten. Der Roboter ist auch in der Lage eine bestimmte Distanz zu fahren.
-
-Die Bilderkennung und der Wegfindungsalgorithmus  konnten mithilfe des Kameratestaufbaus aus \acrshort{pren1} und einem leicht veränderten Code bereits vor Ort getestet werden (Siehe Anhang ''Testprotokoll: Statische Traversierung des Graphen``). Gesperrte Knoten konnten bei unseren Testläufen mit einer 100\% Sicherheit erkennt werden, ebenso konnten die Barrieren in 100\% der Fälle erkannt werden. Dies bezieht sich auf die manuellen Testdurchläufe und das Trainingsresultat des Models. Auch die Erkennung der ausgehenden Kanten war immer erfolgreich. Der Algorithmus hat bei allen Testdurchläufen einen direkten Weg ans Ziel gefunden. 
+Auch die Erkennung der ausgehenden Kanten war immer erfolgreich. Der Algorithmus hat bei allen Testdurchläufen einen direkten Weg ans Ziel gefunden. 
 
 \begin{figure}[H]
 \centering
@@ -39,5 +41,10 @@ Die Bilderkennung und der Wegfindungsalgorithmus  konnten mithilfe des Kamerates
 \label{fig:conf-matrix-model}
 \end{figure}
 
+Es kann ein Ziel ausgewählt werden und der Roboter kann gestartet werden. Die Zielknoten können zuverlässig erkannt werden, was mit realistischen Tests geprüft wurde. Der Buzzersound, der anzeigt, dass das Ziel erreicht wurde, ertönt schnell und laut.
 
-Die Konstruktionswerkstoffe konnten wie in PREN1 vorgesehen unter Berücksichtigung der im Kapitel Nachhaltigkeit aufgeführten Kriterien ausgewählt werden.
+Der Roboter kann über einen Schalter ein- und ausgeschaltet werden.
+
+Die Konstruktionswerkstoffe konnten wie in PREN1 vorgesehen unter Berücksichtigung der im Kapitel \ref{nachhaltigkeit} Nachhaltigkeit aufgeführten Kriterien ausgewählt werden.
+
+Obwohl fast alle einzelnen Anforderungen erfüllt werden konnten, kann der Roboter momentan nicht das Wegenetz durchqueren. Die Steuerung konnte bis jetzt noch nicht zusammengefügt werden. Die Navigation und die Mechanik funktionieren jedoch beide als Teilsystem.

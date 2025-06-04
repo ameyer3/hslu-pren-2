@@ -14,6 +14,8 @@
 
 Diese Dokumentation wurde zusammen mit einem elektronischen Anhang in Form einer ZIP-Datei abgegeben. Darin befinden sich der Simulator Programmiercode inklusive dessen Ergebnisse und die erstellten CAD Dateien.
 
+TODO LIST OF WHATS IN THERE
+
 \newpage
 \subfile{parts/x-projektplanung}
 \newpage
@@ -61,23 +63,23 @@ Die  Anforderungsliste ist ersichtlich in Tabellen \ref{table:anforderungsliste_
     {subsection}
     {YOLOv11 Model Evaluation}
 
-Damit Pylonen, Barrieren und Knoten erkannt werden koennen, wird ein Model trainiert. Insgesamt wurden ueber 30 verschiedene YOLO Models trainiert. Viele davon wurden bereits in einem vorherigen Schritt aussortiert, da einige sehr offensichtlich schlechte Performance aufwiesen aufgrund davon, wie es die Objekte erkannt, beziehungsweise nicht erkannt hat. Auf der folgenden Seite ist eine Tabelle angehaent, in der die relevanten Models miteinander verglichen werden und das beste Model gewaehlt wurde.
+Damit Pylonen, Barrieren und Knoten erkannt werden können, wird ein Model trainiert. Insgesamt wurden über 30 verschiedene YOLO Models trainiert. Viele davon wurden bereits in einem vorherigen Schritt aussortiert, da einige sehr offensichtlich schlechte Performance aufwiesen aufgrund davon, wie es die Objekte erkannt, beziehungsweise nicht erkannt hat. Auf der folgenden Seite ist eine Tabelle angehängt, in der die relevanten Models miteinander verglichen werden und das beste Model gewählt wurde.
 
 Die Model Performance wird an folgenden Parametern gemessen:\cite{model-performance}
 
 \begin{itemize}
-    \item Confusion Matrix: Zeigt was das Model vorhergesagt hat und was tatsaechlich zu sehen war. Je 'diagonaler' die Matrix, desto besser.
-    \item F1-Confidence: Zeigt die Balance zwischen Confidence (Wahrscheinlichkeit, dass Vorrausgesagtes stimmt) und F1 Score (Harmonischer Durchschnitt von Recall und Precision). Je hoeher der F1 Wert, desto besser.
+    \item Confusion Matrix: Zeigt was das Model vorhergesagt hat und was tatsächlich zu sehen war. Je 'diagonaler' die Matrix, desto besser.
+    \item F1-Confidence: Zeigt die Balance zwischen Confidence (Wahrscheinlichkeit, dass Vorrausgesagtes stimmt) und F1 Score (Harmonischer Durchschnitt von Recall und Precision). Je höher der F1 Wert, desto besser.
     \item Precision-Confidence: Zeigt die Balance zwischen Precision (Anteil von 'True Positives'; wenn Model sagt, es gibt einen Knoten, wie akkurat ist diese Deutung?) und Confidence. Je tiefer die Confidence, desto besser, da dadurch der hoechste Praezisionswert bereits bei einer tieferen Confidence erreicht wird.
     \item Precision-Recall: Zeigt die Balance zwischen Precision und Recall (Faehigkeit, alle Instanzen zu erkennen). Je hoeher die Precision, desto besser.
-    \item Recall-Confidence: Zeigt die Balance zwischen Recall und Confidence. Je hoeher der Recall, desto besser.
-    \item Lernverlauf: Zeigt inwiefern der Verlust (Unterschied zwischen Vorhergsagtem und Realitaet) sinkt bei den Trainingsdaten und den Validationsdaten. Beginnt der Verlust bei der Validation zu steigen, deutet dies auf Overfitting hin\footnote{https://developers.google.com/machine-learning/crash-course/overfitting/overfitting}. Sollte exponentiell sinken. Zeigt, wie das Model and Wissen gewinnt. Sollte expontentiell steigen.
+    \item Recall-Confidence: Zeigt die Balance zwischen Recall und Confidence. Je höher der Recall, desto besser.
+    \item Lernverlauf: Zeigt inwiefern der Verlust (Unterschied zwischen Vorhergesagtem und Realität) sinkt bei den Trainingsdaten und den Validationsdaten. Beginnt der Verlust bei der Validation zu steigen, deutet dies auf Overfitting hin\footnote{https://developers.google.com/machine-learning/crash-course/overfitting/overfitting}. Sollte exponentiell sinken. Zeigt, wie das Model und Wissen gewinnt. Sollte exponentiell steigen.
 \end{itemize}
 
 
-Der Vergleich zwischen mehreren potentiellen Modellen ist in folgendem Dokument ersichtlich. Zwei Modelle wurden jeweils verglichen aufgrund von mehreren Werten. Ist der jeweilige Wert des einen Models besser, wird diese Zelle gruen eingefaerbt.
+Der Vergleich zwischen mehreren potentiellen Modellen ist in folgendem Dokument ersichtlich. Zwei Modelle wurden jeweils verglichen aufgrund von mehreren Werten. Ist der jeweilige Wert des einen Models besser, wird diese Zelle grün eingefärbt.
 
-Es wurde untersucht, ob das Modell bessere Ergebnisse bringt, wenn die beiden Barrieren pro Farbe in einzelnen Klassen aufgeteilt werden oder nicht und verschiedene Augmentationen wurden verglichen. Augmentationen werden auf die Trainingsbilder angewandt, damit diese diverser sind und zum einen mehr der Realitaet entsprechen und auch um mehr Trainingsmaterial zu haben. Ebenfalls wurde experimentiert mit unterschiedlichen Groessen der Bilder. 
+Es wurde untersucht, ob das Modell bessere Ergebnisse bringt, wenn die beiden Barrieren pro Farbe in einzelnen Klassen aufgeteilt werden oder nicht und verschiedene Augmentationen wurden verglichen. Augmentationen werden auf die Trainingsbilder angewandt, damit diese diverser sind und zum einen mehr der Realitaet entsprechen und auch um mehr Trainingsmaterial zu haben. Ebenfalls wurde experimentiert mit unterschiedlichen Grössen der Bilder. 
 
 \includepdf[pages=-]{assets/IT/testing/yolo/ModelComparison.pdf}
 
@@ -98,7 +100,7 @@ Die Tests der Zielknotenerkennung haben zwei Ziele:
 
 \textbf{Parameter tunen}
 
-Die Zielknotenerkennung hat folgende Parameter, deren Werte durch Tests getuned wurden. Ein Match bezeichnet einen gefundenen Erkennungspunkt des Buchstabens. Auf dem folgenden Bild \ref{img:orb-example} gibt es beispielsweise 14 Matches (Linien), deren Durchschnittliche Distanz 0 ist, da es sich um das selbe Bild handelt. Die Erkennungspunkte sind im Bild links gleich weit voneinander entfernt wie im rechten.
+Die Zielknotenerkennung hat folgende Parameter, deren Werte durch Tests optimiert wurden. Ein Match bezeichnet einen gefundenen Erkennungspunkt des Buchstabens. Auf dem folgenden Bild \ref{img:orb-example} gibt es beispielsweise 14 Matches (Linien), deren Durchschnittliche Distanz 0 ist, da es sich um das selbe Bild handelt. Die Erkennungspunkte sind im Bild links gleich weit voneinander entfernt wie im rechten.
 
 \begin{figure}[H]
 \centering
@@ -109,12 +111,12 @@ Die Zielknotenerkennung hat folgende Parameter, deren Werte durch Tests getuned 
 
 \begin{enumerate}
     \item MIN\_MATCHES\_REQUIRED = 10: Wie viele Matches muss es geben?
-    \item MAX\_DISTANCE\_ALLOWED = 50: Wie ungenau duerfen die Matches maximal sein?
-    \item Differenz Messpunkte < 5: Differenz der Anzahl Matches fuer jeden Buchstaben, um die Buchstaben mit den zwei meisten Matches vergleichen zu muessen, anstatt direkt den Buchstaben mit den meisten Matches zu nehmen.
+    \item MAX\_DISTANCE\_ALLOWED = 50: Wie ungenau dürfen die Matches maximal sein?
+    \item Differenz Messpunkte < 5: Differenz der Anzahl Matches für jeden Buchstaben, um die Buchstaben mit den zwei meisten Matches vergleichen zu müssen, anstatt direkt den Buchstaben mit den meisten Matches zu nehmen.
     \item Distanz der Distanz > 5: Differenz in der durchschnittlichen Distanz der Matches der zwei Buchstaben mit den meisten Matches. Hat der Buchstaben mit weniger Matches eine Distanz, die mindestens 6 kleiner ist, passt dieser besser.
 \end{enumerate}
 
-Die finalen Werte wurden mithilfe von diesen Testresultaten in Tabelle \ref{letter-matches-orb} ermittelt. Ist die Anzahl Match Differenz grösser als 5, wird die Distanz von zwei Buchstaben gemessen.  Ist die Differenze der Distanzen grösser als 5, wird der zweite Buchstabe genommen. Werden benötigte Anzahl Matches nicht erreicht oder with die maximale Distanz überschritten, wird kein Buchstabe erkannt.
+Die finalen Werte wurden mithilfe von diesen Testresultaten in Tabelle \ref{letter-matches-orb} ermittelt. Ist die Anzahl Match Differenz grösser als 5, wird die Distanz von zwei Buchstaben gemessen.  Ist die Differenz der Distanzen grösser als 5, wird der zweite Buchstabe genommen. Werden benötigte Anzahl Matches nicht erreicht oder wird die maximale Distanz überschritten, wird kein Buchstabe erkannt.
 
 \begin{table}[H]
 \centering
@@ -158,9 +160,9 @@ B & {'B': 28, 'A': 22, 'C': 15} & 6 & B: 15.80 &  \\
 \label{letter-matches-orb}
 \end{table}
 
-\textbf{Funktionalitaet testen}
+\textbf{Funktionalität testen}
 
-Die Logik, um den richtigen Buchstaben zu erkennen beschraenkt sich nicht nur auf den \acrshort{orb} Algorithmus. Es wurde selber noch ein Algorithmus implementiert. Grundsaetzlich wird der Buchstabe, fuer den die meisten Matches gefunden wurden, zurueckgeben. Jedoch ist es vor allem bei dem Buchstaben C so, dass es relativ wenige Messpunkte gibt, da der Buchstaben sehr simpel ist. Das heisst, wenn C erkannt werden soll, gibt es oft falsche Buchstaben, mit mehr Messpunkten. Falls die Buchstaben mit den meisten und den zweitmeisten Messpunkten nur 5 Messpunkte auseinander liegen, werden die Distanzen der Messpunkte verglichen. Wenn der Buchstaben, der maximal 5 Messpunkte weniger hat, eine durchschnittliche Distanz von mehr als 5 hat, wird der Buchstaben zurueckgegeben, mit den wenigeren Messpunkten. Diese Logik wird in den Unittests getestet.
+Die Logik, um den richtigen Buchstaben zu erkennen beschränkt sich nicht nur auf den \acrshort{orb} Algorithmus. Es wurde selber noch ein Algorithmus implementiert. Grundsätzlich wird der Buchstabe, für den die meisten Matches gefunden wurden, zurückgeben. Jedoch ist es vor allem bei dem Buchstaben C so, dass es relativ wenige Messpunkte gibt, da der Buchstaben sehr simpel ist. Das heisst, wenn C erkannt werden soll, gibt es oft falsche Buchstaben, mit mehr Messpunkten. Falls die Buchstaben mit den meisten und den zweit meisten Messpunkten nur 5 Messpunkte auseinander liegen, werden die Distanzen der Messpunkte verglichen. Wenn der Buchstaben, der maximal 5 Messpunkte weniger hat, eine durchschnittliche Distanz von mehr als 5 hat, wird der Buchstaben zurückgegeben, mit den wenigeren Messpunkten. Diese Logik wird in den Unittests getestet.
 
 Die folgenden Fälle wurden getestet:
 
@@ -353,13 +355,13 @@ Die Abbildung \ref{fig:angle-reader-unittests} dokumentiert die getesteten Funkt
 {Object Detector}
 
 Der Object Detector erhaelt Bilder und detektiert, welche Objekte sich darauf befinden mit dem YOLO Model. Dann wird ein Algorithmus angewandt, um sicherzustellen, dass nur das Objekt direkt vor dem Roboter beachtet wird, ausser hinter dem Hindernis befindet sich eine Pylone, dann soll die Pylone beachtet werden.
-Die Unittests des Object Detectors sollen nicht primaer das Modell testen, sondern den Algorithmus, der das relevante Objekt findet. Folgende Szenarien wurden getestet:
+Die Unittests des Object Detectors sollen nicht primär das Modell testen, sondern den Algorithmus, der das relevante Objekt findet. Folgende Szenarien wurden getestet:
 
 \begin{enumerate}
     \item Eine Barriere befindet sich vor dem Roboter, dahinter ein Knoten.
     \item Nur ein Knoten befindet sich vor dem Roboter.
-    \item Nur eine Pylone befindet sich vor dem Roboter (auf dem naechsten Knoten).
-    \item Eine Barriere befindet sich vor dem Roboter, dahiner eine Pylone.
+    \item Nur eine Pylone befindet sich vor dem Roboter (auf dem nächsten Knoten).
+    \item Eine Barriere befindet sich vor dem Roboter, dahinter eine Pylone.
     \item Eine Barriere befindet sich vor dem Roboter, dahinter ein Knoten. Ebenfalls ist auf dem Bild eine Barriere, die nicht direkt vor dem Roboter ist.
     \item Ein Knoten befindet sich vor dem Roboter. Auf der Linie zu der Seite, befindet sich eine Barriere, die nicht vor dem Roboter ist.
 \end{enumerate}
@@ -494,6 +496,7 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 \addcontentsline{toc}
 {subsection}
 {Testprotokoll Statische Traversierung}
+\label{statische-traver}
 
 \includepdf[pages=-]{assets/IT/testing/testprotocol_static_traversal.pdf}
 
@@ -570,7 +573,7 @@ Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern
     {subsection}
     {Tests mit Gyroskop}
 
-Die ersten Tests mit dem Gryskop wurden mit einem Bread Board durchgefuehrt und wurde mit einem Tiny K22 verbunden. Auf diese Weise kann das Gryoskop isoliert von den anderen Komponenten getestet werden. Damit das Gyrsokop moeglichst gerade sind konnte, wurde es aufgestellt. Durch die bereits angebrachten Widerstaende konnte es nicht hingelegt werden. Das Setup ist ersichtlich auf Abbildung \ref{img:gyro-tests-1}.
+Die ersten Tests mit dem Gryskop wurden mit einem Bread Board durchgeführt und wurde mit einem Tiny K22 verbunden. Auf diese Weise kann das Gyroskop isoliert von den anderen Komponenten getestet werden. Damit das Gyroskop möglichst gerade sind konnte, wurde es aufgestellt. Durch die bereits angebrachten Widerstände konnte es nicht hingelegt werden. Das Setup ist ersichtlich auf Abbildung \ref{img:gyro-tests-1}.
 
 \begin{figure}[H]
 \centering
@@ -581,9 +584,9 @@ Die ersten Tests mit dem Gryskop wurden mit einem Bread Board durchgefuehrt und 
 
 Zuerst wurde ein simples Programm geschrieben, um die Werte über UART1 im Terminal auszulesen. Das Gyroskop gibt 16-Bit-Messwerte für jede Achse (X, Y und Z) im Big-Endian-Format aus, wobei das höchstwertige Byte zuerst übertragen wird. Da der Prozessor des TinyK22 im Little-Endian-Format arbeitet, müssen diese Bytes nach dem Empfang zuerst noch korrekt konvertiert werden.\footnote{https://wraycastle.com/de/blogs/knowledge-base/big-endian-little-endian}
 
-Als naechstes wurde ein Programm geschrieben, das erwartet, dass das Gyroskop sich um einen bestimmten Winkel (in den folgendenen Tests 90\textdegree) dreht und sobald der Winkel erreicht wird, wird eine Nachricht dafuer ausgegeben. Dafuer wurde das Breadboard in verschiedenen Geschwindigkeiten um 90\textdegree \ gedreht, bis die Nachricht erschien. Die Messung war in allen Geschwindigkeiten sehr genau. Der Wert war immer zwischen 90.0\textdegree \ und 90.5\textdegree.
+Als nächstes wurde ein Programm geschrieben, das erwartet, dass das Gyroskop sich um einen bestimmten Winkel (in den folgenden Tests 90\textdegree) dreht und sobald der Winkel erreicht wird, wird eine Nachricht dafür ausgegeben. Dafür wurde das Breadboard in verschiedenen Geschwindigkeiten um 90\textdegree \ gedreht, bis die Nachricht erschien. Die Messung war in allen Geschwindigkeiten sehr genau. Der Wert war immer zwischen 90.0\textdegree \ und 90.5\textdegree.
 
-Die folgenden Bewegungen wurden durchgefuerht mit dem Gyroskop: 
+Die folgenden Bewegungen wurden durchgeführt mit dem Gyroskop: 
 
 \begin{figure}[H]
   \centering
@@ -620,7 +623,7 @@ Dazu gab es folgende Ausgabe des Testprogrammes:
 
 Da aus Platzgründen das Gyroskop vertikal angebracht werden muss, werden die Werte der Y-Achse ausgelesen um die Drehung des Roboters zu messen.
 
-Nachdem das Grysokop angebracht wurde, wurden die Tests von zuvor wiederholt, indem der Roboter von Hand gedreht wurde, um sicherzustellen, dass die richtige Achse ausgelesen werden. Erst dann wurde der Motor für die Drehung verwendet. Sobald der definierte Winkel erreicht wurden, stoppt der Roboter. Dies funktionierte ebenfalls. Dabei wurde die Drehung jedoch etwas ungenauer. Der Roboter dreht sich ungefähr 10\textdegree \ zu weit, da die Motoren zu langsam ausgeschaltet werden. Dies wird jedoch akzeptiert, da es sich nur um eine kleine Ungenauigkeit handelt, die vom Liniensensor beim Losfahren wieder korrigiert wird.
+Nachdem das Gyroskop angebracht wurde, wurden die Tests von zuvor wiederholt, indem der Roboter von Hand gedreht wurde, um sicherzustellen, dass die richtige Achse ausgelesen werden. Erst dann wurde der Motor für die Drehung verwendet. Sobald der definierte Winkel erreicht wurden, stoppt der Roboter. Dies funktionierte ebenfalls. Dabei wurde die Drehung jedoch etwas ungenauer. Der Roboter dreht sich ungefähr 10\textdegree \ zu weit, da die Motoren zu langsam ausgeschaltet werden. Dies wird jedoch akzeptiert, da es sich nur um eine kleine Ungenauigkeit handelt, die vom Liniensensor beim Losfahren wieder korrigiert wird.
 
 
 %%%%%%%%%%%%%%%%%%%%%% nachkorrektur wert hindernis %%%%%%%%%%%%%%%%%%%%%%%%%

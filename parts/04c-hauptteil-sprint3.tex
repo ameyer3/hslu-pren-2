@@ -100,14 +100,14 @@ Was in Abbildung \ref{fig:f1}  sichtbar ist, ist der F1 Wert. Dieser ist besser,
 \subsubsection{YOLOv11 Model konvertieren}
 \label{convert-yolo}
 
-Es gibt Methoden, um die .pt Datei, Das Format in welchem das Model gespeichert wird, mit der Ultralytics Bibliothek in ein anderes Format zu transformieren. Somit kann auf Embedded Systems und auch auf Raspberry Pi's die Bilderkennung schneller durchgeführt werden kann.
+Es gibt Methoden, um die .pt Datei, Das Format in welchem das Model gespeichert wird, mit der Ultralytics Bibliothek in ein anderes Format zu transformieren. Dadurch kann auf Embedded Systems und somit auch auf Raspberry Pi's die Bilderkennung schneller durchgeführt werden kann.
 
 Drei Möglichkeiten wurden betrachtet und verglichen:
-TODO add sources for each \& akronyum
+
 \begin{enumerate}
     \item Caffe2\footnote{https://caffe2.ai/}: In der Vergangenheit sehr geeignet, heutzutage mit PyTorch zusammengefügt und existiert nicht mehr auf diese Weise.\cite{caffe2}
     \item \acrfull{ncnn}\footnote{https://docs.ultralytics.com/integrations/ncnn/}: Sehr gute Performance für ARM Geräte (u.a. Raspberry Pi), sehr wenig Abhängigkeiten, einfache Transformation.\cite{ncnn-bib}
-    \item \acrfull{onnx}\footnote{https://onnx.ai/}: Geeignet für  Cross-Plattform Fälle, gute Austauschbarkeit des Models, flexibel, viele Abhängigkeiten.\cite{onnx}
+    \item \acrfull{onnx}\footnote{https://onnx.ai/}: Geeignet für  Cross-Plattform Fälle, gute Austauschbarkeit des Models, flexibel, viele Abhängigkeiten.\cite{onnx-bib}
 \end{enumerate}
 
 Es wird NCNN gewählt, da dies perfekt für den Verwendungszweck mit einem Raspberry Pi passt. Das erstellte .pt File kann mit der ultralytics Bibliothek transformiert werden:
