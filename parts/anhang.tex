@@ -441,6 +441,37 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 \caption{Alle Object Detector Unittests}
 \label{img:object_detector_unittests}
 \end{figure}
+
+
+\newpage
+\subsubsection*{Angle Reader}\label{angle-reader-unittests}
+\addcontentsline{toc}{subsubsection}{Angle Reader}
+
+Der Angle Reader wird verwendet, um aus Kamerabildern Winkel zu erkennen, die den Positionen und Verbindungen im Basisgraphen entsprechen. Er nutzt dazu Bildverarbeitung, um Knoten zu maskieren, Konturen zu analysieren, Winkel zu berechnen und diese anschliessend den Verbindungen zuzuordnen. Die folgenden Unittests prüfen das Verhalten einzelner Teilfunktionen unabhängig vom realen Bildinput.
+
+Folgende Szenarien wurden getestet:
+
+\begin{enumerate}
+\item Maske korrekt vorbereiten aus RGB-Bild (HSV-Filterung).
+\item Knotenmaskierung mit Morphologie und Kreiszeichnung.
+\item Winkelberechnung aus erkannter Kontur.
+\item Ergebnisbild speichern, wenn Winkel vorhanden sind.
+\item Fehler beim Speichern ohne berechnete Winkel.
+\item Für jedes gültige Knotenpaar: Korrekte relative Winkelberechnung.
+\item Für jede Verbindung: Zuordnung eines einzelnen Winkels zu einem Nachbarknoten.
+\item Für jeden Knoten: Positionsbasierte Winkelzuordnung bei unsortierter Eingabe.
+\end{enumerate}
+
+Die Abbildung \ref{fig:angle-reader-unittests} dokumentiert die getesteten Funktionen mit Zielverhalten und Resultat.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{assets/IT/testing/unittests/angle_reader_unittests_result.png}
+\caption{Alle Angle Reader Unittests}
+\label{fig:angle-reader-unittests}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%% protocol opencv calibration %%%%%%%%%%%%%%%%%%%%%%%%
 
 \addcontentsline{toc}
