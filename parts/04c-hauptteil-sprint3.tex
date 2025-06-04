@@ -45,7 +45,7 @@ Die folgenden Bilder zeigen einige Bilder, die das Model annotiert hat. Darauf i
 
 \begin{figure}[H]
   \centering
-    \begin{minipage}[b]{0.28\textwidth}
+   \begin{minipage}[b]{0.28\textwidth}
     \centering
     \includegraphics[width=\textwidth]{assets/IT/yolo/val_batch0_pred.jpg}
     \caption{Bilderkennung I}
@@ -67,25 +67,29 @@ Die folgenden Bilder zeigen einige Bilder, die das Model annotiert hat. Darauf i
   \end{minipage}
 \end{figure}
 
-Auf den folgenden Bildern sind die Metriken aufgezeigt. Diese sind ebenfalls im Anhang im Kapitel \nameref{model-evaluation} genauer erklärt. Was hier sichtbar ist, ist zum einen der F1 Wert. Dieser ist besser, je höher er ist. Er ist hier für alle Klassen sehr hoch, was auf eine hohe Genauigkeit in den Detekierungen deutet. Ebenfalls ist die Confusion Matrix erkenntlich, diese zeigt welche Objekte das Model wie oft falsch oder richtig gedeutet hat. Das Model hat jede Pylone erkannt, hat sich zwei Knoten eingebildet und zwei Knoten verpasst. Mit den Algorithmen, die in dem nachfolgenden Kapitel \ref{model-results} beschrieben sind, die die Modelperformance stützen, sind diese Resultate ausgezeichnet. Ebenfalls ist der Lernverlauf des Models ersichtlich. Alle Graphen zeigen das gewünschte Muster. Die 6 Graphen links, die den Verlust in der Leistung (falsche Deutungen) darstellen, sind exponentiell fallend. Das heisst, dass das Modell mit jeder Iteration mehr gelernt hat und nicht irgendwann gestoppt hat oder schlechter wurde. Die 4 Graphen auf der rechten Seite zeigen, wie viel das Model gelernt, diese steigen und flachen dann ab. Dies ist ebenfalls das Muster, das bei einem guten Model erwartet wird.\cite{model-performance}
+Auf den folgenden Bildern sind die Metriken aufgezeigt. Diese sind ebenfalls im Anhang im Kapitel \nameref{model-evaluation} genauer erklärt. 
+
+Die Confusion Matrix ist auf Abbildung \ref{fig:conf-matrix}, diese zeigt, welche Objekte das Model wie oft falsch oder richtig gedeutet hat. Das Model hat jede Pylone und jede Barriere erkannt, hat sich zwei Knoten eingebildet und zwei Knoten verpasst. Mit den Algorithmen, die in dem nachfolgenden Kapitel \ref{model-results} beschrieben sind, die die Modelperformance stützen, sind diese Resultate ausgezeichnet. 
+
 
 \begin{figure}[H]
-  \centering
-    \begin{minipage}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{assets/IT/yolo/confusion_matrix.png}
+    \caption{Confusion Matrix}
+    \label{fig:conf-matrix}
+\end{figure}
+
+Was in Abbildung \ref{fig:f1}  sichtbar ist, ist der F1 Wert. Dieser ist besser, je höher er ist. Er ist hier für alle Klassen sehr hoch, was auf eine hohe Genauigkeit in den Detekierungen deutet. In Abblidung \ref{fig:results-lernverlauf} ist der Lernverlauf des Models ersichtlich. Alle Graphen zeigen das gewünschte Muster. Die 6 Graphen links, die den Verlust in der Leistung (falsche Deutungen) darstellen, sind exponentiell fallend. Das heisst, dass das Modell mit jeder Iteration mehr gelernt hat und nicht irgendwann gestoppt hat oder schlechter wurde. Die 4 Graphen auf der rechten Seite zeigen, wie viel das Model gelernt, diese steigen und flachen dann ab. Dies ist ebenfalls das Muster, das bei einem guten Model erwartet wird.\cite{model-performance}
+
+
+\begin{figure}[H]
+    \begin{minipage}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{assets/IT/yolo/F1_curve.png}
     \caption{F1 Kurve}
     \label{fig:f1}
   \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.3\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{assets/IT/yolo/confusion_matrix.png}
-    \caption{Confusion Matrix}
-    \label{fig:conf-matrix}
-  \end{minipage}
     \hfill
-  \begin{minipage}[b]{0.3\textwidth}
+  \begin{minipage}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{assets/IT/yolo/results.png}
     \caption{Lernverlauf}
