@@ -29,7 +29,7 @@ Der Servomotor steuert den Greifer an, der die Barriere anheben kann, um sie zu 
 \end{figure}
 
 \newpage
-Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dieses Ablaufdiagramm stammt aus \acrshort{pren1} und dient zur Erinnerung. Genauere Informationen können aus der angehängten PREN 1 Dokumentation entnommen werden.
+Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dieses Ablaufdiagramm stammt aus \acrshort{pren1}. Genauere Informationen können aus der angehängten PREN 1 Dokumentation entnommen werden.
 
 \begin{figure}[H]
 \centering
@@ -38,7 +38,7 @@ Die folgende Grafik \ref{fig:ablauf} zeigt den geplanten Ablauf auf. Dieses Abla
 \label{fig:ablauf}
 \end{figure}
 
-
+\newpage
 Die einzelnen elektronischen Teile im Roboter bilden das Gesamtsystem ersichtlich auf Grafik \ref{fig:electro-components}. Dieses sorgt dafür, dass sich der Roboter wie geplant autonom fortbewegen kann.  Die Graphik ist aufgeteilt in die Teile, die Teil der Navigation sind und diese, die Teil der Steuerung sind. 
 
 Das PCBA ist die zentrale Verbindung. Der TinyK22 liest den Ultraschall, Liniensensor, die Encoder und die Endschalter des Greifers aus und steuert den Servomotor und die Motorentreiber. Der Raspberry Pi und der TinyK22 kommunizieren über UART. Der Raspberry Pi steuert die Kamera an und liest den Startknopf und den Zielauswahlknopf an und zeigt auf dem Display das gewählte Ziel und die Zeit an, die seit dem Start vergangen ist.
@@ -56,13 +56,13 @@ Das PCBA ist die zentrale Verbindung. Der TinyK22 liest den Ultraschall, Liniens
 \subsection{Mechanische Komponenten}
 \label{Mechanische Komponenten}
 
-Im nachfolgenden Kapitel wird auf die Konstruktion der mechanischen Komponenten eingegangen. Alle Konstruktionsbauteile, bis auf die Grundplatte, wurden im FDM-Verfahren aus PLA gedruckt. Zum Verschrauben der verschiedenen Bauteilen wurden M3 Gewindeeinsätze verwendet.
+Im nachfolgenden Kapitel wird auf die Konstruktion der mechanischen Komponenten eingegangen. Alle Konstruktionsbauteile, bis auf die Grundplatte, wurden im \acrfull{fmd} Verfahren aus \acrfull{pla} gedruckt. Zum Verschrauben der verschiedenen Bauteilen wurden M3 Gewindeeinsätze verwendet.
 
 \subsubsection{Fahrwerk konstruieren}
 \label{Fahrwerk konstruieren}
 
- Das Konzept für das Fahrwerk und die Grundplatte wurden analog zum Konzept aus \acrshort{pren1} umgesetzt. Am Fahrwerk wurden gegenüber des Prototyps aus \acrshort{pren1} einzig der Motorflansch und der Lenkrollenhalter angepasst. 
- Beim Prototyp in PREN 1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus PLA nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt, wie gezeigt auf Abbildung \ref{fig: Lenkrollenhalter V2}.
+ Das Konzept für das Fahrwerk und die Grundplatte werden analog zum Konzept aus \acrshort{pren1} umgesetzt. Am Fahrwerk werden gegenüber des Prototyps aus \acrshort{pren1} einzig der Motorflansch und der Lenkrollenhalter angepasst. 
+ Beim Prototyp in PREN 1 hat sich gezeigt, dass eine reine Presspassung für die Befestigung der Lenkrolle im Lenkrollenhalter aus \acrshort{pla} nicht ausreichend ist. Aus diesem Grund wird die Lenkrolle jetzt mithilfe eines M4 Gewindestifts geklemmt, wie gezeigt auf Abbildung \ref{fig: Lenkrollenhalter V2}.
 
 \begin{figure}[H]
 \centering
@@ -71,7 +71,7 @@ Im nachfolgenden Kapitel wird auf die Konstruktion der mechanischen Komponenten 
 \label{fig: Lenkrollenhalter V2}
 \end{figure}
 
-Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In Abbildung \ref{fig: Motorflansch V1/V2} sieht man in gelb die erste Version des Motorflansches wie er in PREN 1 verbaut wurde. Blau eingefärbt ist die finale Version des Flansches mit einer Verstrebung. Auf Abbildung \ref{fig: Motorentest} wird die Konstruktion am Roboter gezeigt.
+Der Motorflansch wird für den finalen Roboter leicht verstärkt. In Abbildung \ref{fig: Motorflansch V1/V2} ist in gelb die erste Version des Motorflansches ersichtlich, wie er in PREN 1 verbaut wurde. Blau eingefärbt ist die finale Version des Flansches mit einer Verstrebung. Auf Abbildung \ref{fig: Motorentest} wird die Konstruktion am Roboter gezeigt.
 
 \begin{figure}[H]
 \centering
@@ -84,8 +84,8 @@ Der Motorflansch wurde für den finalen Roboter leicht verstärkt. In Abbildung 
 \label{Montage der Elektronischen Komponenten}
 
 
-Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder Raspberry Pi werden nicht direkt auf die Grundplatte montiert, sondern auf Trägern, welche anschliessend auf die Grundplatte geschraubt werden. Die Träger sind auf der Abbildung \ref{fig: Träger für elektronische Komponenten} in schwarz sichtbar; es ist das schwarze \acrfull{pla} Gerüst unter dem grünen Raspberry Pi. Sie wurden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. 
-Dieser Aufbau hatte in der frühen Testphase den Vorteil, dass alle elektronischen Komponenten provisorisch platziert werden konnten, ohne einen Kurzschluss zu riskieren. 
+Die elektronischen Komponenten wie DC/DC-Konverter, Motortreiber oder Raspberry Pi werden nicht direkt auf die Grundplatte montiert, sondern auf Trägern, welche anschliessend auf die Grundplatte geschraubt werden. Die Träger sind auf der Abbildung \ref{fig: Träger für elektronische Komponenten} in schwarz sichtbar; es ist das schwarze \acrfull{pla} Gerüst unter dem grünen Raspberry Pi. Sie werden so konstruiert, dass die Kabel zwischen Träger und Bauteilen geführt werden können. 
+Dieser Aufbau hat in der frühen Testphase den Vorteil, dass alle elektronischen Komponenten provisorisch platziert werden können, ohne einen Kurzschluss zu riskieren. 
 
 \begin{figure}[H]
 \centering
@@ -97,7 +97,7 @@ Dieser Aufbau hatte in der frühen Testphase den Vorteil, dass alle elektronisch
 \subsubsection{Batteriefach konstruieren}
 \label{Batteriefach konstruieren}
 
-Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung jederzeit entfernen lässt. Dafür wurde ein Click-Verschluss verwendet. Das Batteriefach wird von unten in die Grundplatte geschoben bis es einrastet. Zum Herausnehmen der Batterie müssen nur die Haken gedrückt werden und das Batteriefach kann ausgefahren werden. Um die Funktion problemlos zu gewährleisten dürfen die Wandstärken nicht zu gross sein. Das die Festigkeit trotzdem gewährleistet werden kann wurde die Layerrichtung im 3D Drucker, wie in Abbildung \ref{Layerrichtung Batteriefach} so gewählt das die Layer horizontal zur Verschiebung der Hacken angeordnet sind. Auf Grund der Risikoanalyse in Tabelle \ref{table:risks} wurde entschieden als zusätzliche Vorsichtsmassnahme eine zweite Halterung herzustellen. So kann bei einem Defekt ohne Unterbruch weiter gearbeitet werden. \ref{table:risks}
+Das Batteriefach wird so konstruiert, dass sich die Batterie für die Lagerung jederzeit entfernen lässt. Dafür wird ein Click-Verschluss verwendet. Das Batteriefach wird von unten in die Grundplatte geschoben bis es einrastet. Zum Herausnehmen der Batterie müssen nur die Haken gedrückt werden und das Batteriefach kann ausgefahren werden. Um die Funktion problemlos zu gewährleisten, dürfen die Wandstärken nicht zu gross sein. Damit die Festigkeit trotzdem gewährleistet werden kann, wurde die Layerrichtung im 3D Drucker, wie gezeigt in Abbildung \ref{Layerrichtung Batteriefach}, so gewählt, dass die Layer horizontal zur Verschiebung der Hacken angeordnet sind. Auf Grund der Risikoanalyse in Tabelle \ref{table:risks} wurde entschieden, als zusätzliche Vorsichtsmassnahme eine zweite Halterung herzustellen. So kann bei einem Defekt ohne Unterbruch weiter gearbeitet werden.
 
 
 \begin{figure}[H]
@@ -110,7 +110,7 @@ Das Batteriefach wurde so konstruiert das sich die Batterie für die Lagerung je
 \subsubsection{Greifer konstruieren}
 \label{Greifer konstruieren}
 
-Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft und den Lagerstellen. Dies ist detailliert beschrieben in der Dokumentation von \acrshort{pren1}. Bei der Implementierung des Greifers musste darauf geachtet werden, dass die Lagerstellen nicht verschoben werden. In Abbildung \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sieht man die für die Funktion wichtigsten Masse am Versuchsaufbau und am fertigen Roboter. Die für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
+Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft und den Lagerstellen. Dies ist detailliert beschrieben in der Dokumentation von \acrshort{pren1}. Bei der Implementierung des Greifers muss darauf geachtet werden, dass die Lagerstellen nicht verschoben werden. In Abbildung \ref{fig:Greifer im Roboter} \& \ref{fig:Greifer Versuchsaufbau} sind die für die Funktion wichtigsten Masse am Versuchsaufbau und am fertigen Roboter gezeigt. Die für die Haltekraft verantwortliche Feder, sowie alle Haltebacken und Pendelstützen wurden vom Prototyp wiederverwendet. 
 
 \begin{figure}[H]
   \centering
@@ -134,7 +134,7 @@ Der Klemm- und Hebemechanismus des Greifers sind abhängig von der Federkraft un
 \subsubsection{Halterung Liniensensor}
 \label{Halterung Liniensensor}
 
-Der Liniensensor wird mit einer zweiteiligen Halterung befestigt. Auf der inneren Schale, in Abbildung \ref{fig:Schnitt Halterung Liniensensor} blau, ist der Sensor befestigt. Die innere Schale lässt sich verschieben. So kann die Höhe eingestellt werden. Die Fixierung erfolgt mithilfe von zwei Gewindestiften die in der äusseren Schale befestigt werden und die innere Schale klemmen. 
+Der Liniensensor wird mit einer zweiteiligen Halterung befestigt. Auf der inneren Schale, in Abbildung \ref{fig:Schnitt Halterung Liniensensor} blau, ist der Sensor befestigt. Die innere Schale lässt sich verschieben. So kann die Höhe eingestellt werden. Die Fixierung erfolgt mithilfe von zwei Gewindestiften, die in der äusseren Schale befestigt werden und die innere Schale klemmen. 
 
 
 \begin{figure}[H]
@@ -148,7 +148,7 @@ Der Liniensensor wird mit einer zweiteiligen Halterung befestigt. Auf der innere
 \subsubsection{Abschirmung des Liniensensors}
 \label{Abschirmung des Liniensensors}
 
-Um Störungen durch Fremdlicht zu verhindern wurde eine Abdeckung konstruiert, die jegliche Fremdeinstrahlung abschirmt. Als Dichtung wurde ein Bürstenband verwendet, wie es üblicherweise bei Schiebetüren zum Einsatz kommt. Die Bürsten werden in einer Halterung eingesteckt und mit einem Gewindestift geklemmt. 
+Um Störungen durch Fremdlicht zu verhindern, wird eine Abdeckung konstruiert, die jegliche Fremdeinstrahlung abschirmt. Als Dichtung wird ein Bürstenband verwendet, wie es üblicherweise bei Schiebetüren zum Einsatz kommt. Die Bürsten werden in einer Halterung eingesteckt und mit einem Gewindestift geklemmt.  Diese Abschirmung war in \acrshort{pren1} noch nicht geplant.
 
 
 \begin{figure}[H]
@@ -178,7 +178,7 @@ Um Störungen durch Fremdlicht zu verhindern wurde eine Abdeckung konstruiert, d
 
 Es wird ein Ultraschallsensor montiert. Dieser wird gebraucht für die Bewältigung der Hindernisse und ebenfalls dient er als Backup, um Objekte zu erkennen. Falls die Kamera ein Objekte nicht erkennt, dann würde der Ultraschall dieses bemerken, wenn der Roboter sich davor befindet. Das sorgt dafür, dass Kollisionen vermieden werden.
 
-Der Ultraschall wird ganz vorne am Roboter angebracht, auf der Höhe, die optimal ist, um die Barriere zu erkennen. Der Ultraschall misst direkt über den Löchern, die es in der Barriere gibt, so können die Wellen sicher an einer geraden Fläche reflektiert werden.
+Der Ultraschall wird ganz vorne am Roboter angebracht, auf der Höhe, die optimal ist, um die Barriere zu erkennen. Der Ultraschall misst direkt über den Löchern, die es in der Barriere gibt, so können die Wellen sicher an einer geraden Fläche reflektiert werden. Die Höhe im Vergleich mit einer Barriere ist auf Abbildung \ref{fig:ultraschall-hoehe} gezeigt.
 
 \begin{figure}[H]
 \centering
@@ -219,7 +219,7 @@ Der Winkel und die Höhe der Kamera wurden in \acrshort{pren1} an dem Testaufbau
 \end{figure}
 
 
-Bei der Konstruktion der Kamerabefestigung wurde darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23\textdegree\ beträgt. Ebenfalls wichtig ist, dass die Linsenhöhe 242mm über dem Boden beträgt. 
+Bei der Konstruktion der Kamerabefestigung wird darauf geachtet, dass der Winkel wie im Testaufbau gemessen 23\textdegree\ beträgt. Ebenfalls wichtig ist, dass die Linsenhöhe 242mm über dem Boden beträgt. Dies wurde in \acrshort{pren1} bereits so definiert, da mit diesen Massen, eine Pylone in zwei Metern Entfernung immer noch komplett sichrbar ist. Der Kameraturm auf dem Roboter ist gezeigt auf Abbildungen \ref{fig:Skizze der Funktionsmasse für die Kamerabefestigung} und \ref{fig:kameraturm-robi}.
 
 
 \begin{figure}[H]
@@ -257,7 +257,9 @@ die vom \gls{tinyk22} erfasst und verarbeitet werden sollen, entsprechend verbun
 \label{fig: Verteiler PCB}
 \end{figure}
 
-Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} mehrere Exemplare vorhanden. Das PCB zusammen mit dem \gls{tinyk22} ist auf Grafik \ref{fig: Verteiler PCBA} gezeigt. Somit ist das Risiko 19 der kaputten Elektroteile nicht mehr relevant.
+Von dem PCB werden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} mehrere Exemplare vorhanden. Auch von den Motoren gibt es ein zweites Exemplar. Somit ist das Risiko 19 der kaputten Elektroteile (siehe Tabelle \ref{table:risks} nicht mehr relevant.
+
+Das PCB zusammen mit dem \gls{tinyk22} ist auf Grafik \ref{fig: Verteiler PCBA} gezeigt. 
 
 \begin{figure}[H]
 \centering
@@ -269,7 +271,7 @@ Von dem PCB wurden fünf Exemplare bestellt. Ebenso sind von dem \gls{tinyk22} m
 
 \subsubsection{Pinout und Softwaregrundlagen}
 
-Als Grundlage für die Software diente das Projekt aus dem Modul \textit{Microcontroller Fundamentals}. Dieses enthielt ein solides Gerüst, das im Verlauf angepasst wurde. Dabei wurden verschiedene Codeabschnitte ergänzt, überarbeitet oder entfernt. Als Entwicklungsumgebung kam \textit{MCUXpresso} zum Einsatz.
+Als Grundlage für die Software diente das Projekt aus dem Modul \textit{Microcontroller Fundamentals}. Dieses enthielt ein solides Gerüst, das im Verlauf des Roboterbaus angepasst wird. Dabei werden verschiedene Codeabschnitte ergänzt, überarbeitet oder entfernt.
 
 Die Initialisierung der Pins erfolgte auf Basis der Belegungen aus Abbildung~\ref{fig:Pinout TinyK22} und Abbildung~\ref{fig:Pinout Raspy Hat}
 
@@ -290,9 +292,9 @@ Die Initialisierung der Pins erfolgte auf Basis der Belegungen aus Abbildung~\re
 \end{minipage}
 \end{figure}
 
-Im Vergleich zur ursprünglichen Planung in \gls{pren1} (siehe Abbildung~\ref{fig:Pinout PREN 1}) hat sich das finale Pinout bis zum Ende von \gls{pren2} (siehe Abbildung~\ref{fig:Pinout PREN 2}) in mehreren Punkten verändert.
+Im Vergleich zur ursprünglichen Planung in \gls{pren1} (siehe Abbildung~\ref{fig:Pinout PREN 1}) wird das Pinout in \gls{pren2} (siehe Abbildung~\ref{fig:Pinout PREN 2}) in mehreren Punkten angepasst.
 
-Drei ursprünglich für die Liniensensoren vorgesehene Pins mussten aufgrund der verwendeten Sensorbank entfallen. Der Buzzer sowie der Startknopf wurden auf das Raspberry-HAT verlagert. Zudem wurde die Richtungsauswahl von zwei auf vier Pins erweitert, um eine differenziertere Steuerung zu ermöglichen. Zusätzlich wurde eine $I^2C$-Schnittstelle implementiert, um weitere Sensoren anbinden zu können. 
+Drei ursprünglich für die Liniensensoren vorgesehene Pins werden aufgrund der verwendeten Sensorbank entfallen. Der Buzzer sowie der Startknopf werden auf das Raspberry-HAT verlagert. Zudem wird die Richtungsauswahl von zwei auf vier Pins erweitert, um eine differenziertere Steuerung zu ermöglichen. Zusätzlich wird eine $I^2C$-Schnittstelle implementiert, um weitere Sensoren anbinden zu können. 
 
 
 \begin{figure}[H]
@@ -319,13 +321,16 @@ Drei ursprünglich für die Liniensensoren vorgesehene Pins mussten aufgrund der
 \subsubsection{Spannungsversorgung und Leistungsberechnung}
 
 
-In der Tabelle \ref{tab:spannungsversorgung} werden alle Verbraucher aufgezeigt mit ihrer Betriebsspannung wie auch die maximale Stromaufnahme. Anhand dieser Daten konnte die Wahl eines geeigneten Akkus getroffen werden. Die Spannungsversorgung kann mittels eines Not-Aus Schalters von den Verbrauchern getrennt werden. Das Raspberry Pi 5 wird dabei als einziger Verbraucher nicht von der Spannung getrennt(siehe Abbildung \ref{fig: Verdrahtung Hauptschalter}). Damit wird die Möglichkeit von Datenkorruption auf der SD-Karte verringert. Berechnet man von jedem Verbraucher die Leistung kommt man auf eine maximale Gesamtleistung von 101W. Der vorgesehene Akku, liefert eine Spannung von 14.8V und eine Kapazität von 3000mAh. Unter maximaler Leistung könnte der Roboter für ca. 25 Minuten betrieben werden. \ref{eq:Energieverbrauch}.
+In der Tabelle \ref{tab:spannungsversorgung} werden alle Verbraucher aufgezeigt mit ihrer Betriebsspannung, wie auch der maximalen Stromaufnahme. Anhand dieser Daten kann die Wahl eines geeigneten Akkus getroffen werden.
+
+Die Spannungsversorgung kann mittels eines Not-Aus Schalters von den Verbrauchern getrennt werden. Das Raspberry Pi 5 wird dabei als einziger Verbraucher nicht von der Spannung getrennt(siehe Abbildung \ref{fig: Verdrahtung Hauptschalter}). Damit wird die Möglichkeit von Datenkorruption auf der SD-Karte verringert.
+
+Wird von jedem Verbraucher die Leistung berechnet, ist dies eine maximale Gesamtleistung von 101W (siehe Gleichung \ref{eq:Energieverbrauch}). Der vorgesehene Akku, liefert eine Spannung von 14.8V und eine Kapazität von 3000mAh. Unter maximaler Leistung könnte der Roboter für ca. 25 Minuten betrieben werden. .
 
 \begin{equation}
     t = \frac{E}{P} = \frac{U \cdot Q}{P} = \frac{14{,}8\,\text{V} \cdot 10800\,\text{As}}{105\,\text{W}} \approx 1{'}520\,\text{s} = 25\,\text{Minuten} 
     \label{eq:Energieverbrauch}
 \end{equation}
-
 
 
 \newpage
@@ -366,9 +371,9 @@ Tiny K22             & 5V               & 500mA                      & - \\
 \subsubsection{Motoren ansteuern und auslesen}
 \label{motoren-encoder}
 
-Um die Motoren richtig anzusteutern, wurden die Ticks der Encoder pro Radumdrehung in der MCCAR Library in dem Quad Modul definiert. Danach wurde mithilfe eines Lineals geprueft, ob der Roboter sich die Distanz vorbewegt, wie der Encoder das sagt. Da dies erfolgreich war, konnte das Drive Modul der Library verwendet werden, die das Fahren regelt, damit sich die Motoren so schnell drehen, wie in den jeweiligen Ziel-Variablen vorgegeben. Mit der konfigurierten Library soll der Roboter in der Lage sein, eine bestimmte Distanz akkurat zurueckzulegen.
+Um die Motoren richtig anzusteuern, werden die Ticks der Encoder pro Radumdrehung in der MCCAR Library in dem Quad Modul definiert. Danach wird mithilfe eines Lineals geprüft, ob der Roboter sich die Distanz vorbewegt, wie der Encoder das sagt. Da dies erfolgreich war, kann das Drive Modul der Library verwendet werden, die das Fahren regelt, damit sich die Motoren so schnell drehen, wie in den jeweiligen Ziel-Variablen vorgegeben. Mit der konfigurierten Library soll der Roboter in der Lage sein, eine bestimmte Distanz akkurat zurückzulegen. Wie in \acrshort{pren1} geplant, werden Motoren mit Encodern gewaehlt, um die Fahrdistanz auslesen zu koennen.
 
-Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden war, wurde der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht sich die Verwendung eines Breadboards mit dem \gls{tinyk22} und einem Speisegerät, anstelle einer richtigen Verbindung mit einem \acrshort{pcb}. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
+Nachdem die erste Ausführung der Software für die Motoren mit den beiden Encodern vorhanden ist, wird der implementierte Code mithilfe eines provisorischen Aufbaus getestet. Unter einem provisorischen Aufbau versteht sich die Verwendung eines Breadboards mit dem \gls{tinyk22} und einem Speisegerät, anstelle einer richtigen Verbindung mit einem \acrshort{pcb}. Dies ist auf Abbildung \ref{fig: Motorentest} ersichtlich.
 
 \begin{figure}[H]
 \centering
@@ -398,9 +403,9 @@ Der zugrunde liegende Fahralgorithmus basiert darauf, die Werte beider Encoder z
 \subsubsection{Liniensensor auslesen}
 \label{Liniensensor auslesen}
 
-In einem ersten Durchlauf wurde ein Code implementiert, um die Funktion mit dem \gls{tinyk22} zu testen. Mittels eines Timers wurden die einzelnen Pins in einem genügend grossen Zeitabstand von \acrfull{vcc} auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture, sollten sich die Kondensatoren, die sich am Liniensensor befinden, je nach Reflektion des Untergrundes in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm erfolgreich festgestellt werden, durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
+In einem ersten Durchlauf wird ein Code implementiert, um die Funktion mit dem \gls{tinyk22} zu testen. Mittels eines Timers werden die einzelnen Pins in einem genügend grossen Zeitabstand von \acrfull{vcc} auf Input Capture umgeschaltet. Nach dem Umschalten auf Input Capture, sollen sich die Kondensatoren, die sich am Liniensensor befinden, je nach Reflektion des Untergrundes in unterschiedlichen Zeiten laden. Dieses Verhalten konnte im Testprogramm erfolgreich festgestellt werden, durch die unterschiedlichen Werte im Timer Register des Input Capture Modus.
 
-Auf der Abb. \ref{fig:liniensensor soll} ist die Sollposition des Liniensensors gezeigt, während des Traversieren auf der Linie. Im Konzept von \acrshort{pren1} waren jeweils vor und hinter dem Array ein zusätzlicher Sensor vorgesehen. Jedoch konnten diese nicht realisiert werden, da es nicht genügend Timer Channels zur Verfügung hatte.
+Auf der Abb. \ref{fig:liniensensor soll} ist die Sollposition des Liniensensors gezeigt, während des Traversieren auf der Linie. Im Konzept von \acrshort{pren1} waren jeweils vor und hinter dem Array ein zusätzlicher Sensor vorgesehen. Jedoch kann dies nicht realisiert werden, da es nicht genügend Timer Channels zur Verfügung hat.
 
  \begin{figure}[H]
 \centering
@@ -413,9 +418,15 @@ Auf der Abb. \ref{fig:liniensensor soll} ist die Sollposition des Liniensensors 
 \subsubsection{Linie folgen mit PD-Regelung}
 \label{Linie folgen mit PD-Regelung}
 
-Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, konnte die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abbildung \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit möglichst wenig Schwingungen gefahren werden kann, wurde ein PD-Regler ausgewählt.
+Nachdem die Auslesung des Liniensensors erfolgreich getestet wurde, kann die eigentliche Linienregelung implementiert werden, wovon ein Ausschnitt auf Abbildung \ref{fig:Ausschnitt der Implementation der PD-Regelung} ersichtlich ist. Damit möglichst dynamisch und mit möglichst wenig Schwingungen gefahren werden kann, wird ein PD-Regler ausgewählt.
 
-Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen. Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
+Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht.
+
+Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte der einzelnen Sensoren ein. Beim Kalibrieren muss der Roboter immer in seiner Soll-Fahrposition stehen.
+
+Die periodisch aufgerufene Reglerfunktion berechnet dann aus dem Soll-Wert und dem aktuellen Sensorwert (Ist-Wert) die Abweichung. Diese Fehler werden zu einem Gesamtfehler mit einer Gewichtung der Sensoren von aussen nach innen zunehmend berechnet. Dieser Gesamtfehler wird dann mit dem P- und D-Anteil zu einem Korrekturwert weiter verrechnet. Der Proportionalanteil (P) sorgt dafür, dass das Fahrzeug bei einem grösseren Fehler stärker korrigiert, während der Differentialanteil (D) auf schnelle Änderungen des Fehlers reagiert und so Schwingungen dämpft. Der Korrekturwert wird dann genutzt um die beiden \acrfull{pwm} Signale der Motoren zu senken oder erhöhen, je nach Abweichung zur Linie.
+
+Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. 
 
  \begin{figure}[H]
 \centering
@@ -425,7 +436,7 @@ Bei jedem Neustart des Roboters, liest eine Kalibrierungsfunktion die Soll-Werte
 \end{figure}
 
 
-Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung angebracht (siehe Abbildung \ref{fig:linsen-robi}). Dank diesem Aufbau konnte mit der weiteren Implementierung fortgefahren werden. Für die Feineinstellung wurden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
+Der Liniensensor wird am Fahrzeug mit der Abschirmung angebracht (siehe Abbildung \ref{fig:linsen-robi}). Für die Feineinstellung werden die einzelnen Sensorwerte auf dem Originalboden und dem Klebeband ausgemessen, da dies essenziell ist, um die Regelung sauber abzustimmen.
 
  \begin{figure}[H]
 \centering
@@ -442,10 +453,6 @@ Nach dem ersten Test wurde der Liniensensor am Fahrzeug mit der Abschirmung ange
 
 \subsubsection{Liniensensor}
 
-Die Liniensensoren wurden wie geplant implementiert. Durch das Ummuxen der Pins von GPIO-Output (High) auf den Input Capture Modus, wird die Ladezeit eines Kondensators gemessen. Diese Zeit (ausgedrückt in Ticks) liefert Informationen darüber, ob sich das Fahrzeug über dem Soll-Fahrweg befindet oder davon abweicht.
-
-Während der Fahrt werden die Sensor-Pins periodisch zwischen GPIO High und Input Capture umgeschaltet, um kontinuierlich neue Messwerte zu erhalten. Die erfassten Ticks werden in einer PD-Regelung weiter verarbeitet, welche die Abweichung zur Soll-Position (Linie) berechnet und entsprechend die Motoren nachsteuert. Diese Regelung ergänzt die Wegmessung über die Encodersensoren und erhöht die Spurtreue, indem sie sicherstellt, dass das Fahrzeug die Linie nicht verlässt. 
-
-Das Erkennen, ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorwerten geprüft. Da beim Erreichen des Wegpunktes deutlich mehr Sensoren auf der weissen Oberfläche stehen, weichen die Werte der aktuellen Ticks stark der Sollwerte ab. Somit kann ein Wegpunkt klar identifiziert werden und der Roboter kann anhalten. Dies ist auf Abbildung TODO REF gezeigt.
+Das Erkennen, ob der Roboter auf einem Wegpunkt steht oder nicht, wird ebenfalls mittels der Sensorwerten geprüft. Da beim Erreichen des Wegpunktes deutlich mehr Sensoren auf der weissen Oberfläche stehen, weichen die Werte der aktuellen Ticks stark den Sollwerten ab. Somit kann ein Wegpunkt klar identifiziert werden und der Roboter kann anhalten. Dies ist auf Abbildung TODO REF gezeigt.
 
 TODO ABBILDUNG VON \textbf{KNOTEN}
