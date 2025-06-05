@@ -123,7 +123,7 @@ Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File:
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
 
-Um die Modelresultate auszuwerten wurde das Model in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt, gezeigt im Klassendiagramm \ref{fig:nav-object-detector}.
+Um die Modelresultate auszuwerten, wurde das Model in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt, gezeigt im Klassendiagramm auf Abbildung\ref{fig:nav-object-detector}.
 
  \begin{figure}[H]
 \centering
@@ -137,20 +137,20 @@ Diese ObjectDetector Klasse ladet das Model bei der Instanzierung und wird aufge
 \begin{enumerate}
     \item Inference (Objekterkennung).
     \item Resultat parsen.
-    \item Nächstes Objekte vor dem Roboter finden.
+    \item Nächstes Objekt vor dem Roboter finden.
 \end{enumerate}
 
-Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur die erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf 0.4. Aus der F1 Kurve in Abbildung \ref{fig:f1} kann gelesen werden, dass die Pylone bei 0.4 die besten Resultate hat. Knoten und Pylone sind recht konstant und haben dort ebenfalls sehr genaue Resultate. Dadurch, dass dieser Wert erhöht wurde von dem Standardwert, kann das Risiko 7 (Ein Objekt wird fälschlicherweise erkannt) damit vermindert werden: Das Modell muss sich sicherer sein als dies standardmässig der Fall ist, damit die Deutung akzeptiert wird.
+Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur diese erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf 0.4. Aus der F1 Kurve in Abbildung \ref{fig:f1} kann gelesen werden, dass die Barriere bei 0.4 die besten Resultate hat. Knoten und Pylone sind recht konstant und haben dort ebenfalls sehr genaue Resultate. Dadurch, dass dieser Wert erhöht wurde von dem Standardwert, kann das Risiko 7 (Ein Objekt wird fälschlicherweise erkannt), siehe Tabelle \ref{table:risks}, damit vermindert werden: Das Modell muss sich sicherer sein, als dies standardmässig der Fall ist, damit die Deutung akzeptiert wird.
 
 Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
-Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bildes befinden. Somit kann sichergestellt werden, dass nicht versehentlich Objekte, die sich nicht auf der Fahrbahn befinden, gespeichert werden und auch Risiko 7 (Objekte werden fälschlicherweise erkannt) kann so mitigiert werden. Die Mittellinie wird berechnet aus der Breite des Bildes. Die Objekte auf der Mittellinie werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser Liste ist das nächste Objekt zum Roboter. Die ID des Objektes, die vom Model zurückgegben wird, korrespondiert mit der ID des erstellten Enums, damit das erkannte Objekt als Enum zurückgegeben wird.
+Aus dieser Liste werden nun alle Objekte betrachtet, die sich auf der Mittellinie des Bildes befinden. Somit kann sichergestellt werden, dass nicht versehentlich Objekte, die sich nicht auf der Fahrbahn befinden, gespeichert werden und auch Risiko 7 (Objekte werden fälschlicherweise erkannt, siehe Tabelle \ref{table:risks}) kann so mitigiert werden. Die Mittellinie wird berechnet aus der Breite des Bildes. Die Objekte auf der Mittellinie werden sortiert nach ihren Koordinaten auf dem Bild. Das erste Element in dieser Liste ist das nächste Objekt zum Roboter.
 
 In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
 
 \begin{itemize}
     \item Falls das nächste Objekt eine Barriere und das zweitnächste eine Pylone ist. In diesem Fall wird zurückgegeben, dass eine Pylone das nächste Objekt ist, da dieser Knoten sowieso nicht befahrbar ist und aus dem internen Graph entfernt werden soll.
-    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein Objekt verpasst wurde. Es ist ein kleineres Problem ein Objekt zu verpassen, als sich eines einzubilden und fälschlicherweise Strecken zu entfernen. Durch den Ultraschall werden Risiko 12 und 1 (Objekte werden nicht erkannt) mitigiert.
+    \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt, siehe Tabelle \ref{table:risks}) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein Objekt verpasst wurde. Durch den Ultraschall werden Risiko 12 und 1 (Objekte werden nicht erkannt, siehe Tabelle \ref{table:risks}) mitigiert.
 \end{itemize}
 
 Die folgenden Abbildungen veranschaulichen das Prinzip. Diese Bilder haben die einzelnen Objekte, die das Model erkannt hat mit Boxen annotiert. Die Bildunterschrift zeigt, welche Objekte zurückgegeben werden basierend auf dem Algorithmus, der zuvor erklärt wurde. Wenn es keine Box annotiert hätte, würde ebenfalls ein Knoten zurückgegeben werden.
