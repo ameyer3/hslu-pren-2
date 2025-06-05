@@ -1,6 +1,6 @@
 \section{Realisiertes Funktionsmuster}
 
-In diesem Kapitel wird die Umsetzung des in \acrshort{pren1} erarbeiteten Konzept anhand der  erstellten Anforderungsliste bewertet. Der Fokus liegt auf den Fest- und Mindestanforderungen. Die Anforderungsliste ist im Anhang in Kapitel \nameref{anforderungliste} angehängt.
+In diesem Kapitel wird die Umsetzung des in \acrshort{pren1} erarbeiteten Konzept anhand der erstellten Anforderungsliste (siehe Kapitel \nameref{anforderungliste}) bewertet. Der Fokus liegt auf den Fest- und Mindestanforderungen.
 
 \subsection{Anforderungen}
 
@@ -8,7 +8,7 @@ Die physischen Anforderungen an den Roboter konnten vollständig erfüllt werden
 
 Der Roboter ist in der Lage eine bestimmte Distanz vor und zurück zu fahren und sich einen bestimmten Winkel zu drehen.
 
-Die Anforderung 1.6 'Das Fahrzeug muss in der Lage sein das Hindernis mit  einer Masse von 300g anzuheben und im Umkreis von 20mm am alten Ort abzusetzen', konnte nur teilweise erreicht beziehungsweise. getestet werden. Der Anhebemechanismus des Greifers konnte mit dem originalen Hindernis erfolgreich getestet werden. (Abb. \ref{fig:greifer-open}/ \ref{fig:griefe-rclose}) Da die Systemintegration jedoch nicht vollständig durchgeführt werden konnte, konnte das Aufheben, Drehen und Absetzen als automatisierter Prozess nicht getestet werden.
+Durch diese Funktionen und den Greifer ist der Roboter in der Lage ein Hindernis mit einer Masse von 300g anzuheben und im Umkreis von 20mm am alten Ort abzusetzen. Auf Abbildungen \ref{fig:greifer-open} \& \ref{fig:griefe-rclose} ist das Greifen gezeigt.
 
 
 \begin{figure}[H]
@@ -28,9 +28,9 @@ Die Anforderung 1.6 'Das Fahrzeug muss in der Lage sein das Hindernis mit  einer
 \end{minipage}
 \end{figure}
 
-Das Folgen der Linie erfolgt wie in \acrshort{pren1} geplant mit einem Liniensensor, der aus mehreren Phototransistoren besteht. Die Regelung der Motoren erfolgt mit Hilfe eines PD-Reglers. Der PD-Regler konnte auf dem Testpracour geprüft werden und ist in der Lage der Linie zu folgen und auf einem Knoten anzuhalten.
+Das Folgen der Linie erfolgt wie in \acrshort{pren1} geplant mit einem Liniensensor, der aus mehreren Phototransistoren besteht. Die Regelung der Motoren erfolgt mit Hilfe eines PD-Reglers. Der PD-Regler konnte auf dem Testparcour geprüft werden und ist in der Lage der Linie zu folgen und auf einem Knoten anzuhalten.
 
-Die Bilderkennung und der Wegfindungsalgorithmus  konnten mithilfe des Kameratestaufbaus aus \acrshort{pren1} und einem leicht veränderten Code bereits vor Ort getestet werden (Siehe Anhang \nameref{statische-traver}). Gesperrte Knoten konnten bei unseren Testläufen mit einer 100\% Sicherheit erkennt werden, ebenso konnten die Barrieren in 100\% der Fälle erkannt werden. Dies bezieht sich auf die manuellen Testdurchläufe und das Trainingsresultat des Models. Trotzdem wird mit dem Ultraschall eine zusätzliche Sicherung eingebaut. Dieser misst sehr zuverlässig, wie nahe sich ein Objekt vor dem Roboter befindet.
+Die Bilderkennung und der Wegfindungsalgorithmus konnten mithilfe des Kameratestaufbaus aus \acrshort{pren1} und einem leicht veränderten Code bereits vor Ort getestet werden (siehe Anhang \pageref{statische-traver}). Gesperrte Knoten konnten bei den Testläufen mit einer 100\% Sicherheit erkennt werden, ebenso konnten die Barrieren in 100\% der Fälle erkannt werden. Dies bezieht sich auf die manuellen Testdurchläufe und das Trainingsresultat des Models (siehe Confusion Matrix auf Abbildung \ref{fig:conf-matrix-model}. Trotzdem wird mit dem Ultraschall eine zusätzliche Sicherung eingebaut. Dieser misst auf \pm 1cm zuverlässig, wie nahe sich ein Objekt vor dem Roboter befindet.
 
 Auch die Erkennung der ausgehenden Kanten war immer erfolgreich. Der Algorithmus hat bei allen Testdurchläufen einen direkten Weg ans Ziel gefunden. 
 

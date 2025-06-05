@@ -43,7 +43,7 @@ Es werden mehrere Models trainiert, die laufend miteinander verglichen werden. D
 
 Das Model, das verwendet wird, deutet die Bilder in ihrer Originalgrösse und hat über alle Klassen (Pylonen, Knoten, Hindernisse) gute Ergebnisse.
 
-Die folgenden Bilder zeigen einige Bilder, die das Model annotiert hat. Darauf ist zu sehen, wie genau es die einzelnen Objekte erkennen kann.
+Die folgenden Abbildungen zeigen einige Bilder, die das Model annotiert hat. Darauf ist zu sehen, wie genau es die einzelnen Objekte erkennen kann.
 
 \begin{figure}[H]
   \centering
@@ -107,9 +107,9 @@ Es gibt Methoden, um die .pt Datei, das Format in welchem das Model gespeichert 
 Drei Möglichkeiten wurden betrachtet und verglichen:
 
 \begin{enumerate}
-    \item Caffe2\footnote{https://caffe2.ai/}: In der Vergangenheit sehr geeignet, heutzutage mit PyTorch zusammengefügt und existiert nicht mehr auf diese Weise.\cite{caffe2}
-    \item \acrfull{ncnn}\footnote{https://docs.ultralytics.com/integrations/ncnn/}: Sehr gute Performance für ARM Geräte (u.a. Raspberry Pi), sehr wenig Abhängigkeiten, einfache Transformation.\cite{ncnn-bib}
-    \item \acrfull{onnx}\footnote{https://onnx.ai/}: Geeignet für  Cross-Plattform Fälle, gute Austauschbarkeit des Models, flexibel, viele Abhängigkeiten.\cite{onnx-bib}
+    \item Caffe2\footnote{\url{https://caffe2.ai/}}: In der Vergangenheit sehr geeignet, heutzutage mit PyTorch zusammengefügt und existiert nicht mehr auf diese Weise.\cite{caffe2}
+    \item \acrfull{ncnn}\footnote{\url{https://docs.ultralytics.com/integrations/ncnn/}}: Sehr gute Performance für ARM Geräte (u.a. Raspberry Pi), sehr wenig Abhängigkeiten, einfache Transformation.\cite{ncnn-bib}
+    \item \acrfull{onnx}\footnote{\url{https://onnx.ai/}}: Geeignet für  Cross-Plattform Fälle, gute Austauschbarkeit des Models, flexibel, viele Abhängigkeiten.\cite{onnx-bib}
 \end{enumerate}
 
 Es wird NCNN gewählt, da dies perfekt für den Verwendungszweck mit einem Raspberry Pi passt. Das erstellte .pt File kann mit der ultralytics Bibliothek transformiert werden:
@@ -118,12 +118,12 @@ Es wird NCNN gewählt, da dies perfekt für den Verwendungszweck mit einem Raspb
 yolo export model=best.pt format=ncnn
 \end{verbatim}
 
-Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File: Die Ultralytics Library erwartet den Pfad zu der Datei, respektive dem Ordner und baut daraus das YOLO Model, das verwendet werden kann in Python. Mit der Transformation wurde das Risiko 3: 4 Minuten reichen nicht für einen Durchgang (siehe Tabelle \ref{table:risks}), weiter gemindert. Auf dem Raspberry Pi, kann die Bilderkennung pro Bild konstant unter einer Sekunde gehalten werden.
+Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File: Die Ultralytics Library erwartet den Pfad zu der Datei, respektive dem Ordner und baut daraus das YOLO Model, welches in Python verwendet werden kann. Mit der Transformation wurde das Risiko 3 (4 Minuten reichen nicht für einen Durchgang) (siehe Tabelle \ref{table:risks}), weiter gemindert. Auf dem Raspberry Pi, kann die Bilderkennung pro Bild konstant unter einer Sekunde gehalten werden.
 
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
 
-Um die Modelresultate auszuwerten, wurde das Model in den Ordner der Navigation kopiert und es wurde eine ObjectDetector Klasse und ein Object Enum erstellt, gezeigt im Klassendiagramm auf Abbildung\ref{fig:nav-object-detector}.
+Um die Modelresultate auszuwerten, wird das Model in den Ordner der Navigation kopiert und es wird eine ObjectDetector Klasse und ein Object Enum erstellt, gezeigt im Klassendiagramm auf Abbildung \ref{fig:nav-object-detector}.
 
  \begin{figure}[H]
 \centering
@@ -140,7 +140,7 @@ Diese ObjectDetector Klasse ladet das Model bei der Instanzierung und wird aufge
     \item Nächstes Objekt vor dem Roboter finden.
 \end{enumerate}
 
-Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur diese erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf 0.4. Aus der F1 Kurve in Abbildung \ref{fig:f1} kann gelesen werden, dass die Barriere bei 0.4 die besten Resultate hat. Knoten und Pylone sind recht konstant und haben dort ebenfalls sehr genaue Resultate. Dadurch, dass dieser Wert erhöht wurde von dem Standardwert, kann das Risiko 7 (Ein Objekt wird fälschlicherweise erkannt), siehe Tabelle \ref{table:risks}, damit vermindert werden: Das Modell muss sich sicherer sein, als dies standardmässig der Fall ist, damit die Deutung akzeptiert wird.
+Im Teil der Inference wird ein Bild an das Model gegeben. Dabei sollen nur diese erkannten Objekte zurückgegeben werden, die mit einer definierten prozentualen Gewissheit erkannt wurden. Diese Gewissheit ist als Konstante definiert auf 0.4. Aus der F1 Kurve in Abbildung \ref{fig:f1} kann gelesen werden, dass die Barriere bei 0.4 die besten Resultate hat. Knoten und Pylone sind recht konstant und haben dort ebenfalls sehr genaue Resultate. Dadurch, dass dieser Wert von dem Standardwert erhöht wurde, kann das Risiko 7 (Ein Objekt wird fälschlicherweise erkannt), siehe Tabelle \ref{table:risks}, damit vermindert werden: Das Modell muss sich sicherer sein, als dies standardmässig der Fall ist, damit die Deutung akzeptiert wird.
 
 Diese Resultate werden dann geparsed, sodass alle erkannten Objekte mir ihrer ID, mit der Confidence, mit der sie erkannt wurden, und mit ihrem Standort auf dem Bild zurückgegeben werden.
 
@@ -153,7 +153,7 @@ In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
     \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt, siehe Tabelle \ref{table:risks}) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein Objekt verpasst wurde. Durch den Ultraschall werden Risiko 12 und 1 (Objekte werden nicht erkannt, siehe Tabelle \ref{table:risks}) mitigiert.
 \end{itemize}
 
-Die folgenden Abbildungen veranschaulichen das Prinzip. Diese Bilder haben die einzelnen Objekte, die das Model erkannt hat mit Boxen annotiert. Die Bildunterschrift zeigt, welche Objekte zurückgegeben werden basierend auf dem Algorithmus, der zuvor erklärt wurde. Wenn es keine Box annotiert hätte, würde ebenfalls ein Knoten zurückgegeben werden.
+Die folgenden Abbildungen veranschaulichen das Prinzip. Diese Bilder haben die einzelnen Objekte, die das Model erkannt hat mit Boxen annotiert. Die Bildunterschrift zeigt, welche Objekte zurückgegeben werden, basierend auf dem Algorithmus, der zuvor erklärt wurde. Wenn es keine Box annotiert hätte, würde ebenfalls ein Knoten zurückgegeben werden.
 
 \begin{figure}[H]
   \centering
@@ -209,7 +209,7 @@ Die entfernten Linien werden erkannt, wenn die Winkel der ausgehenden Linien ber
 \subsection{Zieleingabe: Peripherie Ein- und Ausgabe}
 
 In diesem Kapitel wird die Ein- und Ausgabe des Roboters thematisiert.
-Dafür wurde auf dem Raspberry Pi ein Prototypen-HAT montiert, welcher die benötigten GPIO-Pins entsprechend der Abbildung \ref{fig:raspiheader-schema} auf Taster, Display und Buzzer verbindet.
+Dafür wird auf dem Raspberry Pi ein Prototypen-HAT montiert, welcher die benötigten GPIO-Pins entsprechend der Abbildung \ref{fig:raspiheader-schema} auf Taster, Display und Buzzer verbindet.
 
 \begin{figure}[H]
     \centering
@@ -231,7 +231,7 @@ Dafür wurde auf dem Raspberry Pi ein Prototypen-HAT montiert, welcher die benö
     \label{fig:raspiheader-assembly}
 \end{figure}
 
-Die Software dieser Komponenten wurde direkt in Python auf dem Raspberry Pi umgesetzt. Nachfolgend in Abbildung \ref{fig:peripherie-classdiagramm} ist das Klassendiagramm ersichtlich. Wir haben eine RealPeripherieConnector, welcher von BaseConnector erbt, und die Hardwarefunktionen wie Buttons und Buzzer übernimmt. Zusätzlich haben wir einen MockPeripherieConnector, welcher zum Einsatz kommt, wenn kein GPIO zur Verfügung steht. Dieser Simuliert die Ein und Ausgabe auf dem Terminal. Somit kann stets der Programmcode auf dem PC ausgeführt werden, wo keine, über GPIO verbundene, Buttons und Buzzers verfügbar sind.
+Die Software dieser Komponenten wird direkt in Python auf dem Raspberry Pi umgesetzt. Nachfolgend in Abbildung \ref{fig:peripherie-classdiagramm} ist das Klassendiagramm ersichtlich. Es gibt einen RealPeripherieConnector, welcher von BaseConnector erbt, und die Hardwarefunktionen, wie Buttons und Buzzer, übernimmt. Zusätzlich gibt es einen MockPeripherieConnector, welcher zum Einsatz kommt, wenn kein GPIO zur Verfügung steht. Dieser simuliert die Ein- und Ausgabe auf dem Terminal. Somit kann stets der Programmcode auf dem PC ausgeführt werden, wo keine über GPIO verbundene Buttons und Buzzers verfügbar sind.
 
 \begin{figure}[H]
     \centering
@@ -245,20 +245,20 @@ Die Software dieser Komponenten wurde direkt in Python auf dem Raspberry Pi umge
 
 \textbf{Zielknopf}
 
-Die Zieleingabe wird dazu verwendet, um vor dem Start den geforderten Zielknoten auszuwählen. Bei Knopfdruck wird der gewählte Zielknoten durchgeschaltet, dies in der Reihenfolge A --> B --> C und dann wieder von vorne. So wird nur ein Taster benötigt, um zwischen den drei Zielen zu wechseln. Das Gewählte Ziel ist stets im Display (\ref{peripherie-display}) ersichtlich.
+Die Zieleingabe wird verwendet, um vor dem Start den geforderten Zielknoten auszuwählen. Bei Knopfdruck werden die möglichen Zielknoten auf dem Display durchgeschaltet in der Reihenfolge A --> B --> C und dann wieder von vorne. So wird nur ein Taster benötigt, um zwischen den drei Zielen zu wechseln. Das Gewählte Ziel ist stets im Display (Kapitel \ref{peripherie-display}) ersichtlich.
 
 \textbf{Startknopf}
 
-Der zweite Taster ist der Startknopf. Dieser wird nach der Eingabe des Zielknoten gedrückt, nach einer kurzen Wartezeit wird dann der Start initialisiert und der Roboter fängt an den Graphen Richtung Zielknoten zu traversieren.
+Der zweite Taster ist der Startknopf. Dieser wird nach der Eingabe des Zielknoten gedrückt. Nach einer kurzen Wartezeit wird der Start initialisiert und der Roboter fängt an den Graphen in Richtung des Zielknotens zu traversieren.
 
-Durch die einfache Zweitaster-Bedienung, und das ablesbare Display ist das Aufstellen sowie wählen des Zielknoten sehr gut unter 1 Minute möglich. 
+Durch die einfache Zweitaster-Bedienung, und das ablesbare Display ist das Aufstellen sowie wählen des Zielknoten sehr gut unter 1 Minute möglich. Das Risiko 4 (1 Minute reicht nicht, siehe Tabelle \ref{table:risks}) kann somit vermindert werden.
 
 \subsubsection{Peripherie Ausgabe}
 
 \textbf{Display}\label{peripherie-display}
 
 Das Display zeigt stets den aktuellen gewählten Zielknoten an, so kann einfach überprüft werden, welcher Zielknoten gewählt wird, bevor der Roboter gestartet wird. 
-Zusätzlich wird der Status sowie die Laufzeit des Roboters dargestellt. Dadurch muss nicht separat eine Stoppuhr verwendet werden. Die Laufzeit wird automatisch beim erreichen des Zielknoten gestoppt und bleibt ablesbar.
+Zusätzlich wird der Status sowie die Laufzeit des Roboters dargestellt. Dadurch muss nicht separat eine Stoppuhr verwendet werden. Die Laufzeit wird automatisch beim Erreichen des Zielknotens gestoppt und bleibt ablesbar.
 
 TODO LUKAS: insert image of Display\\
 TODO ALINA: Take image of each state of the display (IDLE, RUNNING, FINISHED)
@@ -286,4 +286,4 @@ TODO ALINA: Take image of each state of the display (IDLE, RUNNING, FINISHED)
 
 \textbf{Buzzer}\label{peripherie-buzzer}
 
-Der Buzzer ertönt sobald der Zielknoten erreicht wurde. Somit wird dem Bediener und Publikum vermittelt, dass der Roboter seine Traversierung beendet hat, und sich am Zielknoten befindet.
+Der Buzzer ertönt, sobald der Zielknoten erreicht wurde. Somit wird dem Bediener und Publikum vermittelt, dass der Roboter seine Traversierung beendet hat und sich am Zielknoten befindet.

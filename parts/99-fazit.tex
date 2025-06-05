@@ -26,7 +26,7 @@ Der Roboter kann die einzelnen benötigten Funktionen umsetzen:
 
 Die einzelnen Funktionen der Steuerung konnten jedoch noch nicht zusammengesetzt werden.
 
-Die Navigation wurde trotzdem getestet ohne ein Fahrwerk, der Kameraturm wurde an die Orte geschoben, welche die Navigation vorgibt. Mit den Instruktionen der Navigation konnte der Graph erfolgreich traversiert werden. Auch die Mechanik konnte erfolgreich umgesetzt werden. Der Roboter fährt und dreht sich stabil, der Greifmechanismus funktioniert und alle Komponenten unterstützen die Funktionen erfolgreich.
+Die Navigation wurde trotzdem getestet ohne ein Fahrwerk, der Kameraturm wurde an die Orte geschoben, welche die Navigation vorgibt. Mit den Instruktionen der Navigation konnte der Graph erfolgreich traversiert werden. Dieser Test ist im Anhang beschrieben in Kapitel \nameref{statische-traver}. Auch die Mechanik konnte erfolgreich umgesetzt werden. Der Roboter fährt und dreht sich stabil, der Greifmechanismus funktioniert und alle Komponenten unterstützen die Funktionen erfolgreich.
 
 Die nicht-funktionalen Anforderungen konnten ebenfalls erreicht werden: Die maximale Grösse wurde eingehalten und das Gewicht wurde klar unterschritten. Der Roboter ist robust gebaut und durch die Verwendung von \acrshort{pla} konnte nachhaltiger gearbeitet werden. Auch das Budget konnte eingehalten werden.
 
@@ -51,11 +51,11 @@ Bei dem Zusammensetzen werden wahrscheinlich weitere Probleme auftreten, die inn
 
 \subsection{Lessons Learned}
 
-Die während PREN2 aufgetretenen Hindernisse führten zu wichtigen Learnings, die in künftigen Projekten früher erkannt oder umgangen werden können.
+Die während PREN2 aufgetretenen Hindernisse, führten zu wichtigen Learnings, die in künftigen Projekten früher erkannt oder umgangen werden können.
 
 Das Konzept aus \acrshort{pren1} dient als Basis für den Roboterbau. Es gab Momente, in denen festgestellt wurde, dass Teile des Konzeptes nicht so funktionieren, wie geplant. Dies passierte beispielsweise bei der Messung der Distanz zu dem nächsten Knoten. Die funktioniert technisch zwar, war aber zu riskant, da der Knoten selber nicht immer genau erkannt wurde. Deshalb wurde das Konzept hier angepasst. Die Herausforderung dabei ist es, dass das neue Konzept in das Gesamtkonzept passen muss. Wir haben gelernt mit unerwarteten Problemen auf angemessene Art umzugehen.
 
-Ein weiteres Hindernis war das parallele Arbeiten. Zu Beginn hatten wir mehrere Prototypen des Roboters, die einzelne Teilfunktionen ausführen konnten. Ab einem gewissen Stand der Systemintegration konnte der Roboter nur noch als ganzes getestet werden. Es musste koordiniert werden wer wann welche Tests durchführt. Der Test der Navigation wurde schlussendlich mit der Hilfe von der Kamerahalterung aus PREN1 durchgeführt, so konnten parallel andere Tests durchgeführt werden.
+Ein weiteres Hindernis war das parallele Arbeiten. Zu Beginn hatten wir mehrere Prototypen des Roboters, die einzelne Teilfunktionen ausführen konnten. Ab einem gewissen Stand der Systemintegration konnte der Roboter nur noch als ganzes getestet werden. Es musste koordiniert werden, wer wann welche Tests durchführt. Der Test der Navigation wurde schlussendlich mit der Hilfe von der Kamerahalterung aus PREN1 durchgeführt, so konnten parallel mehrere Tests durchgeführt werden.
 
 Im Verlauf des Projekts wurde deutlich, wie wichtig die Technologierecherche in \acrshort{pren1} war. Rückblickend hätte eine intensivere Recherche in bestimmten Bereichen in \acrshort{pren2} von grossem Nutzen sein können. Insbesondere beim Problem mit den Encoder Motoren. Für zukünftige Projekte sollte allgemein beim auftretenden von Problemen frühzeitig parallel an der Fehleranalyse gearbeitet und gleichzeitig eine alternative Lösung erarbeitet werden. Dieses Vorgehen hätte geholfen die Implementierung des Gyroskop früher in Betracht zu ziehen.
 
