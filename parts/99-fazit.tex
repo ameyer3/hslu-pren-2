@@ -1,6 +1,6 @@
 \section{Schlussdiskussion}
 
-In den folgenden Kapiteln wird zusammengefasst, was in \acrshort{pren2} bearbeitet wurde mit Ausblick auf den Wettbewerb.
+In den folgenden Kapiteln wird zusammengefasst, was in \acrshort{pren2} bearbeitet wurde, mit Ausblick auf den Wettbewerb.
 Ebenfalls werden die gesammelten Erfahrungen bezüglich der Arbeiten und der Zusammenarbeit im Team beschrieben und welche Lehren daraus gezogen werden konnten.
 
 \subsection{Erfüllung der Anforderungen}
@@ -12,11 +12,11 @@ Der Roboter kann die einzelnen benötigten Funktionen umsetzen:
     \item Der Roboter kann sich drehen.
     \item Der Roboter kann einer Linie folgen.
     \item Der Roboter kann anhalten, sobald er sich auf einem Knoten befindet.
-    \item Der Roboter greift das Hindernis, sobald er es am Endschalter spürt.
-    \item Der Roboter kann, sobald er ein Hindernis am Endschalter spürt, einen Prozess starten, um das Hindernis zu beseitigen. Das Hindernis wird am selben Ort wieder abgestellt.
-    \item Der Roboter kann mit einem Ultraschall Objekte vor sich bemerken.
-    \item Der Roboter kann ein Bild machen von einem Knoten und die Winkel der ausgehenden Linien erkennen.
-    \item Der Roboter kann ein Bild machen zu einem Nachbarsknoten und erkennen, ob sich eine Pylone, eine Barriere oder nur ein Knoten dort befindet.
+    \item Der Roboter greift das Hindernis, sobald er es am Endschalter detektiert.
+    \item Der Roboter kann, sobald er ein Hindernis am Endschalter detektiert, einen Prozess starten, um das Hindernis zu beseitigen. Das Hindernis wird am selben Ort wieder abgestellt.
+    \item Der Roboter kann mit einem Ultraschall Objekte vor sich detektieren.
+    \item Der Roboter kann von einem Knoten ein Bild machen und die Winkel der ausgehenden Linien erkennen.
+    \item Der Roboter kann zu einem Nachbarsknoten ein Bild machen und erkennen, ob sich eine Pylone, eine Barriere oder nur ein Knoten dort befindet.
     \item Der Roboter kann den schnellsten Weg zum Ziel finden.
     \item Es kann ein Ziel ausgewählt werden.
     \item Der Roboter kann mit einem Notstop ausgeschaltet werden.
@@ -26,7 +26,8 @@ Der Roboter kann die einzelnen benötigten Funktionen umsetzen:
 
 Die einzelnen Funktionen der Steuerung konnten jedoch noch nicht zusammengesetzt werden.
 
-Die Navigation wurde trotzdem getestet ohne ein Fahrwerk, der Kameraturm wurde an die Orte geschoben, welche die Navigation vorgibt. Mit den Instruktionen der Navigation konnte der Graph erfolgreich traversiert werden. Dieser Test ist im Anhang beschrieben in Kapitel \nameref{statische-traver}. Auch die Mechanik konnte erfolgreich umgesetzt werden. Der Roboter fährt und dreht sich stabil, der Greifmechanismus funktioniert und alle Komponenten unterstützen die Funktionen erfolgreich.
+% Used hyperlink beceause of includepdf instead of section to label
+Die Navigation wurde trotzdem getestet ohne ein Fahrwerk, der Kameraturm wurde an die Orte geschoben, welche die Navigation vorgibt. Mit den Instruktionen der Navigation konnte der Graph erfolgreich traversiert werden. Dieser Test ist im Anhang beschrieben im ``\hyperlink{statische-traver.1}{Testprotokoll Statische Traversierung}''. Auch die Mechanik konnte erfolgreich umgesetzt werden. Der Roboter fährt und dreht sich stabil, der Greifmechanismus funktioniert und alle Komponenten unterstützen die Funktionen erfolgreich.
 
 Die nicht-funktionalen Anforderungen konnten ebenfalls erreicht werden: Die maximale Grösse wurde eingehalten und das Gewicht wurde klar unterschritten. Der Roboter ist robust gebaut und durch die Verwendung von \acrshort{pla} konnte nachhaltiger gearbeitet werden. Auch das Budget konnte eingehalten werden.
 

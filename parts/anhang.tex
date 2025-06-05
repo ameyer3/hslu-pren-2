@@ -63,23 +63,23 @@ Die  Anforderungsliste ist ersichtlich in Tabellen \ref{table:anforderungsliste_
     {subsection}
     {YOLOv11 Model Evaluation}
 
-Damit Pylonen, Barrieren und Knoten erkannt werden können, wird ein Model trainiert. Insgesamt wurden über 30 verschiedene YOLO Models trainiert. Viele davon wurden bereits in einem vorherigen Schritt aussortiert, da einige sehr offensichtlich schlechte Performance aufwiesen aufgrund davon, wie es die Objekte erkannt, beziehungsweise nicht erkannt hat. Auf der folgenden Seite ist eine Tabelle angehängt, in der die relevanten Models miteinander verglichen werden und das beste Model gewählt wurde.
+Damit Pylonen, Barrieren und Knoten erkannt werden können, wird ein Model trainiert. Insgesamt wurden über 30 verschiedene YOLO Models trainiert. Viele davon wurden bereits in einem vorherigen Schritt aussortiert, da einige sehr offensichtlich schlechte Performance aufwiesen, aufgrund davon, wie es die Objekte erkannt, beziehungsweise nicht erkannt hat. Auf der folgenden Seite ist eine Tabelle angehängt, in der die relevanten Models miteinander verglichen werden und das beste Model gewählt wurde.
 
 Die Model Performance wird an folgenden Parametern gemessen:\cite{model-performance}
 
 \begin{itemize}
-    \item Confusion Matrix: Zeigt was das Model vorhergesagt hat und was tatsächlich zu sehen war. Je 'diagonaler' die Matrix, desto besser.
+    \item Confusion Matrix: Zeigt was das Model vorhergesagt hat und was tatsächlich zu sehen war. Je `diagonaler' die Matrix, desto besser.
     \item F1-Confidence: Zeigt die Balance zwischen Confidence (Wahrscheinlichkeit, dass Vorrausgesagtes stimmt) und F1 Score (Harmonischer Durchschnitt von Recall und Precision). Je höher der F1 Wert, desto besser.
-    \item Precision-Confidence: Zeigt die Balance zwischen Precision (Anteil von 'True Positives'; wenn Model sagt, es gibt einen Knoten, wie akkurat ist diese Deutung?) und Confidence. Je tiefer die Confidence, desto besser, da dadurch der hoechste Praezisionswert bereits bei einer tieferen Confidence erreicht wird.
-    \item Precision-Recall: Zeigt die Balance zwischen Precision und Recall (Faehigkeit, alle Instanzen zu erkennen). Je hoeher die Precision, desto besser.
+    \item Precision-Confidence: Zeigt die Balance zwischen Precision (Anteil von `True Positives'; wenn Model sagt, es gibt einen Knoten, wie akkurat ist diese Deutung?) und Confidence. Je tiefer die Confidence, desto besser, da dadurch der höchste Präzisionswert bereits bei einer tieferen Confidence erreicht wird.
+    \item Precision-Recall: Zeigt die Balance zwischen Precision und Recall (Fähigkeit, alle Instanzen zu erkennen). Je höher die Precision, desto besser.
     \item Recall-Confidence: Zeigt die Balance zwischen Recall und Confidence. Je höher der Recall, desto besser.
-    \item Lernverlauf: Zeigt inwiefern der Verlust (Unterschied zwischen Vorhergesagtem und Realität) sinkt bei den Trainingsdaten und den Validationsdaten. Beginnt der Verlust bei der Validation zu steigen, deutet dies auf Overfitting hin\footnote{https://developers.google.com/machine-learning/crash-course/overfitting/overfitting}. Sollte exponentiell sinken. Zeigt, wie das Model und Wissen gewinnt. Sollte exponentiell steigen.
+    \item Lernverlauf: Zeigt inwiefern der Verlust (Unterschied zwischen Vorhergesagtem und Realität) sinkt bei den Trainingsdaten und den Validationsdaten. Beginnt der Verlust bei der Validation zu steigen, deutet dies auf Overfitting hin\footnote{https://developers.google.com/machine-learning/crash-course/overfitting/overfitting}. Sollte exponentiell sinken. Zeigt, wie das Model an Wissen gewinnt. Sollte exponentiell steigen.
 \end{itemize}
 
 
-Der Vergleich zwischen mehreren potentiellen Modellen ist in folgendem Dokument ersichtlich. Zwei Modelle wurden jeweils verglichen aufgrund von mehreren Werten. Ist der jeweilige Wert des einen Models besser, wird diese Zelle grün eingefärbt.
+Der Vergleich zwischen mehreren potentiellen Modellen ist in folgendem Dokument ersichtlich. Zwei Modelle wurden jeweils ,aufgrund von mehreren Werten, verglichen. Ist der jeweilige Wert des einen Models besser, wird diese Zelle grün eingefärbt.
 
-Es wurde untersucht, ob das Modell bessere Ergebnisse bringt, wenn die beiden Barrieren pro Farbe in einzelnen Klassen aufgeteilt werden oder nicht und verschiedene Augmentationen wurden verglichen. Augmentationen werden auf die Trainingsbilder angewandt, damit diese diverser sind und zum einen mehr der Realitaet entsprechen und auch um mehr Trainingsmaterial zu haben. Ebenfalls wurde experimentiert mit unterschiedlichen Grössen der Bilder. 
+Es wurde untersucht, ob das Modell bessere Ergebnisse bringt, wenn die beiden Barrieren pro Farbe in einzelnen Klassen aufgeteilt werden oder nicht und verschiedene Augmentationen wurden verglichen. Augmentationen werden auf die Trainingsbilder angewandt, damit diese diverser sind und zum einen mehr der Realität entsprechen und auch um mehr Trainingsmaterial zu haben. Ebenfalls wurde experimentiert mit unterschiedlichen Grössen der Bilder. 
 
 \includepdf[pages=-]{assets/IT/testing/yolo/ModelComparison.pdf}
 
@@ -95,12 +95,12 @@ Die Tests der Zielknotenerkennung haben zwei Ziele:
 
 \begin{enumerate}
     \item Parameter tunen.
-    \item Funktionalitaet testen.
+    \item Funktionalität testen.
 \end{enumerate}
 
 \textbf{Parameter tunen}
 
-Die Zielknotenerkennung hat folgende Parameter, deren Werte durch Tests optimiert wurden. Ein Match bezeichnet einen gefundenen Erkennungspunkt des Buchstabens. Auf dem folgenden Bild \ref{img:orb-example} gibt es beispielsweise 14 Matches (Linien), deren Durchschnittliche Distanz 0 ist, da es sich um das selbe Bild handelt. Die Erkennungspunkte sind im Bild links gleich weit voneinander entfernt wie im rechten.
+Die Zielknotenerkennung hat folgende Parameter, deren Werte durch Tests optimiert wurden. Ein Match bezeichnet einen gefundenen Erkennungspunkt des Buchstabens. Auf dem folgenden Abbildung \ref{img:orb-example} gibt es beispielsweise 14 Matches (Linien), deren Durchschnittliche Distanz 0 ist, da es sich um das selbe Bild handelt. Die Erkennungspunkte sind im Bild links gleich weit voneinander entfernt wie im rechten.
 
 \begin{figure}[H]
 \centering
@@ -379,16 +379,16 @@ Die Abbildung \ref{fig:uart-connector-unittests} zeigt das Resultat der Unittest
 {subsubsection}
 {Object Detector}
 
-Der Object Detector erhaelt Bilder und detektiert, welche Objekte sich darauf befinden mit dem YOLO Model. Dann wird ein Algorithmus angewandt, um sicherzustellen, dass nur das Objekt direkt vor dem Roboter beachtet wird, ausser hinter dem Hindernis befindet sich eine Pylone, dann soll die Pylone beachtet werden.
+Der Object Detector erhält Bilder und detektiert, welche Objekte sich darauf befinden mit dem YOLO Model. Dann wird ein Algorithmus angewandt, um sicherzustellen, dass nur das Objekt direkt vor dem Roboter beachtet wird, ausser hinter dem Hindernis befindet sich eine Pylone, dann soll die Pylone beachtet werden.
 Die Unittests des Object Detectors sollen nicht primär das Modell testen, sondern den Algorithmus, der das relevante Objekt findet. Folgende Szenarien wurden getestet:
 
 \begin{enumerate}
-    \item Eine Barriere befindet sich vor dem Roboter, dahinter ein Knoten.
-    \item Nur ein Knoten befindet sich vor dem Roboter.
-    \item Nur eine Pylone befindet sich vor dem Roboter (auf dem nächsten Knoten).
-    \item Eine Barriere befindet sich vor dem Roboter, dahinter eine Pylone.
-    \item Eine Barriere befindet sich vor dem Roboter, dahinter ein Knoten. Ebenfalls ist auf dem Bild eine Barriere, die nicht direkt vor dem Roboter ist.
-    \item Ein Knoten befindet sich vor dem Roboter. Auf der Linie zu der Seite, befindet sich eine Barriere, die nicht vor dem Roboter ist.
+    \item Vor dem Roboter befindet sich eine Barriere und hinter dieser ein Knoten.
+    \item Vor dem Roboter befindet sich nur ein Knoten.
+    \item Vor dem Roboter befindet sich eine Pylone (auf dem nächsten Knoten).
+    \item Vor dem Roboter befindet sich eine Barriere, und hinter dieser eine Pylone
+    \item Vor dem Roboter befindet sich eine Barriere und hinter dieser ein Knoten. Ebenfalls ist auf dem Bild eine Barriere, die nicht direkt vor dem Roboter ist.
+    \item Vor dem Roboter befindet sich ein Knoten. Auf der Linie zu der Seite befindet sich eine Barriere
 \end{enumerate}
 
 \textit{Die annotierten Bilder in der folgenden Tabelle \ref{table:object-det-test}, wurden von dem Object Detector selber annotiert in dem jeweiligen Testfall.}
@@ -503,9 +503,10 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 \addcontentsline{toc}
 {subsection}
 {Protokoll OpenCV Kalibration}
-\label{opencv}
+% \label{opencv}
 
-\includepdf[pages=-]{assets/IT/testing/protocol_opencv_calibration.pdf}
+\includepdf[pages=-,link,linkname=opencv]{assets/IT/testing/protocol_opencv_calibration.pdf}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%% testprocotol static node and edge detection %%%%%%%%%%%%%%%%%%%%%%%%
@@ -513,9 +514,9 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 \addcontentsline{toc}
 {subsection}
 {Testprotokoll Ausgehende Kanten erkennen}
-\label{outgoing-lines-test}
+% \label{outgoing-lines-test}
 
-\includepdf[pages=-]{assets/IT/testing/testprotocol_static_node_edge_detection.pdf}
+\includepdf[pages=-,link,linkname=outgoing-lines-test]{assets/IT/testing/testprotocol_static_node_edge_detection.pdf}
 
 
 %%%%%%%%%%%%%%%%%%%%%%% testprocotol static node and edge detection %%%%%%%%%%%%%%%%%%%%%%%%
@@ -523,18 +524,9 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 \addcontentsline{toc}
 {subsection}
 {Testprotokoll Statische Traversierung}
-\label{statische-traver}
-
-\includepdf[pages=-]{assets/IT/testing/testprotocol_static_traversal.pdf}
-
-% \clearpage
-% \phantomsection
-% \addcontentsline{toc}{subsection}{Testprotokoll Statische Traversierung}
-% \section*{Testprotokoll Statische Traversierung}
 % \label{statische-traver}
 
-% \includepdf[pages=-]{assets/IT/testing/testprotocol_static_traversal.pdf}
-
+\includepdf[pages=-,link,linkname=statische-traver]{assets/IT/testing/testprotocol_static_traversal.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%% testprocotol Fahrregelung mit Liniensensoren %%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -609,7 +601,7 @@ Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern
     {subsection}
     {Tests mit Gyroskop}
 
-Die ersten Tests mit dem Gryskop wurden mit einem Bread Board durchgeführt und wurde mit einem Tiny K22 verbunden. Auf diese Weise kann das Gyroskop isoliert von den anderen Komponenten getestet werden. Damit das Gyroskop möglichst gerade sind konnte, wurde es aufgestellt. Durch die bereits angebrachten Widerstände konnte es nicht hingelegt werden. Das Setup ist ersichtlich auf Abbildung \ref{img:gyro-tests-1}.
+Die ersten Tests mit dem Gyroskop wurden mit einem Bread Board durchgeführt und wurde mit einem Tiny K22 verbunden. Auf diese Weise kann das Gyroskop isoliert von den anderen Komponenten getestet werden. Das Setup ist ersichtlich auf Abbildung \ref{img:gyro-tests-1}.
 
 \begin{figure}[H]
 \centering
@@ -669,9 +661,9 @@ Nachdem das Gyroskop angebracht wurde, wurden die Tests von zuvor wiederholt, in
     {subsection}
     {Hindernis umplatzieren - Nachkorrekturwert}
 
-Damit der Nachkorrekturwert, der gefahren werden muss, damit das Hindernis am selben Ort abgestellt werden kann, ermittelt werden kann, werden 10 Testdurchläufe durchgeführt. Dabei wird wiederholt der Roboter das Hindernis aufheben, sich 180\textdegree \ drehen und dann dort wo er ist, das Hindernis wieder hinstellten. Dies jeweiligen Abstellorte wurden mit Postit Zetteln markiert (siehe Abbildung \ref{fig:abstellorte}). Die Mitte von jedem Postit korrespondiert mit der Mitte der Barriere. Auch der ursprüngliche Ort der Barriere wird markiert (siehe Abbildung \ref{fig:roboter-grefit-martkier}). Die Distanzen zwischen dem Abstellort und dem ursprüngliche Ort der Barriere wird gemessen. 
+Damit der Nachkorrekturwert, der gefahren werden muss, um das Hindernis am selben Ort abzustellen, ermittelt werden kann, werden 10 Testdurchläufe durchgeführt. Dabei wird der Roboter wiederholt das Hindernis aufheben, sich 180\textdegree \ drehen und dann dort wo er ist, dieses wieder hinstellen. Diese jeweiligen Abstellorte wurden mit Postit Zetteln markiert (siehe Abbildung \ref{fig:abstellorte}). Die Mitte von jedem Postit korrespondiert mit der Mitte der Barriere. Auch der ursprüngliche Ort der Barriere wird markiert (siehe Abbildung \ref{fig:roboter-grefit-martkier}). Die Distanzen zwischen dem Abstellort und dem ursprüngliche Ort der Barriere wird gemessen. 
 
-Ein blaues Postit, das den Abstellort markiert, ist 12mm breit. Die Distanz von dem Rand des blauen Postit, das sich am weitesten weg von der Barriere befindet, zu der Mitte der Barriere beträgt 153 mm.
+Ein blaues Postit, welches den Abstellort markiert, ist 12mm breit. Die Distanz von dem Rand des blauen Postit, das sich am weitesten weg von der Barriere befindet, zu der Mitte der Barriere beträgt 153 mm.
 
 \begin{figure}[H]
   \centering
