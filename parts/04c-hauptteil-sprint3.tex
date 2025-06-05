@@ -2,7 +2,7 @@
 
 \subsection{Objekte erkennen}
 
-Dieses Kapitel behandelt die Methoden zur Objekterkennung. Zur Identifikation von Objekten auf dem Graphen, wurde ein YOLOv11-Modell eingesetzt, das speziell für diese Aufgabe trainiert wurde. Die erzielten Modellresultate werden vom Raspberry Pi ausgewertet, damit der Roboter die optimale Route wählen kann. Ergänzend dazu dient ein Ultraschallsensor als Backup-System zur Erkennung von Hindernissen, um die Sicherheit des Roboters zu erhöhen. 
+Dieses Kapitel behandelt die Methoden zur Objekterkennung. Zur Identifikation von Objekten auf dem Graphen, wird ein YOLOv11-Modell eingesetzt, das speziell für diese Aufgabe trainiert wurde. Die erzielten Modellresultate werden vom Raspberry Pi ausgewertet, damit der Roboter die optimale Route wählen kann. Ergänzend dazu dient ein Ultraschallsensor als Backup-System zur Erkennung von Hindernissen, falls mit der Kamera welche nicht entdeckt werden, um die Sicherheit des Roboters zu erhöhen. 
 
 
 \subsubsection{Kamera}
@@ -10,6 +10,8 @@ Dieses Kapitel behandelt die Methoden zur Objekterkennung. Zur Identifikation vo
 
 Zur Einbindung der Raspberry Pi Kamera in Python stellt Raspberry Pi die Bibliothek PiCamera2 zur Verfügung\footnote{\url{https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf}}.
 Abbildung \ref{fig:camera-connector-classdiagram} zeigt das Klassendiagramm des CameraConnector. Diese Klasse nutzt die PiCamera2-Bibliothek, um die Kamera zu konfigurieren und Fotos aufzunehmen. Darüber hinaus abstrahiert sie die Kamerakommunikation, sodass sowohl eine USB-Webcam als auch, wie in unserem Fall, die Raspberry Pi Kamera einheitlich angesprochen werden kann.
+
+Die Kamera soll alle Objekte erkennen, die sich zwischen dem momentanen Knoten und dem naechsten Knoten, der betrachtet wird, befindet.
 
  \begin{figure}[H]
 \centering
@@ -25,21 +27,21 @@ Abbildung \ref{fig:camera-connector-classdiagram} zeigt das Klassendiagramm des 
 
 Zur Erhöhung der Betriebssicherheit ist das Fahrzeug mit einer redundanten Hinderniserkennung zusätzlich zu der Kamera ausgestattet. Diese erfolgt über einen Ultraschallsensor, der kontinuierlich die Entfernung zu Objekten im unmittelbaren Umfeld misst. Der Sensor ist direkt mit dem Mikrocontroller \gls{tinyk22} verbunden.
 
-Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 15cm erkannt wird, hält der Roboter an, um Kollisionen zu vermeiden. Diese Distanz wurde gewählt, damit die Balance eingehalten wird zwischen 'zu viel' oder 'zu spät' erkennen. Es sollen nicht fälschlicherweise Objekte erkannt werden, jedoch sollen sie auch nicht zu spät erkannt werden. Dies ist auch deswegen so, da die Kamera benutzt wird, um das unerwartete Objekt zu deuten. Die Kamera braucht eine bestimmte Distanz, um eine mögliche Pylone zu erkennen, da diese möglichst ganz auf dem Bild sein sollte. Die Kamera kann Objekte bis zu 10cm vor dem Roboter erkennen. 
-Die 15cm wurden gewählt, damit es sicher genug Zeit gibt, um die Motoren auszuschalten, da der Roboter schneller fährt, wenn kein Objekt erwartet wird.
+Die Messwerte werden in Echtzeit ausgewertet. Sobald ein Objekt in einer Distanz von weniger als 15cm erkannt wird, hält der Roboter an, um Kollisionen zu vermeiden. Diese Distanz wurde gewählt, damit die Balance eingehalten wird zwischen 'zu viel' oder 'zu spät' erkennen. Es sollen nicht fälschlicherweise Objekte erkannt werden, jedoch sollen sie auch nicht zu spät erkannt werden. Die 15cm wurden gewählt, damit es sicher genug Zeit gibt, um die Motoren auszuschalten, da der Roboter schneller fährt, wenn kein Objekt erwartet wird. Dies ist aber auch deswegen so, da die Kamera benutzt wird, um das unerwartete Objekt zu deuten. Die Kamera braucht eine bestimmte Distanz, um eine mögliche Pylone zu erkennen, da diese möglichst ganz auf dem Bild sein sollte. Die Kamera kann Objekte bis zu 10cm vor dem Roboter erkennen. 
 
-Es wird ein definierter Fehlercode generiert und über die serielle Schnittstelle an den Raspberry Pi übertragen. Der Raspberry Pi leitete entsprechende Massnahmen ein. Dies ist beschrieben in Tabelle \ref{table:statuscodes}.
 
-Dies hilft dabei Risiko 12 (Objekte werden nicht erkannt) zu mitigieren, falls es passiert.
+Wird ein unerwartetes Objekt erkennt, wird ein definierter Fehlercode generiert und über die serielle Schnittstelle an den Raspberry Pi übertragen. Der Raspberry Pi leitete entsprechende Massnahmen ein. Dies ist beschrieben in Tabelle \ref{table:statuscodes}.
+
+Dies hilft dabei Risiko 12 (Objekte werden nicht erkannt), siehe Tabelle \ref{table:risks}, zu mitigieren, falls es passiert.
 
 
 
 \subsubsection{YOLOv11-Model trainieren}
 
-Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wurde ein \gls{yolo} Model trainiert.
-Es wurden mehrere Models trainiert, die laufend miteinander verglichen wurden. Der Prozess wie das finale Model gewählt wurde, ist im Anhang in Kapitel \nameref{model-evaluation} zu finden.
+Damit der Roboter Pylonen, Knoten und Hindernissen erkennen kann, wird ein \gls{yolo} Model trainiert.
+Es werden mehrere Models trainiert, die laufend miteinander verglichen werden. Der Prozess wie das finale Model gewählt wurde, ist im Anhang in Kapitel \nameref{model-evaluation} zu finden.
 
-Das Model, das verwendet werden wird, deutet die Bilder in ihrer Originalgrösse und hat über alle Klassen (Pylonen, Knoten, Hindernisse) gute Ergebnisse.
+Das Model, das verwendet wird, deutet die Bilder in ihrer Originalgrösse und hat über alle Klassen (Pylonen, Knoten, Hindernisse) gute Ergebnisse.
 
 Die folgenden Bilder zeigen einige Bilder, die das Model annotiert hat. Darauf ist zu sehen, wie genau es die einzelnen Objekte erkennen kann.
 
@@ -78,7 +80,7 @@ Die Confusion Matrix ist auf Abbildung \ref{fig:conf-matrix}, diese zeigt, welch
     \label{fig:conf-matrix}
 \end{figure}
 
-Was in Abbildung \ref{fig:f1}  sichtbar ist, ist der F1 Wert. Dieser ist besser, je höher er ist. Er ist hier für alle Klassen sehr hoch, was auf eine hohe Genauigkeit in den Detekierungen deutet. In Abblidung \ref{fig:results-lernverlauf} ist der Lernverlauf des Models ersichtlich. Alle Graphen zeigen das gewünschte Muster. Die 6 Graphen links, die den Verlust in der Leistung (falsche Deutungen) darstellen, sind exponentiell fallend. Das heisst, dass das Modell mit jeder Iteration mehr gelernt hat und nicht irgendwann gestoppt hat oder schlechter wurde. Die 4 Graphen auf der rechten Seite zeigen, wie viel das Model gelernt, diese steigen und flachen dann ab. Dies ist ebenfalls das Muster, das bei einem guten Model erwartet wird.\cite{model-performance}
+Was in Abbildung \ref{fig:f1}  sichtbar ist, ist der F1 Wert. Dieser ist besser, je höher er ist. Er ist hier für alle Klassen sehr hoch, was auf eine hohe Genauigkeit in den Detektierungen deutet. In Abblidung \ref{fig:results-lernverlauf} ist der Lernverlauf des Models ersichtlich. Alle Graphen zeigen das gewünschte Muster. Die 6 Graphen links, die den Verlust von falschen Deutungen darstellen, sind exponentiell fallend. Das heisst, dass das Modell mit jeder Iteration mehr gelernt hat und nicht irgendwann gestoppt hat oder schlechter wurde. Die 4 Graphen auf der rechten Seite zeigen, wie viel das Model gelernt, diese steigen und flachen dann ab. Dies ist ebenfalls das Muster, das bei einem guten Model erwartet wird.\cite{model-performance}
 
 
 \begin{figure}[H]
@@ -100,7 +102,7 @@ Was in Abbildung \ref{fig:f1}  sichtbar ist, ist der F1 Wert. Dieser ist besser,
 \subsubsection{YOLOv11 Model konvertieren}
 \label{convert-yolo}
 
-Es gibt Methoden, um die .pt Datei, Das Format in welchem das Model gespeichert wird, mit der Ultralytics Bibliothek in ein anderes Format zu transformieren. Dadurch kann auf Embedded Systems und somit auch auf Raspberry Pi's die Bilderkennung schneller durchgeführt werden kann.
+Es gibt Methoden, um die .pt Datei, das Format in welchem das Model gespeichert wird, mit der Ultralytics Bibliothek in ein anderes Format zu transformieren. Dadurch kann auf Embedded Systems und somit auch auf Raspberry Pi's die Bilderkennung schneller durchgeführt werden.
 
 Drei Möglichkeiten wurden betrachtet und verglichen:
 
@@ -116,7 +118,7 @@ Es wird NCNN gewählt, da dies perfekt für den Verwendungszweck mit einem Raspb
 yolo export model=best.pt format=ncnn
 \end{verbatim}
 
-Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File: Die Ultralytics Library erwartet den Pfad zu der Datei, respektive dem Ordner und baut daraus das YOLO Model, das verwendet werden kann in Python. Mit der Transformation wurde das Risiko 3: 4 Minuten reichen nicht für einen Durchgang, weiter gemindert. Auf dem Raspberry Pi, kann die Bilderkennung pro Bild konstant unter einer Sekunde gehalten werden.
+Das Resultat ist ein Ordner, der gleich verwendet werden kann, wie das .pt File: Die Ultralytics Library erwartet den Pfad zu der Datei, respektive dem Ordner und baut daraus das YOLO Model, das verwendet werden kann in Python. Mit der Transformation wurde das Risiko 3: 4 Minuten reichen nicht für einen Durchgang (siehe Tabelle \ref{table:risks}), weiter gemindert. Auf dem Raspberry Pi, kann die Bilderkennung pro Bild konstant unter einer Sekunde gehalten werden.
 
 \subsubsection{Modelresultate auswerten}
 \label{model-results}
