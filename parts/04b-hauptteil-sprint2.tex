@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%Epic 4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Wegfindung}
 
-In diesem Kapitel wird die Umsetzung der Wegfindung beschrieben. Ziel davon ist es, dass der schnellste Weg im Graphen zum Ziel gefunden werden kann und die Kommunikation zwischen Navigation und Steuerung besteht. Die einzelnen Tasks sind im Anhang im Kapitel \nameref{projektplanung} nachzulesen.
+In diesem Kapitel wird die Umsetzung der Wegfindung beschrieben. Ziel davon ist es, dass der schnellste Weg im Graphen zum Ziel gefunden werden kann und die Kommunikation zwischen Navigation und Steuerung besteht. Die einzelnen Tasks sind im Anhang im Kapitel ``\nameref{projektplanung}'' nachzulesen.
 
 Der Wegfindungsalgorithmus wurde bereits in PREN 1 mit einem Dijkstra Algorithmus im Simulator umgesetzt. Der Simulator wird umstrukturiert, damit möglichst viele Teile wiederverwendet werden können.
 
@@ -63,7 +63,7 @@ Sowohl der Ablauf aus der Navigation, die Berechnung der kürzesten Pfades und d
 
 Ein grosser Unterschied von der neuen Architektur zu der Architektur des Simulators ist es, dass es eine klare Unterteilung in die einzelnen Module gibt, welche die Navigation benötigt. So wird paralleles Arbeiten einfacher. Die Architektur modelliert nicht mehr die physischen Roboterteile, sondern nur noch die Navigationsteile. Die Architektur des Simluators kann in der Dokumentation von \acrshort{pren1} nachgelesen werden.
 
-Der gesamte Sourcecode zu der Navigation kann im elektronischen Anhang (Kapitel \nameref{elect-anhang}) als ZIP Datei gefunden werden.
+Der gesamte Sourcecode zu der Navigation kann im elektronischen Anhang (Kapitel ``\nameref{elect-anhang}'') als ZIP Datei gefunden werden.
 
 Wie im Simulator aus \acrshort{pren1}, wird in der Navigation ein Trial \& Error Modus implementiert. Dieser Modus wird Blind Testing Mode genannt. Er wird eingeschaltet, falls es wirkt, als ob der Roboter nicht mehr korrekt weiss wo er sich befindet. Die folgenden Situationen sind Zeichen, dass dies der Fall ist:
 
@@ -206,7 +206,7 @@ Im Assert Teil wird getestet, ob die zurückgegebene Response korrekt decodiert 
 [0, 0, abs(-200), 2]'
 \end{verbatim}
 
-Alle Tests, die durchgeführt wurden, koennen im Anhang im Kapitel TODO LUKAS REF gefunden werden.
+Alle Tests, die durchgeführt wurden, können im Anhang im Kapitel ``\nameref{uart-connector-unittests}'' gefunden werden.
 
 Damit auch ohne Verbindung zu einem \gls{tinyk22} eine lauffähige Version verfügbar ist, wird beim Erstellen der UARTConnector Klasse geprüft, ob eine serielle Verbindung aufgebaut werden konnte. Wenn nicht, werden nach wie vor die alten Teile des Simulators verwendet. Dieser Zustand wird in der `connected' Variable festgehalten. Dies hilft beim Debuggen und Testen von einzelnen Modulen.
 
@@ -230,12 +230,12 @@ Der Ultraschall kann eine Distanz auf \pm 1cm genau messen. Durch diese Genauigk
 
 Der Roboter muss sich drehen können, um das Hindernis wegzustellen. Ebenfalls muss er sich drehen können, damit der Roboter sich ausrichten kann, um eine bestimmte Linie zu befahren. Die ist in dem folgenden Kapitel \ref{outgoing-lines} beschrieben.
 
-In \acrshort{pren1} wurde geplant, dass der Roboter sich mit den Encodern dreht. Dabei sind jedoch immer wieder Probleme aufgetreten. Die Untersuchung davon ist im Anhang zu finden im Kapitel \nameref{drehen-encoder}.
+In \acrshort{pren1} wurde geplant, dass der Roboter sich mit den Encodern dreht. Dabei sind jedoch immer wieder Probleme aufgetreten. Die Untersuchung davon ist im Anhang zu finden im Kapitel ``\nameref{drehen-encoder}''.
 
 Aus diesem Grund wird entschieden ein Gyroskop zu verwenden.
  Ein Gyroskop reagiert auf Drehbewegungen, die durch die Corioliskraft verursacht wird. Die Corioliskraft bringt eine Masse ins Schwingen, so kann die Drehbewegung detektiert werden \parencite{zielke2025}. Dieser Sensor wird über \acrshort{iic} angesteuert, um die Messdaten auszulesen. 
 
-Die Tests dazu sind im Anhang in Kapitel \nameref{drehen-gyro} zu finden.
+Die Tests dazu sind im Anhang in Kapitel ``\nameref{drehen-gyro}'' zu finden.
 
 Das Gyroskop wird fest auf dem Roboter angeschlossen und montiert, wie in Abbildung \ref{fig:Gyroskop auf dem Roboter} unten links zu sehen ist. Danach wird getestet, dass das Gyroskop noch immer richtig misst, wenn der Roboter mit den Rädern und dem Motor dreht.
 
