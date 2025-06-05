@@ -337,7 +337,7 @@ Folgende Szenarien wurden getestet:
 \item Für jeden Knoten: Positionsbasierte Winkelzuordnung bei unsortierter Eingabe.
 \end{enumerate}
 
-Die Abbildung \ref{fig:angle-reader-unittests} dokumentiert die getesteten Funktionen mit Zielverhalten und Resultat.
+Die Abbildung \ref{fig:angle-reader-unittests} dokumentiert das Resultat der Unittest Session.
 
 \begin{figure}[H]
 \centering
@@ -346,6 +346,31 @@ Die Abbildung \ref{fig:angle-reader-unittests} dokumentiert die getesteten Funkt
 \label{fig:angle-reader-unittests}
 \end{figure}
 
+
+\newpage
+\subsubsection*{UART Connector}\label{uart-connector-unittests}
+\addcontentsline{toc}{subsubsection}{UART Connector}
+
+Der UART Connector abstrahiert die Kommunikation mit dem Mikrocontroller über eine serielle Schnittstelle. Dabei werden Fahr- und Drehbefehle sowie Signalisierungen wie Hindernismeldungen kodiert und gesendet. Die Rückmeldung erfolgt durch interpretierte Statusbits. Die Unittests überprüfen die korrekte Zusammensetzung der Nachrichten und das Verhalten bei spezifischen Rückgabewerten.
+
+Folgende Szenarien wurden getestet:
+
+\begin{enumerate}
+\item Fahrt vorwärts mit Hindernis im Weg (unerwartetes Objekt).
+\item Rückwärtsfahrt wird korrekt übermittelt.
+\item Drehung nach rechts mit Summenkontrolle der Winkelteile.
+\item Drehung nach links und Zuordnung des Richtungsbits.
+\item Meldung eines Hindernisses via UART.
+\end{enumerate}
+
+Die Abbildung \ref{fig:uart-connector-unittests} zeigt das Resultat der Unittest Session.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{assets/IT/testing/unittests/uart_connector_unittests_result.png}
+\caption{Alle UART Connector Unittests}
+\label{fig:uart-connector-unittests}
+\end{figure}
 
 
 \newpage
