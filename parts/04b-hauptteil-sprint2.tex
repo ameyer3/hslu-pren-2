@@ -78,7 +78,7 @@ Im Blind Testing Mode nimmt der Roboter jedes Mal die erste Kante von links, auf
 \subsubsection{Schnittstelle Navigation und Steuerung}
 \label{interface-nav-control}
 
-Die Navigation läuft auf einem Raspberry Pi und die Steuerung läuft auf einem \gls{tinyk22}. Die beiden kommunizieren wie in \acrshort{pren1} geplant über das UART Protokoll miteinander. Für die Kommunikation wird eine Schnittstelle definiert. Die Navigation sendet 4 Bytes an die Steuerung und die Steuerung antwortet mit dem Statuscode in Form von einem Byte.
+Die Navigation läuft auf einem Raspberry Pi und die Steuerung läuft auf einem \gls{tinyk22}. Die beiden kommunizieren wie in \acrshort{pren1} geplant über das \acrfull{uart} Protokoll miteinander. Für die Kommunikation wird eine Schnittstelle definiert. Die Navigation sendet 4 Bytes an die Steuerung und die Steuerung antwortet mit dem Statuscode in Form von einem Byte.
 
 Die Instruktionen von der Navigation an die Steuerung, werden, wie in Abbildung \ref{fig:interface-tiny} gezeigt, gesendet.
 
@@ -166,7 +166,7 @@ Für jedes empfangene Byte wird auf dem \gls{tinyk22} ein Interrupt generiert un
 \textbf{Raspberry Pi Implementation}
 \label{raspi-uart}
 
-Auf dem Raspberry Pi wird UART aktiviert, damit dieser mit dem \gls{tinyk22} kommunizieren kann.
+Auf dem Raspberry Pi wird \acrshort{uart} aktiviert, damit dieser mit dem \gls{tinyk22} kommunizieren kann.
 Für die Kommunikation wird ein uart\_connector Modul erstellt. Dieses besteht aus der UARTConnector Klasse und der ErrorHandler Klasse, welche die statische Methode 'handle\_errors' enthält. Auf folgender Abbildung \ref{fig:uart-connector-nav} sind die beiden Klassen im Detail dargestellt mit ihren Beziehungen zu den anderen Klassen.
 
 \begin{figure}[H]

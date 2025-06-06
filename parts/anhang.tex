@@ -12,9 +12,16 @@
 {subsection}
 {Elektronischer Anhang}
 
-Diese Dokumentation wurde zusammen mit einem elektronischen Anhang in Form einer ZIP-Datei abgegeben. Darin befinden sich der Simulator Programmiercode inklusive dessen Ergebnisse und die erstellten CAD Dateien.
+Diese Dokumentation wurde zusammen mit einem elektronischen Anhang in Form einer ZIP-Datei abgegeben. Darin befinden sich folgende Dateien:
 
-TODO LIST OF WHATS IN THERE
+\begin{itemize}
+    \item Programmiercode der Navigation
+    \item Programmiercode der Steuerung
+    \item Design der PCB
+    \item alle CAD Dateien
+    \item Dokumentation auf PREN 1
+\end{itemize}
+
 
 \newpage
 \subfile{parts/x-projektplanung}
@@ -27,9 +34,11 @@ TODO LIST OF WHATS IN THERE
 {subsection}
 {Originale Aufgabenstellung}
 
-Nachfolgend ist die originale Aufgabenstellung angehängt.
+Nachfolgend sind die originalen Aufgabenstellungen aus \acrshort{pren1} und \acrshort{pren2} angehängt.
 
 \includepdf[pages=-]{assets/projektmanagement/AufgabenstellungPREN1HS24.pdf}
+\includepdf[pages=-]{assets/projektmanagement/AufgabenstellungPREN2 FS25-Version-1_1.pdf}
+
 
 %%%%%%%%%%%%%%% Anforderungsliste %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -63,21 +72,21 @@ Die  Anforderungsliste ist ersichtlich in Tabellen \ref{table:anforderungsliste_
     {subsection}
     {YOLOv11 Model Evaluation}
 
-Damit Pylonen, Barrieren und Knoten erkannt werden können, wird ein Model trainiert. Insgesamt wurden über 30 verschiedene YOLO Models trainiert. Viele davon wurden bereits in einem vorherigen Schritt aussortiert, da einige sehr offensichtlich schlechte Performance aufwiesen, aufgrund davon, wie es die Objekte erkannt, beziehungsweise nicht erkannt hat. Auf der folgenden Seite ist eine Tabelle angehängt, in der die relevanten Models miteinander verglichen werden und das beste Model gewählt wurde.
+Damit Pylonen, Barrieren und Knoten erkannt werden können, wird ein Model trainiert. Insgesamt wurden über 30 verschiedene \gls{yolo} Models trainiert. Viele davon wurden bereits in einem vorherigen Schritt aussortiert, da einige sehr offensichtlich schlechte Performance aufwiesen, aufgrund davon, wie es die Objekte erkannt, beziehungsweise nicht erkannt hat. Auf der folgenden Seite ist eine Tabelle angehängt, in der die relevanten Models miteinander verglichen werden und das beste Model gewählt wurde.
 
 Die Model Performance wird an folgenden Parametern gemessen:\cite{model-performance}
 
 \begin{itemize}
     \item Confusion Matrix: Zeigt was das Model vorhergesagt hat und was tatsächlich zu sehen war. Je `diagonaler' die Matrix, desto besser.
     \item F1-Confidence: Zeigt die Balance zwischen Confidence (Wahrscheinlichkeit, dass Vorrausgesagtes stimmt) und F1 Score (Harmonischer Durchschnitt von Recall und Precision). Je höher der F1 Wert, desto besser.
-    \item Precision-Confidence: Zeigt die Balance zwischen Precision (Anteil von `True Positives'; wenn Model sagt, es gibt einen Knoten, wie akkurat ist diese Deutung?) und Confidence. Je tiefer die Confidence, desto besser, da dadurch der höchste Präzisionswert bereits bei einer tieferen Confidence erreicht wird.
+    \item Precision-Confidence: Zeigt die Balance zwischen Precision (Anteil von `True Positives'; wenn das Model ein Objekt erkennt, wie akkurat diese Deutung ist) und Confidence. Je tiefer die Confidence, desto besser, da dadurch der höchste Präzisionswert bereits bei einer tieferen Confidence erreicht wird.
     \item Precision-Recall: Zeigt die Balance zwischen Precision und Recall (Fähigkeit, alle Instanzen zu erkennen). Je höher die Precision, desto besser.
     \item Recall-Confidence: Zeigt die Balance zwischen Recall und Confidence. Je höher der Recall, desto besser.
-    \item Lernverlauf: Zeigt inwiefern der Verlust (Unterschied zwischen Vorhergesagtem und Realität) sinkt bei den Trainingsdaten und den Validationsdaten. Beginnt der Verlust bei der Validation zu steigen, deutet dies auf Overfitting hin\footnote{https://developers.google.com/machine-learning/crash-course/overfitting/overfitting}. Sollte exponentiell sinken. Zeigt, wie das Model an Wissen gewinnt. Sollte exponentiell steigen.
+    \item Lernverlauf: 6 Graphen zeigen inwiefern der Verlust (Unterschied zwischen Vorhergesagtem und Realität) bei den Trainingsdaten und den Validationsdaten sinkt. Beginnt der Verlust bei der Validation zu steigen, deutet dies auf Overfitting hin\footnote{https://developers.google.com/machine-learning/crash-course/overfitting/overfitting}. Sollte exponentiell sinken. 4 Graphen zeigen wie das Model an Wissen gewinnt. Sollte exponentiell steigen.
 \end{itemize}
 
 
-Der Vergleich zwischen mehreren potentiellen Modellen ist in folgendem Dokument ersichtlich. Zwei Modelle wurden jeweils ,aufgrund von mehreren Werten, verglichen. Ist der jeweilige Wert des einen Models besser, wird diese Zelle grün eingefärbt.
+Der Vergleich zwischen mehreren potentiellen Modellen ist in folgendem Dokument ersichtlich. Zwei Modelle wurden jeweils aufgrund von mehreren Werten verglichen. Ist der jeweilige Wert des einen Models besser, wird diese Zelle grün eingefärbt.
 
 Es wurde untersucht, ob das Modell bessere Ergebnisse bringt, wenn die beiden Barrieren pro Farbe in einzelnen Klassen aufgeteilt werden oder nicht und verschiedene Augmentationen wurden verglichen. Augmentationen werden auf die Trainingsbilder angewandt, damit diese diverser sind und zum einen mehr der Realität entsprechen und auch um mehr Trainingsmaterial zu haben. Ebenfalls wurde experimentiert mit unterschiedlichen Grössen der Bilder. 
 
@@ -327,7 +336,7 @@ Der Angle Reader wird verwendet, um aus Kamerabildern Winkel zu erkennen, die de
 Folgende Szenarien wurden getestet:
 
 \begin{enumerate}
-\item Maske korrekt vorbereiten aus RGB-Bild (HSV-Filterung).
+\item Maske korrekt vorbereiten aus \acrshort{rgb}-Bild (\acrfull{hsv} Filterung).
 \item Knotenmaskierung mit Morphologie und Kreiszeichnung.
 \item Winkelberechnung aus erkannter Kontur.
 \item Ergebnisbild speichern, wenn Winkel vorhanden sind.
@@ -351,7 +360,7 @@ Die Abbildung \ref{fig:angle-reader-unittests} dokumentiert das Resultat der Uni
 \subsubsection*{UART Connector}\label{uart-connector-unittests}
 \addcontentsline{toc}{subsubsection}{UART Connector}
 
-Der UART Connector abstrahiert die Kommunikation mit dem Mikrocontroller über eine serielle Schnittstelle. Dabei werden Fahr- und Drehbefehle sowie Signalisierungen wie Hindernismeldungen kodiert und gesendet. Die Rückmeldung erfolgt durch interpretierte Statusbits. Die Unittests überprüfen die korrekte Zusammensetzung der Nachrichten und das Verhalten bei spezifischen Rückgabewerten.
+Der \acrfull{uart} Connector abstrahiert die Kommunikation mit dem Mikrocontroller über eine serielle Schnittstelle. Dabei werden Fahr- und Drehbefehle sowie Signalisierungen, wie Hindernismeldungen, kodiert und gesendet. Die Rückmeldung erfolgt durch interpretierte Statusbits. Die Unittests überprüfen die korrekte Zusammensetzung der Nachrichten und das Verhalten bei spezifischen Rückgabewerten.
 
 Folgende Szenarien wurden getestet:
 
@@ -379,16 +388,16 @@ Die Abbildung \ref{fig:uart-connector-unittests} zeigt das Resultat der Unittest
 {subsubsection}
 {Object Detector}
 
-Der Object Detector erhält Bilder und detektiert, welche Objekte sich darauf befinden mit dem YOLO Model. Dann wird ein Algorithmus angewandt, um sicherzustellen, dass nur das Objekt direkt vor dem Roboter beachtet wird, ausser hinter dem Hindernis befindet sich eine Pylone, dann soll die Pylone beachtet werden.
+Der Object Detector erhält Bilder und detektiert, welche Objekte sich darauf befinden mit dem \gls{yolo} Model. Dann wird ein Algorithmus angewandt, um sicherzustellen, dass nur das Objekt direkt vor dem Roboter beachtet wird. Falls sich hinter dem Hindernis eine Pylone befindet, dann soll die Pylone beachtet werden.
 Die Unittests des Object Detectors sollen nicht primär das Modell testen, sondern den Algorithmus, der das relevante Objekt findet. Folgende Szenarien wurden getestet:
 
 \begin{enumerate}
     \item Vor dem Roboter befindet sich eine Barriere und hinter dieser ein Knoten.
     \item Vor dem Roboter befindet sich nur ein Knoten.
     \item Vor dem Roboter befindet sich eine Pylone (auf dem nächsten Knoten).
-    \item Vor dem Roboter befindet sich eine Barriere, und hinter dieser eine Pylone
+    \item Vor dem Roboter befindet sich eine Barriere, und hinter dieser eine Pylone.
     \item Vor dem Roboter befindet sich eine Barriere und hinter dieser ein Knoten. Ebenfalls ist auf dem Bild eine Barriere, die nicht direkt vor dem Roboter ist.
-    \item Vor dem Roboter befindet sich ein Knoten. Auf der Linie zu der Seite befindet sich eine Barriere
+    \item Vor dem Roboter befindet sich ein Knoten. Auf der Linie zu der Seite befindet sich eine Barriere.
 \end{enumerate}
 
 \textit{Die annotierten Bilder in der folgenden Tabelle \ref{table:object-det-test}, wurden von dem Object Detector selber annotiert in dem jeweiligen Testfall.}
@@ -601,7 +610,7 @@ Die Abweichung beim Input Capture ist geringer als bei den integrierten Decodern
     {subsection}
     {Tests mit Gyroskop}
 
-Die ersten Tests mit dem Gyroskop wurden mit einem Bread Board durchgeführt und wurde mit einem Tiny K22 verbunden. Auf diese Weise kann das Gyroskop isoliert von den anderen Komponenten getestet werden. Das Setup ist ersichtlich auf Abbildung \ref{img:gyro-tests-1}.
+Die ersten Tests mit dem Gyroskop wurden mit einem Bread Board durchgeführt. Darauf wurde das Gyroskop mit einem Tiny K22 verbunden. Auf diese Weise kann das Gyroskop isoliert von den anderen Komponenten getestet werden. Das Setup ist ersichtlich auf Abbildung \ref{img:gyro-tests-1}.
 
 \begin{figure}[H]
 \centering
@@ -610,7 +619,7 @@ Die ersten Tests mit dem Gyroskop wurden mit einem Bread Board durchgeführt und
 \label{img:gyro-tests-1}
 \end{figure}
 
-Zuerst wurde ein simples Programm geschrieben, um die Werte über UART1 im Terminal auszulesen. Das Gyroskop gibt 16-Bit-Messwerte für jede Achse (X, Y und Z) im Big-Endian-Format aus, wobei das höchstwertige Byte zuerst übertragen wird. Da der Prozessor des TinyK22 im Little-Endian-Format arbeitet, müssen diese Bytes nach dem Empfang zuerst noch korrekt konvertiert werden.\footnote{https://wraycastle.com/de/blogs/knowledge-base/big-endian-little-endian}
+Zuerst wurde ein simples Programm geschrieben, um die Werte über UART1 im Terminal auszulesen. Das Gyroskop gibt 16-Bit-Messwerte für jede Achse (X, Y und Z) im Big-Endian-Format aus, also wird das höchstwertige Byte zuerst übertragen. Da der Prozessor des Tiny K22 im Little-Endian-Format arbeitet, müssen diese Bytes nach dem Empfang zuerst noch korrekt konvertiert werden.\footnote{https://wraycastle.com/de/blogs/knowledge-base/big-endian-little-endian}
 
 Als nächstes wurde ein Programm geschrieben, das erwartet, dass das Gyroskop sich um einen bestimmten Winkel (in den folgenden Tests 90\textdegree) dreht und sobald der Winkel erreicht wird, wird eine Nachricht dafür ausgegeben. Dafür wurde das Breadboard in verschiedenen Geschwindigkeiten um 90\textdegree \ gedreht, bis die Nachricht erschien. Die Messung war in allen Geschwindigkeiten sehr genau. Der Wert war immer zwischen 90.0\textdegree \ und 90.5\textdegree.
 

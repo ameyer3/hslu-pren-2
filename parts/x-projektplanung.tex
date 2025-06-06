@@ -110,7 +110,7 @@ Folglich wurden zwei der drei definierten Sprintziele wie folgt erreicht:
 \begin{itemize}
     \item Der Roboter kann von Software gesteuert geradeaus fahren.
     \item Der Roboter kann noch nicht von Software gesteuert einer Linie folgen oder mithilfe des Liniensensors einen Knoten erreichen.
-    \item Der Roboter kann von einem Knoten zum Nachbarsknoten fahren, indem die Distanz gemessen wird, insofern der Knoten sich gerade vor dem Roboter befindet.
+    \item Der Roboter kann noch nicht von einem Knoten zum Nachbarsknoten fahren.
 \end{itemize}
 
 
@@ -129,6 +129,7 @@ Es konnte bereits mit einigen Aufgaben von Sprint 2 begonnen werden:
 In diesem Sprint konnten folgende Risiken beseitigt oder minimiert werden:
 \begin{itemize}
     \item Risiko 11: Kamera liefert unscharfe oder verzerrte Bilder: Kamera wurde intensiv verwendet und liefert sehr gute Bilder, insofern sie im Stillstand ist.
+    \item Risiko 15: Akkustand ist zu niedrig: Durch die einfache Austauschbarkeit das Akkus, ist dies kein Problem, da ein zweiter Akku vorhanden ist.
 \end{itemize}
 
 Es kam ein neues Risiko hinzu und wurde ebenfalls direkt minimiert:
@@ -171,7 +172,7 @@ dargestellt.
 
 Mehrere Stories, die in Sprint 1 noch nicht umgesetzt werden konnten, konnten in Sprint 2 fertig gemacht werden: Das PCB ist angekommen und konnte auf der Grundplatte angebracht werden und mit dem \gls{tinyk22} und dem Liniensensor verbunden werden. Ebenfalls konnten die Lichtabdeckungen für den Liniensensor gefertigt und angebracht werden. Der Liniensenor selbst wurde ebenfalls fertiggestellt.
 
-Im Sprint 2 konnten alle Stories des Wegfindungs Epics fertiggestellt werden: Schnittstelle wurde definiert und implementiert. Die Software des Simulators wurde bereits im Vorherigen Sprint angepasst.
+Im Sprint 2 konnten alle Stories des Wegfindungs Epics fertiggestellt werden: Schnittstelle wurde definiert und implementiert. Die Software des Simulators wurde bereits im vorherigen Sprint angepasst.
 Der Greifer ist seit Sprint 1 auf der Grundplatte angebracht und der Motor wurde an das PCB angeschlossen. Eine erste Version der Software dafür ist implementiert, jedoch wurde diese noch nicht getestet. Der Roboter kann die Winkel des ausgehenden Linien erkennen und sich drehen.
 
 Es wurden drei der fünf definierten Sprintziele wie folgt erreicht:
@@ -207,7 +208,7 @@ Es kam ein neues Risiko hinzu und wurde ebenfalls direkt minimiert:
 \begin{itemize}
     \item Risiko 19: Elektroteile gehen kaputt: Alle Elektroteile sind in mindestens zweifacher Ausgabe vorhanden. Das PCB ist fünf Mal vorhanden.
     \item Risiko 20: Roboter weiss nicht mehr, wo er sich befindet: Indizien gesammelt, wann dies der Fall sein könnte und Wechsel in Trial \& Error Modus implementiert.
-    \item Risiko 21: Ausgehende Linien werden nicht erkannt: Sehr robute Methode und Prozess wurde definiert und implementiert, falls keine Linien erkannt werden.
+    \item Risiko 21: Ausgehende Linien werden nicht erkannt: Sehr robuste Methode und Prozess wurde definiert und implementiert, falls keine Linien erkannt werden.
 \end{itemize}
 \newpage
 
@@ -243,7 +244,7 @@ dargestellt.
 
 \textbf{Sprintreview}
 
-In diesem Sprint wurde ein YOLO Model trainiert, das genug sicher Objekte erkennen kann. Ebenfalls kann das Model in der Navigation ausgewertet werden und der Roboter kann somit auf die einzelnen Objekte passend reagieren. 
+In diesem Sprint wurde ein YOLO Model trainiert, das sicher Objekte erkennen kann. Ebenfalls kann das Model in der Navigation ausgewertet werden und der Roboter kann somit auf die einzelnen Objekte passend reagieren. 
 
 Alle sieben Sprint Ziele von diesem Sprint konnten erreicht werden. Lediglich der Ultraschall konnte noch nicht umgesetzt werden. Dieser dient jedoch nur als zusätzliche Absicherungen und es konnten trotzdem alle Ziele erreicht werden.
 
@@ -309,7 +310,7 @@ Der Liniensensor konnte ebenfalls optimiert werden, damit die Knoten besser erka
 
 In diesem Sprint konnte der Ultraschall implementiert werden. Es gibt nun eine Funktion, die konstant misst, ob sich Objekte nah vor dem Roboter befinden. Ebenfalls wurde der Prozess implementiert, der das Hindernis beseitigt.
 
-In diesem Sprint konnte  das Problem mit dem Drehen behoben werden. Der Roboter kann sich nun drehen.
+In diesem Sprint konnte  das Problem mit dem Drehen behoben werden. Der Roboter kann sich nun drehen. Dadurch konnte nun der Vorgang, um das Hindernis zu besieitgen erfolgreich implementiert werden.
 
 Was zu diesem Zeitpunkt noch fehlt, ist das Zusammensetzen der einzelnen Funktionen der Steuerung, dies wird versucht bis zum Wettbewerb noch umzusetzen.
 
@@ -321,6 +322,7 @@ Folgende Risiken konnten in diesem Sprint mitigiert werden.
     \item Risiko 1: Hindernisse werden nicht erkannt: Ultraschall als zusätzliche Sicherheitsmassnahme.
     \item Risiko 5: Bodenfugen werden als Linie erkannt: Liniensensor hatte in allen Tests keine Probleme mit den Bodenfugen.
     \item Risiko 6: Liniensensor fehlerhaft: Liniensensor wurde ausgiebig getestet.
+    \item Risiko 8: Hindernisse werden beim Anhaben verschoben: Die Greifmethode ist sehr sicher, die Funktion wurde getestet und hat gut funktioniert.
 \end{enumerate}
 
 Weiterhin besteht das Risiko, dass die Steuerung als System noch nicht funktioniert. Dies wird versucht zu überwinden bis zum Wettbewerb.
@@ -333,9 +335,7 @@ Weiterhin besteht das Risiko, dass die Steuerung als System noch nicht funktioni
 
 Bei der Projektplanung gab es einige Schwierigkeiten. Mehrere Stories aus Sprint 1 und 2 konnten erst in Sprint 4 gemacht werden und dauerten viel länger als geplant. Bei einigen wurde die Arbeitszeit stark unterschätzt. Diese Stories hätten wahrscheinlich in mehrere Stories oder Tasks aufgeteilt werden sollen, damit das Schätzen präzisere hätte durchgeführt werden können.
 
-Die meisten Sprintziele konnten erreicht werden, obwohl manche Stories fehlten. Dies deutete darauf hin, dass die Sprintziele nicht genug genau formuliert wurden und nicht tatsächlich ihren Sinn erfüllten, zu messen, ob die Arbeit vollständig erledigt werden konnte.
-
-Es muss also weiter daran gearbeitet werden Stories aufzubrechen, sie zu schätzen und auch aussagekräftige, klare Ziele zu formulieren.
+Es muss daran gearbeitet werden, Stories aufzubrechen und sie zu schätzen.
 
 Zum Abschluss der Projektes wurden die aufgewendeten Stunden zusammengefasst. Diese sind in der folgenden Tabelle \ref{table:times} ersichtlich. Es wurde sehr viel Zeit aufgewendet, um sich mit Problemen mit den Motoren auseinanderzusetzen. Dabei gab es bei dem Fahren und dem Drehen Schwierigkeiten mit den Encodern und der Regelung.
 
