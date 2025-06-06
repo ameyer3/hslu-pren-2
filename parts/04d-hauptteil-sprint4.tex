@@ -8,7 +8,7 @@ Es ist gefordert, dass der Roboter weiss, dass er sich im Ziel befindet und dies
 
 Es wurde bereits in \acrshort{pren1} die Methode gewählt, mit welcher die Buchstaben auf den Zielknoten erkannt werden sollen. Dieser Code muss nun lediglich migriert werden, um in die Architektur der Navigation zu passen.
 
-Wie geplant wird der \gls{orb-gloss} Algorithmus verwendet, der in der OpenCV Library vorhanden ist. Es wird die TargetNodeReader Klasse im NodeReader Modul erstellt (siehe Abbildung \ref{fig:nav-arch}). Sobald eine Instanz dieser Klasse erstellt wird, lernt sie die Konturen von den Buchstaben A, B und C und speichert diese .
+Wie geplant wird der \gls{orb-gloss} Algorithmus verwendet, der in der \gls{opencv} Library vorhanden ist. Es wird die TargetNodeReader Klasse im NodeReader Modul erstellt (siehe Abbildung \ref{fig:nav-arch}). Sobald eine Instanz dieser Klasse erstellt wird, lernt sie die Konturen von den Buchstaben A, B und C und speichert diese .
 Dies lernt sie von den Beispielbildern von schwarzen Buchstaben auf weissem Hintergrund.
 Jedes Mal wenn der Roboter einen Knoten fotografiert, wird dieses Bild verzerrt, um den Knoten in Vogelperspektive anzuzeigen (siehe Kapitel \ref{outgoing-lines}) und dann wird detektiert, ob sich darauf der Buchstabe des Zielknotens befindet. Falls der Zielknoten sich darauf befindet, macht der Roboter ein Buzzergeräusch (siehe Kapitel \ref{peripherie-buzzer}).
 

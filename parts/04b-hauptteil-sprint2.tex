@@ -3,7 +3,7 @@
 
 In diesem Kapitel wird die Umsetzung der Wegfindung beschrieben. Ziel davon ist es, dass der schnellste Weg im Graphen zum Ziel gefunden werden kann und die Kommunikation zwischen Navigation und Steuerung besteht. Die einzelnen Tasks sind im Anhang im Kapitel ``\nameref{projektplanung}'' nachzulesen.
 
-Der Wegfindungsalgorithmus wurde bereits in PREN 1 mit einem Dijkstra Algorithmus im Simulator umgesetzt. Der Simulator wird umstrukturiert, damit möglichst viele Teile wiederverwendet werden können.
+Der Wegfindungsalgorithmus wurde bereits in PREN 1 mit einem \gls{dijkstra} Algorithmus im Simulator umgesetzt. Der Simulator wird umstrukturiert, damit möglichst viele Teile wiederverwendet werden können.
 
 \subsubsection{Wegfindungssoftware aus Simulator anpassen}
 \label{navigation-arch}
@@ -73,7 +73,7 @@ Wie im Simulator aus \acrshort{pren1}, wird in der Navigation ein Trial \& Error
     \item Falls der Dijkstra Algorithmus keine Route zum Ziel mehr findet.
 \end{itemize}
 
-Im Blind Testing Mode nimmt der Roboter jedes Mal die erste Kante von links, auf dessen Knoten keine Pylone erkannt wird und sucht so das Ziel. Obwohl es möglich ist, dass falsche Kanten entfernt werden und dies nicht auffällt, wird dies akzeptiert. Falls immer noch ein Weg gefunden werden kann, wird dieser zwar länger dauern, dies wird aber in Kauf genommen. Mit diesem Konzept können Risiko 20 (Roboter weiss nicht mehr wo er sich befindet) und Risiko 7 (Hindernis wird fälschlicherweise erkannt), siehe Tabelle \ref{table:risks} so stark mitigiert werden, dass sie vernachlässigt werden können.
+Im Blind Testing Mode nimmt der Roboter jedes Mal die erste Kante von links, auf dessen Knoten keine Pylone erkannt wird und sucht so das Ziel. Obwohl es möglich ist, dass falsche Kanten entfernt werden und dies nicht auffällt, wird dies akzeptiert. Falls immer noch ein Weg gefunden werden kann, wird dieser zwar länger dauern, dies wird aber in Kauf genommen. Mit diesem Konzept können Risiko 20 (Roboter weiss nicht mehr wo er sich befindet) und Risiko 7 (Hindernis wird fälschlicherweise erkannt), siehe Tabelle \ref{table:risks}, so stark mitigiert werden, dass sie vernachlässigt werden können.
 
 \subsubsection{Schnittstelle Navigation und Steuerung}
 \label{interface-nav-control}
@@ -152,7 +152,7 @@ Die möglichen Statuscodes von der Steuerung an der Navigation sind in folgender
   \hline
       00000000&SUCCESSFULLY\_DONE&Befehl wurde erfolgreich ausgeführt. \\
   \hline
-00000001&UNEXPECTED\_OBJECT\_DETECTED &Ultraschall hat ein Objekt erkannt, das nicht erwartet wurde. Navigation macht ein Bild und detektiert, um welches Objekt es sich handelt und handelt entsprechend (mitigiert Risiko 12 (übersehene Objekte)): Kehrt um, falls Pylone oder beseitigt, falls Barriere.\\
+00000001&UNEXPECTED\_OBJECT\_DETECTED &Ultraschall hat ein Objekt erkannt, das nicht erwartet wurde. Navigation macht ein Bild und detektiert, um welches Objekt es sich handelt und handelt entsprechend (mitigiert Risiko 12 (übersehene Objekte, siehe Tabelle \ref{table:risks})): Kehrt um, falls Pylone oder beseitigt, falls Barriere.\\
   \hline
 \end{tabularx}
 \caption{Statuscodes von Steuerung}
@@ -320,7 +320,7 @@ Die Klasse \verb|AngleReader| ist verantwortlich für das Erkennen und Zuordnen 
     \item Analyse der Konturen zur Berechnung der Winkel der Linien relativ zur Knotenmitte
 \end{itemize}
 
-Die detektierten Winkel werden anschliessend mit den erwarteten Winkeln aus einer statischen YAML-Konfigurationsdatei (\verb|base_graph_angles.yml|) abgeglichen. Dies geschieht entweder über:
+Die detektierten Winkel werden anschliessend mit den erwarteten Winkeln aus einer statischen \gls{yaml}-Konfigurationsdatei (\verb|base_graph_angles.yml|) abgeglichen. Dies geschieht entweder über:
 
 \begin{itemize}
     \item \textbf{Positionsbasiertes Matching}: Falls die Anzahl erkannter Linien mit der Anzahl erwarteter Linien übereinstimmt, werden die Winkel einfach nach ihrer Reihenfolge im Uhrzeigersinn zugeordnet.
@@ -337,6 +337,7 @@ Die Klasse bietet zudem die Möglichkeit, dass erkannte Ergebnis mit Winkeln und
 \end{figure}
 
 Die Winkel der ausgehenden Linien lassen sich sehr präzise messen, was dem Liniensensor hilft, sauber von einem Knoten wegzufahren. Durch die exakte Ausrichtung des Roboters wird die Linie zuverlässig erkannt, ohne dass Bodenfugen fälschlicherweise als Linie interpretiert werden. Damit wird Risiko 5 (Bodenfugen werden als Linie gedeutet), siehe Tabelle \ref{table:risks}, wirksam mitigiert.
+
 
 \textbf{Fehlende Linien erkennen und darauf reagieren}
 

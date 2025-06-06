@@ -71,7 +71,7 @@ Die folgenden Abbildungen zeigen einige Bilder, die das Model annotiert hat. Dar
 
 Auf den folgenden Bildern sind die Metriken aufgezeigt. Diese sind ebenfalls im Anhang im Kapitel ``\nameref{model-evaluation}'' genauer erklärt. 
 
-Die Confusion Matrix ist auf Abbildung \ref{fig:conf-matrix}, diese zeigt, welche Objekte das Model wie oft falsch oder richtig gedeutet hat. Das Model hat jede Pylone und jede Barriere erkannt, hat sich zwei Knoten eingebildet und zwei Knoten verpasst. Mit den Algorithmen, die in dem nachfolgenden Kapitel \ref{model-results} beschrieben sind, die die Modelperformance stützen, sind diese Resultate ausgezeichnet. 
+Die \gls{confusion-matrix} ist auf Abbildung \ref{fig:conf-matrix}, diese zeigt, welche Objekte das Model wie oft falsch oder richtig gedeutet hat. Das Model hat jede Pylone und jede Barriere erkannt, hat sich zwei Knoten eingebildet und zwei Knoten verpasst. Mit den Algorithmen, die in dem nachfolgenden Kapitel \ref{model-results} beschrieben sind, die die Modelperformance stützen, sind diese Resultate ausgezeichnet. 
 
 
 \begin{figure}[H]
@@ -107,7 +107,7 @@ Es gibt Methoden, um die .pt Datei, das Format in welchem das Model gespeichert 
 Drei Möglichkeiten wurden betrachtet und verglichen:
 
 \begin{enumerate}
-    \item Caffe2\footnote{\url{https://caffe2.ai/}}: In der Vergangenheit sehr geeignet, heutzutage mit PyTorch zusammengefügt und existiert nicht mehr auf diese Weise.\cite{caffe2}
+    \item Caffe2\footnote{\url{https://caffe2.ai/}}: In der Vergangenheit sehr geeignet, heutzutage mit \gls{pytorch} zusammengefügt und existiert nicht mehr auf diese Weise.\cite{caffe2}
     \item \acrfull{ncnn}\footnote{\url{https://docs.ultralytics.com/integrations/ncnn/}}: Sehr gute Performance für ARM Geräte (u.a. Raspberry Pi), sehr wenig Abhängigkeiten, einfache Transformation.\cite{ncnn-bib}
     \item \acrfull{onnx}\footnote{\url{https://onnx.ai/}}: Geeignet für  Cross-Plattform Fälle, gute Austauschbarkeit des Models, flexibel, viele Abhängigkeiten.\cite{onnx-bib}
 \end{enumerate}
@@ -153,7 +153,7 @@ In folgenden Fällen wird nicht einfach das nächste Objekt zurückgegeben:
     \item Falls kein Objekt erkannt wurde, wird ein Knoten zurückgegeben. Es ist weniger wahrscheinlich, dass eine Barriere oder ein Pylon verpasst werden, als dass ein Knoten nicht erkannt wird. Somit wird Risiko 2 (Knoten werden nicht erkannt, siehe Tabelle \ref{table:risks}) behandelt. Der Ultraschall kann trotzdem Objekte noch erkennen, falls ein Objekt verpasst wurde. Durch den Ultraschall werden Risiko 12 und 1 (Objekte werden nicht erkannt, siehe Tabelle \ref{table:risks}) mitigiert.
 \end{itemize}
 
-Die folgenden Abbildungen veranschaulichen das Prinzip. Diese Bilder haben die einzelnen Objekte, die das Model erkannt hat mit Boxen annotiert. Die Bildunterschrift zeigt, welche Objekte zurückgegeben werden, basierend auf dem Algorithmus, der zuvor erklärt wurde. Wenn es keine Box annotiert hätte, würde ebenfalls ein Knoten zurückgegeben werden.
+Die folgenden Abbildungen veranschaulichen das Prinzip. Diese Bilder haben die einzelnen Objekte, die das Model erkannt hat mit Boxen annotiert. Die Bildunterschrift zeigt, welche Objekte zurückgegeben werden, basierend auf dem Algorithmus, der zuvor erklärt wurde. Wenn es keine Box annotiert hätte, würde ebenfalls ein Knoten zurückgegeben werden. Alle erstellten Unittests dazu sind im Anhang in Kapitel ''\nameref{object-detector-unittests}'' zu finden.
 
 \begin{figure}[H]
   \centering
@@ -260,23 +260,20 @@ Durch die einfache Zweitaster-Bedienung, und das ablesbare Display ist das Aufst
 Das Display zeigt stets den aktuellen gewählten Zielknoten an, so kann einfach überprüft werden, welcher Zielknoten gewählt wird, bevor der Roboter gestartet wird. 
 Zusätzlich wird der Status sowie die Laufzeit des Roboters dargestellt. Dadurch muss nicht separat eine Stoppuhr verwendet werden. Die Laufzeit wird automatisch beim Erreichen des Zielknotens gestoppt und bleibt ablesbar.
 
-TODO LUKAS: insert image of Display\\
-TODO ALINA: Take image of each state of the display (IDLE, RUNNING, FINISHED)
-
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.30\textwidth}
-        \includegraphics[width=\linewidth]{assets/placeholder.png}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \includegraphics[width=\linewidth]{assets/IT/peripherie/display_state_idle.png}
     \caption*{Status: IDLE}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[t]{0.30\textwidth}
-        \includegraphics[width=\linewidth]{assets/placeholder.png}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \includegraphics[width=\linewidth]{assets/IT/peripherie/display_state_run.png}
     \caption*{Status: RUNNING}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[t]{0.30\textwidth}
-        \includegraphics[width=\linewidth]{assets/placeholder.png}
+    \begin{subfigure}[t]{0.25\textwidth}
+        \includegraphics[width=\linewidth]{assets/IT/peripherie/display_state_finished.png}
     \caption*{Status: FINISHED}
     \end{subfigure}
     \caption{Raspberry Pi Display}

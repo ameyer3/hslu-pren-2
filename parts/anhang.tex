@@ -14,14 +14,25 @@
 
 Diese Dokumentation wurde zusammen mit einem elektronischen Anhang in Form einer ZIP-Datei abgegeben. Darin befinden sich folgende Dateien:
 
-\begin{itemize}
-    \item Programmiercode der Navigation
-    \item Programmiercode der Steuerung
-    \item Design der PCB
-    \item alle CAD Dateien
-    \item Dokumentation auf PREN 1
-\end{itemize}
-
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \textbf{Ordner oder Datei} & \textbf{Inhalt} \\
+        \hline
+        CAD & Alle CAD-Dateien des Roboters \\
+        \hline
+        PCB\_Schema\_Gerber & Design der Leiterplatte (Schaltplan, Board, Gerber) \\
+        \hline
+        hslu-pren-navigation-dev.zip & Programmiercode der Navigation \\
+        \hline
+        hslu-pren-tinyk22-control.zip & Programmiercode der Steuerung \\
+        \hline
+        pren1\_team\_04.pdf& Dokumentation aus PREN 1 \\
+        \hline
+    \end{tabularx}
+    \caption{Inhalt des elektronischen Anhangs}
+\end{table}
 
 \newpage
 \subfile{parts/x-projektplanung}
@@ -77,7 +88,7 @@ Damit Pylonen, Barrieren und Knoten erkannt werden können, wird ein Model train
 Die Model Performance wird an folgenden Parametern gemessen:\cite{model-performance}
 
 \begin{itemize}
-    \item Confusion Matrix: Zeigt was das Model vorhergesagt hat und was tatsächlich zu sehen war. Je `diagonaler' die Matrix, desto besser.
+    \item \gls{confusion-matrix}: Zeigt was das Model vorhergesagt hat und was tatsächlich zu sehen war. Je `diagonaler' die Matrix, desto besser.
     \item F1-Confidence: Zeigt die Balance zwischen Confidence (Wahrscheinlichkeit, dass Vorrausgesagtes stimmt) und F1 Score (Harmonischer Durchschnitt von Recall und Precision). Je höher der F1 Wert, desto besser.
     \item Precision-Confidence: Zeigt die Balance zwischen Precision (Anteil von `True Positives'; wenn das Model ein Objekt erkennt, wie akkurat diese Deutung ist) und Confidence. Je tiefer die Confidence, desto besser, da dadurch der höchste Präzisionswert bereits bei einer tieferen Confidence erreicht wird.
     \item Precision-Recall: Zeigt die Balance zwischen Precision und Recall (Fähigkeit, alle Instanzen zu erkennen). Je höher die Precision, desto besser.
@@ -511,7 +522,8 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 
 \addcontentsline{toc}
 {subsection}
-{Protokoll OpenCV Kalibration}
+{Protokoll: Parameterabstimmung der Bildverarbeitung
+f ̈ur die Knoten- und Kantenerkennung}
 % \label{opencv}
 
 \includepdf[pages=-,link,linkname=opencv]{assets/IT/testing/protocol_opencv_calibration.pdf}
@@ -522,7 +534,8 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 
 \addcontentsline{toc}
 {subsection}
-{Testprotokoll Ausgehende Kanten erkennen}
+{Testprotokoll: Statische Knoten- und
+Kantenerkennung}
 % \label{outgoing-lines-test}
 
 \includepdf[pages=-,link,linkname=outgoing-lines-test]{assets/IT/testing/testprotocol_static_node_edge_detection.pdf}
@@ -532,7 +545,7 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 
 \addcontentsline{toc}
 {subsection}
-{Testprotokoll Statische Traversierung}
+{Testprotokoll: Statische Traversierung des Graphen}
 % \label{statische-traver}
 
 \includepdf[pages=-,link,linkname=statische-traver]{assets/IT/testing/testprotocol_static_traversal.pdf}
@@ -541,9 +554,9 @@ Auf dem folgenden Bild \ref{img:object_detector_unittests} sind alle Unittests e
 
 \addcontentsline{toc}
 {subsection}
-{Testprotokoll Liniensensor}
+{Testprotokoll: Fahrregelung mit Liniensensor}
 
-\includepdf[pages=-]{assets/ET/Testprotokolle/Testprotokoll_Regelung.pdf}
+\includepdf[pages=-,link,linkname=linesens]{assets/ET/Testprotokolle/Testprotokoll_Regelung.pdf}
 
 
 
